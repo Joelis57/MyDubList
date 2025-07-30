@@ -4,6 +4,22 @@
 
 ---
 
+## 🌐 Supported Languages
+
+* English
+* French
+* German
+* Hebrew
+* Hungarian
+* Italian
+* Japanese
+* Korean
+* Mandarin
+* Portuguese (BR)
+* Spanish
+
+---
+
 ## 🚀 How It Works
 
 1. **Automatic Dub Detection:**
