@@ -13,6 +13,7 @@ MAL_BASE = "https://api.myanimelist.net/v2"
 JIKAN_BASE = "https://api.jikan.moe/v4"
 MAX_IN_MEMORY_CACHE = 5000
 CALL_RETRIES = 3
+RETRY_DELAYS = [10, 60, 120]
 FINALIZE_EVERY_N = 100
 # ======================
 
@@ -28,7 +29,7 @@ def get_anime_roles_for_va_cached(person_id):
 def mal_get(url, client_id):
     headers = {"X-MAL-CLIENT-ID": client_id}
     last_exception = None
-    for _ in range(CALL_RETRIES):
+    for attempt in range(CALL_RETRIES):
         try:
             response = requests.get(url, headers=headers)
             if response.status_code == 404:
@@ -38,7 +39,10 @@ def mal_get(url, client_id):
             return response.json()
         except Exception as e:
             last_exception = e
-            time.sleep(10)
+            if attempt < CALL_RETRIES - 1:
+                delay = RETRY_DELAYS[attempt]
+                print(f"  MAL API call failed. Retrying in {delay} seconds...")
+                time.sleep(delay)
     raise last_exception
 
 def jikan_get(url):
@@ -50,7 +54,7 @@ def jikan_get(url):
     jikan_last_call = time.time()
 
     last_exception = None
-    for _ in range(CALL_RETRIES):
+    for attempt in range(CALL_RETRIES):
         try:
             response = requests.get(JIKAN_BASE + url)
             if response.status_code == 404:
@@ -60,7 +64,10 @@ def jikan_get(url):
             return response.json()
         except Exception as e:
             last_exception = e
-            time.sleep(10)
+            if attempt < CALL_RETRIES - 1:
+                delay = RETRY_DELAYS[attempt]
+                print(f"  Jikan API call failed. Retrying in {delay} seconds...")
+                time.sleep(delay)
     raise last_exception
 
 def get_characters(mal_id, client_id):
