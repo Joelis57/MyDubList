@@ -13,6 +13,10 @@ def load_json(path):
             return json.load(f)
     return {}
 
+def save_json(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
 def merge_language_file(filename):
     manual_path = os.path.join(MANUAL_DIR, filename)
     automatic_path = os.path.join(AUTOMATIC_DIR, filename)
@@ -29,6 +33,14 @@ def merge_language_file(filename):
     # Automatic list
     auto_dubbed = set(automatic.get("dubbed", []))
 
+    # --- Update manual: remove IDs already present in auto_dubbed ---
+    original_manual_dubbed = manual_dubbed.copy()
+    manual_dubbed -= auto_dubbed
+    if manual_dubbed != original_manual_dubbed:
+        manual["dubbed"] = sorted(manual_dubbed)
+        save_json(manual_path, manual)
+        print(f"Updated manual: {filename} (removed {len(original_manual_dubbed - manual_dubbed)} auto-duplicated IDs)")
+
     # Merge logic
     final_dubbed = (auto_dubbed | manual_dubbed) - manual_not_dubbed - manual_incomplete
     final_incomplete = manual_incomplete
@@ -41,8 +53,7 @@ def merge_language_file(filename):
         "incomplete": sorted(final_incomplete)
     }
 
-    with open(final_path, "w", encoding="utf-8") as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
+    save_json(final_path, result)
     print(f"Merged: {filename} → {FINAL_DIR}")
 
 def main():
