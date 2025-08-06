@@ -7,13 +7,14 @@ from bs4 import BeautifulSoup
 FORUM_URL = "https://myanimelist.net/forum/?topicid=1692966"
 MANUAL_PATH = os.path.join("manual", "dubbed_english.json")
 FINAL_PATH = os.path.join("final", "dubbed_english.json")
+POST_COUNT = 11
 
 def fetch_posts():
     resp = requests.get(FORUM_URL)
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
     posts = soup.find_all("div", class_="forum-topic-message", attrs={"data-user": "Kenny_Stryker"})
-    return posts[:5]
+    return posts[:POST_COUNT]
 
 def extract_mal_ids(post):
     content = post.find("div", class_="content")
