@@ -12,7 +12,7 @@ from functools import lru_cache
 MAL_BASE = "https://api.myanimelist.net/v2"
 JIKAN_BASE = "https://api.jikan.moe/v4"
 MAX_IN_MEMORY_CACHE = 5000
-CALL_RETRIES = 3
+CALL_RETRIES = 4
 RETRY_DELAYS = [10, 60, 120]
 FINALIZE_EVERY_N = 100
 # ======================
@@ -39,10 +39,12 @@ def mal_get(url, client_id):
             return response.json()
         except Exception as e:
             last_exception = e
+            print(f"  Attempt {attempt + 1} failed: {e}")
             if attempt < CALL_RETRIES - 1:
                 delay = RETRY_DELAYS[attempt]
                 print(f"  MAL API call failed. Retrying in {delay} seconds...")
                 time.sleep(delay)
+    print(f"  All {CALL_RETRIES} attempts failed for {url}")
     raise last_exception
 
 def jikan_get(url):
@@ -58,16 +60,18 @@ def jikan_get(url):
         try:
             response = requests.get(JIKAN_BASE + url)
             if response.status_code == 404:
-                print("  404 Not Found, skipping")
+                print("    404 Not Found, skipping")
                 return None
             response.raise_for_status()
             return response.json()
         except Exception as e:
             last_exception = e
+            print(f"    Attempt {attempt + 1} failed: {e}")
             if attempt < CALL_RETRIES - 1:
                 delay = RETRY_DELAYS[attempt]
-                print(f"  Jikan API call failed. Retrying in {delay} seconds...")
+                print(f"    Jikan API call failed. Retrying in {delay} seconds...")
                 time.sleep(delay)
+    print(f"    All {CALL_RETRIES} attempts failed for {url}")
     raise last_exception
 
 def get_characters(mal_id, client_id):
