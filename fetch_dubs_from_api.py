@@ -20,10 +20,15 @@ FINALIZE_EVERY_N = 100
 # Globals
 jikan_last_call = 0
 json_data = defaultdict(set)
+debug_log = False
+
+def log(message):
+    if debug_log:
+        print(message)
 
 @lru_cache(maxsize=MAX_IN_MEMORY_CACHE)
 def get_anime_roles_for_va_cached(person_id):
-    print(f"    Fetching VA {person_id} from API")
+    log(f"    Fetching VA {person_id} from API")
     return jikan_get(f"/people/{person_id}/voices")
 
 def mal_get(url, client_id):
@@ -33,7 +38,7 @@ def mal_get(url, client_id):
         try:
             response = requests.get(url, headers=headers)
             if response.status_code == 404:
-                print("  404 Anime Not Found, skipping")
+                log("  404 Anime Not Found, skipping")
                 return None
             response.raise_for_status()
             return response.json()
@@ -60,7 +65,7 @@ def jikan_get(url):
         try:
             response = requests.get(JIKAN_BASE + url)
             if response.status_code == 404:
-                print("    404 Not Found, skipping")
+                log("    404 Not Found, skipping")
                 return None
             response.raise_for_status()
             return response.json()
@@ -81,10 +86,10 @@ def get_voice_actors(char_id):
     return jikan_get(f"/characters/{char_id}/voices")
 
 def process_anime(mal_id, client_id):
-    print(f"Processing MAL ID: {mal_id}")
+    log(f"Processing MAL ID: {mal_id}")
     characters = get_characters(mal_id, client_id)
     if not characters or "data" not in characters or not characters["data"]:
-        print(f"  No characters found, skipping")
+        log(f"  No characters found, skipping")
         return
 
     first_char = characters["data"][0]["node"]
@@ -99,7 +104,7 @@ def process_anime(mal_id, client_id):
         person = va_entry["person"]
         person_id = person["mal_id"]
 
-        print(f"  Processing voice actor: {person['name']} ({lang})")
+        log(f"  Processing voice actor: {person['name']} ({lang})")
 
         va_roles = get_anime_roles_for_va_cached(person_id)
         if not va_roles or "data" not in va_roles:
@@ -131,6 +136,16 @@ def finalize_jsons(start_id, end_id):
 
         updated_ids = (existing_ids - processed_range) | new_ids
 
+        # Compare before and after
+        added_ids = sorted(updated_ids - existing_ids)
+        removed_ids = sorted(existing_ids - updated_ids)
+        if added_ids or removed_ids:
+            log(f"  Changes in {filename}:")
+            if added_ids:
+                log(f"    Added: {added_ids}")
+            if removed_ids:
+                log(f"    Removed: {removed_ids}")
+
         obj = {
             "_license": "This file is licensed under the MIT License. User visible attribution is required.",
             "_origin": "https://github.com/Joelis57/MyDubList",
@@ -142,20 +157,22 @@ def finalize_jsons(start_id, end_id):
             json.dump(obj, f, ensure_ascii=False, indent=2)
 
 def main():
-    if len(sys.argv) != 4:
-        print("Usage: python fetchDubsFromApi.py <mal_client_id> <startMalId> <endMalId>")
+    global debug_log
+    if len(sys.argv) < 4 or len(sys.argv) > 5:
+        print("Usage: python fetchDubsFromApi.py <mal_client_id> <startMalId> <endMalId> [debug_log]")
         return
 
     client_id = sys.argv[1]
     start_id = int(sys.argv[2])
     end_id = int(sys.argv[3])
+    debug_log = sys.argv[4].lower() == "true" if len(sys.argv) == 5 else False
 
     try:
         for count, mal_id in enumerate(range(start_id, end_id + 1), 1):
             process_anime(mal_id, client_id)
             if count % FINALIZE_EVERY_N == 0:
                 current_end = start_id + count - 1
-                print(f"--- Updating files at MAL ID {current_end} ---")
+                log(f"--- Updating files at MAL ID {current_end} ---")
                 finalize_jsons(start_id, current_end)
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing data...")
