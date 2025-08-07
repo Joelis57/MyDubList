@@ -3,6 +3,7 @@ import json
 
 MANUAL_DIR = "manual"
 AUTOMATIC_DIR = "automatic"
+AUTOMATIC_NSFW_DIR = "automatic_nsfw"
 FINAL_DIR = "final"
 
 os.makedirs(FINAL_DIR, exist_ok=True)
@@ -20,29 +21,34 @@ def save_json(path, data):
 def merge_language_file(filename):
     manual_path = os.path.join(MANUAL_DIR, filename)
     automatic_path = os.path.join(AUTOMATIC_DIR, filename)
+    automatic_nsfw_path = os.path.join(AUTOMATIC_NSFW_DIR, filename)
     final_path = os.path.join(FINAL_DIR, filename)
 
     manual = load_json(manual_path)
     automatic = load_json(automatic_path)
+    automatic_nsfw = load_json(automatic_nsfw_path)
 
     # Manual lists
     manual_dubbed = set(manual.get("dubbed", []))
     manual_not_dubbed = set(manual.get("not_dubbed", []))
     manual_incomplete = set(manual.get("incomplete", []))
 
-    # Automatic list
+    # Automatic lists (normal + NSFW)
     auto_dubbed = set(automatic.get("dubbed", []))
+    auto_nsfw_dubbed = set(automatic_nsfw.get("dubbed", []))
+
+    combined_auto_dubbed = auto_dubbed | auto_nsfw_dubbed
 
     # --- Update manual: remove IDs already present in auto_dubbed ---
     original_manual_dubbed = manual_dubbed.copy()
-    manual_dubbed -= auto_dubbed
+    manual_dubbed -= combined_auto_dubbed
     if manual_dubbed != original_manual_dubbed:
         manual["dubbed"] = sorted(manual_dubbed)
         save_json(manual_path, manual)
         print(f"Updated manual: {filename} (removed {len(original_manual_dubbed - manual_dubbed)} auto-duplicated IDs)")
 
     # Merge logic
-    final_dubbed = (auto_dubbed | manual_dubbed) - manual_not_dubbed - manual_incomplete
+    final_dubbed = (combined_auto_dubbed | manual_dubbed) - manual_not_dubbed - manual_incomplete
     final_incomplete = manual_incomplete
 
     result = {
