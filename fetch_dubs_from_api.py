@@ -56,14 +56,6 @@ def log(message: str):
 # Language normalization
 # ----------------------
 def sanitize_lang(lang: str) -> str:
-    """
-    Normalize language names from MAL and AniList to a base language key.
-    Rules:
-      - lowercase
-      - special case: anything starting with "portuguese" => "portuguese"
-      - strip any parenthetical/suffixes like "(BR)", "(Crunchyroll)", "(Netflix)"
-      - collapse whitespace; filenames will use underscores for spaces
-    """
     if not lang:
         return ""
 
@@ -72,6 +64,10 @@ def sanitize_lang(lang: str) -> str:
     # Portuguese variants → "portuguese"
     if s.startswith("portuguese"):
         return "portuguese"
+
+    # NEW: Mandarin → Chinese (unify MAL + AniList)
+    if s.startswith("mandarin"):
+        return "chinese"
 
     # Remove any (...) parenthetical chunk(s)
     s = re.sub(r"\(.*?\)", "", s).strip()
@@ -287,11 +283,6 @@ def anilist_total_pages(per_page=ANILIST_PER_PAGE) -> int:
 
 
 def process_anilist_page(page: int):
-    """
-    Fetch one AniList page and accumulate dubbed-language MAL IDs into json_data.
-    Uses characters.edges.voiceActors (correct field).
-    Adds verbose debug and a defensive sample dump when VAs are empty.
-    """
     variables = {
         "page": page,
         "perPage": ANILIST_PER_PAGE,
