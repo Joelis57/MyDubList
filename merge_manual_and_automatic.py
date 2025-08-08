@@ -93,8 +93,21 @@ def merge_language_file(filename):
         "incomplete": sorted(final_incomplete)
     }
 
+    # Calculate changes for summary
+    previous_final = load_json(final_path)
+    previous_dubbed = set(previous_final.get("dubbed", []))
+    previous_incomplete = set(previous_final.get("incomplete", []))
+    added_dubbed = final_dubbed - previous_dubbed
+    added_incomplete = final_incomplete - previous_incomplete
+    changes = []
+    if added_dubbed:
+        changes.append(f"+{len(added_dubbed)} dubbed")
+    if added_incomplete:
+        changes.append(f"+{len(added_incomplete)} incomplete")
+    summary = f" ({', '.join(changes)})" if changes else ""
+
     save_json(final_path, result)
-    print(f"Merged: {filename} → {FINAL_DIR} (dubbed={len(result['dubbed'])}, incomplete={len(result['incomplete'])})")
+    print(f"Merged: {filename} → {FINAL_DIR}{summary}")
 
 def main():
     global DEBUG
