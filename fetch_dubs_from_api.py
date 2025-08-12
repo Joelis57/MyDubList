@@ -403,7 +403,8 @@ def finalize_jsons(api_mode: str):
             log(f"    Added: {added_ids}")
 
         obj = {
-            "_license": "This file is licensed under the MIT License. User visible attribution is required.",
+            "_license": "CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+            "_attribution": "MyDubList - https://mydublist.com - (CC BY 4.0)",
             "_origin": "https://github.com/Joelis57/MyDubList",
             "language": lang_key.capitalize(),
             "dubbed": sorted(updated_ids),

@@ -1,88 +1,90 @@
 # MyDubList
 
-**MyDubList** is an open-source tool that builds and maintains a database of anime titles with multilingual dubs. It uses both the official MyAnimeList API and the Jikan API to automatically identify which anime titles have been dubbed in specific languages.
+**MyDubList** is an open-source project that builds and maintains a multi-language database of anime with released dubs. The dataset is designed to be dependable, simple to consume, and permissively licensed (only requiring attribution) so anyone-from hobby scripts to large closed-source apps-can use it.
 
----
+## Overview
 
-## 🌐 Supported Languages
+- Continuously updated, language-keyed dataset of dubbed anime (by MyAnimeList ID).
+- Final JSON files under `final/`, one per language (e.g. `final/dubbed_english.json`).
+- Optional `incomplete` array tracks edge cases (partial/lost/unverified) when relevant.
 
-* English
-* French
-* German
-* Hebrew
-* Hungarian
-* Italian
-* Japanese
-* Korean
-* Mandarin
-* Portuguese (BR)
-* Spanish
+## Database search website
 
----
+[Click here to search](https://mydublist.com)
 
-## 🚀 How It Works
+![MyDubList Search](https://raw.githubusercontent.com/Joelis57/MyDubList/main/images/mydublist.com.jpg)
 
-1. **Automatic Dub Detection:**
+## Browser extension for MyAnimeList
 
-   * For each anime (MAL ID), the script retrieves the list of characters using the MyAnimeList API.
-   * It selects **only the first main character**.
-   * Using the Jikan API, it fetches all voice actors for that character.
-   * For each voice actor, it checks their full voice acting history to confirm whether they actually voiced the character **in that specific anime**.
-   * If a match is found, the anime is recorded as dubbed in that voice actor's language.
+![MyDubList extension showcase](https://raw.githubusercontent.com/Joelis57/MyDubList/main/images/extension-showcase.gif)
 
-2. **Manual Corrections:**
+[![Install for Chrome](https://img.shields.io/badge/Install-Chrome%20Web%20Store-4285F4?logo=google-chrome&logoColor=white)](https://chrome.google.com/webstore/detail/mydublist/hdpppphfhlhmehghmndopednfpbimkco)
+[![Install for Firefox](https://img.shields.io/badge/Install-Firefox%20Add--ons-FF7139?logo=firefox-browser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/mydublist)
 
-   * You can manually correct or override data using JSON files in the `manual/` folder.
-   * These support fields for `dubbed`, `not_dubbed`, and `incomplete`.
-   * Manual entries override automatic ones during the merge step.
+## Language statistics
 
-3. **Final Output:**
+<!-- LANG-STATS:START -->
+| Language | Native name | Dubbed | Incomplete | File |
+|---|---:|---:|---:|---|
+| Japanese | 日本語 | 12741 | 0 | `final/dubbed_japanese.json` |
+| English | English | 4667 | 66 | `final/dubbed_english.json` |
+| Spanish | Español | 2083 | 0 | `final/dubbed_spanish.json` |
+| French | Français | 2050 | 0 | `final/dubbed_french.json` |
+| German | Deutsch | 2022 | 0 | `final/dubbed_german.json` |
+| Italian | Italiano | 1836 | 0 | `final/dubbed_italian.json` |
+| Portuguese | Português | 1497 | 0 | `final/dubbed_portuguese.json` |
+| Korean | 한국어 | 1208 | 0 | `final/dubbed_korean.json` |
+| Chinese | 中文 | 595 | 0 | `final/dubbed_chinese.json` |
+| Polish | Polski | 246 | 0 | `final/dubbed_polish.json` |
+| Hungarian | Magyar | 168 | 0 | `final/dubbed_hungarian.json` |
+| Norwegian | Norsk | 132 | 0 | `final/dubbed_norwegian.json` |
+| Swedish | Svenska | 121 | 0 | `final/dubbed_swedish.json` |
+| Hebrew | עברית | 107 | 0 | `final/dubbed_hebrew.json` |
+| Indonesian | Bahasa Indonesia | 59 | 0 | `final/dubbed_indonesian.json` |
+| Thai | ไทย | 39 | 0 | `final/dubbed_thai.json` |
+| Hindi | हिन्दी | 19 | 0 | `final/dubbed_hindi.json` |
+| Finnish | Suomi | 16 | 0 | `final/dubbed_finnish.json` |
+| Tagalog | Tagalog | 11 | 0 | `final/dubbed_tagalog.json` |
+| Turkish | Türkçe | 10 | 0 | `final/dubbed_turkish.json` |
+| Arabic | العربية | 9 | 0 | `final/dubbed_arabic.json` |
+| Dutch | Nederlands | 4 | 0 | `final/dubbed_dutch.json` |
+| Catalan | Català | 3 | 0 | `final/dubbed_catalan.json` |
+| Filipino | Filipino | 1 | 0 | `final/dubbed_filipino.json` |
+| Vietnamese | Tiếng Việt | 1 | 0 | `final/dubbed_vietnamese.json` |
+<!-- LANG-STATS:END -->
 
-   * Merged results are written to the `final/` folder.
-   * Each language file contains two arrays: `dubbed` and `incomplete`.
+## App integrations
 
----
+### DailyAL
+![DailyAL integration](https://raw.githubusercontent.com/Joelis57/MyDubList/main/images/DailyAL.jpg)
 
-## 📁 Folder Structure
+With enough interest, support may be added to MoeList and other iOS/Android clients.
 
-* `automatic/` — automatically generated dubbed lists
-* `manual/` — user-maintained overrides
-* `final/` — merged, cleaned output files
+## Data sources (automatic)
 
----
+The database is automatically assembled and constantly refreshed from multiple sources:
 
-## 🛠 Requirements
+- MyAnimeList API
+- AniList API
+- Kenny Stryker's ("Mr. Dub McQueen") community forum post on MAL
+- Select NSFW dub sources (where applicable)
 
-* Python 3.7+
-* `requests` library
+All sources are ingested, normalized, de-duplicated, and merged by the merge_manual_and_automatic script to keep the dataset current. If something looks wrong or missing for your language, please open an issue.
 
-Install dependencies with:
+## Output format
 
-```bash
-pip install requests
+Each language file in `final/` contains two arrays of MAL IDs:
+
+```json
+{
+  "dubbed": [16498, 40028, 38524],
+  "incomplete": [50197]
+}
 ```
-
----
-
-## 💻 Running the Script
-
-To fetch dubbed anime info for a range of MAL IDs:
-
-```bash
-python fetchDubsFromApi.py <mal_client_id> <startMalId> <endMalId>
-```
-
-To merge automatic and manual entries into the final folder:
-
-```bash
-python merge_manual_and_automatic.py
-```
-
----
 
 ## ☕ Support the Project
 
-If you find this project helpful, consider supporting its development:
+If you find this project helpful, consider supporting its development.
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/joelis)
 
@@ -90,12 +92,38 @@ If you find this project helpful, consider supporting its development:
 
 ## 📄 License
 
-MIT License. User-visible attribution is required.
+- **Code:** MIT © MyDubList. See [LICENSE](./LICENSE).
+- **Dataset (JSON files)**: **Creative Commons Attribution 4.0 International (CC BY 4.0)**.  
+  See [DATA-LICENSE](./DATA-LICENSE) and [NOTICE](./NOTICE).
+
+### Required attribution for dataset (CC BY 4.0)
+
+When you display or distribute the dataset (or substantial portions/derivatives), provide public attribution that is reasonable to the medium, including:
+- **Name:** MyDubList
+- **Link to source:** https://mydublist.com
+- **License:** CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
+- **Changes:** note if you modified the data
+
+**Preferred credit line:**
+> "Dub data © MyDubList - https://mydublist.com - (CC BY 4.0)"
+
+**Reasonable placement:** About screen, settings, footer, or results header.
+
+### Requested (not required) UI links
+
+I kindly ask integrators who display dub info to include:
+- A small "**Powered by MyDubList**" credit linking to https://mydublist.com  
+- **Report inaccurate dubs** → https://github.com/Joelis57/MyDubList/issues/new/choose  
+- **Support MyDubList** → https://ko-fi.com/joelis
 
 ---
 
 ## 📫 Contributing
 
-Pull requests are welcome! Feel free to open an issue or suggestion to fix mistakes or to help identify anime with incomplete dubs across different languages. Your contributions are highly appreciated!
+Your contributions are highly appreciated!
+
+- **Report issues**: please include the anime link, language, what’s missing/incorrect, and a source (streaming page, official post, etc.).
+- **Manual overrides**: see manual/ for the override format. Manual entries supersede automated results during merge.
+- **Pull requests**: welcome for new sources, language keys, validation, and tooling.
 
 ---
