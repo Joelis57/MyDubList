@@ -34,7 +34,7 @@
 | Italian | Italiano | 1836 | 0 | `final/dubbed_italian.json` |
 | Portuguese | Português | 1497 | 0 | `final/dubbed_portuguese.json` |
 | Korean | 한국어 | 1208 | 0 | `final/dubbed_korean.json` |
-| Chinese | 中文 | 595 | 0 | `final/dubbed_chinese.json` |
+| Chinese | 中文 | 597 | 0 | `final/dubbed_chinese.json` |
 | Polish | Polski | 246 | 0 | `final/dubbed_polish.json` |
 | Hungarian | Magyar | 168 | 0 | `final/dubbed_hungarian.json` |
 | Norwegian | Norsk | 132 | 0 | `final/dubbed_norwegian.json` |
