@@ -27,14 +27,14 @@
 | Language | Native name | Dubbed | Incomplete | File |
 |---|---:|---:|---:|---|
 | Japanese | 日本語 | 12741 | 0 | `final/dubbed_japanese.json` |
-| English | English | 4667 | 66 | `final/dubbed_english.json` |
-| Spanish | Español | 2083 | 0 | `final/dubbed_spanish.json` |
+| English | English | 4668 | 66 | `final/dubbed_english.json` |
+| Spanish | Español | 2086 | 0 | `final/dubbed_spanish.json` |
 | French | Français | 2050 | 0 | `final/dubbed_french.json` |
 | German | Deutsch | 2022 | 0 | `final/dubbed_german.json` |
 | Italian | Italiano | 1836 | 0 | `final/dubbed_italian.json` |
 | Portuguese | Português | 1497 | 0 | `final/dubbed_portuguese.json` |
-| Korean | 한국어 | 1208 | 0 | `final/dubbed_korean.json` |
-| Chinese | 中文 | 597 | 0 | `final/dubbed_chinese.json` |
+| Korean | 한국어 | 1209 | 0 | `final/dubbed_korean.json` |
+| Chinese | 中文 | 602 | 0 | `final/dubbed_chinese.json` |
 | Polish | Polski | 246 | 0 | `final/dubbed_polish.json` |
 | Hungarian | Magyar | 168 | 0 | `final/dubbed_hungarian.json` |
 | Norwegian | Norsk | 132 | 0 | `final/dubbed_norwegian.json` |
