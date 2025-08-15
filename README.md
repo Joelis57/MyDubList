@@ -37,8 +37,8 @@
 | Chinese | 中文 | 602 | 0 | `final/dubbed_chinese.json` |
 | Polish | Polski | 246 | 0 | `final/dubbed_polish.json` |
 | Hungarian | Magyar | 168 | 0 | `final/dubbed_hungarian.json` |
-| Norwegian | Norsk | 132 | 0 | `final/dubbed_norwegian.json` |
-| Swedish | Svenska | 121 | 0 | `final/dubbed_swedish.json` |
+| Norwegian | Norsk | 134 | 0 | `final/dubbed_norwegian.json` |
+| Swedish | Svenska | 123 | 0 | `final/dubbed_swedish.json` |
 | Hebrew | עברית | 107 | 0 | `final/dubbed_hebrew.json` |
 | Indonesian | Bahasa Indonesia | 59 | 0 | `final/dubbed_indonesian.json` |
 | Thai | ไทย | 39 | 0 | `final/dubbed_thai.json` |
