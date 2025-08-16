@@ -139,7 +139,7 @@
     {
       "key": "russian",
       "english_name": "Russian",
-      "native_name": "Russian",
+      "native_name": "Русский",
       "file": "final/dubbed_russian.json",
       "dubbed_count": 78,
       "incomplete_count": 0
@@ -147,7 +147,7 @@
     {
       "key": "danish",
       "english_name": "Danish",
-      "native_name": "Danish",
+      "native_name": "Dansk",
       "file": "final/dubbed_danish.json",
       "dubbed_count": 62,
       "incomplete_count": 0

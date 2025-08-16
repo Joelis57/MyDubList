@@ -43,8 +43,8 @@
 | Norwegian | Norsk | 134 | 0 | `final/dubbed_norwegian.json` |
 | Hebrew | עברית | 107 | 0 | `final/dubbed_hebrew.json` |
 | Dutch | Nederlands | 102 | 0 | `final/dubbed_dutch.json` |
-| Russian | Russian | 78 | 0 | `final/dubbed_russian.json` |
-| Danish | Danish | 62 | 0 | `final/dubbed_danish.json` |
+| Russian | Русский | 78 | 0 | `final/dubbed_russian.json` |
+| Danish | Dansk | 62 | 0 | `final/dubbed_danish.json` |
 | Indonesian | Bahasa Indonesia | 59 | 0 | `final/dubbed_indonesian.json` |
 | Thai | ไทย | 39 | 0 | `final/dubbed_thai.json` |
 | Hindi | हिन्दी | 19 | 0 | `final/dubbed_hindi.json` |
