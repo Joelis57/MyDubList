@@ -75,10 +75,14 @@ def sanitize_lang(lang: str) -> str:
     if s.startswith("portuguese"):
         return "portuguese"
 
-    # NEW: Mandarin → Chinese (unify MAL + AniList)
+    # Mandarin → Chinese (unify MAL + AniList)
     if s.startswith("mandarin"):
         return "chinese"
 
+    # Map Filipino to Tagalog (only 1 occurrence of Filipino)
+    if s.startswith("filipino"):
+        return "tagalog"
+    
     # Remove any (...) parenthetical chunk(s)
     s = re.sub(r"\(.*?\)", "", s).strip()
 

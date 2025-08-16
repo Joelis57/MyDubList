@@ -69,7 +69,7 @@
       "english_name": "Tagalog",
       "native_name": "Tagalog",
       "file": "final/dubbed_tagalog.json",
-      "dubbed_count": 811,
+      "dubbed_count": 812,
       "incomplete_count": 0
     },
     {
@@ -198,14 +198,6 @@
       "native_name": "Català",
       "file": "final/dubbed_catalan.json",
       "dubbed_count": 3,
-      "incomplete_count": 0
-    },
-    {
-      "key": "filipino",
-      "english_name": "Filipino",
-      "native_name": "Filipino",
-      "file": "final/dubbed_filipino.json",
-      "dubbed_count": 1,
       "incomplete_count": 0
     },
     {
