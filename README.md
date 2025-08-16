@@ -26,7 +26,7 @@
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed | Incomplete | File |
 |---|---:|---:|---:|---|
-| Japanese | 日本語 | 13523 | 0 | `final/dubbed_japanese.json` |
+| Japanese | 日本語 | 13524 | 0 | `final/dubbed_japanese.json` |
 | English | English | 4937 | 66 | `final/dubbed_english.json` |
 | Spanish | Español | 2792 | 0 | `final/dubbed_spanish.json` |
 | German | Deutsch | 2245 | 0 | `final/dubbed_german.json` |
