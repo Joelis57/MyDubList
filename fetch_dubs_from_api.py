@@ -9,6 +9,8 @@ from functools import lru_cache
 import re
 import requests
 from math import ceil
+import xml.etree.ElementTree as ET
+from urllib.parse import urlparse, parse_qs
 
 # ======================
 # CONFIG
@@ -16,6 +18,7 @@ from math import ceil
 MAL_BASE = "https://api.myanimelist.net/v2"
 JIKAN_BASE = "https://api.jikan.moe/v4"
 ANILIST_BASE = "https://graphql.anilist.co"
+ANN_API = "https://cdn.animenewsnetwork.com/encyclopedia/api.xml"
 
 MAX_IN_MEMORY_CACHE = 5000
 CALL_RETRIES = 4
@@ -26,6 +29,10 @@ FINALIZE_EVERY_N = 100
 ANILIST_PER_PAGE = 50
 ANILIST_CHAR_PER_PAGE = 50
 ANILIST_PAGE_SLEEP = 2  # seconds
+
+# ANN batching
+ANN_BATCH_SIZE = 40
+
 # ======================
 
 # Globals
@@ -46,6 +53,9 @@ mal_last_call = 0
 MAL_MIN_INTERVAL = 2.0  # seconds -> max 0.5 req/sec
 last_mal_404 = False
 
+# ANN throttle
+ann_last_call = 0
+ANN_MIN_INTERVAL = 1.0  # seconds between ANN calls
 
 def log(message: str):
     if debug_log:
@@ -83,6 +93,71 @@ def filename_for_lang(lang_key: str) -> str:
     return lang_key.replace(" ", "_")
 
 
+# ANN code/name → our normalized keys
+def ann_lang_to_key(raw: str) -> str:
+    if not raw:
+        return ""
+
+    r = raw.strip().upper()
+
+    # Normalize a few common region codes and oddities
+    # Spanish (LATAM) variants → 'spanish'
+    if r in {"ES-419", "ES-LA", "LATAM"}:
+        return "spanish"
+
+    # Portuguese (BR) variants
+    if r in {"PT-BR", "BR"}:
+        return "portuguese"
+
+    # Chinese variants
+    if r in {"ZH", "ZH-CN", "ZH-TW", "ZH-HK", "CH", "CN"}:
+        return "chinese"
+
+    # ISO-ish 639-1 map (common ones)
+    iso = {
+        "EN": "english",
+        "FR": "french",
+        "DE": "german",
+        "HE": "hebrew",
+        "IW": "hebrew",
+        "HU": "hungarian",
+        "IT": "italian",
+        "JA": "japanese",
+        "KO": "korean",
+        "PT": "portuguese",
+        "ES": "spanish",
+        "TL": "tagalog",
+        "PL": "polish",
+        "RU": "russian",
+        "TR": "turkish",
+        "NL": "dutch",
+        "SV": "swedish",
+        "NO": "norwegian",
+        "NB": "norwegian",
+        "NN": "norwegian",
+        "DA": "danish",
+        "FI": "finnish",
+        "CS": "czech",
+        "SK": "slovak",
+        "RO": "romanian",
+        "BG": "bulgarian",
+        "UK": "ukrainian",
+        "UA": "ukrainian",
+        "EL": "greek",
+        "ID": "indonesian",
+        "MS": "malay",
+        "VI": "vietnamese",
+        "TH": "thai",
+        "AR": "arabic",
+        "HI": "hindi",
+    }
+    if r in iso:
+        return iso[r]
+
+    # If they send a word (rare), funnel through sanitize_lang
+    return sanitize_lang(raw)
+
+
 # ----------------------
 # MAL + Jikan helpers
 # ----------------------
@@ -105,19 +180,15 @@ def mal_get(url, client_id):
     last_exception = None
     for attempt in range(CALL_RETRIES):
         try:
-            # record call time right before we hit the endpoint
             mal_last_call = time.time()
-
             response = requests.get(url, headers=headers)
             if response.status_code == 404:
                 last_mal_404 = True
                 log("  404 Anime Not Found, skipping")
                 return None
             response.raise_for_status()
-
             last_mal_404 = False
             return response.json()
-
         except Exception as e:
             last_exception = e
             print(f"  Attempt {attempt + 1} failed: {e}")
@@ -218,12 +289,12 @@ ANILIST_QUERY = """
 query ($page: Int, $perPage: Int, $charPerPage: Int) {
   Page(page: $page, perPage: $perPage) {
     pageInfo { currentPage hasNextPage total }
-    media(type: ANIME, sort: ID) {  # you can change ID -> POPULARITY_DESC to sanity check
+    media(type: ANIME, sort: ID) {
       id
       idMal
       characters(perPage: $charPerPage) {
         edges {
-          node { id }  # optional, useful for debug
+          node { id }
           voiceActors {
             id
             languageV2
@@ -240,7 +311,7 @@ ANILIST_TOTAL_QUERY = """
 query ($page: Int = 1, $perPage: Int = 50) {
   Page(page: $page, perPage: $perPage) {
     pageInfo { total lastPage currentPage hasNextPage perPage }
-    media(type: ANIME, sort: ID) { id }  # trivial selection so Page is actually paging something
+    media(type: ANIME, sort: ID) { id }
   }
 }
 """
@@ -252,14 +323,11 @@ def anilist_post(query, variables):
     for attempt in range(CALL_RETRIES):
         try:
             r = requests.post(ANILIST_BASE, json={"query": query, "variables": variables}, headers=headers)
-            # AniList returns 200 with {"errors":[...]} for GraphQL errors. 400s usually mean malformed payload.
             if r.status_code >= 400:
-                # show the raw body so you can see the GraphQL error text
                 print(f"  AniList HTTP {r.status_code}: {r.text[:500]}")
                 r.raise_for_status()
             data = r.json()
             if "errors" in data:
-                # surface GraphQL errors
                 raise RuntimeError(data["errors"])
             return data
         except Exception as e:
@@ -325,7 +393,6 @@ def process_anilist_page(page: int):
                 empty_va_edges = sum(1 for e in edges if not (e.get("voiceActors") or []))
                 log(f"    edges={len(edges)} empty_va_edges={empty_va_edges}")
                 if empty_va_edges == len(edges) and len(edges) > 0:
-                    # Dump a sample edge (trimmed) to inspect structure
                     import json as _json
                     log("    sample edge dump:")
                     try:
@@ -377,6 +444,7 @@ def process_anilist_page(page: int):
 # ----------------------
 # Append-only finalize
 # ----------------------
+
 def finalize_jsons(api_mode: str):
     output_dir = f"automatic_{api_mode}"
     os.makedirs(output_dir, exist_ok=True)
@@ -412,13 +480,180 @@ def finalize_jsons(api_mode: str):
 
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(obj, f, ensure_ascii=False, indent=2)
-        if debug_log:
-            log(f"  wrote {filename} (total ids: {len(updated_ids)})")
 
+
+# ----------------------
+# ANN helpers
+# ----------------------
+def ann_get(url):
+    """Throttled GET for ANN (XML)."""
+    global ann_last_call
+    now = time.time()
+    to_wait = ANN_MIN_INTERVAL - (now - ann_last_call)
+    if to_wait > 0:
+        time.sleep(to_wait)
+    ann_last_call = time.time()
+
+    last_exception = None
+    for attempt in range(CALL_RETRIES):
+        try:
+            resp = requests.get(url, headers={"Accept": "text/xml"})
+            if resp.status_code == 404:
+                log("  ANN 404, skipping batch")
+                return None
+            resp.raise_for_status()
+            return resp.text
+        except Exception as e:
+            last_exception = e
+            print(f"  ANN attempt {attempt + 1} failed: {e}")
+            if attempt < CALL_RETRIES - 1:
+                delay = RETRY_DELAYS[attempt]
+                print(f"  ANN call failed. Retrying in {delay} seconds...")
+                time.sleep(delay)
+    print(f"  All {CALL_RETRIES} ANN attempts failed for {url}")
+    raise last_exception
+
+
+def extract_ann_id_from_url(url: str) -> int | None:
+    """Parse ANN 'encyclopedia/anime.php?id=12345' from a URL."""
+    if not url:
+        return None
+    try:
+        # Be liberal: handle www/cdn subdomains and any query params
+        parsed = urlparse(url)
+        if "animenewsnetwork.com" not in parsed.netloc:
+            return None
+        if not parsed.path.endswith("/encyclopedia/anime.php"):
+            # Also accept direct 'encyclopedia/anime.php' without leading slash variants
+            if "encyclopedia/anime.php" not in parsed.path:
+                return None
+        qs = parse_qs(parsed.query)
+        if "id" in qs and qs["id"]:
+            return int(qs["id"][0])
+    except Exception:
+        return None
+    return None
+
+
+def jikan_ann_id_for_mal(mal_id: int) -> int | None:
+    """Use Jikan external links to find ANN id for a MAL anime id."""
+    data = jikan_get(f"/anime/{mal_id}/external")
+    if not data or "data" not in data:
+        return None
+    for entry in data["data"]:
+        url = entry.get("url") or ""
+        ann_id = extract_ann_id_from_url(url)
+        if ann_id:
+            return ann_id
+    return None
+
+
+def parse_ann_batch_xml(xml_text: str) -> dict[int, set[str]]:
+    """
+    Parse ANN XML and return {ann_id: set(lang_keys)} inferred from <cast lang="...">
+    """
+    result: dict[int, set[str]] = {}
+    try:
+        root = ET.fromstring(xml_text)
+    except Exception as e:
+        log(f"  Failed to parse ANN XML batch: {e}")
+        return result
+
+    # ANN root tends to be <ann>
+    for anime in root.findall(".//anime"):
+        try:
+            ann_id = int(anime.get("id"))
+        except Exception:
+            continue
+
+        langs = set()
+
+        # only languages attached to cast entries (voice acting)
+        for cast in anime.findall(".//cast"):
+            code = cast.get("lang")
+            if not code:
+                continue
+            key = ann_lang_to_key(code)
+            if key:
+                langs.add(key)
+
+        if langs:
+            result[ann_id] = langs
+
+    return result
+
+
+def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]):
+    """
+    Fetch a batch of ANN IDs and add MAL IDs to json_data by language.
+    """
+    if not ann_ids:
+        return
+
+    # Build ANN batch URL: title=ID1/ID2/... (trailing slash is fine)
+    ids_part = "/".join(str(i) for i in ann_ids) + "/"
+    url = f"{ANN_API}?title={ids_part}"
+
+    xml_text = ann_get(url)
+    if not xml_text:
+        return
+
+    ann_langs = parse_ann_batch_xml(xml_text)
+    for ann_id, langs in ann_langs.items():
+        mal_id = ann_to_mal.get(ann_id)
+        if not mal_id:
+            continue
+        for key in langs:
+            json_data[key].add(mal_id)
 
 # ----------------------
 # Runners
 # ----------------------
+
+def run_ann(mal_start: int, mal_end: int):
+    """
+    ANN mode:
+      - iterate MAL id range
+      - map MAL -> ANN via Jikan /external
+      - batch ANN lookups
+      - write append-only JSONs under automatic_ann/
+    """
+    pending: list[int] = []
+    ann_to_mal: dict[int, int] = {}
+    processed = 0
+
+    try:
+        for mal_id in range(mal_start, mal_end + 1):
+            ann_id = jikan_ann_id_for_mal(mal_id)
+            if ann_id:
+                pending.append(ann_id)
+                ann_to_mal[ann_id] = mal_id
+
+            if len(pending) >= ANN_BATCH_SIZE:
+                if debug_log:
+                    log(f"ANN batch {processed // ANN_BATCH_SIZE + 1}: ids={pending[:3]}... (+{len(pending)-3} more)")
+                process_ann_batch(pending, ann_to_mal)
+                processed += len(pending)
+                pending.clear()
+
+            if processed and processed % (FINALIZE_EVERY_N) == 0:
+                finalize_jsons("ann")
+
+        # flush remainder
+        if pending:
+            process_ann_batch(pending, ann_to_mal)
+
+    except KeyboardInterrupt:
+        print("\nInterrupted. Finalizing data...")
+    except Exception as e:
+        print(f"\nUnexpected error (ANN): {e}")
+        import traceback
+        traceback.print_exc()
+    finally:
+        finalize_jsons("ann")
+        print("Done (ANN).")
+
+
 def run_mal(client_id: str, start_id: int, end_id: int):
     MAX_CONSECUTIVE_404 = 500
     consecutive_404 = 0
@@ -452,7 +687,6 @@ def run_mal(client_id: str, start_id: int, end_id: int):
 
 
 def run_anilist(start_page: int | None, end_page: int | None):
-    # If no start_page is given, default to 1
     page = start_page or 1
     total_processed = 0
 
@@ -465,11 +699,9 @@ def run_anilist(start_page: int | None, end_page: int | None):
             if page % 10 == 0:
                 finalize_jsons("anilist")
 
-            # Stop if we've reached the requested end_page
             if end_page is not None and page >= end_page:
                 break
 
-            # Otherwise continue as long as AniList has more pages
             if not has_next:
                 break
 
@@ -499,13 +731,13 @@ def main():
     parser = argparse.ArgumentParser(
         description="Fetch dubbed languages per anime and save to JSON (append-only)."
     )
-    parser.add_argument("--api", choices=["mal", "anilist"], default="mal", help="Which source to use.")
+    parser.add_argument("--api", choices=["mal", "anilist", "ann"], default="mal", help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
 
     # MAL-specific
     parser.add_argument("--client-id", help="MyAnimeList API Client ID (required for --api mal).")
-    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal.")
-    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal.")
+    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann.")
+    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann.")
 
     # AniList-specific
     parser.add_argument("--anilist-start-page", type=int, help="AniList: start page number (1-based).")
@@ -522,7 +754,7 @@ def main():
             sys.exit(1)
         run_mal(args.client_id, args.mal_start, args.mal_end)
 
-    else:  # anilist
+    elif args.api == "anilist":
         if str(args.anilist_check_pages).lower() == "true":
             try:
                 pages = anilist_total_pages(ANILIST_PER_PAGE)
@@ -531,9 +763,13 @@ def main():
             except Exception as e:
                 print(f"Failed to fetch AniList total pages: {e}")
                 sys.exit(2)
-
-        # Run with optional start/end page bounds
         run_anilist(args.anilist_start_page, args.anilist_end_page)
+
+    else:  # ann
+        if args.mal_start is None or args.mal_end is None:
+            print("For --api ann you must provide --mal-start and --mal-end.")
+            sys.exit(1)
+        run_ann(args.mal_start, args.mal_end)
 
 
 if __name__ == "__main__":

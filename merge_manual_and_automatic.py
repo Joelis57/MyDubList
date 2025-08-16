@@ -13,6 +13,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 MANUAL_DIR              = os.path.join(ROOT, "manual")
 AUTOMATIC_MAL_DIR       = os.path.join(ROOT, "automatic_mal")
 AUTOMATIC_ANILIST_DIR   = os.path.join(ROOT, "automatic_anilist")
+AUTOMATIC_ANN_DIR       = os.path.join(ROOT, "automatic_ann")
 AUTOMATIC_NSFW_DIR      = os.path.join(ROOT, "automatic_nsfw")
 FINAL_DIR               = os.path.join(ROOT, "final")
 README_PATH             = os.path.join(ROOT, "README.md")
@@ -78,12 +79,14 @@ def merge_language_file(filename: str):
     manual_path            = os.path.join(MANUAL_DIR, filename)
     automatic_mal_path     = os.path.join(AUTOMATIC_MAL_DIR, filename)
     automatic_anilist_path = os.path.join(AUTOMATIC_ANILIST_DIR, filename)
+    automatic_ann_path     = os.path.join(AUTOMATIC_ANN_DIR, filename)
     automatic_nsfw_path    = os.path.join(AUTOMATIC_NSFW_DIR, filename)
     final_path             = os.path.join(FINAL_DIR, filename)
 
     manual           = load_json(manual_path)
     auto_mal         = load_json(automatic_mal_path)
     auto_anilist     = load_json(automatic_anilist_path)
+    auto_ann         = load_json(automatic_ann_path)
     auto_nsfw        = load_json(automatic_nsfw_path)
 
     # Manual lists
@@ -91,15 +94,19 @@ def merge_language_file(filename: str):
     manual_not_dubbed = set(manual.get("not_dubbed", []) or [])
     manual_incomplete = set(manual.get("incomplete", []) or [])
 
-    # Automatic lists (MAL + AniList + NSFW)
+    # Automatic lists (MAL + AniList + ANN + NSFW)
     auto_mal_dubbed     = set(auto_mal.get("dubbed", []) or [])
     auto_anilist_dubbed = set(auto_anilist.get("dubbed", []) or [])
+    auto_ann_dubbed     = set(auto_ann.get("dubbed", []) or [])
     auto_nsfw_dubbed    = set(auto_nsfw.get("dubbed", []) or [])
 
-    combined_auto_dubbed = auto_mal_dubbed | auto_anilist_dubbed | auto_nsfw_dubbed
+    combined_auto_dubbed = (
+        auto_mal_dubbed | auto_anilist_dubbed | auto_ann_dubbed | auto_nsfw_dubbed
+    )
 
     log(f"[{filename}] auto_mal={len(auto_mal_dubbed)} "
         f"auto_anilist={len(auto_anilist_dubbed)} nsfw={len(auto_nsfw_dubbed)} "
+        f"ann={len(auto_ann_dubbed)} "
         f"=> combined_auto={len(combined_auto_dubbed)}; manual_dubbed={len(manual_dubbed)}")
 
     # --- Update manual: remove IDs already present in auto (de-dup) ---
