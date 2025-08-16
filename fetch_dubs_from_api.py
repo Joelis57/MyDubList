@@ -33,6 +33,9 @@ ANILIST_PAGE_SLEEP = 2  # seconds
 # ANN batching
 ANN_BATCH_SIZE = 40
 
+MISSING_CACHE_PATH = "cache/missing_mal_ids.json"
+LARGEST_KNOWN_MAL_FILE = "final/dubbed_japanese.json"
+
 # ======================
 
 # Globals
@@ -56,6 +59,9 @@ last_mal_404 = False
 # ANN throttle
 ann_last_call = 0
 ANN_MIN_INTERVAL = 1.0  # seconds between ANN calls
+
+missing_mal_ids = set()
+largest_known_mal_id = 0  # determined from final/dubbed_japanese.json
 
 def log(message: str):
     if debug_log:
@@ -163,6 +169,67 @@ def ann_lang_to_key(raw: str) -> str:
 
 
 # ----------------------
+# Missing MAL IDs cache helpers
+# ----------------------
+def _ensure_dir_for(path: str):
+    d = os.path.dirname(path)
+    if d and not os.path.exists(d):
+        os.makedirs(d, exist_ok=True)
+
+
+def load_missing_cache() -> set[int]:
+    """Load cached anime 404 MAL IDs from disk."""
+    if not os.path.exists(MISSING_CACHE_PATH):
+        return set()
+    try:
+        with open(MISSING_CACHE_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        # accept either {"missing":[...]} or a bare list for robustness
+        ids = data.get("missing", data if isinstance(data, list) else [])
+        out = set(int(x) for x in ids if isinstance(x, int) or (isinstance(x, str) and x.isdigit()))
+        log(f"[cache] Loaded {len(out)} missing MAL IDs from {MISSING_CACHE_PATH}")
+        return out
+    except Exception as e:
+        print(f"[cache] Failed to load {MISSING_CACHE_PATH}: {e}")
+        return set()
+
+
+def save_missing_cache():
+    """Persist cached anime 404 MAL IDs to disk."""
+    _ensure_dir_for(MISSING_CACHE_PATH)
+    try:
+        payload = {"missing": sorted(missing_mal_ids)}
+        with open(MISSING_CACHE_PATH, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+        log(f"[cache] Saved {len(missing_mal_ids)} missing MAL IDs to {MISSING_CACHE_PATH}")
+    except Exception as e:
+        print(f"[cache] Failed to save {MISSING_CACHE_PATH}: {e}")
+
+
+def get_largest_known_mal_id() -> int:
+    """
+    Read final/dubbed_japanese.json and return the last MAL ID in the 'dubbed' array.
+    If not available, returns 0.
+    """
+    path = LARGEST_KNOWN_MAL_FILE
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        arr = data.get("dubbed", [])
+        if isinstance(arr, list) and arr:
+            # Use last element as requested
+            val = arr[-1]
+            if isinstance(val, int):
+                return val
+            if isinstance(val, str) and val.isdigit():
+                return int(val)
+        return 0
+    except Exception as e:
+        log(f"[cache] Could not read largest known MAL ID from {path}: {e}")
+        return 0
+
+
+# ----------------------
 # MAL + Jikan helpers
 # ----------------------
 @lru_cache(maxsize=MAX_IN_MEMORY_CACHE)
@@ -245,7 +312,7 @@ def process_anime_mal(mal_id, client_id):
     log(f"Processing MAL ID: {mal_id}")
     characters = get_characters(mal_id, client_id)
 
-    # If the characters call 404'd, short-circuit and report it
+    # If the characters call 404'd for the anime, short-circuit and report it
     if 'last_mal_404' in globals() and last_mal_404:
         return True  # was_404
 
@@ -659,11 +726,30 @@ def run_ann(mal_start: int, mal_end: int):
 
 
 def run_mal(client_id: str, start_id: int, end_id: int):
+    global missing_mal_ids, largest_known_mal_id
+
+    # Load cache + largest known MAL ID once per run
+    missing_mal_ids = load_missing_cache()
+    largest_known_mal_id = get_largest_known_mal_id()
+    if debug_log:
+        log(f"[cache] largest_known_mal_id={largest_known_mal_id or 0}")
+
     MAX_CONSECUTIVE_404 = 500
     consecutive_404 = 0
     try:
         for idx, mal_id in enumerate(range(start_id, end_id + 1), 1):
-            was_404 = process_anime_mal(mal_id, client_id)
+            # Skip using cache only if ID is <= largest_known_mal_id
+            if largest_known_mal_id and mal_id <= largest_known_mal_id and mal_id in missing_mal_ids:
+                if debug_log:
+                    log(f"  Skipping MAL ID {mal_id} (cached 404)")
+                was_404 = True
+                # no need to re-add; it's already in cache
+            else:
+                was_404 = process_anime_mal(mal_id, client_id)
+                # If MAL anime returned 404, record to cache
+                if was_404:
+                    if mal_id not in missing_mal_ids:
+                        missing_mal_ids.add(mal_id)
 
             if was_404:
                 consecutive_404 += 1
@@ -679,6 +765,7 @@ def run_mal(client_id: str, start_id: int, end_id: int):
             if idx % FINALIZE_EVERY_N == 0:
                 log(f"--- Updating files at MAL ID {start_id + idx - 1} ---")
                 finalize_jsons("mal")
+                save_missing_cache()
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing data...")
     except Exception as e:
@@ -687,6 +774,7 @@ def run_mal(client_id: str, start_id: int, end_id: int):
         traceback.print_exc()
     finally:
         finalize_jsons("mal")
+        save_missing_cache()
         print("Done (MAL).")
 
 
