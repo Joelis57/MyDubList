@@ -26,28 +26,30 @@
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed | Incomplete | File |
 |---|---:|---:|---:|---|
-| Japanese | 日本語 | 12741 | 0 | `final/dubbed_japanese.json` |
-| English | English | 4669 | 66 | `final/dubbed_english.json` |
-| Spanish | Español | 2086 | 0 | `final/dubbed_spanish.json` |
-| French | Français | 2050 | 0 | `final/dubbed_french.json` |
-| German | Deutsch | 2022 | 0 | `final/dubbed_german.json` |
-| Italian | Italiano | 1836 | 0 | `final/dubbed_italian.json` |
-| Portuguese | Português | 1497 | 0 | `final/dubbed_portuguese.json` |
-| Korean | 한국어 | 1209 | 0 | `final/dubbed_korean.json` |
-| Chinese | 中文 | 602 | 0 | `final/dubbed_chinese.json` |
-| Polish | Polski | 246 | 0 | `final/dubbed_polish.json` |
+| Japanese | 日本語 | 13523 | 0 | `final/dubbed_japanese.json` |
+| English | English | 4937 | 66 | `final/dubbed_english.json` |
+| Spanish | Español | 2792 | 0 | `final/dubbed_spanish.json` |
+| German | Deutsch | 2245 | 0 | `final/dubbed_german.json` |
+| French | Français | 2218 | 0 | `final/dubbed_french.json` |
+| Italian | Italiano | 2080 | 0 | `final/dubbed_italian.json` |
+| Portuguese | Português | 1669 | 0 | `final/dubbed_portuguese.json` |
+| Korean | 한국어 | 1338 | 0 | `final/dubbed_korean.json` |
+| Tagalog | Tagalog | 811 | 0 | `final/dubbed_tagalog.json` |
+| Chinese | 中文 | 639 | 0 | `final/dubbed_chinese.json` |
+| Arabic | العربية | 316 | 0 | `final/dubbed_arabic.json` |
+| Polish | Polski | 269 | 0 | `final/dubbed_polish.json` |
 | Hungarian | Magyar | 168 | 0 | `final/dubbed_hungarian.json` |
+| Swedish | Svenska | 141 | 0 | `final/dubbed_swedish.json` |
 | Norwegian | Norsk | 134 | 0 | `final/dubbed_norwegian.json` |
-| Swedish | Svenska | 123 | 0 | `final/dubbed_swedish.json` |
 | Hebrew | עברית | 107 | 0 | `final/dubbed_hebrew.json` |
+| Dutch | Nederlands | 102 | 0 | `final/dubbed_dutch.json` |
+| Russian | Russian | 78 | 0 | `final/dubbed_russian.json` |
+| Danish | Danish | 62 | 0 | `final/dubbed_danish.json` |
 | Indonesian | Bahasa Indonesia | 59 | 0 | `final/dubbed_indonesian.json` |
 | Thai | ไทย | 39 | 0 | `final/dubbed_thai.json` |
 | Hindi | हिन्दी | 19 | 0 | `final/dubbed_hindi.json` |
 | Finnish | Suomi | 16 | 0 | `final/dubbed_finnish.json` |
-| Tagalog | Tagalog | 11 | 0 | `final/dubbed_tagalog.json` |
 | Turkish | Türkçe | 10 | 0 | `final/dubbed_turkish.json` |
-| Arabic | العربية | 9 | 0 | `final/dubbed_arabic.json` |
-| Dutch | Nederlands | 4 | 0 | `final/dubbed_dutch.json` |
 | Catalan | Català | 3 | 0 | `final/dubbed_catalan.json` |
 | Filipino | Filipino | 1 | 0 | `final/dubbed_filipino.json` |
 | Vietnamese | Tiếng Việt | 1 | 0 | `final/dubbed_vietnamese.json` |

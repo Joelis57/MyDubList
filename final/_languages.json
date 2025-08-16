@@ -5,7 +5,7 @@
       "english_name": "Japanese",
       "native_name": "日本語",
       "file": "final/dubbed_japanese.json",
-      "dubbed_count": 12741,
+      "dubbed_count": 13523,
       "incomplete_count": 0
     },
     {
@@ -13,7 +13,7 @@
       "english_name": "English",
       "native_name": "English",
       "file": "final/dubbed_english.json",
-      "dubbed_count": 4669,
+      "dubbed_count": 4937,
       "incomplete_count": 66
     },
     {
@@ -21,15 +21,7 @@
       "english_name": "Spanish",
       "native_name": "Español",
       "file": "final/dubbed_spanish.json",
-      "dubbed_count": 2086,
-      "incomplete_count": 0
-    },
-    {
-      "key": "french",
-      "english_name": "French",
-      "native_name": "Français",
-      "file": "final/dubbed_french.json",
-      "dubbed_count": 2050,
+      "dubbed_count": 2792,
       "incomplete_count": 0
     },
     {
@@ -37,7 +29,15 @@
       "english_name": "German",
       "native_name": "Deutsch",
       "file": "final/dubbed_german.json",
-      "dubbed_count": 2022,
+      "dubbed_count": 2245,
+      "incomplete_count": 0
+    },
+    {
+      "key": "french",
+      "english_name": "French",
+      "native_name": "Français",
+      "file": "final/dubbed_french.json",
+      "dubbed_count": 2218,
       "incomplete_count": 0
     },
     {
@@ -45,7 +45,7 @@
       "english_name": "Italian",
       "native_name": "Italiano",
       "file": "final/dubbed_italian.json",
-      "dubbed_count": 1836,
+      "dubbed_count": 2080,
       "incomplete_count": 0
     },
     {
@@ -53,7 +53,7 @@
       "english_name": "Portuguese",
       "native_name": "Português",
       "file": "final/dubbed_portuguese.json",
-      "dubbed_count": 1497,
+      "dubbed_count": 1669,
       "incomplete_count": 0
     },
     {
@@ -61,7 +61,15 @@
       "english_name": "Korean",
       "native_name": "한국어",
       "file": "final/dubbed_korean.json",
-      "dubbed_count": 1209,
+      "dubbed_count": 1338,
+      "incomplete_count": 0
+    },
+    {
+      "key": "tagalog",
+      "english_name": "Tagalog",
+      "native_name": "Tagalog",
+      "file": "final/dubbed_tagalog.json",
+      "dubbed_count": 811,
       "incomplete_count": 0
     },
     {
@@ -69,7 +77,15 @@
       "english_name": "Chinese",
       "native_name": "中文",
       "file": "final/dubbed_chinese.json",
-      "dubbed_count": 602,
+      "dubbed_count": 639,
+      "incomplete_count": 0
+    },
+    {
+      "key": "arabic",
+      "english_name": "Arabic",
+      "native_name": "العربية",
+      "file": "final/dubbed_arabic.json",
+      "dubbed_count": 316,
       "incomplete_count": 0
     },
     {
@@ -77,7 +93,7 @@
       "english_name": "Polish",
       "native_name": "Polski",
       "file": "final/dubbed_polish.json",
-      "dubbed_count": 246,
+      "dubbed_count": 269,
       "incomplete_count": 0
     },
     {
@@ -89,6 +105,14 @@
       "incomplete_count": 0
     },
     {
+      "key": "swedish",
+      "english_name": "Swedish",
+      "native_name": "Svenska",
+      "file": "final/dubbed_swedish.json",
+      "dubbed_count": 141,
+      "incomplete_count": 0
+    },
+    {
       "key": "norwegian",
       "english_name": "Norwegian",
       "native_name": "Norsk",
@@ -97,19 +121,35 @@
       "incomplete_count": 0
     },
     {
-      "key": "swedish",
-      "english_name": "Swedish",
-      "native_name": "Svenska",
-      "file": "final/dubbed_swedish.json",
-      "dubbed_count": 123,
-      "incomplete_count": 0
-    },
-    {
       "key": "hebrew",
       "english_name": "Hebrew",
       "native_name": "עברית",
       "file": "final/dubbed_hebrew.json",
       "dubbed_count": 107,
+      "incomplete_count": 0
+    },
+    {
+      "key": "dutch",
+      "english_name": "Dutch",
+      "native_name": "Nederlands",
+      "file": "final/dubbed_dutch.json",
+      "dubbed_count": 102,
+      "incomplete_count": 0
+    },
+    {
+      "key": "russian",
+      "english_name": "Russian",
+      "native_name": "Russian",
+      "file": "final/dubbed_russian.json",
+      "dubbed_count": 78,
+      "incomplete_count": 0
+    },
+    {
+      "key": "danish",
+      "english_name": "Danish",
+      "native_name": "Danish",
+      "file": "final/dubbed_danish.json",
+      "dubbed_count": 62,
       "incomplete_count": 0
     },
     {
@@ -145,35 +185,11 @@
       "incomplete_count": 0
     },
     {
-      "key": "tagalog",
-      "english_name": "Tagalog",
-      "native_name": "Tagalog",
-      "file": "final/dubbed_tagalog.json",
-      "dubbed_count": 11,
-      "incomplete_count": 0
-    },
-    {
       "key": "turkish",
       "english_name": "Turkish",
       "native_name": "Türkçe",
       "file": "final/dubbed_turkish.json",
       "dubbed_count": 10,
-      "incomplete_count": 0
-    },
-    {
-      "key": "arabic",
-      "english_name": "Arabic",
-      "native_name": "العربية",
-      "file": "final/dubbed_arabic.json",
-      "dubbed_count": 9,
-      "incomplete_count": 0
-    },
-    {
-      "key": "dutch",
-      "english_name": "Dutch",
-      "native_name": "Nederlands",
-      "file": "final/dubbed_dutch.json",
-      "dubbed_count": 4,
       "incomplete_count": 0
     },
     {
