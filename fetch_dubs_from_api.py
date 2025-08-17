@@ -12,6 +12,14 @@ from math import ceil
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse, parse_qs
 
+# JustWatch wrapper (used only in --api justwatch mode)
+# pip install simple-justwatch-python-api
+try:
+    from simplejustwatchapi.justwatch import search as jw_search, offers_for_countries as jw_offers_for_countries
+except Exception:
+    jw_search = None
+    jw_offers_for_countries = None
+
 # ======================
 # CONFIG
 # ======================
@@ -36,10 +44,40 @@ ANN_BATCH_SIZE = 40
 MISSING_CACHE_PATH = "cache/missing_mal_ids.json"
 LARGEST_KNOWN_MAL_FILE = "final/dubbed_japanese.json"
 
+# MAL -> JustWatch node id cache
+MAL_JW_MAP_PATH = "cache/mal_justwatch_ids.json"
+
+# JustWatch coverage — 20 high-coverage markets (keeps payloads small)
+JW_COVERAGE = {
+    # Americas
+    "US", "CA", "MX", "BR", "AR",
+    # Europe (West/North)
+    "GB", "FR", "DE", "IT", "ES", "PT", "NL",
+    # Europe (East / extra)
+    "PL", "TR",
+    # APAC
+    "JP", "KR", "IN", "AU", "NZ",
+}
+
+# Trusted providers (filter offers to reduce false positives)
+# NOTE: Amazon/Prime is intentionally NOT present and is hard-excluded below.
+TRUSTED_PROVIDERS = {
+    "netflix",
+    "disneyplus",
+    "hulu",
+    "appletvplus",  # Apple TV+
+    "itunes",       # allow iTunes storefront
+    "crunchyroll",
+    "max", "hbomax",
+    "paramountplus",
+    "peacock",
+    "hidive",
+}
 # ======================
 
 # Globals
 jikan_last_call = 0
+jikan_last_404 = False   # remember if last Jikan call was a 404
 json_data = defaultdict(set)
 debug_log = False
 anilist_stats = {
@@ -60,8 +98,15 @@ last_mal_404 = False
 ann_last_call = 0
 ANN_MIN_INTERVAL = 1.0  # seconds between ANN calls
 
+# JustWatch throttle
+JW_MIN_INTERVAL = 1.05  # seconds
+jw_last_call = 0.0
+
 missing_mal_ids = set()
 largest_known_mal_id = 0  # determined from final/dubbed_japanese.json
+
+# MAL→JW map (in-memory).
+mal_to_jw_map = {}  # str(mal_id) -> str(node_id)
 
 def log(message: str):
     if debug_log:
@@ -77,96 +122,53 @@ def sanitize_lang(lang: str) -> str:
 
     s = lang.strip().lower()
 
-    # Portuguese variants → "portuguese"
     if s.startswith("portuguese"):
         return "portuguese"
 
-    # Mandarin → Chinese (unify MAL + AniList)
     if s.startswith("mandarin"):
         return "chinese"
 
-    # Map Filipino to Tagalog (only 1 occurrence of Filipino)
     if s.startswith("filipino"):
         return "tagalog"
-    
-    # Remove any (...) parenthetical chunk(s)
+
     s = re.sub(r"\(.*?\)", "", s).strip()
-
-    # Collapse whitespace
     s = re.sub(r"\s+", " ", s)
-
     return s
 
 
 def filename_for_lang(lang_key: str) -> str:
-    """Turn normalized language key into a filename-friendly token."""
     return lang_key.replace(" ", "_")
 
 
-# ANN code/name → our normalized keys
 def ann_lang_to_key(raw: str) -> str:
     if not raw:
         return ""
-
     r = raw.strip().upper()
-
-    # Normalize a few common region codes and oddities
-    # Spanish (LATAM) variants → 'spanish'
     if r in {"ES-419", "ES-LA", "LATAM"}:
         return "spanish"
-
-    # Portuguese (BR) variants
     if r in {"PT-BR", "BR"}:
         return "portuguese"
-
-    # Chinese variants
     if r in {"ZH", "ZH-CN", "ZH-TW", "ZH-HK", "CH", "CN"}:
         return "chinese"
 
-    # ISO-ish 639-1 map (common ones)
     iso = {
-        "EN": "english",
-        "FR": "french",
-        "DE": "german",
-        "HE": "hebrew",
-        "IW": "hebrew",
-        "HU": "hungarian",
-        "IT": "italian",
-        "JA": "japanese",
-        "KO": "korean",
-        "PT": "portuguese",
-        "ES": "spanish",
-        "TL": "tagalog",
-        "PL": "polish",
-        "RU": "russian",
-        "TR": "turkish",
-        "NL": "dutch",
-        "SV": "swedish",
-        "NO": "norwegian",
-        "NB": "norwegian",
-        "NN": "norwegian",
-        "DA": "danish",
-        "FI": "finnish",
-        "CS": "czech",
-        "SK": "slovak",
-        "RO": "romanian",
-        "BG": "bulgarian",
-        "UK": "ukrainian",
-        "UA": "ukrainian",
-        "EL": "greek",
-        "ID": "indonesian",
-        "MS": "malay",
-        "VI": "vietnamese",
-        "TH": "thai",
-        "AR": "arabic",
-        "HI": "hindi",
+        "EN": "english","FR":"french","DE":"german","HE":"hebrew","IW":"hebrew","HU":"hungarian",
+        "IT":"italian","JA":"japanese","KO":"korean","PT":"portuguese","ES":"spanish","TL":"tagalog",
+        "PL":"polish","RU":"russian","TR":"turkish","NL":"dutch","SV":"swedish","NO":"norwegian",
+        "NB":"norwegian","NN":"norwegian","DA":"danish","FI":"finnish","CS":"czech","SK":"slovak",
+        "RO":"romanian","BG":"bulgarian","UK":"ukrainian","UA":"ukrainian","EL":"greek","ID":"indonesian",
+        "MS":"malay","VI":"vietnamese","TH":"thai","AR":"arabic","HI":"hindi","ET":"estonian","EU":"basque",
+        "LT":"lithuanian","LV":"latvian","CA":"catalan","IS":"icelandic","MK":"macedonian","SL":"slovenian",
+        "SR":"serbian","HR":"croatian","UR":"urdu","FA":"persian","BN":"bengali","TA":"tamil","TE":"telugu",
+        "MR":"marathi","GU":"gujarati","PA":"punjabi",
     }
     if r in iso:
         return iso[r]
-
-    # If they send a word (rare), funnel through sanitize_lang
     return sanitize_lang(raw)
 
+
+def jw_lang_to_key(raw: str) -> str:
+    return ann_lang_to_key(raw)
 
 # ----------------------
 # Missing MAL IDs cache helpers
@@ -178,13 +180,11 @@ def _ensure_dir_for(path: str):
 
 
 def load_missing_cache() -> set[int]:
-    """Load cached anime 404 MAL IDs from disk."""
     if not os.path.exists(MISSING_CACHE_PATH):
         return set()
     try:
         with open(MISSING_CACHE_PATH, "r", encoding="utf-8") as f:
             data = json.load(f)
-        # accept either {"missing":[...]} or a bare list for robustness
         ids = data.get("missing", data if isinstance(data, list) else [])
         out = set(int(x) for x in ids if isinstance(x, int) or (isinstance(x, str) and x.isdigit()))
         log(f"[cache] Loaded {len(out)} missing MAL IDs from {MISSING_CACHE_PATH}")
@@ -195,7 +195,6 @@ def load_missing_cache() -> set[int]:
 
 
 def save_missing_cache():
-    """Persist cached anime 404 MAL IDs to disk."""
     _ensure_dir_for(MISSING_CACHE_PATH)
     try:
         payload = {"missing": sorted(missing_mal_ids)}
@@ -207,17 +206,12 @@ def save_missing_cache():
 
 
 def get_largest_known_mal_id() -> int:
-    """
-    Read final/dubbed_japanese.json and return the last MAL ID in the 'dubbed' array.
-    If not available, returns 0.
-    """
     path = LARGEST_KNOWN_MAL_FILE
     try:
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
         arr = data.get("dubbed", [])
         if isinstance(arr, list) and arr:
-            # Use last element as requested
             val = arr[-1]
             if isinstance(val, int):
                 return val
@@ -227,6 +221,29 @@ def get_largest_known_mal_id() -> int:
     except Exception as e:
         log(f"[cache] Could not read largest known MAL ID from {path}: {e}")
         return 0
+
+
+# MAL -> JW map helpers
+def load_mal_jw_map() -> dict:
+    if not os.path.exists(MAL_JW_MAP_PATH):
+        return {}
+    try:
+        with open(MAL_JW_MAP_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data.get("map", data if isinstance(data, dict) else {})
+    except Exception as e:
+        print(f"[cache] Failed to load {MAL_JW_MAP_PATH}: {e}")
+        return {}
+
+
+def save_mal_jw_map(mapping: dict):
+    _ensure_dir_for(MAL_JW_MAP_PATH)
+    try:
+        with open(MAL_JW_MAP_PATH, "w", encoding="utf-8") as f:
+            json.dump({"map": mapping}, f, ensure_ascii=False, indent=2)
+        log(f"[cache] Saved {len(mapping)} MAL→JW mappings to {MAL_JW_MAP_PATH}")
+    except Exception as e:
+        print(f"[cache] Failed to save {MAL_JW_MAP_PATH}: {e}")
 
 
 # ----------------------
@@ -240,8 +257,6 @@ def get_anime_roles_for_va_cached(person_id):
 
 def mal_get(url, client_id):
     global mal_last_call, last_mal_404
-
-    # Throttle MAL to <= 0.5 req/sec (2s min interval)
     now = time.time()
     to_wait = MAL_MIN_INTERVAL - (now - mal_last_call)
     if to_wait > 0:
@@ -267,13 +282,12 @@ def mal_get(url, client_id):
                 delay = RETRY_DELAYS[attempt]
                 print(f"  MAL API call failed. Retrying in {delay} seconds...")
                 time.sleep(delay)
-
     print(f"  All {CALL_RETRIES} attempts failed for {url}")
     raise last_exception
 
 
 def jikan_get(url):
-    global jikan_last_call
+    global jikan_last_call, jikan_last_404
     now = time.time()
     to_wait = 1.0 - (now - jikan_last_call)
     if to_wait > 0:
@@ -285,9 +299,11 @@ def jikan_get(url):
         try:
             response = requests.get(JIKAN_BASE + url)
             if response.status_code == 404:
+                jikan_last_404 = True
                 log("    404 Not Found, skipping")
                 return None
             response.raise_for_status()
+            jikan_last_404 = False
             return response.json()
         except Exception as e:
             last_exception = e
@@ -312,7 +328,6 @@ def process_anime_mal(mal_id, client_id):
     log(f"Processing MAL ID: {mal_id}")
     characters = get_characters(mal_id, client_id)
 
-    # If the characters call 404'd for the anime, short-circuit and report it
     if 'last_mal_404' in globals() and last_mal_404:
         return True  # was_404
 
@@ -435,7 +450,6 @@ def process_anilist_page(page: int):
     has_next = page_data["pageInfo"]["hasNextPage"]
     media_list = page_data.get("media", [])
 
-    # Local counters for this page
     page_media_total = len(media_list)
     page_with_mal = 0
     page_without_mal = 0
@@ -501,7 +515,6 @@ def process_anilist_page(page: int):
             f"with_langs={page_with_langs} no_langs={page_without_langs}"
         )
 
-    # Update global stats
     anilist_stats["pages"] += 1
     anilist_stats["media_total"] += page_media_total
     anilist_stats["media_with_mal"] += page_with_mal
@@ -515,7 +528,6 @@ def process_anilist_page(page: int):
 # ----------------------
 # Append-only finalize
 # ----------------------
-
 def finalize_jsons(api_mode: str):
     output_dir = f"automatic_{api_mode}"
     os.makedirs(output_dir, exist_ok=True)
@@ -534,7 +546,7 @@ def finalize_jsons(api_mode: str):
         else:
             existing_ids = set()
 
-        updated_ids = existing_ids | set(new_ids)  # append-only
+        updated_ids = existing_ids | set(new_ids)
 
         added_ids = sorted(updated_ids - existing_ids)
         if added_ids:
@@ -557,7 +569,6 @@ def finalize_jsons(api_mode: str):
 # ANN helpers
 # ----------------------
 def ann_get(url):
-    """Throttled GET for ANN (XML)."""
     global ann_last_call
     now = time.time()
     to_wait = ANN_MIN_INTERVAL - (now - ann_last_call)
@@ -586,16 +597,13 @@ def ann_get(url):
 
 
 def extract_ann_id_from_url(url: str) -> int | None:
-    """Parse ANN 'encyclopedia/anime.php?id=12345' from a URL."""
     if not url:
         return None
     try:
-        # Be liberal: handle www/cdn subdomains and any query params
         parsed = urlparse(url)
         if "animenewsnetwork.com" not in parsed.netloc:
             return None
         if not parsed.path.endswith("/encyclopedia/anime.php"):
-            # Also accept direct 'encyclopedia/anime.php' without leading slash variants
             if "encyclopedia/anime.php" not in parsed.path:
                 return None
         qs = parse_qs(parsed.query)
@@ -607,7 +615,6 @@ def extract_ann_id_from_url(url: str) -> int | None:
 
 
 def jikan_ann_id_for_mal(mal_id: int) -> int | None:
-    """Use Jikan external links to find ANN id for a MAL anime id."""
     data = jikan_get(f"/anime/{mal_id}/external")
     if not data or "data" not in data:
         return None
@@ -620,9 +627,6 @@ def jikan_ann_id_for_mal(mal_id: int) -> int | None:
 
 
 def parse_ann_batch_xml(xml_text: str) -> dict[int, set[str]]:
-    """
-    Parse ANN XML and return {ann_id: set(lang_keys)} inferred from <cast lang="...">
-    """
     result: dict[int, set[str]] = {}
     try:
         root = ET.fromstring(xml_text)
@@ -630,7 +634,6 @@ def parse_ann_batch_xml(xml_text: str) -> dict[int, set[str]]:
         log(f"  Failed to parse ANN XML batch: {e}")
         return result
 
-    # ANN root tends to be <ann>
     for anime in root.findall(".//anime"):
         try:
             ann_id = int(anime.get("id"))
@@ -638,8 +641,6 @@ def parse_ann_batch_xml(xml_text: str) -> dict[int, set[str]]:
             continue
 
         langs = set()
-
-        # only languages attached to cast entries (voice acting)
         for cast in anime.findall(".//cast"):
             code = cast.get("lang")
             if not code:
@@ -655,16 +656,10 @@ def parse_ann_batch_xml(xml_text: str) -> dict[int, set[str]]:
 
 
 def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]):
-    """
-    Fetch a batch of ANN IDs and add MAL IDs to json_data by language.
-    """
     if not ann_ids:
         return
-
-    # Build ANN batch URL: title=ID1/ID2/... (trailing slash is fine)
     ids_part = "/".join(str(i) for i in ann_ids) + "/"
     url = f"{ANN_API}?title={ids_part}"
-
     xml_text = ann_get(url)
     if not xml_text:
         return
@@ -677,18 +672,370 @@ def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]):
         for key in langs:
             json_data[key].add(mal_id)
 
+
+# ----------------------
+# JustWatch helpers
+# ----------------------
+def _respect_jw_rps():
+    global jw_last_call
+    now = time.time()
+    to_wait = JW_MIN_INTERVAL - (now - jw_last_call)
+    if to_wait > 0:
+        time.sleep(to_wait)
+    jw_last_call = time.time()
+
+def jw_search_rl(*args, **kwargs):
+    _respect_jw_rps()
+    return jw_search(*args, **kwargs)
+
+def jw_offers_for_countries_rl(*args, **kwargs):
+    _respect_jw_rps()
+    return jw_offers_for_countries(*args, **kwargs)
+
+def _norm_title(s: str) -> str:
+    import unicodedata as _u
+    s = _u.normalize("NFKC", s or "")
+    return "".join(ch for ch in s if (_u.category(ch)[0] != "P" and not ch.isspace())).casefold()
+
+# --- Season marker detection (very conservative)
+_SEASON_RE = re.compile(
+    r"\b("
+    r"season\s*\d+|"
+    r"\d+(?:st|nd|rd|th)\s*season|"
+    r"final\s*season|"
+    r"part\s*\d+|"
+    r"s\d+\b"
+    r")",
+    re.IGNORECASE
+)
+
+def _has_season_marker_in_titles(raw_titles: list[str]) -> bool:
+    for t in raw_titles:
+        if t and _SEASON_RE.search(t):
+            return True
+    return False
+
+def jikan_is_multi_season(mal_id: int) -> bool:
+    """True if Jikan relations include Sequel/Prequel (treat as multi-season risk)."""
+    d = jikan_get(f"/anime/{mal_id}/relations")
+    if not d or "data" not in d:
+        return False
+    for rel in d["data"]:
+        rel_type = (rel.get("relation") or "").strip().lower()
+        if rel_type in {"sequel", "prequel"}:
+            return True
+    return False
+
+def _collect_titles_from_jikan_data(d: dict):
+    """Return (set_of_norm_titles, ordered_query_titles, raw_titles_list)."""
+    titles_set, queries, raw_titles = set(), [], []
+    if not d:
+        return titles_set, queries, raw_titles
+
+    seen = set()
+    def add(t: str | None, priority=False):
+        if not t:
+            return
+        if t in seen:
+            return
+        seen.add(t)
+        raw_titles.append(t)
+        titles_set.add(_norm_title(t))
+        if priority:
+            queries.append(t)
+
+    for obj in (d.get("titles") or []):
+        ttype = (obj.get("type") or "").lower()
+        if ttype == "english":
+            add(obj.get("title"), True)
+    for obj in (d.get("titles") or []):
+        ttype = (obj.get("type") or "").lower()
+        if ttype in {"default", "synonym"}:
+            add(obj.get("title"), True)
+    for obj in (d.get("titles") or []):
+        ttype = (obj.get("type") or "").lower()
+        if ttype == "japanese":
+            add(obj.get("title"), True)
+
+    add(d.get("title_english"), True)
+    add(d.get("title"), True)
+    add(d.get("title_japanese"), True)
+    for syn in (d.get("title_synonyms") or []):
+        add(syn, True)
+
+    queries = list(dict.fromkeys(queries))
+    return titles_set, queries, raw_titles
+
+
+def _map_mal_type_to_jw_type(mal_type: str | None) -> str | None:
+    mt = (mal_type or "").upper()
+    if mt in {"TV", "ONA", "OVA", "SPECIAL"}:
+        return "show"
+    if mt == "MOVIE":
+        return "movie"
+    return None
+
+
+def _norm_jw_type(t) -> str | None:
+    if t is None:
+        return None
+    t = str(t).strip().lower()
+    if t in {"show", "series", "tv", "tv_show"}:
+        return "show"
+    if t in {"movie", "film"}:
+        return "movie"
+    return t
+
+
+def _extract_year_from_aired(d: dict) -> int | None:
+    aired = d.get("aired") or {}
+    prop = aired.get("prop") or {}
+    y = (prop.get("from") or {}).get("year")
+    if isinstance(y, int):
+        return y
+    iso = aired.get("from")
+    if isinstance(iso, str) and len(iso) >= 4 and iso[:4].isdigit():
+        try:
+            return int(iso[:4])
+        except Exception:
+            return None
+    return None
+
+
+def jikan_mal_meta_for_jw(mal_id: int):
+    data = jikan_get(f"/anime/{mal_id}")
+    if not data or "data" not in data:
+        log(f"[JW] Jikan meta missing for MAL {mal_id}")
+        return None
+    d = data["data"]
+    titles_set, queries, raw_titles = _collect_titles_from_jikan_data(d)
+    year = d.get("year")
+    if year is None:
+        y2 = _extract_year_from_aired(d)
+        if y2 is not None:
+            year = y2
+            log(f"[{mal_id}] Using fallback year from 'aired': {year}")
+        else:
+            log(f"[{mal_id}] No 'year' and could not derive from 'aired'.")
+    jw_type = _map_mal_type_to_jw_type(d.get("type"))
+
+    has_season_marker = _has_season_marker_in_titles(raw_titles)
+    is_multi_season = jikan_is_multi_season(mal_id)  # extra Jikan call (throttled)
+
+    if not titles_set:
+        log(f"[{mal_id}] Jikan returned no titles for strict match.")
+    if jw_type is None:
+        log(f"[{mal_id}] MAL type '{d.get('type')}' not mappable to JW type.")
+    return {
+        "titles_set": titles_set,
+        "queries": queries,
+        "year": year,
+        "jw_type": jw_type,
+        "has_season_marker": has_season_marker,
+        "is_multi_season": is_multi_season,
+    }
+
+
+def _jw_entry_has_ani_genre(e) -> bool:
+    """
+    Return True iff the JW search entry has the 'ani' genre code.
+    JW often returns 3-letter genre codes like: act, scf, wsn, drm, ani, cmy.
+    """
+    raw_genres = getattr(e, "genres", None) or getattr(e, "genre", None) or []
+    tokens = []
+    for g in raw_genres:
+        if isinstance(g, str):
+            tokens.append(g.strip().lower())
+        else:
+            # Try common fields on genre objects
+            for attr in ("short_name", "technical_name", "name"):
+                val = getattr(g, attr, None)
+                if val:
+                    tokens.append(str(val).strip().lower())
+    return "ani" in tokens
+
+def jw_strict_pick(mal_id: int, titles_set: set, queries: list, year: int | None, jw_type: str | None,
+                   is_multi_season: bool, has_mal_season_marker: bool):
+    """
+    Return an entry that matches:
+      (title ∈ MAL titles) AND (year) AND (type) AND ('ani' genre present)
+    plus Season-guard for shows:
+      If MAL looks multi-season but MAL titles lack season markers -> reject (avoid series-wide aggregation).
+    """
+    if jw_search is None:
+        print("simple-justwatch-python-api not installed. Please `pip install simple-justwatch-python-api`.")
+        sys.exit(2)
+
+    if not titles_set or year is None or jw_type is None:
+        log(f"[{mal_id}] Strict picker aborted: titles={bool(titles_set)}, year={year}, jw_type={jw_type}")
+        return None
+
+    want_type = _norm_jw_type(jw_type)
+
+    for q in queries[:8]:
+        try:
+            results = jw_search_rl(q, "US", "en", 20, True) or []
+        except Exception as e:
+            log(f"[{mal_id}] JW search error for '{q}': {e}")
+            continue
+
+        if not results:
+            log(f"[{mal_id}] JW search returned 0 results for '{q}'.")
+            continue
+
+        examined = 0
+        by_type = by_year = by_title = by_anicode = by_seasonguard = 0
+        best = None
+        for e in results:
+            examined += 1
+            title = getattr(e, "title", None) or getattr(e, "name", None) or ""
+            ty = _norm_jw_type(getattr(e, "object_type", None) or getattr(e, "content_type", None) or getattr(e, "type", None))
+            yr = getattr(e, "release_year", None) or getattr(e, "original_release_year", None) or getattr(e, "year", None)
+
+            # Required checks
+            if ty != want_type:
+                by_type += 1; continue
+            if yr != year:
+                by_year += 1; continue
+            if _norm_title(title) not in titles_set:
+                by_title += 1; continue
+            if not _jw_entry_has_ani_genre(e):
+                by_anicode += 1
+                continue
+
+            # Season false-positive guard (only for shows)
+            if want_type == "show" and is_multi_season and not has_mal_season_marker:
+                by_seasonguard += 1
+                if debug_log:
+                    log(f"      [season-guard] Reject series-level match for MAL {mal_id} (multi-season w/o season marker).")
+                continue
+
+            best = e
+            log(f"[{mal_id}] strict OK → type:{ty}, year:{yr}, title✓, ani-genre✓")
+            break
+
+        if best:
+            return best
+
+        # Per-candidate summary
+        log(f"[{mal_id}] No strict match for '{q}'. Examined={examined}, by_type={by_type}, by_year={by_year}, by_title={by_title}, by_anicode={by_anicode}, by_seasonguard={by_seasonguard}")
+        for idx, e in enumerate(results, 1):
+            title = getattr(e, "title", None) or getattr(e, "name", None) or ""
+            ty = _norm_jw_type(getattr(e, "object_type", None) or getattr(e, "content_type", None) or getattr(e, "type", None))
+            yr = getattr(e, "release_year", None) or getattr(e, "original_release_year", None) or getattr(e, "year", None)
+            nid = getattr(e, "node_id", None) or getattr(e, "entry_id", None) or getattr(e, "id", None)
+            t_ok = _norm_title(title) in titles_set
+            y_ok = (yr == year)
+            ty_ok = (ty == want_type)
+            ani_ok = _jw_entry_has_ani_genre(e)
+            log(f"    [{idx:02d}] '{title}' | type={ty} ({'✓' if ty_ok else '×'}) | year={yr} ({'✓' if y_ok else '×'}) | node={nid} | title={'✓' if t_ok else '×'} | ani={'✓' if ani_ok else '×'}")
+        time.sleep(0.05)
+
+    return None
+
+# Trusted provider filtering (Amazon fully excluded)
+def _normalize_provider_string(s: str | None) -> str:
+    if not s:
+        return ""
+    return re.sub(r"[^a-z0-9]+", "", s.lower())
+
+def _is_trusted_provider(offer_pkg) -> bool:
+    # Raw strings
+    raw_name = (getattr(offer_pkg, "name", "") or "").lower()
+    raw_tech = (getattr(offer_pkg, "technical_name", "") or "").lower()
+
+    # Normalized tokens (letters/digits only)
+    name = _normalize_provider_string(raw_name)
+    tech = _normalize_provider_string(raw_tech)
+
+    # 0) Global Amazon/Prime hard-exclude (channels included)
+    if ("amazon" in raw_name or "amazon" in raw_tech or
+        "prime" in raw_name or "prime" in raw_tech or
+        "amazon" in name or "amazon" in tech or
+        "prime"  in name or "prime"  in tech):
+        return False
+
+    # 1) Allowlist FIRST:
+    #    - iTunes storefront (often shows with display name "Apple TV", tech "itunes")
+    #    - Apple TV+ SVOD
+    if tech == "itunes" or name == "itunes":
+        return True
+    if tech == "appletvplus" or name == "appletvplus":
+        return True
+
+    # 2) Hard-exclude ALL Apple TV Channels (anything starting with "appletv"
+    #    that is NOT Apple TV+ and NOT iTunes)
+    if name.startswith("appletv") or tech.startswith("appletv"):
+        return False
+
+    # 3) Other trusted providers (no change)
+    if tech in TRUSTED_PROVIDERS or name in TRUSTED_PROVIDERS:
+        return True
+
+    # simple alias map
+    aliases = {"disney+": "disneyplus", "hbomax": "max"}
+    mapped = aliases.get(tech) or aliases.get(name)
+    return bool(mapped and mapped in TRUSTED_PROVIDERS)
+
+def jw_collect_langs_filtered(offers_by_country: dict[str, list]) -> tuple[set[str], dict]:
+    langs: set[str] = set()
+    diag = {
+        "total_offers": 0,
+        "kept_offers": 0,
+        "skipped_untrusted_provider": 0,
+        "skipped_no_audio": 0,
+        "kept_providers": set(),
+        "skipped_providers": set(),
+    }
+
+    for cc, offers in (offers_by_country or {}).items():
+        for off in (offers or []):
+            diag["total_offers"] += 1
+
+            pkg = getattr(off, "package", None)
+            if not pkg or not _is_trusted_provider(pkg):
+                diag["skipped_untrusted_provider"] += 1
+                if debug_log and pkg:
+                    tname = getattr(pkg, "technical_name", "") or ""
+                    pname = getattr(pkg, "name", "") or ""
+                    diag["skipped_providers"].add((tname or pname).lower())
+                continue
+
+            auds = getattr(off, "audio_languages", None) or []
+            if not auds:
+                diag["skipped_no_audio"] += 1
+                continue
+
+            diag["kept_offers"] += 1
+            diag["kept_providers"].add((getattr(pkg, "technical_name", "") or getattr(pkg, "name", "")).lower())
+            for two_letter in auds:
+                two_letter = (two_letter or "").strip().lower()
+                if two_letter:
+                    langs.add(two_letter)
+
+    return langs, diag
+
+def jw_union_audio_langs(node_id: str, countries: set[str]) -> list[str]:
+    try:
+        offers_map = jw_offers_for_countries_rl(node_id, countries, "en", True)
+    except Exception as e:
+        log(f"[node {node_id}] JW offers error: {e}")
+        return []
+    langs_set, diag = jw_collect_langs_filtered(offers_map)
+    if debug_log:
+        log(f"    JW diag: total={diag['total_offers']}, kept={diag['kept_offers']}, "
+            f"skipped_provider={diag['skipped_untrusted_provider']}, skipped_no_audio={diag['skipped_no_audio']}")
+        if diag["kept_providers"]:
+            log(f"    kept providers={sorted(diag['kept_providers'])}")
+        if diag["skipped_providers"]:
+            log(f"    skipped providers={sorted(diag['skipped_providers'])}")
+    return sorted(langs_set)
+
+
 # ----------------------
 # Runners
 # ----------------------
-
 def run_ann(mal_start: int, mal_end: int):
-    """
-    ANN mode:
-      - iterate MAL id range
-      - map MAL -> ANN via Jikan /external
-      - batch ANN lookups
-      - write append-only JSONs under automatic_ann/
-    """
     pending: list[int] = []
     ann_to_mal: dict[int, int] = {}
     processed = 0
@@ -710,7 +1057,6 @@ def run_ann(mal_start: int, mal_end: int):
             if processed and processed % (FINALIZE_EVERY_N) == 0:
                 finalize_jsons("ann")
 
-        # flush remainder
         if pending:
             process_ann_batch(pending, ann_to_mal)
 
@@ -728,7 +1074,6 @@ def run_ann(mal_start: int, mal_end: int):
 def run_mal(client_id: str, start_id: int, end_id: int):
     global missing_mal_ids, largest_known_mal_id
 
-    # Load cache + largest known MAL ID once per run
     missing_mal_ids = load_missing_cache()
     largest_known_mal_id = get_largest_known_mal_id()
     if debug_log:
@@ -738,15 +1083,12 @@ def run_mal(client_id: str, start_id: int, end_id: int):
     consecutive_404 = 0
     try:
         for idx, mal_id in enumerate(range(start_id, end_id + 1), 1):
-            # Skip using cache only if ID is <= largest_known_mal_id
             if largest_known_mal_id and mal_id <= largest_known_mal_id and mal_id in missing_mal_ids:
                 if debug_log:
                     log(f"  Skipping MAL ID {mal_id} (cached 404)")
                 was_404 = True
-                # no need to re-add; it's already in cache
             else:
                 was_404 = process_anime_mal(mal_id, client_id)
-                # If MAL anime returned 404, record to cache
                 if was_404:
                     if mal_id not in missing_mal_ids:
                         missing_mal_ids.add(mal_id)
@@ -814,6 +1156,129 @@ def run_anilist(start_page: int | None, end_page: int | None):
         f"with_langs={anilist_stats['media_with_langs']}, no_langs={anilist_stats['media_without_langs']}")
 
 
+def run_justwatch(mal_start: int, mal_end: int):
+    if jw_search is None or jw_offers_for_countries is None:
+        print("For --api justwatch you must `pip install simple-justwatch-python-api` first.")
+        sys.exit(2)
+
+    global missing_mal_ids, largest_known_mal_id, mal_to_jw_map
+    missing_mal_ids = load_missing_cache()
+    largest_known_mal_id = get_largest_known_mal_id()
+    mal_to_jw_map = load_mal_jw_map()
+
+    try:
+        for idx, mal_id in enumerate(range(mal_start, mal_end + 1), 1):
+            # Skip known MAL 404s (only trust cache for IDs up to the largest known range)
+            if largest_known_mal_id and mal_id <= largest_known_mal_id and mal_id in missing_mal_ids:
+                if debug_log:
+                    log(f"[JW] Skip MAL {mal_id} (cached as missing)")
+                if idx % FINALIZE_EVERY_N == 0:
+                    log(f"--- Updating files at MAL ID {mal_start + idx - 1} ---")
+                    finalize_jsons("justwatch")
+                    save_mal_jw_map(mal_to_jw_map)
+                    save_missing_cache()
+                continue
+
+            # If we have a cached JW node_id, use it
+            node_id = mal_to_jw_map.get(str(mal_id))
+            if isinstance(node_id, str) and node_id:
+                langs_codes = jw_union_audio_langs(node_id, JW_COVERAGE)
+                if not langs_codes:
+                    if debug_log:
+                        log(f"[JW] No languages returned for MAL {mal_id} (node {node_id})")
+                else:
+                    for code in langs_codes:
+                        key = jw_lang_to_key(code)
+                        if key:
+                            json_data[key].add(mal_id)
+                time.sleep(0.03)
+                if idx % FINALIZE_EVERY_N == 0:
+                    log(f"--- Updating files at MAL ID {mal_start + idx - 1} ---")
+                    finalize_jsons("justwatch")
+                    save_mal_jw_map(mal_to_jw_map)
+                    save_missing_cache()
+                continue
+
+            # Resolve strictly via Jikan + JW search
+            meta = jikan_mal_meta_for_jw(mal_id)
+            if meta is None:
+                # If Jikan said 404, record in missing_mal_ids
+                if jikan_last_404:
+                    if mal_id not in missing_mal_ids:
+                        missing_mal_ids.add(mal_id)
+                        log(f"[JW] Added MAL {mal_id} to missing_mal_ids (Jikan 404).")
+                if idx % FINALIZE_EVERY_N == 0:
+                    log(f"--- Updating files at MAL ID {mal_start + idx - 1} ---")
+                    finalize_jsons("justwatch")
+                    save_mal_jw_map(mal_to_jw_map)
+                    save_missing_cache()
+                continue
+
+            if not meta["titles_set"] or meta["year"] is None or meta["jw_type"] is None:
+                if debug_log:
+                    log(f"[JW] MAL {mal_id}: insufficient meta for strict match.")
+                if idx % FINALIZE_EVERY_N == 0:
+                    log(f"--- Updating files at MAL ID {mal_start + idx - 1} ---")
+                    finalize_jsons("justwatch")
+                    save_mal_jw_map(mal_to_jw_map)
+                    save_missing_cache()
+                continue
+
+            entry = jw_strict_pick(
+                mal_id,
+                meta["titles_set"], meta["queries"], meta["year"], meta["jw_type"],
+                meta["is_multi_season"], meta["has_season_marker"]
+            )
+            if not entry:
+                if debug_log:
+                    log(f"[JW] MAL {mal_id}: strict match not found (not cached).")
+                if idx % FINALIZE_EVERY_N == 0:
+                    log(f"--- Updating files at MAL ID {mal_start + idx - 1} ---")
+                    finalize_jsons("justwatch")
+                    save_mal_jw_map(mal_to_jw_map)
+                    save_missing_cache()
+                continue
+
+            node_id = getattr(entry, "node_id", None) or getattr(entry, "entry_id", None) or getattr(entry, "id", None)
+            if not node_id:
+                if debug_log:
+                    log(f"[JW] MAL {mal_id}: JW entry had no node/entry id.")
+                if idx % FINALIZE_EVERY_N == 0:
+                    log(f"--- Updating files at MAL ID {mal_start + idx - 1} ---")
+                    finalize_jsons("justwatch")
+                    save_mal_jw_map(mal_to_jw_map)
+                    save_missing_cache()
+                continue
+
+            # Cache successful mapping and fetch fresh langs
+            mal_to_jw_map[str(mal_id)] = node_id
+            langs_codes = jw_union_audio_langs(node_id, JW_COVERAGE)
+            for code in langs_codes:
+                key = jw_lang_to_key(code)
+                if key:
+                    json_data[key].add(mal_id)
+
+            time.sleep(0.03)
+
+            if idx % FINALIZE_EVERY_N == 0:
+                log(f"--- Updating files at MAL ID {mal_start + idx - 1} ---")
+                finalize_jsons("justwatch")
+                save_mal_jw_map(mal_to_jw_map)
+                save_missing_cache()
+
+    except KeyboardInterrupt:
+        print("\nInterrupted. Finalizing data...")
+    except Exception as e:
+        print(f"\nUnexpected error (JustWatch): {e}")
+        import traceback
+        traceback.print_exc()
+    finally:
+        finalize_jsons("justwatch")
+        save_mal_jw_map(mal_to_jw_map)
+        save_missing_cache()
+        print("Done (JustWatch).")
+
+
 # ----------------------
 # Main
 # ----------------------
@@ -823,13 +1288,13 @@ def main():
     parser = argparse.ArgumentParser(
         description="Fetch dubbed languages per anime and save to JSON (append-only)."
     )
-    parser.add_argument("--api", choices=["mal", "anilist", "ann"], default="mal", help="Which source to use.")
+    parser.add_argument("--api", choices=["mal", "anilist", "ann", "justwatch"], default="mal", help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
 
     # MAL-specific
     parser.add_argument("--client-id", help="MyAnimeList API Client ID (required for --api mal).")
-    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann.")
-    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann.")
+    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann/justwatch.")
+    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann/justwatch.")
 
     # AniList-specific
     parser.add_argument("--anilist-start-page", type=int, help="AniList: start page number (1-based).")
@@ -857,11 +1322,17 @@ def main():
                 sys.exit(2)
         run_anilist(args.anilist_start_page, args.anilist_end_page)
 
-    else:  # ann
+    elif args.api == "ann":
         if args.mal_start is None or args.mal_end is None:
             print("For --api ann you must provide --mal-start and --mal-end.")
             sys.exit(1)
         run_ann(args.mal_start, args.mal_end)
+
+    else:  # justwatch
+        if args.mal_start is None or args.mal_end is None:
+            print("For --api justwatch you must provide --mal-start and --mal-end.")
+            sys.exit(1)
+        run_justwatch(args.mal_start, args.mal_end)
 
 
 if __name__ == "__main__":
