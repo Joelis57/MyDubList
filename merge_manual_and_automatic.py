@@ -5,52 +5,30 @@ import os
 import json
 import re
 import sys
+from typing import Dict, Set, List
 
 # Resolve paths relative to this script file
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
-# Directories
-MANUAL_DIR              = os.path.join(ROOT, "manual")
-AUTOMATIC_MAL_DIR       = os.path.join(ROOT, "automatic_mal")
-AUTOMATIC_ANILIST_DIR   = os.path.join(ROOT, "automatic_anilist")
-AUTOMATIC_ANN_DIR       = os.path.join(ROOT, "automatic_ann")
-AUTOMATIC_NSFW_DIR      = os.path.join(ROOT, "automatic_nsfw")
-FINAL_DIR               = os.path.join(ROOT, "final")
-README_PATH             = os.path.join(ROOT, "README.md")
-FINAL_LANG_INDEX_FILE   = os.path.join(FINAL_DIR, "_languages.json")
+# Input roots
+DUBS_SOURCES_DIR       = os.path.join(ROOT, "dubs", "sources")
+MANUAL_DIR             = os.path.join(DUBS_SOURCES_DIR, "manual")
+AUTOMATIC_MAL_DIR      = os.path.join(DUBS_SOURCES_DIR, "automatic_mal")
+AUTOMATIC_ANILIST_DIR  = os.path.join(DUBS_SOURCES_DIR, "automatic_anilist")
+AUTOMATIC_ANN_DIR      = os.path.join(DUBS_SOURCES_DIR, "automatic_ann")
+AUTOMATIC_NSFW_DIR     = os.path.join(DUBS_SOURCES_DIR, "automatic_nsfw")
+
+# Output roots
+COUNTS_DIR = os.path.join(ROOT, "dubs", "counts")
+CONFIDENCE_DIR = os.path.join(ROOT, "dubs", "confidence")
+CONFIDENCE_LEVELS = {
+    "low": 1,
+    "normal": 2,
+    "high": 3,
+    "very-high": 4,
+}
 
 DEBUG = False
-
-# Optional native names (fallback to Title Case English if missing)
-NATIVE_NAMES = {
-    "arabic": "العربية",
-    "catalan": "Català",
-    "chinese": "中文",
-    "danish": "Dansk",
-    "dutch": "Nederlands",
-    "english": "English",
-    "filipino": "Filipino",
-    "finnish": "Suomi",
-    "french": "Français",
-    "german": "Deutsch",
-    "hebrew": "עברית",
-    "hindi": "हिन्दी",
-    "hungarian": "Magyar",
-    "indonesian": "Bahasa Indonesia",
-    "italian": "Italiano",
-    "japanese": "日本語",
-    "korean": "한국어",
-    "norwegian": "Norsk",
-    "polish": "Polski",
-    "portuguese": "Português",
-    "russian": "Русский",
-    "spanish": "Español",
-    "swedish": "Svenska",
-    "tagalog": "Tagalog",
-    "thai": "ไทย",
-    "turkish": "Türkçe",
-    "vietnamese": "Tiếng Việt",
-}
 
 def log(msg: str):
     if DEBUG:
@@ -77,171 +55,139 @@ def infer_language_from_filename(filename: str) -> str:
         return name[len("dubbed_"):]
     return name
 
-def merge_language_file(filename: str):
+def int_set(iterable) -> Set[int]:
+    s: Set[int] = set()
+    for x in iterable or []:
+        try:
+            s.add(int(x))
+        except Exception:
+            continue
+    return s
+
+def list_language_files(*dirs: str) -> Set[str]:
+    files: Set[str] = set()
+    for d in dirs:
+        if not os.path.isdir(d):
+            continue
+        for fname in os.listdir(d):
+            if fname.startswith("dubbed_") and fname.endswith(".json"):
+                files.add(fname)
+    return files
+
+def load_language_sources(filename: str):
+    """Load per-language sets from manual and each automatic source."""
     manual_path            = os.path.join(MANUAL_DIR, filename)
-    automatic_mal_path     = os.path.join(AUTOMATIC_MAL_DIR, filename)
-    automatic_anilist_path = os.path.join(AUTOMATIC_ANILIST_DIR, filename)
-    automatic_ann_path     = os.path.join(AUTOMATIC_ANN_DIR, filename)
-    automatic_nsfw_path    = os.path.join(AUTOMATIC_NSFW_DIR, filename)
-    final_path             = os.path.join(FINAL_DIR, filename)
+    auto_mal_path          = os.path.join(AUTOMATIC_MAL_DIR, filename)
+    auto_anilist_path      = os.path.join(AUTOMATIC_ANILIST_DIR, filename)
+    auto_ann_path          = os.path.join(AUTOMATIC_ANN_DIR, filename)
+    auto_nsfw_path         = os.path.join(AUTOMATIC_NSFW_DIR, filename)
 
     manual           = load_json(manual_path)
-    auto_mal         = load_json(automatic_mal_path)
-    auto_anilist     = load_json(automatic_anilist_path)
-    auto_ann         = load_json(automatic_ann_path)
-    auto_nsfw        = load_json(automatic_nsfw_path)
+    auto_mal         = load_json(auto_mal_path)
+    auto_anilist     = load_json(auto_anilist_path)
+    auto_ann         = load_json(auto_ann_path)
+    auto_nsfw        = load_json(auto_nsfw_path)
 
     # Manual lists
-    manual_dubbed     = set(manual.get("dubbed", []) or [])
-    manual_not_dubbed = set(manual.get("not_dubbed", []) or [])
-    manual_incomplete = set(manual.get("incomplete", []) or [])
+    manual_dubbed     = int_set(manual.get("dubbed"))
+    manual_not_dubbed = int_set(manual.get("not_dubbed"))
+    manual_incomplete = int_set(manual.get("incomplete"))
 
-    # Automatic lists (MAL + AniList + ANN + NSFW)
-    auto_mal_dubbed     = set(auto_mal.get("dubbed", []) or [])
-    auto_anilist_dubbed = set(auto_anilist.get("dubbed", []) or [])
-    auto_ann_dubbed     = set(auto_ann.get("dubbed", []) or [])
-    auto_nsfw_dubbed    = set(auto_nsfw.get("dubbed", []) or [])
+    # Automatic lists
+    auto_mal_dubbed     = int_set(auto_mal.get("dubbed"))
+    auto_anilist_dubbed = int_set(auto_anilist.get("dubbed"))
+    auto_ann_dubbed     = int_set(auto_ann.get("dubbed"))
+    auto_nsfw_dubbed    = int_set(auto_nsfw.get("dubbed"))
 
-    combined_auto_dubbed = (
-        auto_mal_dubbed | auto_anilist_dubbed | auto_ann_dubbed | auto_nsfw_dubbed
-    )
+    language_value = manual.get("language") or infer_language_from_filename(filename).replace("_", " ").title()
 
-    log(f"[{filename}] auto_mal={len(auto_mal_dubbed)} "
-        f"auto_anilist={len(auto_anilist_dubbed)} nsfw={len(auto_nsfw_dubbed)} "
-        f"ann={len(auto_ann_dubbed)} "
-        f"=> combined_auto={len(combined_auto_dubbed)}; manual_dubbed={len(manual_dubbed)}")
-
-    # --- Update manual: remove IDs already present in auto (de-dup) ---
-    original_manual_dubbed = manual_dubbed.copy()
-    manual_dubbed -= combined_auto_dubbed
-    removed = len(original_manual_dubbed - manual_dubbed)
-    if removed > 0:
-        manual["dubbed"] = sorted(manual_dubbed)
-        if not manual.get("language"):
-            manual["language"] = infer_language_from_filename(filename)
-        save_json(manual_path, manual)
-        print(f"Updated manual: {filename} (removed {removed} auto-duplicated IDs)")
-
-    # Merge logic (append-only)
-    final_dubbed = (combined_auto_dubbed | manual_dubbed) - manual_not_dubbed - manual_incomplete
-    final_incomplete = manual_incomplete
-
-    # Prefer language in manual file; fall back to filename inference
-    language_value = manual.get("language") or infer_language_from_filename(filename)
-
-    result = {
-        "_license": "CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
-        "_attribution": "MyDubList - https://mydublist.com - (CC BY 4.0)",
-        "_origin": "https://github.com/Joelis57/MyDubList",
-        "language": language_value,
-        "dubbed": sorted(final_dubbed),
-        "incomplete": sorted(final_incomplete),
+    return {
+        "manual_dubbed": manual_dubbed,
+        "manual_not_dubbed": manual_not_dubbed,
+        "manual_incomplete": manual_incomplete,
+        "auto_sources": {
+            "mal": auto_mal_dubbed,
+            "anilist": auto_anilist_dubbed,
+            "ann": auto_ann_dubbed,
+            "nsfw": auto_nsfw_dubbed,
+        },
+        "language_value": language_value,
     }
 
-    # Calculate changes for summary
-    previous_final = load_json(final_path)
-    previous_dubbed = set(previous_final.get("dubbed", []) or [])
-    previous_incomplete = set(previous_final.get("incomplete", []) or [])
-    added_dubbed = final_dubbed - previous_dubbed
-    added_incomplete = final_incomplete - previous_incomplete
-    changes = []
-    if added_dubbed:
-        changes.append(f"+{len(added_dubbed)} dubbed")
-    if added_incomplete:
-        changes.append(f"+{len(added_incomplete)} incomplete")
-    summary = f" ({', '.join(changes)})" if changes else ""
+def compute_counts(auto_sources: Dict[str, Set[int]]) -> Dict[int, int]:
+    """Count in how many automatic sources each MAL id appears."""
+    counts: Dict[int, int] = {}
+    for src_name, ids in auto_sources.items():
+        for mid in ids:
+            counts[mid] = counts.get(mid, 0) + 1
+    return counts
 
-    save_json(final_path, result)
-    print(f"Merged: {filename} → {os.path.relpath(FINAL_DIR, ROOT)}{summary}")
+def build_confidence_outputs(filename: str):
+    """
+    For one language file (dubbed_<lang>.json):
+      - compute automatic source counts
+      - write outputs into dubs/confidence/<level>/dubbed_<lang>.json
+      - write counts to dubs/counts/dubbed_<lang>.json
+    """
+    info = load_language_sources(filename)
 
-def build_language_index():
-    index = []
-    if not os.path.isdir(FINAL_DIR):
-        save_json(FINAL_LANG_INDEX_FILE, {"languages": index})
-        print(f"Wrote language index: {FINAL_LANG_INDEX_FILE} (0 entries)")
-        return index
+    manual_dubbed     = info["manual_dubbed"]
+    manual_not_dubbed = info["manual_not_dubbed"]
+    manual_incomplete = info["manual_incomplete"]
+    auto_sources      = info["auto_sources"]
+    language_value    = info["language_value"]
 
-    for fname in sorted(os.listdir(FINAL_DIR)):
-        if not (fname.startswith("dubbed_") and fname.endswith(".json")):
-            continue
-        path = os.path.join(FINAL_DIR, fname)
-        data = load_json(path) or {}
-        key = infer_language_from_filename(fname)
-        english_name = key.replace("_", " ").title()
-        native_name = NATIVE_NAMES.get(key, english_name)
-        dubbed_count = len(data.get("dubbed", []) or [])
-        incomplete_count = len(data.get("incomplete", []) or [])
-        index.append({
-            "key": key,
-            "english_name": english_name,
-            "native_name": native_name,
-            "file": f"final/{fname}",
-            "dubbed_count": dubbed_count,
-            "incomplete_count": incomplete_count,
-        })
+    counts = compute_counts(auto_sources)
 
-    index.sort(key=lambda x: x["dubbed_count"], reverse=True)
-    save_json(FINAL_LANG_INDEX_FILE, {"languages": index})
-    print(f"Wrote language index: {FINAL_LANG_INDEX_FILE} ({len(index)} entries)")
-    return index
+    # Save counts file (IDs from automatic sources only)
+    counts_out = {str(mid): counts[mid] for mid in sorted(counts.keys())}
+    # Incomplete is copied straight from manual (untouched)
+    counts_out["incomplete"] = sorted(manual_incomplete)
+    save_json(os.path.join(COUNTS_DIR, filename), counts_out)
 
-def render_lang_table(index):
-    header = "| Language | Native name | Dubbed | Incomplete | File |\n|---|---:|---:|---:|---|"
-    lines = [header]
-    for row in index:
-        lines.append(
-            f'| {row["english_name"]} | {row["native_name"]} | '
-            f'{row["dubbed_count"]} | {row["incomplete_count"]} | '
-            f'`{row["file"]}` |'
-        )
-    return "\n".join(lines)
+    # Build confidence-tier files
+    for level, threshold in CONFIDENCE_LEVELS.items():
+        # candidates from automatic sources by threshold
+        auto_candidates = {mid for mid, c in counts.items() if c >= threshold}
+        # final dubbed = manual base ∪ candidates, then subtract manual exclusions
+        final_dubbed = (manual_dubbed | auto_candidates) - manual_not_dubbed - manual_incomplete
+        final_incomplete = sorted(manual_incomplete)
 
-def update_readme_language_stats(index):
-    table = render_lang_table(index)
-    block = f"<!-- LANG-STATS:START -->\n{table}\n<!-- LANG-STATS:END -->"
+        result = {
+            "_license": "CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+            "_attribution": "MyDubList - https://mydublist.com - (CC BY 4.0)",
+            "_origin": "https://github.com/Joelis57/MyDubList",
+            "language": language_value,
+            "dubbed": sorted(final_dubbed),
+            "incomplete": final_incomplete,
+        }
 
-    try:
-        with open(README_PATH, "r", encoding="utf-8") as fh:
-            content = fh.read()
-    except FileNotFoundError:
-        print(f"README not found at {README_PATH}, skipping README update.")
-        return False
-
-    if "<!-- LANG-STATS:START -->" in content and "<!-- LANG-STATS:END -->" in content:
-        new = re.sub(
-            r"<!-- LANG-STATS:START -->.*?<!-- LANG-STATS:END -->",
-            block,
-            content,
-            flags=re.S,
-        )
-    else:
-        suffix = "\n\n## Language statistics\n\n" + block + "\n"
-        new = content + suffix
-
-    if new != content:
-        with open(README_PATH, "w", encoding="utf-8") as fh:
-            fh.write(new)
-        print(f"Updated README language stats: {os.path.relpath(README_PATH, ROOT)}")
-        return True
-
-    print("README language stats already up to date.")
-    return False
+        save_json(os.path.join(CONFIDENCE_DIR, level, filename), result)
+        log(f"[{filename}] level={level} → dubbed={len(result['dubbed'])}, incomplete={len(result['incomplete'])}")
 
 def main():
-    if not os.path.exists(MANUAL_DIR):
-        print(f"Manual directory '{os.path.relpath(MANUAL_DIR, ROOT)}' does not exist.")
-        sys.exit(1)
+    # Discover languages across manual and all automatic sources
+    all_lang_files = list_language_files(
+        MANUAL_DIR,
+        AUTOMATIC_MAL_DIR,
+        AUTOMATIC_ANILIST_DIR,
+        AUTOMATIC_ANN_DIR,
+        AUTOMATIC_NSFW_DIR,
+    )
 
-    os.makedirs(FINAL_DIR, exist_ok=True)
+    if not all_lang_files:
+        print("No language files found in dubs/sources/* — nothing to merge.")
+        return
 
-    # Merge each manual language file
-    for filename in sorted(os.listdir(MANUAL_DIR)):
-        if filename.endswith(".json"):
-            merge_language_file(filename)
+    # Ensure output roots exist
+    os.makedirs(COUNTS_DIR, exist_ok=True)
+    for level in CONFIDENCE_LEVELS:
+        os.makedirs(os.path.join(CONFIDENCE_DIR, level), exist_ok=True)
 
-    # Build language index from final/ and update README
-    index = build_language_index()
-    update_readme_language_stats(index)
+    for filename in sorted(all_lang_files):
+        build_confidence_outputs(filename)
+
+    print(f"Done. Wrote counts to 'dubs/counts' and confidence tiers to 'dubs/confidence/{{low,normal,high,very-high}}'.")
 
 if __name__ == "__main__":
     main()
