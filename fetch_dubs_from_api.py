@@ -570,7 +570,7 @@ def anilist_total_pages(per_page=ANILIST_PER_PAGE) -> int:
     return ceil(total / per_page) if total else 0
 
 
-def process_anilist_page(page: int):
+def process_anilist_page(page: int) -> tuple[bool, int, set[int]]:
     variables = {
         "page": page,
         "perPage": ANILIST_PER_PAGE,
@@ -578,7 +578,7 @@ def process_anilist_page(page: int):
     }
     data = anilist_post(ANILIST_QUERY, variables)
     if not data:
-        return False, 0
+        return False, 0, set()
 
     page_data = data["data"]["Page"]
     has_next = page_data["pageInfo"]["hasNextPage"]
@@ -592,6 +592,7 @@ def process_anilist_page(page: int):
     page_without_langs = 0
 
     processed = 0
+    checked_ids: set[int] = set()
 
     for media in media_list:
         mal_id = media.get("idMal")
@@ -600,6 +601,12 @@ def process_anilist_page(page: int):
             if debug_log:
                 log("  skip: no idMal")
             continue
+
+        # mark as checked this run
+        try:
+            checked_ids.add(int(mal_id))
+        except Exception:
+            pass
 
         # Record mapping MAL → AniList ID
         try:
@@ -612,20 +619,6 @@ def process_anilist_page(page: int):
 
         chars = media.get("characters") or {}
         edges = chars.get("edges") or []
-
-        if debug_log:
-            if not edges:
-                log("    No character edges returned.")
-            else:
-                empty_va_edges = sum(1 for e in edges if not (e.get("voiceActors") or []))
-                log(f"    edges={len(edges)} empty_va_edges={empty_va_edges}")
-                if empty_va_edges == len(edges) and len(edges) > 0:
-                    import json as _json
-                    log("    sample edge dump:")
-                    try:
-                        log(_json.dumps(edges[0], ensure_ascii=False, indent=2)[:2000])
-                    except Exception:
-                        pass
 
         langs = set()
         va_count = 0
@@ -665,40 +658,63 @@ def process_anilist_page(page: int):
     anilist_stats["media_with_langs"] += page_with_langs
     anilist_stats["media_without_langs"] += page_without_langs
 
-    return has_next, processed
+    return has_next, processed, checked_ids
 
 
 # ----------------------
-# Append-only finalize (dubbed_* sources + mappings)
+# Finalize (dubbed_* sources + mappings) with safe removals for checked IDs
 # ----------------------
 
-
-def finalize_jsons(api_mode: str):
-    # Write dubbed_* language lists to dubs/sources/automatic_<api>
+def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
+    """
+    Write/merge dubbed lists under dubs/sources/automatic_<api>/.
+    Removals are allowed, but only for MAL IDs contained in checked_ok_ids.
+    If checked_ok_ids is None/empty, no removals occur; only additions happen.
+    """
     output_dir = os.path.join(SOURCES_DIR, f"automatic_{api_mode}")
     os.makedirs(output_dir, exist_ok=True)
 
-    for lang_key, new_ids in json_data.items():
+    # Build per-language found sets from this run
+    found_per_lang: dict[str, set[int]] = {k: {int(x) for x in v} for k, v in json_data.items()}
+
+    # Collect all languages to consider (existing files + new keys)
+    languages: set[str] = set(found_per_lang.keys())
+    try:
+        for fname in os.listdir(output_dir):
+            if not fname.startswith("dubbed_") or not fname.endswith(".json"):
+                continue
+            lang_key = fname[len("dubbed_"):-len(".json")].replace("_", " ")
+            languages.add(lang_key)
+    except FileNotFoundError:
+        pass
+
+    checked_ok_ids = checked_ok_ids or set()
+
+    for lang_key in sorted(languages):
         fname_lang = filename_for_lang(lang_key)
         filename = os.path.join(output_dir, f"dubbed_{fname_lang}.json")
 
+        # Load existing
         if os.path.exists(filename):
             try:
                 with open(filename, "r", encoding="utf-8") as f:
                     existing_data = json.load(f)
-                    existing_ids = set(existing_data.get("dubbed", []))
+                    existing_ids = set(int(x) for x in existing_data.get("dubbed", []))
             except Exception:
                 existing_ids = set()
         else:
             existing_ids = set()
 
-        updated_ids = existing_ids | set(new_ids)  # append-only
+        found_ids = found_per_lang.get(lang_key, set())
 
-        added_ids = sorted(updated_ids - existing_ids)
-        if added_ids:
-            log(f"  Changes in {filename}:")
-            log(f"    Added: {added_ids}")
+        # Only remove IDs that were checked this run and are no longer present
+        removal_candidates = (existing_ids & checked_ok_ids) - found_ids
+        updated_ids = (existing_ids - removal_candidates) | found_ids
 
+        if removal_candidates and debug_log:
+            log(f"  [{api_mode}] {lang_key}: removing {len(removal_candidates)} ids; keeping {len(updated_ids)}")
+
+        # Write file
         obj = {
             "_license": "CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
             "_attribution": "MyDubList - https://mydublist.com - (CC BY 4.0)",
@@ -706,7 +722,6 @@ def finalize_jsons(api_mode: str):
             "language": lang_key.capitalize(),
             "dubbed": sorted(int(x) for x in updated_ids),
         }
-
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(obj, f, ensure_ascii=False, indent=2)
 
@@ -787,21 +802,25 @@ def jikan_ann_id_for_mal(mal_id: int) -> int | None:
     return None
 
 
-def parse_ann_batch_xml(xml_text: str) -> dict[int, set[str]]:
+def parse_ann_batch_xml(xml_text: str) -> tuple[dict[int, set[str]], set[int]]:
     """
-    Parse ANN XML and return {ann_id: set(lang_keys)} inferred from <cast lang="...">
+    Parse ANN XML and return (lang_map, present_ids) where:
+      - lang_map: {ann_id: set(lang_keys)} inferred from <cast lang="...">
+      - present_ids: set of ANN IDs that appeared in the response (even if no cast/dubs reported)
     """
     result: dict[int, set[str]] = {}
+    present_ids: set[int] = set()
     try:
         root = ET.fromstring(xml_text)
     except Exception as e:
         log(f"  Failed to parse ANN XML batch: {e}")
-        return result
+        return result, present_ids
 
     # ANN root tends to be <ann>
     for anime in root.findall(".//anime"):
         try:
             ann_id = int(anime.get("id"))
+            present_ids.add(ann_id)
         except Exception:
             continue
 
@@ -819,16 +838,16 @@ def parse_ann_batch_xml(xml_text: str) -> dict[int, set[str]]:
         if langs:
             result[ann_id] = langs
 
-    return result
+    return result, present_ids
 
 
-def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]):
+def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]) -> set[int]:
     """
     Fetch a batch of ANN IDs and add MAL IDs to json_data by language.
-    Also updates ann_mapping (mal_id -> ann_id).
+    Also updates ann_mapping (mal_id -> ann_id) and returns MAL IDs present in ANN response.
     """
     if not ann_ids:
-        return
+        return set()
 
     # Build ANN batch URL: title=ID1/ID2/... (trailing slash is fine)
     ids_part = "/".join(str(i) for i in ann_ids) + "/"
@@ -836,9 +855,16 @@ def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]):
 
     xml_text = ann_get(url)
     if not xml_text:
-        return
+        return set()
 
-    ann_langs = parse_ann_batch_xml(xml_text)
+    ann_langs, present_ann_ids = parse_ann_batch_xml(xml_text)
+
+    checked_ok_mals: set[int] = set()
+    for ann_id in present_ann_ids:
+        mal_id = ann_to_mal.get(ann_id)
+        if mal_id:
+            checked_ok_mals.add(int(mal_id))
+
     for ann_id, langs in ann_langs.items():
         mal_id = ann_to_mal.get(ann_id)
         if not mal_id:
@@ -847,6 +873,8 @@ def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]):
         ann_mapping[int(mal_id)] = int(ann_id)
         for key in langs:
             json_data[key].add(int(mal_id))
+
+    return checked_ok_mals
 
 
 # ----------------------
@@ -922,6 +950,7 @@ def run_ann(mal_start: int, mal_end: int):
     pending: list[int] = []
     ann_to_mal: dict[int, int] = {}
     processed = 0
+    checked_ok_ids: set[int] = set()
 
     try:
         for mal_id in range(mal_start, mal_end + 1):
@@ -935,16 +964,18 @@ def run_ann(mal_start: int, mal_end: int):
             if len(pending) >= ANN_BATCH_SIZE:
                 if debug_log:
                     log(f"ANN batch {processed // ANN_BATCH_SIZE + 1}: ids={pending[:3]}... (+{len(pending)-3} more)")
-                process_ann_batch(pending, ann_to_mal)
+                newly_checked = process_ann_batch(pending, ann_to_mal)
+                checked_ok_ids.update(newly_checked)
                 processed += len(pending)
                 pending.clear()
 
             if processed and processed % (FINALIZE_EVERY_N) == 0:
-                finalize_jsons("ann")
+                finalize_jsons("ann", checked_ok_ids)
 
         # flush remainder
         if pending:
-            process_ann_batch(pending, ann_to_mal)
+            newly_checked = process_ann_batch(pending, ann_to_mal)
+            checked_ok_ids.update(newly_checked)
 
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing data...")
@@ -953,7 +984,7 @@ def run_ann(mal_start: int, mal_end: int):
         import traceback
         traceback.print_exc()
     finally:
-        finalize_jsons("ann")
+        finalize_jsons("ann", checked_ok_ids)
         print("Done (ANN).")
 
 
@@ -968,6 +999,7 @@ def run_mal(client_id: str, start_id: int, end_id: int):
 
     MAX_CONSECUTIVE_404 = 500
     consecutive_404 = 0
+    checked_ok_ids: set[int] = set()
     try:
         for idx, mal_id in enumerate(range(start_id, end_id + 1), 1):
             # Skip using cache only if ID is <= largest_known_mal_id
@@ -975,13 +1007,14 @@ def run_mal(client_id: str, start_id: int, end_id: int):
                 if debug_log:
                     log(f"  Skipping MAL ID {mal_id} (cached 404)")
                 was_404 = True
-                # no need to re-add; it's already in cache
+                # Do NOT mark as checked_ok; we didn't actually check it this run
             else:
                 was_404 = process_anime_mal(mal_id, client_id)
+                # mark as successfully checked this run (even if 404)
+                checked_ok_ids.add(mal_id)
                 # If MAL anime returned 404, record to cache
-                if was_404:
-                    if mal_id not in missing_mal_ids:
-                        missing_mal_ids.add(mal_id)
+                if was_404 and mal_id not in missing_mal_ids:
+                    missing_mal_ids.add(mal_id)
 
             if was_404:
                 consecutive_404 += 1
@@ -996,7 +1029,7 @@ def run_mal(client_id: str, start_id: int, end_id: int):
 
             if idx % FINALIZE_EVERY_N == 0:
                 log(f"--- Updating files at MAL ID {start_id + idx - 1} ---")
-                finalize_jsons("mal")
+                finalize_jsons("mal", checked_ok_ids)
                 save_missing_cache()
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing data...")
@@ -1005,7 +1038,7 @@ def run_mal(client_id: str, start_id: int, end_id: int):
         import traceback
         traceback.print_exc()
     finally:
-        finalize_jsons("mal")
+        finalize_jsons("mal", checked_ok_ids)
         save_missing_cache()
         print("Done (MAL).")
 
@@ -1013,15 +1046,17 @@ def run_mal(client_id: str, start_id: int, end_id: int):
 def run_anilist(start_page: int | None, end_page: int | None):
     page = start_page or 1
     total_processed = 0
+    checked_ok_ids: set[int] = set()
 
     try:
         while True:
             log(f"AniList Page {page}")
-            has_next, processed = process_anilist_page(page)
+            has_next, processed, checked_ids = process_anilist_page(page)
+            checked_ok_ids.update(checked_ids)
             total_processed += processed
 
             if page % 10 == 0:
-                finalize_jsons("anilist")
+                finalize_jsons("anilist", checked_ok_ids)
 
             if end_page is not None and page >= end_page:
                 break
@@ -1038,7 +1073,7 @@ def run_anilist(start_page: int | None, end_page: int | None):
         import traceback
         traceback.print_exc()
     finally:
-        finalize_jsons("anilist")
+        finalize_jsons("anilist", checked_ok_ids)
         print(f"Done (AniList). Processed ~{total_processed} media items.")
 
     log(f"AniList totals: pages={anilist_stats['pages']}, media={anilist_stats['media_total']}, "
@@ -1132,7 +1167,10 @@ def main():
     global debug_log
 
     parser = argparse.ArgumentParser(
-        description="Fetch dubbed languages per anime and save to JSON (append-only). Also writes per-API mappings and a merged mapping JSONL."
+        description=(
+            "Fetch dubbed languages per anime and save to JSON with safe, incremental removals "
+            "(only for IDs checked this run). Also writes per-API mappings and a merged mapping JSONL."
+        )
     )
     parser.add_argument("--api", choices=["mal", "anilist", "ann", "malsync"], default="mal", help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
