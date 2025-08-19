@@ -27,6 +27,7 @@ MAL_BASE = "https://api.myanimelist.net/v2"
 JIKAN_BASE = "https://api.jikan.moe/v4"
 ANILIST_BASE = "https://graphql.anilist.co"
 ANN_API = "https://cdn.animenewsnetwork.com/encyclopedia/api.xml"
+MALSYNC_BASE = "https://api.malsync.moe/mal/anime"
 
 MAX_IN_MEMORY_CACHE = 5000
 CALL_RETRIES = 4
@@ -46,6 +47,9 @@ LARGEST_KNOWN_MAL_FILE = "final/dubbed_japanese.json"
 
 # MAL -> JustWatch node id cache
 MAL_JW_MAP_PATH = "cache/mal_justwatch_ids.json"
+
+# MALSync mappings JSONL output
+MALSYNC_JSONL_PATH = "cache/mal_mappings.jsonl"
 
 # JustWatch coverage — 20 high-coverage markets (keeps payloads small)
 JW_COVERAGE = {
@@ -73,6 +77,7 @@ TRUSTED_PROVIDERS = {
     "peacock",
     "hidive",
 }
+
 # ======================
 
 # Globals
@@ -101,6 +106,10 @@ ANN_MIN_INTERVAL = 1.0  # seconds between ANN calls
 # JustWatch throttle
 JW_MIN_INTERVAL = 1.05  # seconds
 jw_last_call = 0.0
+
+# MALSync throttle
+MALSYNC_MIN_INTERVAL = 3  # seconds
+malsync_last_call = 0.0
 
 missing_mal_ids = set()
 largest_known_mal_id = 0  # determined from final/dubbed_japanese.json
@@ -854,6 +863,7 @@ def _jw_entry_has_ani_genre(e) -> bool:
                     tokens.append(str(val).strip().lower())
     return "ani" in tokens
 
+
 def jw_strict_pick(mal_id: int, titles_set: set, queries: list, year: int | None, jw_type: str | None,
                    is_multi_season: bool, has_mal_season_marker: bool):
     """
@@ -933,11 +943,13 @@ def jw_strict_pick(mal_id: int, titles_set: set, queries: list, year: int | None
 
     return None
 
+
 # Trusted provider filtering (Amazon fully excluded)
 def _normalize_provider_string(s: str | None) -> str:
     if not s:
         return ""
     return re.sub(r"[^a-z0-9]+", "", s.lower())
+
 
 def _is_trusted_provider(offer_pkg) -> bool:
     # Raw strings
@@ -977,6 +989,7 @@ def _is_trusted_provider(offer_pkg) -> bool:
     mapped = aliases.get(tech) or aliases.get(name)
     return bool(mapped and mapped in TRUSTED_PROVIDERS)
 
+
 def jw_collect_langs_filtered(offers_by_country: dict[str, list]) -> tuple[set[str], dict]:
     langs: set[str] = set()
     diag = {
@@ -1015,6 +1028,7 @@ def jw_collect_langs_filtered(offers_by_country: dict[str, list]) -> tuple[set[s
 
     return langs, diag
 
+
 def jw_union_audio_langs(node_id: str, countries: set[str]) -> list[str]:
     try:
         offers_map = jw_offers_for_countries_rl(node_id, countries, "en", True)
@@ -1030,6 +1044,114 @@ def jw_union_audio_langs(node_id: str, countries: set[str]) -> list[str]:
         if diag["skipped_providers"]:
             log(f"    skipped providers={sorted(diag['skipped_providers'])}")
     return sorted(langs_set)
+
+
+# ----------------------
+# MALSync helpers
+# ----------------------
+def malsync_get(mal_id: int) -> dict | None:
+    """Fetch MALSync mapping for a MAL anime ID. Returns dict or None on 404."""
+    global malsync_last_call
+    now = time.time()
+    to_wait = MALSYNC_MIN_INTERVAL - (now - malsync_last_call)
+    if to_wait > 0:
+        time.sleep(to_wait)
+    malsync_last_call = time.time()
+
+    url = f"{MALSYNC_BASE}/{mal_id}"
+    last_exception = None
+    for attempt in range(CALL_RETRIES):
+        try:
+            resp = requests.get(url, headers={"Accept": "application/json"})
+            if resp.status_code == 404:
+                log(f"[MALSync] 404 for MAL {mal_id}")
+                return None
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as e:
+            last_exception = e
+            print(f"[MALSync] Attempt {attempt + 1} failed for {mal_id}: {e}")
+            if attempt < CALL_RETRIES - 1:
+                delay = RETRY_DELAYS[attempt]
+                print(f"[MALSync] Retrying in {delay} seconds...")
+                time.sleep(delay)
+    print(f"[MALSync] All {CALL_RETRIES} attempts failed for MAL {mal_id}")
+    raise last_exception
+
+
+def extract_sites_from_malsync_payload(payload: dict) -> dict[str, str]:
+    """
+    From MALSync payload, extract a provider -> FULL URL mapping.
+    If multiple entries exist for a provider, pick the one with the shortest URL string.
+    """
+    out: dict[str, str] = {}
+    sites = (payload or {}).get("Sites") or {}
+    if not isinstance(sites, dict):
+        return out
+
+    for provider_name, entries in sites.items():
+        if not isinstance(entries, dict) or not entries:
+            continue
+
+        best_url = None
+        # Choose a stable "best" URL: shortest string length (usually canonical)
+        for _key, obj in entries.items():
+            if not isinstance(obj, dict):
+                continue
+            url = obj.get("url")
+            if not url or not isinstance(url, str):
+                continue
+            if best_url is None or len(url) < len(best_url):
+                best_url = url
+
+        if best_url:
+            out[provider_name] = best_url
+
+    return out
+
+
+def load_jsonl_map(path: str) -> dict[int, dict]:
+    """Load JSONL (mal_id -> record dict) into a dict. If multiple lines for same mal_id, last one wins."""
+    if not os.path.exists(path):
+        return {}
+    result: dict[int, dict] = {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    obj = json.loads(line)
+                except Exception:
+                    continue
+                mid = obj.get("mal_id")
+                if isinstance(mid, int):
+                    # store the rest of the fields
+                    rec = {k: v for k, v in obj.items() if k != "mal_id"}
+                    # ensure 'sites' key exists
+                    if "sites" not in rec or not isinstance(rec["sites"], dict):
+                        rec["sites"] = {}
+                    result[mid] = rec
+    except Exception as e:
+        print(f"[MALSync] Failed to load existing JSONL '{path}': {e}")
+    return result
+
+
+def save_jsonl_map(path: str, mapping: dict[int, dict]):
+    """Write the entire mapping dict to JSONL, sorted by mal_id."""
+    _ensure_dir_for(path)
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            for mid in sorted(mapping.keys()):
+                rec = mapping[mid] if isinstance(mapping[mid], dict) else {}
+                # Ensure minimal structure
+                out_line = {"mal_id": mid, **rec}
+                out_line.setdefault("sites", {})
+                f.write(json.dumps(out_line, ensure_ascii=False, separators=(",", ":")) + "\n")
+        log(f"[MALSync] Wrote {len(mapping)} lines to {path}")
+    except Exception as e:
+        print(f"[MALSync] Failed to save JSONL '{path}': {e}")
 
 
 # ----------------------
@@ -1279,6 +1401,80 @@ def run_justwatch(mal_start: int, mal_end: int):
         print("Done (JustWatch).")
 
 
+def run_malsync(mal_start: int, mal_end: int):
+    """
+    New mode:
+      - For each MAL ID in range, fetch MALSync mapping JSON.
+      - Extract provider -> FULL URL map.
+      - Also extract `total` (episodes) and `anidbId`.
+      - Update JSONL at cache/mal_mappings.jsonl (overwrite file with merged content).
+      - Respect missing_mal_ids.json for skipping known missing MAL IDs (from MAL 404s).
+        NOTE: We do NOT add to missing_mal_ids when MALSync returns 404.
+    """
+    global missing_mal_ids, largest_known_mal_id
+    missing_mal_ids = load_missing_cache()
+    largest_known_mal_id = get_largest_known_mal_id()
+    if debug_log:
+        log(f"[MALSync] largest_known_mal_id={largest_known_mal_id or 0}, cached_missing={len(missing_mal_ids)}")
+
+    # Load existing JSONL to update/merge instead of blindly appending.
+    # Each record: {"mal_id": <int>, "sites": {...}, "total": <int?>, "anidbId": <int?>}
+    master_map = load_jsonl_map(MALSYNC_JSONL_PATH)
+
+    try:
+        for idx, mal_id in enumerate(range(mal_start, mal_end + 1), 1):
+            # Skip known missing MAL IDs (based on MAL API 404s, within known range)
+            if largest_known_mal_id and mal_id <= largest_known_mal_id and mal_id in missing_mal_ids:
+                if debug_log:
+                    log(f"[MALSync] Skip MAL {mal_id} (cached missing MAL ID)")
+                if idx % FINALIZE_EVERY_N == 0:
+                    save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
+                continue
+
+            data = malsync_get(mal_id)
+            if not data:
+                # No mapping for this MAL ID (do not record as missing MAL).
+                # Mark as processed with empty sites but keep existing total/anidbId if any.
+                rec = master_map.get(mal_id, {})
+                rec["sites"] = rec.get("sites", {})
+                master_map[mal_id] = rec
+                if debug_log:
+                    log(f"[MALSync] No mapping for MAL {mal_id}")
+                if idx % FINALIZE_EVERY_N == 0:
+                    save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
+                continue
+
+            sites_map = extract_sites_from_malsync_payload(data)
+            total = data.get("total")
+            anidb_id = data.get("anidbId")
+
+            rec = master_map.get(mal_id, {})
+            if isinstance(total, int):
+                rec["total"] = total
+            if isinstance(anidb_id, int):
+                rec["anidbId"] = anidb_id
+            rec["sites"] = sites_map if sites_map else {}
+            master_map[mal_id] = rec
+
+            if debug_log:
+                preview = dict(list(rec.get("sites", {}).items())[:5])
+                log(f"[MALSync] MAL {mal_id}: sites={len(rec.get('sites', {}))}, total={rec.get('total')}, anidbId={rec.get('anidbId')}, sample={preview}")
+
+            if idx % FINALIZE_EVERY_N == 0:
+                log(f"[MALSync] --- Updating JSONL at MAL ID {mal_start + idx - 1} ---")
+                save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
+
+    except KeyboardInterrupt:
+        print("\nInterrupted. Saving mappings...")
+    except Exception as e:
+        print(f"\nUnexpected error (MALSync): {e}")
+        import traceback
+        traceback.print_exc()
+    finally:
+        save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
+        print("Done (MALSync).")
+
+
 # ----------------------
 # Main
 # ----------------------
@@ -1288,13 +1484,14 @@ def main():
     parser = argparse.ArgumentParser(
         description="Fetch dubbed languages per anime and save to JSON (append-only)."
     )
-    parser.add_argument("--api", choices=["mal", "anilist", "ann", "justwatch"], default="mal", help="Which source to use.")
+    parser.add_argument("--api", choices=["mal", "anilist", "ann", "justwatch", "malsync"], default="mal",
+                        help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
 
     # MAL-specific
     parser.add_argument("--client-id", help="MyAnimeList API Client ID (required for --api mal).")
-    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann/justwatch.")
-    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann/justwatch.")
+    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann/justwatch/malsync.")
+    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann/justwatch/malsync.")
 
     # AniList-specific
     parser.add_argument("--anilist-start-page", type=int, help="AniList: start page number (1-based).")
@@ -1327,6 +1524,12 @@ def main():
             print("For --api ann you must provide --mal-start and --mal-end.")
             sys.exit(1)
         run_ann(args.mal_start, args.mal_end)
+
+    elif args.api == "malsync":
+        if args.mal_start is None or args.mal_end is None:
+            print("For --api malsync you must provide --mal-start and --mal-end.")
+            sys.exit(1)
+        run_malsync(args.mal_start, args.mal_end)
 
     else:  # justwatch
         if args.mal_start is None or args.mal_end is None:
