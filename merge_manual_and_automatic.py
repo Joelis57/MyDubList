@@ -5,7 +5,7 @@ import os
 import json
 import re
 import sys
-from typing import Dict, Set, List
+from typing import Dict, Set
 
 # Resolve paths relative to this script file
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -17,16 +17,17 @@ AUTOMATIC_MAL_DIR      = os.path.join(DUBS_SOURCES_DIR, "automatic_mal")
 AUTOMATIC_ANILIST_DIR  = os.path.join(DUBS_SOURCES_DIR, "automatic_anilist")
 AUTOMATIC_ANN_DIR      = os.path.join(DUBS_SOURCES_DIR, "automatic_ann")
 AUTOMATIC_NSFW_DIR     = os.path.join(DUBS_SOURCES_DIR, "automatic_nsfw")
+AUTOMATIC_KENNY_DIR    = os.path.join(DUBS_SOURCES_DIR, "automatic_kenny")
 
 # Output roots
-COUNTS_DIR = os.path.join(ROOT, "dubs", "counts")
-CONFIDENCE_DIR = os.path.join(ROOT, "dubs", "confidence")
-CONFIDENCE_LEVELS = {
-    "low": 1,
-    "normal": 2,
-    "high": 3,
-    "very-high": 4,
+CONFIDENCE_DIR         = os.path.join(ROOT, "dubs", "confidence")
+CONFIDENCE_LEVELS      = {
+    "low": 1,        # ≥1 automatic source
+    "normal": 2,     # ≥2 automatic sources
+    "high": 2,       # ≥2 automatic sources
+    "very-high": 3,  # ≥3 automatic sources
 }
+COUNTS_DIR             = os.path.join(ROOT, "dubs", "counts")
 
 DEBUG = False
 
@@ -81,12 +82,14 @@ def load_language_sources(filename: str):
     auto_anilist_path      = os.path.join(AUTOMATIC_ANILIST_DIR, filename)
     auto_ann_path          = os.path.join(AUTOMATIC_ANN_DIR, filename)
     auto_nsfw_path         = os.path.join(AUTOMATIC_NSFW_DIR, filename)
+    auto_kenny_path        = os.path.join(AUTOMATIC_KENNY_DIR, filename)
 
     manual           = load_json(manual_path)
     auto_mal         = load_json(auto_mal_path)
     auto_anilist     = load_json(auto_anilist_path)
     auto_ann         = load_json(auto_ann_path)
     auto_nsfw        = load_json(auto_nsfw_path)
+    auto_kenny       = load_json(auto_kenny_path)
 
     # Manual lists
     manual_dubbed     = int_set(manual.get("dubbed"))
@@ -98,6 +101,7 @@ def load_language_sources(filename: str):
     auto_anilist_dubbed = int_set(auto_anilist.get("dubbed"))
     auto_ann_dubbed     = int_set(auto_ann.get("dubbed"))
     auto_nsfw_dubbed    = int_set(auto_nsfw.get("dubbed"))
+    auto_kenny_dubbed   = int_set(auto_kenny.get("dubbed"))
 
     language_value = manual.get("language") or infer_language_from_filename(filename).replace("_", " ").title()
 
@@ -110,6 +114,7 @@ def load_language_sources(filename: str):
             "anilist": auto_anilist_dubbed,
             "ann": auto_ann_dubbed,
             "nsfw": auto_nsfw_dubbed,
+            "kenny": auto_kenny_dubbed,
         },
         "language_value": language_value,
     }
@@ -117,7 +122,7 @@ def load_language_sources(filename: str):
 def compute_counts(auto_sources: Dict[str, Set[int]]) -> Dict[int, int]:
     """Count in how many automatic sources each MAL id appears."""
     counts: Dict[int, int] = {}
-    for src_name, ids in auto_sources.items():
+    for _src_name, ids in auto_sources.items():
         for mid in ids:
             counts[mid] = counts.get(mid, 0) + 1
     return counts
@@ -125,7 +130,7 @@ def compute_counts(auto_sources: Dict[str, Set[int]]) -> Dict[int, int]:
 def build_confidence_outputs(filename: str):
     """
     For one language file (dubbed_<lang>.json):
-      - compute automatic source counts
+      - compute automatic source counts (MAL, AniList, ANN, NSFW, Kenny)
       - write outputs into dubs/confidence/<level>/dubbed_<lang>.json
       - write counts to dubs/counts/dubbed_<lang>.json
     """
@@ -173,6 +178,7 @@ def main():
         AUTOMATIC_ANILIST_DIR,
         AUTOMATIC_ANN_DIR,
         AUTOMATIC_NSFW_DIR,
+        AUTOMATIC_KENNY_DIR,
     )
 
     if not all_lang_files:
@@ -187,7 +193,7 @@ def main():
     for filename in sorted(all_lang_files):
         build_confidence_outputs(filename)
 
-    print(f"Done. Wrote counts to 'dubs/counts' and confidence tiers to 'dubs/confidence/{{low,normal,high,very-high}}'.")
+    print("Done. Wrote counts to 'dubs/counts' and confidence tiers to 'dubs/confidence/{low,normal,high,very-high}'.")
 
 if __name__ == "__main__":
     main()
