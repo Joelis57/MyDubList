@@ -22,10 +22,10 @@ AUTOMATIC_KENNY_DIR    = os.path.join(DUBS_SOURCES_DIR, "automatic_kenny")
 # Output roots
 CONFIDENCE_DIR         = os.path.join(ROOT, "dubs", "confidence")
 CONFIDENCE_LEVELS      = {
-    "low": 1,        # ≥1 automatic source
-    "normal": 2,     # ≥2 automatic sources
-    "high": 2,       # ≥2 automatic sources
-    "very-high": 3,  # ≥3 automatic sources
+    "low": 1,
+    "normal": 2,
+    "high": 3,
+    "very-high": 4,
 }
 COUNTS_DIR             = os.path.join(ROOT, "dubs", "counts")
 
