@@ -34,8 +34,17 @@ ANILIST_PAGE_SLEEP = 2  # seconds
 # ANN batching
 ANN_BATCH_SIZE = 40
 
+# Output locations
+SOURCES_DIR = "dubs/sources"
+MAPPINGS_DIR = "dubs/mappings"
+ANILIST_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_anilist.jsonl")
+ANN_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_ann.jsonl")
+MALSYNC_JSONL_PATH = os.path.join(MAPPINGS_DIR, "mappings_malsync.jsonl")
+MERGED_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_merged.jsonl")
+
 MISSING_CACHE_PATH = "cache/missing_mal_ids.json"
-LARGEST_KNOWN_MAL_FILE = "final/dubbed_japanese.json"
+# Used to detect end-of-range for MAL scanning
+LARGEST_KNOWN_MAL_FILE = os.path.join(SOURCES_DIR, "automatic_mal", "dubbed_japanese.json")
 
 
 # ======================
@@ -67,7 +76,12 @@ MALSYNC_MIN_INTERVAL = 3  # seconds
 malsync_last_call = 0.0
 
 missing_mal_ids = set()
-largest_known_mal_id = 0  # determined from final/dubbed_japanese.json
+largest_known_mal_id = 0  # determined from dubs/sources/automatic_mal/dubbed_japanese.json
+
+# Per-API mappings accumulated this run
+anilist_mapping: dict[int, int] = {}
+ann_mapping: dict[int, int] = {}
+
 
 def log(message: str):
     if debug_log:
@@ -75,8 +89,19 @@ def log(message: str):
 
 
 # ----------------------
+# FS helpers
+# ----------------------
+
+def _ensure_dir_for(path: str):
+    d = os.path.dirname(path)
+    if d and not os.path.exists(d):
+        os.makedirs(d, exist_ok=True)
+
+
+# ----------------------
 # Language normalization
 # ----------------------
+
 def sanitize_lang(lang: str) -> str:
     if not lang:
         return ""
@@ -110,6 +135,7 @@ def filename_for_lang(lang_key: str) -> str:
 
 
 # ANN code/name → our normalized keys
+
 def ann_lang_to_key(raw: str) -> str:
     if not raw:
         return ""
@@ -177,11 +203,6 @@ def ann_lang_to_key(raw: str) -> str:
 # ----------------------
 # Missing MAL IDs cache helpers
 # ----------------------
-def _ensure_dir_for(path: str):
-    d = os.path.dirname(path)
-    if d and not os.path.exists(d):
-        os.makedirs(d, exist_ok=True)
-
 
 def load_missing_cache() -> set[int]:
     """Load cached anime 404 MAL IDs from disk."""
@@ -214,7 +235,7 @@ def save_missing_cache():
 
 def get_largest_known_mal_id() -> int:
     """
-    Read final/dubbed_japanese.json and return the last MAL ID in the 'dubbed' array.
+    Read dubs/sources/automatic_mal/dubbed_japanese.json and return the last MAL ID in the 'dubbed' array.
     If not available, returns 0.
     """
     path = LARGEST_KNOWN_MAL_FILE
@@ -236,8 +257,131 @@ def get_largest_known_mal_id() -> int:
 
 
 # ----------------------
+# Mapping JSONL helpers
+# ----------------------
+
+def load_simple_jsonl_map(path: str, value_key: str) -> dict[int, int]:
+    """Load JSONL file of lines like {"mal_id": <int>, value_key: <int>} into dict."""
+    if not os.path.exists(path):
+        return {}
+    result: dict[int, int] = {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    obj = json.loads(line)
+                except Exception:
+                    continue
+                mid = obj.get("mal_id")
+                val = obj.get(value_key)
+                if isinstance(mid, int) and isinstance(val, int):
+                    result[mid] = val
+    except Exception as e:
+        print(f"[map] Failed to load {path}: {e}")
+    return result
+
+
+def save_simple_jsonl_map(path: str, mapping: dict[int, int], value_key: str):
+    """Save dict[int,int] to JSONL with keys mal_id and value_key."""
+    _ensure_dir_for(path)
+    try:
+        # merge with existing
+        existing = load_simple_jsonl_map(path, value_key)
+        existing.update(mapping)
+        with open(path, "w", encoding="utf-8") as f:
+            for mid in sorted(existing.keys()):
+                rec = {"mal_id": mid, value_key: int(existing[mid])}
+                f.write(json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n")
+        log(f"[map] Wrote {len(existing)} lines to {path}")
+    except Exception as e:
+        print(f"[map] Failed to save {path}: {e}")
+
+
+def load_jsonl_map(path: str) -> dict[int, dict]:
+    """Load JSONL (mal_id -> record dict) into a dict. If multiple lines for same mal_id, last one wins."""
+    if not os.path.exists(path):
+        return {}
+    result: dict[int, dict] = {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    obj = json.loads(line)
+                except Exception:
+                    continue
+                mid = obj.get("mal_id")
+                if isinstance(mid, int):
+                    # store the rest of the fields
+                    rec = {k: v for k, v in obj.items() if k != "mal_id"}
+                    # ensure 'sites' key exists for malsync style
+                    if "sites" in rec and not isinstance(rec["sites"], dict):
+                        rec["sites"] = {}
+                    result[mid] = rec
+    except Exception as e:
+        print(f"[MALSync] Failed to load existing JSONL '{path}': {e}")
+    return result
+
+
+def save_jsonl_map(path: str, mapping: dict[int, dict]):
+    """Write the entire mapping dict to JSONL, sorted by mal_id."""
+    _ensure_dir_for(path)
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            for mid in sorted(mapping.keys()):
+                rec = mapping[mid] if isinstance(mapping[mid], dict) else {}
+                # Ensure minimal structure
+                out_line = {"mal_id": mid, **rec}
+                f.write(json.dumps(out_line, ensure_ascii=False, separators=(",", ":")) + "\n")
+        log(f"[MALSync] Wrote {len(mapping)} lines to {path}")
+    except Exception as e:
+        print(f"[MALSync] Failed to save JSONL '{path}': {e}")
+
+
+def merge_all_mappings():
+    """Merge existing mappings into a single JSONL at MERGED_MAPPING_JSONL."""
+    master: dict[int, dict] = {}
+
+    # AniList
+    a_map = load_simple_jsonl_map(ANILIST_MAPPING_JSONL, "anilist_id")
+    for mid, aid in a_map.items():
+        master.setdefault(mid, {})["anilist_id"] = aid
+
+    # ANN
+    ann_map = load_simple_jsonl_map(ANN_MAPPING_JSONL, "ann_id")
+    for mid, annid in ann_map.items():
+        master.setdefault(mid, {})["ann_id"] = annid
+
+    # MALSync
+    ms_map = load_jsonl_map(MALSYNC_JSONL_PATH)
+    for mid, rec in ms_map.items():
+        master.setdefault(mid, {})["malsync"] = {
+            "sites": rec.get("sites", {}),
+            "total": rec.get("total"),
+            "anidbId": rec.get("anidbId"),
+        }
+
+    # Write merged
+    _ensure_dir_for(MERGED_MAPPING_JSONL)
+    try:
+        with open(MERGED_MAPPING_JSONL, "w", encoding="utf-8") as f:
+            for mid in sorted(master.keys()):
+                line = {"mal_id": mid, **master[mid]}
+                f.write(json.dumps(line, ensure_ascii=False, separators=(",", ":")) + "\n")
+        log(f"[merge] Wrote merged mappings: {len(master)} to {MERGED_MAPPING_JSONL}")
+    except Exception as e:
+        print(f"[merge] Failed to write merged mappings: {e}")
+
+
+# ----------------------
 # MAL + Jikan helpers
 # ----------------------
+
 @lru_cache(maxsize=MAX_IN_MEMORY_CACHE)
 def get_anime_roles_for_va_cached(person_id):
     log(f"    Fetching VA {person_id} from API")
@@ -457,6 +601,13 @@ def process_anilist_page(page: int):
                 log("  skip: no idMal")
             continue
 
+        # Record mapping MAL → AniList ID
+        try:
+            aid = int(media.get("id"))
+            anilist_mapping[int(mal_id)] = aid
+        except Exception:
+            pass
+
         page_with_mal += 1
 
         chars = media.get("characters") or {}
@@ -518,11 +669,13 @@ def process_anilist_page(page: int):
 
 
 # ----------------------
-# Append-only finalize
+# Append-only finalize (dubbed_* sources + mappings)
 # ----------------------
 
+
 def finalize_jsons(api_mode: str):
-    output_dir = f"automatic_{api_mode}"
+    # Write dubbed_* language lists to dubs/sources/automatic_<api>
+    output_dir = os.path.join(SOURCES_DIR, f"automatic_{api_mode}")
     os.makedirs(output_dir, exist_ok=True)
 
     for lang_key, new_ids in json_data.items():
@@ -551,16 +704,26 @@ def finalize_jsons(api_mode: str):
             "_attribution": "MyDubList - https://mydublist.com - (CC BY 4.0)",
             "_origin": "https://github.com/Joelis57/MyDubList",
             "language": lang_key.capitalize(),
-            "dubbed": sorted(updated_ids),
+            "dubbed": sorted(int(x) for x in updated_ids),
         }
 
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(obj, f, ensure_ascii=False, indent=2)
 
+    # Also finalize per-API mappings and the merged mapping
+    if api_mode == "anilist" and anilist_mapping:
+        save_simple_jsonl_map(ANILIST_MAPPING_JSONL, anilist_mapping, "anilist_id")
+    if api_mode == "ann" and ann_mapping:
+        save_simple_jsonl_map(ANN_MAPPING_JSONL, ann_mapping, "ann_id")
+
+    # Always refresh merged mappings after a finalize
+    merge_all_mappings()
+
 
 # ----------------------
 # ANN helpers
 # ----------------------
+
 def ann_get(url):
     """Throttled GET for ANN (XML)."""
     global ann_last_call
@@ -662,6 +825,7 @@ def parse_ann_batch_xml(xml_text: str) -> dict[int, set[str]]:
 def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]):
     """
     Fetch a batch of ANN IDs and add MAL IDs to json_data by language.
+    Also updates ann_mapping (mal_id -> ann_id).
     """
     if not ann_ids:
         return
@@ -679,13 +843,16 @@ def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]):
         mal_id = ann_to_mal.get(ann_id)
         if not mal_id:
             continue
+        # Record mapping
+        ann_mapping[int(mal_id)] = int(ann_id)
         for key in langs:
-            json_data[key].add(mal_id)
+            json_data[key].add(int(mal_id))
 
 
 # ----------------------
 # MALSync helpers
 # ----------------------
+
 def malsync_get(mal_id: int) -> dict | None:
     """Fetch MALSync mapping for a MAL anime ID. Returns dict or None on 404."""
     global malsync_last_call
@@ -747,49 +914,6 @@ def extract_sites_from_malsync_payload(payload: dict) -> dict[str, str]:
     return out
 
 
-def load_jsonl_map(path: str) -> dict[int, dict]:
-    """Load JSONL (mal_id -> record dict) into a dict. If multiple lines for same mal_id, last one wins."""
-    if not os.path.exists(path):
-        return {}
-    result: dict[int, dict] = {}
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                try:
-                    obj = json.loads(line)
-                except Exception:
-                    continue
-                mid = obj.get("mal_id")
-                if isinstance(mid, int):
-                    # store the rest of the fields
-                    rec = {k: v for k, v in obj.items() if k != "mal_id"}
-                    # ensure 'sites' key exists
-                    if "sites" not in rec or not isinstance(rec["sites"], dict):
-                        rec["sites"] = {}
-                    result[mid] = rec
-    except Exception as e:
-        print(f"[MALSync] Failed to load existing JSONL '{path}': {e}")
-    return result
-
-
-def save_jsonl_map(path: str, mapping: dict[int, dict]):
-    """Write the entire mapping dict to JSONL, sorted by mal_id."""
-    _ensure_dir_for(path)
-    try:
-        with open(path, "w", encoding="utf-8") as f:
-            for mid in sorted(mapping.keys()):
-                rec = mapping[mid] if isinstance(mapping[mid], dict) else {}
-                # Ensure minimal structure
-                out_line = {"mal_id": mid, **rec}
-                out_line.setdefault("sites", {})
-                f.write(json.dumps(out_line, ensure_ascii=False, separators=(",", ":")) + "\n")
-        log(f"[MALSync] Wrote {len(mapping)} lines to {path}")
-    except Exception as e:
-        print(f"[MALSync] Failed to save JSONL '{path}': {e}")
-
 # ----------------------
 # Runners
 # ----------------------
@@ -805,6 +929,8 @@ def run_ann(mal_start: int, mal_end: int):
             if ann_id:
                 pending.append(ann_id)
                 ann_to_mal[ann_id] = mal_id
+                # Also record mapping immediately
+                ann_mapping[int(mal_id)] = int(ann_id)
 
             if len(pending) >= ANN_BATCH_SIZE:
                 if debug_log:
@@ -926,7 +1052,7 @@ def run_malsync(mal_start: int, mal_end: int):
       - For each MAL ID in range, fetch MALSync mapping JSON.
       - Extract provider -> FULL URL map.
       - Also extract `total` (episodes) and `anidbId`.
-      - Update JSONL at cache/mal_mappings.jsonl (overwrite file with merged content).
+      - Update JSONL at dubs/mappings/mappings_malsync.jsonl (overwrite with merged content).
       - Respect missing_mal_ids.json for skipping known missing MAL IDs (from MAL 404s).
         NOTE: We do NOT add to missing_mal_ids when MALSync returns 404.
     """
@@ -948,6 +1074,7 @@ def run_malsync(mal_start: int, mal_end: int):
                     log(f"[MALSync] Skip MAL {mal_id} (cached missing MAL ID)")
                 if idx % FINALIZE_EVERY_N == 0:
                     save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
+                    merge_all_mappings()
                 continue
 
             data = malsync_get(mal_id)
@@ -961,6 +1088,7 @@ def run_malsync(mal_start: int, mal_end: int):
                     log(f"[MALSync] No mapping for MAL {mal_id}")
                 if idx % FINALIZE_EVERY_N == 0:
                     save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
+                    merge_all_mappings()
                 continue
 
             sites_map = extract_sites_from_malsync_payload(data)
@@ -982,6 +1110,7 @@ def run_malsync(mal_start: int, mal_end: int):
             if idx % FINALIZE_EVERY_N == 0:
                 log(f"[MALSync] --- Updating JSONL at MAL ID {mal_start + idx - 1} ---")
                 save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
+                merge_all_mappings()
 
     except KeyboardInterrupt:
         print("\nInterrupted. Saving mappings...")
@@ -991,17 +1120,19 @@ def run_malsync(mal_start: int, mal_end: int):
         traceback.print_exc()
     finally:
         save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
+        merge_all_mappings()
         print("Done (MALSync).")
 
 
 # ----------------------
 # Main
 # ----------------------
+
 def main():
     global debug_log
 
     parser = argparse.ArgumentParser(
-        description="Fetch dubbed languages per anime and save to JSON (append-only)."
+        description="Fetch dubbed languages per anime and save to JSON (append-only). Also writes per-API mappings and a merged mapping JSONL."
     )
     parser.add_argument("--api", choices=["mal", "anilist", "ann", "malsync"], default="mal", help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
@@ -1019,6 +1150,10 @@ def main():
 
     args = parser.parse_args()
     debug_log = str(args.debug).lower() == "true"
+
+    # Ensure output dirs exist up-front
+    os.makedirs(SOURCES_DIR, exist_ok=True)
+    os.makedirs(MAPPINGS_DIR, exist_ok=True)
 
     if args.api == "mal":
         if not args.client_id or args.mal_start is None or args.mal_end is None:
@@ -1048,6 +1183,7 @@ def main():
             print("For --api malsync you must provide --mal-start and --mal-end.")
             sys.exit(1)
         run_malsync(args.mal_start, args.mal_end)
+
 
 if __name__ == "__main__":
     main()
