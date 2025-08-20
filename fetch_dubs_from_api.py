@@ -19,7 +19,6 @@ MAL_BASE = "https://api.myanimelist.net/v2"
 JIKAN_BASE = "https://api.jikan.moe/v4"
 ANILIST_BASE = "https://graphql.anilist.co"
 ANN_API = "https://cdn.animenewsnetwork.com/encyclopedia/api.xml"
-MALSYNC_BASE = "https://api.malsync.moe/mal/anime"
 
 MAX_IN_MEMORY_CACHE = 5000
 CALL_RETRIES = 4
@@ -39,7 +38,6 @@ SOURCES_DIR = "dubs/sources"
 MAPPINGS_DIR = "dubs/mappings"
 ANILIST_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_anilist.jsonl")
 ANN_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_ann.jsonl")
-MALSYNC_JSONL_PATH = os.path.join(MAPPINGS_DIR, "mappings_malsync.jsonl")
 MERGED_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_merged.jsonl")
 HIANIME_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_hianime.jsonl")
 
@@ -70,10 +68,6 @@ last_mal_404 = False
 # ANN throttle
 ann_last_call = 0
 ANN_MIN_INTERVAL = 1.0  # seconds between ANN calls
-
-# MALSync throttle
-MALSYNC_MIN_INTERVAL = 3  # seconds
-malsync_last_call = 0.0
 
 HIANIME_MIN_INTERVAL = 1.0  # seconds
 hianime_last_call = 0.0
@@ -323,12 +317,12 @@ def load_jsonl_map(path: str) -> dict[int, dict]:
                 if isinstance(mid, int):
                     # store the rest of the fields
                     rec = {k: v for k, v in obj.items() if k != "mal_id"}
-                    # ensure 'sites' key exists for malsync style
+                    # ensure 'sites' key is a dict if present
                     if "sites" in rec and not isinstance(rec["sites"], dict):
                         rec["sites"] = {}
                     result[mid] = rec
     except Exception as e:
-        print(f"[MALSync] Failed to load existing JSONL '{path}': {e}")
+        print(f"[jsonl] Failed to load JSONL '{path}': {e}")
     return result
 
 
@@ -342,9 +336,9 @@ def save_jsonl_map(path: str, mapping: dict[int, dict]):
                 # Ensure minimal structure
                 out_line = {"mal_id": mid, **rec}
                 f.write(json.dumps(out_line, ensure_ascii=False, separators=(",", ":")) + "\n")
-        log(f"[MALSync] Wrote {len(mapping)} lines to {path}")
+        log(f"[jsonl] Wrote {len(mapping)} lines to {path}")
     except Exception as e:
-        print(f"[MALSync] Failed to save JSONL '{path}': {e}")
+        print(f"[jsonl] Failed to save JSONL '{path}': {e}")
 
 
 def merge_all_mappings():
@@ -360,15 +354,6 @@ def merge_all_mappings():
     ann_map = load_simple_jsonl_map(ANN_MAPPING_JSONL, "ann_id")
     for mid, annid in ann_map.items():
         master.setdefault(mid, {})["ann_id"] = annid
-
-    # MALSync
-    ms_map = load_jsonl_map(MALSYNC_JSONL_PATH)
-    for mid, rec in ms_map.items():
-        master.setdefault(mid, {})["malsync"] = {
-            "sites": rec.get("sites", {}),
-            "total": rec.get("total"),
-            "anidbId": rec.get("anidbId"),
-        }
 
     # HiAnime
     hi_map = load_jsonl_map(HIANIME_MAPPING_JSONL)
@@ -892,73 +877,62 @@ def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]) -> set[int
 
 
 # ----------------------
-# MALSync helpers
-# ----------------------
-
-def malsync_get(mal_id: int) -> dict | None:
-    """Fetch MALSync mapping for a MAL anime ID. Returns dict or None on 404."""
-    global malsync_last_call
-    now = time.time()
-    to_wait = MALSYNC_MIN_INTERVAL - (now - malsync_last_call)
-    if to_wait > 0:
-        time.sleep(to_wait)
-    malsync_last_call = time.time()
-
-    url = f"{MALSYNC_BASE}/{mal_id}"
-    last_exception = None
-    for attempt in range(CALL_RETRIES):
-        try:
-            resp = requests.get(url, headers={"Accept": "application/json"})
-            if resp.status_code == 404:
-                log(f"[MALSync] 404 for MAL {mal_id}")
-                return None
-            resp.raise_for_status()
-            return resp.json()
-        except Exception as e:
-            last_exception = e
-            print(f"[MALSync] Attempt {attempt + 1} failed for {mal_id}: {e}")
-            if attempt < CALL_RETRIES - 1:
-                delay = RETRY_DELAYS[attempt]
-                print(f"[MALSync] Retrying in {delay} seconds...")
-                time.sleep(delay)
-    print(f"[MALSync] All {CALL_RETRIES} attempts failed for MAL {mal_id}")
-    raise last_exception
-
-
-def extract_sites_from_malsync_payload(payload: dict) -> dict[str, str]:
-    """
-    From MALSync payload, extract a provider -> FULL URL mapping.
-    If multiple entries exist for a provider, pick the one with the shortest URL string.
-    """
-    out: dict[str, str] = {}
-    sites = (payload or {}).get("Sites") or {}
-    if not isinstance(sites, dict):
-        return out
-
-    for provider_name, entries in sites.items():
-        if not isinstance(entries, dict) or not entries:
-            continue
-
-        best_url = None
-        # Choose a stable "best" URL: shortest string length (usually canonical)
-        for _key, obj in entries.items():
-            if not isinstance(obj, dict):
-                continue
-            url = obj.get("url")
-            if not url or not isinstance(url, str):
-                continue
-            if best_url is None or len(url) < len(best_url):
-                best_url = url
-
-        if best_url:
-            out[provider_name] = best_url
-
-    return out
-
-
-# ----------------------
 # HiAnime helpers
 # ----------------------
+
+def _slug_from_url(url: str) -> str:
+    try:
+        parsed = urlparse(url)
+        parts = [seg for seg in parsed.path.split('/') if seg]
+        return parts[-1] if parts else ""
+    except Exception:
+        return ""
+
+def build_hianime_slug_to_mal_map(source_file: str) -> dict[str, int]:
+    if not source_file or not os.path.exists(source_file):
+        print(f"[HiAnime] Source file not found: {source_file}")
+        return {}
+
+    try:
+        with open(source_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"[HiAnime] Failed to parse source file '{source_file}': {e}")
+        return {}
+
+    slug_to_mal: dict[str, int] = {}
+
+    if isinstance(data, dict):
+        for k, v in data.items():
+            try:
+                mal_id = int(k)
+            except Exception:
+                continue
+            if not isinstance(v, dict):
+                continue
+            sites = v.get("sites") or {}
+            if not isinstance(sites, dict):
+                continue
+
+            chosen_url = None
+            for prov, url in sites.items():
+                if not isinstance(url, str):
+                    continue
+                prov_lower = str(prov).lower()
+                if prov_lower == "zoro" or "hianime." in url:
+                    chosen_url = url
+                    if prov_lower == "zoro":
+                        break
+
+            if not chosen_url:
+                continue
+
+            slug = _slug_from_url(chosen_url)
+            if slug:
+                slug_to_mal[slug] = mal_id
+
+    log(f"[HiAnime] Built slug→MAL map for {len(slug_to_mal)} entries from source file.")
+    return slug_to_mal
 
 def hianime_get_page(api_host: str, page: int) -> dict | None:
     """
@@ -990,31 +964,6 @@ def hianime_get_page(api_host: str, page: int) -> dict | None:
                 time.sleep(delay)
     print(f"[HiAnime] All {CALL_RETRIES} attempts failed for page {page}")
     raise last_exception
-
-
-def build_hianime_slug_to_mal_map() -> dict[str, int]:
-    """
-    Build a reverse map from HiAnime slug (from MALSync 'Zoro' URL)
-    to MAL ID, using mappings_malsync.jsonl.
-    Example Zoro URL: https://hianime.to/cowboy-bebop-27  -> slug: 'cowboy-bebop-27'
-    """
-    rev: dict[str, int] = {}
-    ms_map = load_jsonl_map(MALSYNC_JSONL_PATH)
-    for mal_id, rec in ms_map.items():
-        sites = rec.get("sites", {}) or {}
-        zoro_url = sites.get("Zoro")
-        if not zoro_url or not isinstance(zoro_url, str):
-            continue
-        try:
-            parsed = urlparse(zoro_url)
-            # last non-empty segment
-            slug = [seg for seg in parsed.path.split("/") if seg][-1] if parsed.path else ""
-            if slug:
-                rev[slug] = int(mal_id)
-        except Exception:
-            continue
-    log(f"[HiAnime] Built slug→MAL map for {len(rev)} entries from MALSync.")
-    return rev
 
 
 # ----------------------
@@ -1156,94 +1105,20 @@ def run_anilist(start_page: int | None, end_page: int | None):
         f"with_langs={anilist_stats['media_with_langs']}, no_langs={anilist_stats['media_without_langs']}")
 
 
-def run_malsync(mal_start: int, mal_end: int):
-    """
-    New mode:
-      - For each MAL ID in range, fetch MALSync mapping JSON.
-      - Extract provider -> FULL URL map.
-      - Also extract `total` (episodes) and `anidbId`.
-      - Update JSONL at dubs/mappings/mappings_malsync.jsonl (overwrite with merged content).
-      - Respect missing_mal_ids.json for skipping known missing MAL IDs (from MAL 404s).
-        NOTE: We do NOT add to missing_mal_ids when MALSync returns 404.
-    """
-    global missing_mal_ids, largest_known_mal_id
-    missing_mal_ids = load_missing_cache()
-    largest_known_mal_id = get_largest_known_mal_id()
-    if debug_log:
-        log(f"[MALSync] largest_known_mal_id={largest_known_mal_id or 0}, cached_missing={len(missing_mal_ids)}")
-
-    # Load existing JSONL to update/merge instead of blindly appending.
-    # Each record: {"mal_id": <int>, "sites": {...}, "total": <int?>, "anidbId": <int?>}
-    master_map = load_jsonl_map(MALSYNC_JSONL_PATH)
-
-    try:
-        for idx, mal_id in enumerate(range(mal_start, mal_end + 1), 1):
-            # Skip known missing MAL IDs (based on MAL API 404s, within known range)
-            if largest_known_mal_id and mal_id <= largest_known_mal_id and mal_id in missing_mal_ids:
-                if debug_log:
-                    log(f"[MALSync] Skip MAL {mal_id} (cached missing MAL ID)")
-                if idx % FINALIZE_EVERY_N == 0:
-                    save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
-                    merge_all_mappings()
-                continue
-
-            data = malsync_get(mal_id)
-            if not data:
-                # No mapping for this MAL ID (do not record as missing MAL).
-                # Mark as processed with empty sites but keep existing total/anidbId if any.
-                rec = master_map.get(mal_id, {})
-                rec["sites"] = rec.get("sites", {})
-                master_map[mal_id] = rec
-                if debug_log:
-                    log(f"[MALSync] No mapping for MAL {mal_id}")
-                if idx % FINALIZE_EVERY_N == 0:
-                    save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
-                    merge_all_mappings()
-                continue
-
-            sites_map = extract_sites_from_malsync_payload(data)
-            total = data.get("total")
-            anidb_id = data.get("anidbId")
-
-            rec = master_map.get(mal_id, {})
-            if isinstance(total, int):
-                rec["total"] = total
-            if isinstance(anidb_id, int):
-                rec["anidbId"] = anidb_id
-            rec["sites"] = sites_map if sites_map else {}
-            master_map[mal_id] = rec
-
-            if debug_log:
-                preview = dict(list(rec.get("sites", {}).items())[:5])
-                log(f"[MALSync] MAL {mal_id}: sites={len(rec.get('sites', {}))}, total={rec.get('total')}, anidbId={rec.get('anidbId')}, sample={preview}")
-
-            if idx % FINALIZE_EVERY_N == 0:
-                log(f"[MALSync] --- Updating JSONL at MAL ID {mal_start + idx - 1} ---")
-                save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
-                merge_all_mappings()
-
-    except KeyboardInterrupt:
-        print("\nInterrupted. Saving mappings...")
-    except Exception as e:
-        print(f"\nUnexpected error (MALSync): {e}")
-        import traceback
-        traceback.print_exc()
-    finally:
-        save_jsonl_map(MALSYNC_JSONL_PATH, master_map)
-        merge_all_mappings()
-        print("Done (MALSync).")
-
-
-def run_hianime(api_host: str, start_page: int | None, end_page: int | None):
+def run_hianime(api_host: str, start_page: int | None, end_page: int | None, source_file: str | None):
     """
     HiAnime mode:
-      - Build reverse map from MALSync (Zoro URLs) to get slug -> MAL ID.
+      - Build reverse map from a user-provided file to get slug -> MAL ID.
       - Iterate pages from the local aniwatch API for 'dubbed-anime' category.
       - If episodes.dub >= 1: add MAL ID to English set and record hianime mapping.
       - Save dubbed_english.json under dubs/sources/automatic_hianime.
       - Save mappings_hianime.jsonl with mal_id, hianime_id, episodes {sub, dub}.
     """
-    slug_to_mal = build_hianime_slug_to_mal_map()
+    if not source_file:
+        print("For --api hianime you must provide --source-file pointing to a JSON/JSONL mapping file.")
+        sys.exit(1)
+
+    slug_to_mal = build_hianime_slug_to_mal_map(source_file)
     page = start_page or 1
     checked_ok_ids: set[int] = set()
 
@@ -1331,14 +1206,14 @@ def main():
             "(only for IDs checked this run). Also writes per-API mappings and a merged mapping JSONL."
         )
     )
-    parser.add_argument("--api", choices=["mal", "anilist", "ann", "malsync", "hianime"], default="mal", help="Which source to use.")
+    parser.add_argument("--api", choices=["mal", "anilist", "ann", "hianime"], default="mal", help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
 
     # MAL-specific
     parser.add_argument("--client-id", help="MyAnimeList API Client ID (required for --api mal).")
 
-    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann/malsync.")
-    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann/malsync.")
+    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann.")
+    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann.")
 
     # Generic paging
     parser.add_argument("--start-page", type=int, help="Start page number (1-based) for AniList/HiAnime.")
@@ -1351,6 +1226,7 @@ def main():
     # HiAnime-specific
     parser.add_argument("--api-host", default="http://localhost:6969",
                         help="Base host for the aniwatch API (e.g., http://localhost:6969).")
+    parser.add_argument("--source-file", help="Path to a JSON/JSONL mapping file for HiAnime slug -> MAL ID. Required for --api hianime.")
 
     args = parser.parse_args()
     debug_log = str(args.debug).lower() == "true"
@@ -1382,15 +1258,9 @@ def main():
             sys.exit(1)
         run_ann(args.mal_start, args.mal_end)
 
-    elif args.api == "hianime":
-        # HiAnime uses pages and api-host
-        run_hianime(args.api_host, args.start_page, args.end_page)
-
-    else:  # malsync
-        if args.mal_start is None or args.mal_end is None:
-            print("For --api malsync you must provide --mal-start and --mal-end.")
-            sys.exit(1)
-        run_malsync(args.mal_start, args.mal_end)
+    else:  # hianime
+        # HiAnime uses pages, api-host, and source-file
+        run_hianime(args.api_host, args.start_page, args.end_page, args.source_file)
 
 
 if __name__ == "__main__":
