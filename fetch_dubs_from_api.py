@@ -41,11 +41,11 @@ ANILIST_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_anilist.jsonl")
 ANN_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_ann.jsonl")
 MALSYNC_JSONL_PATH = os.path.join(MAPPINGS_DIR, "mappings_malsync.jsonl")
 MERGED_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_merged.jsonl")
+HIANIME_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_hianime.jsonl")
 
 MISSING_CACHE_PATH = "cache/missing_mal_ids.json"
 # Used to detect end-of-range for MAL scanning
 LARGEST_KNOWN_MAL_FILE = os.path.join(SOURCES_DIR, "automatic_mal", "dubbed_japanese.json")
-
 
 # ======================
 
@@ -75,12 +75,16 @@ ANN_MIN_INTERVAL = 1.0  # seconds between ANN calls
 MALSYNC_MIN_INTERVAL = 3  # seconds
 malsync_last_call = 0.0
 
+HIANIME_MIN_INTERVAL = 1.0  # seconds
+hianime_last_call = 0.0
+
 missing_mal_ids = set()
 largest_known_mal_id = 0  # determined from dubs/sources/automatic_mal/dubbed_japanese.json
 
 # Per-API mappings accumulated this run
 anilist_mapping: dict[int, int] = {}
 ann_mapping: dict[int, int] = {}
+hianime_mapping: dict[int, dict] = {}
 
 
 def log(message: str):
@@ -364,6 +368,14 @@ def merge_all_mappings():
             "sites": rec.get("sites", {}),
             "total": rec.get("total"),
             "anidbId": rec.get("anidbId"),
+        }
+
+    # HiAnime
+    hi_map = load_jsonl_map(HIANIME_MAPPING_JSONL)
+    for mid, rec in hi_map.items():
+        master.setdefault(mid, {})["hianime"] = {
+            "id": rec.get("hianime_id"),
+            "episodes": rec.get("episodes"),
         }
 
     # Write merged
@@ -730,6 +742,8 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
         save_simple_jsonl_map(ANILIST_MAPPING_JSONL, anilist_mapping, "anilist_id")
     if api_mode == "ann" and ann_mapping:
         save_simple_jsonl_map(ANN_MAPPING_JSONL, ann_mapping, "ann_id")
+    if api_mode == "hianime" and hianime_mapping:
+        save_jsonl_map(HIANIME_MAPPING_JSONL, hianime_mapping)
 
     # Always refresh merged mappings after a finalize
     merge_all_mappings()
@@ -940,6 +954,67 @@ def extract_sites_from_malsync_payload(payload: dict) -> dict[str, str]:
             out[provider_name] = best_url
 
     return out
+
+
+# ----------------------
+# HiAnime helpers
+# ----------------------
+
+def hianime_get_page(api_host: str, page: int) -> dict | None:
+    """
+    Throttled GET for HiAnime (aniwatch) dubbed-anime category page.
+    """
+    global hianime_last_call
+    now = time.time()
+    to_wait = HIANIME_MIN_INTERVAL - (now - hianime_last_call)
+    if to_wait > 0:
+        time.sleep(to_wait)
+    hianime_last_call = time.time()
+
+    url = f"{api_host.rstrip('/')}/api/v2/hianime/category/dubbed-anime?page={page}"
+    last_exception = None
+    for attempt in range(CALL_RETRIES):
+        try:
+            resp = requests.get(url, headers={"Accept": "application/json"})
+            if resp.status_code == 404:
+                log(f"[HiAnime] 404 on page {page}")
+                return None
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as e:
+            last_exception = e
+            print(f"[HiAnime] Attempt {attempt + 1} failed for page {page}: {e}")
+            if attempt < CALL_RETRIES - 1:
+                delay = RETRY_DELAYS[attempt]
+                print(f"[HiAnime] Retrying in {delay} seconds...")
+                time.sleep(delay)
+    print(f"[HiAnime] All {CALL_RETRIES} attempts failed for page {page}")
+    raise last_exception
+
+
+def build_hianime_slug_to_mal_map() -> dict[str, int]:
+    """
+    Build a reverse map from HiAnime slug (from MALSync 'Zoro' URL)
+    to MAL ID, using mappings_malsync.jsonl.
+    Example Zoro URL: https://hianime.to/cowboy-bebop-27  -> slug: 'cowboy-bebop-27'
+    """
+    rev: dict[str, int] = {}
+    ms_map = load_jsonl_map(MALSYNC_JSONL_PATH)
+    for mal_id, rec in ms_map.items():
+        sites = rec.get("sites", {}) or {}
+        zoro_url = sites.get("Zoro")
+        if not zoro_url or not isinstance(zoro_url, str):
+            continue
+        try:
+            parsed = urlparse(zoro_url)
+            # last non-empty segment
+            slug = [seg for seg in parsed.path.split("/") if seg][-1] if parsed.path else ""
+            if slug:
+                rev[slug] = int(mal_id)
+        except Exception:
+            continue
+    log(f"[HiAnime] Built slug→MAL map for {len(rev)} entries from MALSync.")
+    return rev
 
 
 # ----------------------
@@ -1159,6 +1234,90 @@ def run_malsync(mal_start: int, mal_end: int):
         print("Done (MALSync).")
 
 
+def run_hianime(api_host: str, start_page: int | None, end_page: int | None):
+    """
+    HiAnime mode:
+      - Build reverse map from MALSync (Zoro URLs) to get slug -> MAL ID.
+      - Iterate pages from the local aniwatch API for 'dubbed-anime' category.
+      - If episodes.dub >= 1: add MAL ID to English set and record hianime mapping.
+      - Save dubbed_english.json under dubs/sources/automatic_hianime.
+      - Save mappings_hianime.jsonl with mal_id, hianime_id, episodes {sub, dub}.
+    """
+    slug_to_mal = build_hianime_slug_to_mal_map()
+    page = start_page or 1
+    checked_ok_ids: set[int] = set()
+
+    try:
+        total_pages = None
+        while True:
+            log(f"[HiAnime] Page {page}")
+            data = hianime_get_page(api_host, page)
+            if not data or "data" not in data:
+                # Nothing to process; stop if page fetch failed
+                break
+
+            d = data["data"]
+            animes = d.get("animes", []) or []
+            total_pages = d.get("totalPages") or total_pages
+            has_next = bool(d.get("hasNextPage"))
+            current_page = d.get("currentPage", page)
+
+            for item in animes:
+                hi_id = item.get("id")
+                eps = item.get("episodes") or {}
+                sub_count = int(eps.get("sub", 0) or 0)
+                dub_count = int(eps.get("dub", 0) or 0)
+
+                if not hi_id:
+                    continue
+
+                # only consider if there's at least one dub episode
+                if dub_count < 1:
+                    continue
+
+                mal_id = slug_to_mal.get(hi_id)
+                if not mal_id:
+                    # unmapped; skip quietly
+                    continue
+
+                # Record dubbed English
+                json_data["english"].add(int(mal_id))
+                checked_ok_ids.add(int(mal_id))
+
+                # Record mapping
+                hianime_mapping[int(mal_id)] = {
+                    "hianime_id": hi_id,
+                    "episodes": {"sub": sub_count, "dub": dub_count},
+                }
+
+            # Periodic finalize
+            if current_page % 10 == 0:
+                finalize_jsons("hianime", checked_ok_ids)
+
+            # End conditions
+            if end_page is not None and page >= end_page:
+                break
+            if not has_next:
+                break
+
+            page += 1
+            # (extra safety) Ensure at least 1s between page fetches
+            now = time.time()
+            to_wait = HIANIME_MIN_INTERVAL - (time.time() - hianime_last_call)
+            if to_wait > 0:
+                time.sleep(to_wait)
+
+    except KeyboardInterrupt:
+        print("\nInterrupted. Finalizing data...")
+    except Exception as e:
+        print(f"\nUnexpected error (HiAnime): {e}")
+        import traceback
+        traceback.print_exc()
+    finally:
+        finalize_jsons("hianime", checked_ok_ids)
+        print("Done (HiAnime).")
+
+
 # ----------------------
 # Main
 # ----------------------
@@ -1172,19 +1331,26 @@ def main():
             "(only for IDs checked this run). Also writes per-API mappings and a merged mapping JSONL."
         )
     )
-    parser.add_argument("--api", choices=["mal", "anilist", "ann", "malsync"], default="mal", help="Which source to use.")
+    parser.add_argument("--api", choices=["mal", "anilist", "ann", "malsync", "hianime"], default="mal", help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
 
     # MAL-specific
     parser.add_argument("--client-id", help="MyAnimeList API Client ID (required for --api mal).")
+
     parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann/malsync.")
     parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann/malsync.")
 
+    # Generic paging
+    parser.add_argument("--start-page", type=int, help="Start page number (1-based) for AniList/HiAnime.")
+    parser.add_argument("--end-page", type=int, help="End page number (inclusive) for AniList/HiAnime.")
+
     # AniList-specific
-    parser.add_argument("--anilist-start-page", type=int, help="AniList: start page number (1-based).")
-    parser.add_argument("--anilist-end-page", type=int, help="AniList: end page number (inclusive).")
     parser.add_argument("--anilist-check-pages", default="false",
                         help="AniList: if true, prints total pages (perPage=50) and exits.")
+
+    # HiAnime-specific
+    parser.add_argument("--api-host", default="http://localhost:6969",
+                        help="Base host for the aniwatch API (e.g., http://localhost:6969).")
 
     args = parser.parse_args()
     debug_log = str(args.debug).lower() == "true"
@@ -1208,13 +1374,17 @@ def main():
             except Exception as e:
                 print(f"Failed to fetch AniList total pages: {e}")
                 sys.exit(2)
-        run_anilist(args.anilist_start_page, args.anilist_end_page)
+        run_anilist(args.start_page, args.end_page)
 
     elif args.api == "ann":
         if args.mal_start is None or args.mal_end is None:
             print("For --api ann you must provide --mal-start and --mal-end.")
             sys.exit(1)
         run_ann(args.mal_start, args.mal_end)
+
+    elif args.api == "hianime":
+        # HiAnime uses pages and api-host
+        run_hianime(args.api_host, args.start_page, args.end_page)
 
     else:  # malsync
         if args.mal_start is None or args.mal_end is None:
