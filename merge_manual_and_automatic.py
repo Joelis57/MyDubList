@@ -11,14 +11,15 @@ from typing import Dict, Set
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Input roots
-DUBS_SOURCES_DIR       = os.path.join(ROOT, "dubs", "sources")
-MANUAL_DIR             = os.path.join(DUBS_SOURCES_DIR, "manual")
-AUTOMATIC_MAL_DIR      = os.path.join(DUBS_SOURCES_DIR, "automatic_mal")
-AUTOMATIC_ANILIST_DIR  = os.path.join(DUBS_SOURCES_DIR, "automatic_anilist")
-AUTOMATIC_ANN_DIR      = os.path.join(DUBS_SOURCES_DIR, "automatic_ann")
-AUTOMATIC_HIANIME_DIR  = os.path.join(DUBS_SOURCES_DIR, "automatic_hianime")
-AUTOMATIC_NSFW_DIR     = os.path.join(DUBS_SOURCES_DIR, "automatic_nsfw")
-AUTOMATIC_KENNY_DIR    = os.path.join(DUBS_SOURCES_DIR, "automatic_kenny")
+DUBS_SOURCES_DIR        = os.path.join(ROOT, "dubs", "sources")
+MANUAL_DIR              = os.path.join(DUBS_SOURCES_DIR, "manual")
+AUTOMATIC_MAL_DIR       = os.path.join(DUBS_SOURCES_DIR, "automatic_mal")
+AUTOMATIC_ANILIST_DIR   = os.path.join(DUBS_SOURCES_DIR, "automatic_anilist")
+AUTOMATIC_ANN_DIR       = os.path.join(DUBS_SOURCES_DIR, "automatic_ann")
+AUTOMATIC_ANISEARCH_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_anisearch")
+AUTOMATIC_HIANIME_DIR   = os.path.join(DUBS_SOURCES_DIR, "automatic_hianime")
+AUTOMATIC_NSFW_DIR      = os.path.join(DUBS_SOURCES_DIR, "automatic_nsfw")
+AUTOMATIC_KENNY_DIR     = os.path.join(DUBS_SOURCES_DIR, "automatic_kenny")
 
 # Output roots
 CONFIDENCE_DIR         = os.path.join(ROOT, "dubs", "confidence")
@@ -82,6 +83,7 @@ def load_language_sources(filename: str):
     auto_mal_path          = os.path.join(AUTOMATIC_MAL_DIR, filename)
     auto_anilist_path      = os.path.join(AUTOMATIC_ANILIST_DIR, filename)
     auto_ann_path          = os.path.join(AUTOMATIC_ANN_DIR, filename)
+    auto_anisearch_path    = os.path.join(AUTOMATIC_ANISEARCH_DIR, filename)
     auto_hianime_path      = os.path.join(AUTOMATIC_HIANIME_DIR, filename)
     auto_nsfw_path         = os.path.join(AUTOMATIC_NSFW_DIR, filename)
     auto_kenny_path        = os.path.join(AUTOMATIC_KENNY_DIR, filename)
@@ -90,6 +92,7 @@ def load_language_sources(filename: str):
     auto_mal         = load_json(auto_mal_path)
     auto_anilist     = load_json(auto_anilist_path)
     auto_ann         = load_json(auto_ann_path)
+    auto_anisearch   = load_json(auto_anisearch_path)
     auto_hianime     = load_json(auto_hianime_path)
     auto_nsfw        = load_json(auto_nsfw_path)
     auto_kenny       = load_json(auto_kenny_path)
@@ -100,12 +103,13 @@ def load_language_sources(filename: str):
     manual_incomplete = int_set(manual.get("incomplete"))
 
     # Automatic lists
-    auto_mal_dubbed     = int_set(auto_mal.get("dubbed"))
-    auto_anilist_dubbed = int_set(auto_anilist.get("dubbed"))
-    auto_ann_dubbed     = int_set(auto_ann.get("dubbed"))
-    auto_hianime_dubbed = int_set(auto_hianime.get("dubbed"))
-    auto_nsfw_dubbed    = int_set(auto_nsfw.get("dubbed"))
-    auto_kenny_dubbed   = int_set(auto_kenny.get("dubbed"))
+    auto_mal_dubbed       = int_set(auto_mal.get("dubbed"))
+    auto_anilist_dubbed   = int_set(auto_anilist.get("dubbed"))
+    auto_ann_dubbed       = int_set(auto_ann.get("dubbed"))
+    auto_anisearch_dubbed = int_set(auto_anisearch.get("dubbed"))
+    auto_hianime_dubbed   = int_set(auto_hianime.get("dubbed"))
+    auto_nsfw_dubbed      = int_set(auto_nsfw.get("dubbed"))
+    auto_kenny_dubbed     = int_set(auto_kenny.get("dubbed"))
 
     language_value = manual.get("language") or infer_language_from_filename(filename).replace("_", " ").title()
 
@@ -117,6 +121,7 @@ def load_language_sources(filename: str):
             "mal": auto_mal_dubbed,
             "anilist": auto_anilist_dubbed,
             "ann": auto_ann_dubbed,
+            "anisearch": auto_anisearch_dubbed,
             "hianime": auto_hianime_dubbed,
             "nsfw": auto_nsfw_dubbed,
             "kenny": auto_kenny_dubbed,
@@ -135,7 +140,7 @@ def compute_counts(auto_sources: Dict[str, Set[int]]) -> Dict[int, int]:
 def build_confidence_outputs(filename: str):
     """
     For one language file (dubbed_<lang>.json):
-      - compute automatic source counts (MAL, AniList, ANN, HiAnime, NSFW, Kenny)
+      - compute automatic source counts (MAL, AniList, ANN, AniSearch, HiAnime, NSFW, Kenny)
       - write outputs into dubs/confidence/<level>/dubbed_<lang>.json
       - write counts to dubs/counts/dubbed_<lang>.json
     """
@@ -182,6 +187,7 @@ def main():
         AUTOMATIC_MAL_DIR,
         AUTOMATIC_ANILIST_DIR,
         AUTOMATIC_ANN_DIR,
+        AUTOMATIC_ANISEARCH_DIR,
         AUTOMATIC_HIANIME_DIR,
         AUTOMATIC_NSFW_DIR,
         AUTOMATIC_KENNY_DIR,
