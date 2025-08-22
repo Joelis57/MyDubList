@@ -45,6 +45,20 @@ MISSING_CACHE_PATH = "cache/missing_mal_ids.json"
 # Used to detect end-of-range for MAL scanning
 LARGEST_KNOWN_MAL_FILE = os.path.join(SOURCES_DIR, "automatic_mal", "dubbed_japanese.json")
 
+# AniSearch
+ANISEARCH_BASE = "https://www.anisearch.com/anime/index/page-{page}?synchro={lang}"
+ANISEARCH_LANGS = ["de", "ja", "en", "es", "fr", "it"]
+ANISEARCH_MIN_INTERVAL = 1.0
+anisearch_last_call = 0.0
+ANISEARCH_CODE_TO_KEY = {
+    "de": "german",
+    "ja": "japanese",
+    "en": "english",
+    "es": "spanish",
+    "fr": "french",
+    "it": "italian",
+}
+
 # ======================
 
 # Globals
@@ -457,7 +471,7 @@ def jikan_get(url):
 
             if resp.status_code == 404:
                 log("    404 Not Found, skipping")
-                return None  # permanent miss; safe to return/cached by caller
+                return None
 
             if resp.status_code == 429:
                 ra = resp.headers.get("Retry-After")
@@ -528,8 +542,7 @@ def process_anime_mal(mal_id: int, client_id: str) -> bool | None:
         log(f"  Transient error fetching character voices for char {char_id}: {e}")
         return None
 
-    # Treat missing/invalid VA payload as transient to avoid false negatives
-    if voice_actors is None or "data" not in voice_actors or not isinstance(voice_actors["data"], list):
+    # Treat missing/invalid VA payload as transient to avoid false negatives    if voice_actors is None or "data" not in voice_actors or not isinstance(voice_actors["data"], list):
         return None
 
     had_transient = False
@@ -547,7 +560,6 @@ def process_anime_mal(mal_id: int, client_id: str) -> bool | None:
 
         log(f"  Processing voice actor: {person.get('name', 'Unknown')} ({raw_lang} -> {lang_key})")
 
-        # Look up this VA's anime roles (cached), but DO NOT cache malformed/empty results
         try:
             va_roles = get_anime_roles_for_va_cached(person_id)
         except TransientJikanError as e:
@@ -560,17 +572,14 @@ def process_anime_mal(mal_id: int, client_id: str) -> bool | None:
             continue
 
         if not va_roles or "data" not in va_roles or not isinstance(va_roles["data"], list):
-            # Either 404 (None) or empty list: nothing to add; not transient here
             continue
 
-        # Confirm this VA actually voiced this MAL anime; if yes, record the language
         for role_entry in va_roles["data"]:
             anime = role_entry.get("anime")
             if anime and anime.get("mal_id") == mal_id:
                 json_data[lang_key].add(int(mal_id))
                 break
 
-    # If any transient errors happened for any VA, mark whole anime as transient
     return None if had_transient else False
 
 
@@ -656,7 +665,6 @@ def process_anilist_page(page: int) -> tuple[bool, int, set[int]]:
     has_next = page_data["pageInfo"]["hasNextPage"]
     media_list = page_data.get("media", [])
 
-    # Local counters for this page
     page_media_total = len(media_list)
     page_with_mal = 0
     page_without_mal = 0
@@ -674,13 +682,11 @@ def process_anilist_page(page: int) -> tuple[bool, int, set[int]]:
                 log("  skip: no idMal")
             continue
 
-        # mark as checked this run
         try:
             checked_ids.add(int(mal_id))
         except Exception:
             pass
 
-        # Record mapping MAL → AniList ID
         try:
             aid = int(media.get("id"))
             anilist_mapping[int(mal_id)] = aid
@@ -722,7 +728,6 @@ def process_anilist_page(page: int) -> tuple[bool, int, set[int]]:
             f"with_langs={page_with_langs} no_langs={page_without_langs}"
         )
 
-    # Update global stats
     anilist_stats["pages"] += 1
     anilist_stats["media_total"] += page_media_total
     anilist_stats["media_with_mal"] += page_with_mal
@@ -746,10 +751,8 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     output_dir = os.path.join(SOURCES_DIR, f"automatic_{api_mode}")
     os.makedirs(output_dir, exist_ok=True)
 
-    # Build per-language found sets from this run
     found_per_lang: dict[str, set[int]] = {k: {int(x) for x in v} for k, v in json_data.items()}
 
-    # Collect all languages to consider (existing files + new keys)
     languages: set[str] = set(found_per_lang.keys())
     try:
         for fname in os.listdir(output_dir):
@@ -766,7 +769,6 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
         fname_lang = filename_for_lang(lang_key)
         filename = os.path.join(output_dir, f"dubbed_{fname_lang}.json")
 
-        # Load existing
         if os.path.exists(filename):
             try:
                 with open(filename, "r", encoding="utf-8") as f:
@@ -779,14 +781,12 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
 
         found_ids = found_per_lang.get(lang_key, set())
 
-        # Only remove IDs that were checked this run and are no longer present
         removal_candidates = (existing_ids & checked_ok_ids) - found_ids
         updated_ids = (existing_ids - removal_candidates) | found_ids
 
         if removal_candidates and debug_log:
             log(f"  [{api_mode}] {lang_key}: removing {len(removal_candidates)} ids; keeping {len(updated_ids)}")
 
-        # Write file
         obj = {
             "_license": "CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
             "_attribution": "MyDubList - https://mydublist.com - (CC BY 4.0)",
@@ -797,7 +797,6 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(obj, f, ensure_ascii=False, indent=2)
 
-    # Also finalize per-API mappings and the merged mapping
     if api_mode == "anilist" and anilist_mapping:
         save_simple_jsonl_map(ANILIST_MAPPING_JSONL, anilist_mapping, "anilist_id")
     if api_mode == "ann" and ann_mapping:
@@ -805,7 +804,6 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     if api_mode == "hianime" and hianime_mapping:
         save_jsonl_map(HIANIME_MAPPING_JSONL, hianime_mapping)
 
-    # Always refresh merged mappings after a finalize
     merge_all_mappings()
 
 
@@ -814,7 +812,6 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
 # ----------------------
 
 def ann_get(url):
-    """Throttled GET for ANN (XML)."""
     global ann_last_call
     now = time.time()
     to_wait = ANN_MIN_INTERVAL - (now - ann_last_call)
@@ -843,16 +840,13 @@ def ann_get(url):
 
 
 def extract_ann_id_from_url(url: str) -> int | None:
-    """Parse ANN 'encyclopedia/anime.php?id=12345' from a URL."""
     if not url:
         return None
     try:
-        # Be liberal: handle www/cdn subdomains and any query params
         parsed = urlparse(url)
         if "animenewsnetwork.com" not in parsed.netloc:
             return None
         if not parsed.path.endswith("/encyclopedia/anime.php"):
-            # Also accept direct 'encyclopedia/anime.php' without leading slash variants
             if "encyclopedia/anime.php" not in parsed.path:
                 return None
         qs = parse_qs(parsed.query)
@@ -864,7 +858,6 @@ def extract_ann_id_from_url(url: str) -> int | None:
 
 
 def jikan_ann_id_for_mal(mal_id: int) -> int | None:
-    """Use Jikan external links to find ANN id for a MAL anime id."""
     data = jikan_get(f"/anime/{mal_id}/external")
     if not data or "data" not in data:
         return None
@@ -890,7 +883,6 @@ def parse_ann_batch_xml(xml_text: str) -> tuple[dict[int, set[str]], set[int]]:
         log(f"  Failed to parse ANN XML batch: {e}")
         return result, present_ids
 
-    # ANN root tends to be <ann>
     for anime in root.findall(".//anime"):
         try:
             ann_id = int(anime.get("id"))
@@ -900,7 +892,6 @@ def parse_ann_batch_xml(xml_text: str) -> tuple[dict[int, set[str]], set[int]]:
 
         langs = set()
 
-        # only languages attached to cast entries (voice acting)
         for cast in anime.findall(".//cast"):
             code = cast.get("lang")
             if not code:
@@ -923,7 +914,6 @@ def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]) -> set[int
     if not ann_ids:
         return set()
 
-    # Build ANN batch URL: title=ID1/ID2/... (trailing slash is fine)
     ids_part = "/".join(str(i) for i in ann_ids) + "/"
     url = f"{ANN_API}?title={ids_part}"
 
@@ -943,7 +933,6 @@ def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]) -> set[int
         mal_id = ann_to_mal.get(ann_id)
         if not mal_id:
             continue
-        # Record mapping
         ann_mapping[int(mal_id)] = int(ann_id)
         for key in langs:
             json_data[key].add(int(mal_id))
@@ -1010,9 +999,6 @@ def build_hianime_slug_to_mal_map(source_file: str) -> dict[str, int]:
     return slug_to_mal
 
 def hianime_get_page(api_host: str, page: int) -> dict | None:
-    """
-    Throttled GET for HiAnime (aniwatch) dubbed-anime category page.
-    """
     global hianime_last_call
     now = time.time()
     to_wait = HIANIME_MIN_INTERVAL - (now - hianime_last_call)
@@ -1042,6 +1028,71 @@ def hianime_get_page(api_host: str, page: int) -> dict | None:
 
 
 # ----------------------
+# AniSearch helpers
+# ----------------------
+
+def load_anisearch_map(source_file: str) -> dict[int, int]:
+    """
+    Load {anisearch_id -> mal_id} from a JSON array where objects contain at least:
+      { "mal_id": 123, "anisearch_id": 456, ... }
+    """
+    if not source_file or not os.path.exists(source_file):
+        print(f"[AniSearch] Source file not found: {source_file}")
+        return {}
+
+    try:
+        with open(source_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"[AniSearch] Failed to parse source file '{source_file}': {e}")
+        return {}
+
+    mapping: dict[int, int] = {}
+    if isinstance(data, list):
+        for obj in data:
+            if not isinstance(obj, dict):
+                continue
+            mal_id = obj.get("mal_id")
+            anisearch_id = obj.get("anisearch_id")
+            try:
+                if mal_id is not None and anisearch_id is not None:
+                    mapping[int(anisearch_id)] = int(mal_id)
+            except Exception:
+                continue
+    else:
+        print("[AniSearch] Expected a JSON array of objects.")
+    return mapping
+
+
+def anisearch_get_index_html(lang: str, page: int) -> tuple[str, str]:
+    global anisearch_last_call
+    now = time.time()
+    to_wait = ANISEARCH_MIN_INTERVAL - (now - anisearch_last_call)
+    if to_wait > 0:
+        time.sleep(to_wait)
+    anisearch_last_call = time.time()
+
+    url = ANISEARCH_BASE.format(page=page, lang=lang)
+    headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; MyDubList/1.0)"
+    }
+    resp = requests.get(url, headers=headers, allow_redirects=True, timeout=20)
+    resp.raise_for_status()
+    return resp.text, resp.url
+
+
+def anisearch_extract_ids(html: str) -> set[int]:
+    ids = set()
+    pattern = re.compile(r'href=["\'](?:https?://[^"\']+)?/?anime/(\d+)(?=[,/"\'])')
+    for m in pattern.finditer(html):
+        try:
+            ids.add(int(m.group(1)))
+        except Exception:
+            pass
+    return ids
+
+
+# ----------------------
 # Runners
 # ----------------------
 
@@ -1057,7 +1108,6 @@ def run_ann(mal_start: int, mal_end: int):
             if ann_id:
                 pending.append(ann_id)
                 ann_to_mal[ann_id] = mal_id
-                # Also record mapping immediately
                 ann_mapping[int(mal_id)] = int(ann_id)
 
             if len(pending) >= ANN_BATCH_SIZE:
@@ -1071,7 +1121,6 @@ def run_ann(mal_start: int, mal_end: int):
             if processed and processed % (FINALIZE_EVERY_N) == 0:
                 finalize_jsons("ann", checked_ok_ids)
 
-        # flush remainder
         if pending:
             newly_checked = process_ann_batch(pending, ann_to_mal)
             checked_ok_ids.update(newly_checked)
@@ -1090,7 +1139,6 @@ def run_ann(mal_start: int, mal_end: int):
 def run_mal(client_id: str, start_id: int, end_id: int):
     global missing_mal_ids, largest_known_mal_id
 
-    # Load cache + largest known MAL ID once per run
     missing_mal_ids = load_missing_cache()
     largest_known_mal_id = get_largest_known_mal_id()
     if debug_log:
@@ -1102,32 +1150,24 @@ def run_mal(client_id: str, start_id: int, end_id: int):
 
     try:
         for idx, mal_id in enumerate(range(start_id, end_id + 1), 1):
-            # If we've previously cached that this ID 404s (and it's <= largest known),
-            # skip calling the API. Do NOT mark as checked this run.
             if largest_known_mal_id and mal_id <= largest_known_mal_id and mal_id in missing_mal_ids:
                 if debug_log:
                     log(f"  Skipping MAL ID {mal_id} (cached 404)")
                 was_404 = True
-                # Not adding to checked_ok_ids, because we didn't verify it this run.
             else:
-                # Process this anime
                 res = process_anime_mal(mal_id, client_id)
 
                 if res is None:
-                    # Transient failure -> do NOT mark as checked. This prevents accidental removals.
                     was_404 = False
                     if debug_log:
                         log(f"  MAL ID {mal_id}: transient failure; deferring")
                 else:
-                    # Reliable result (either True for 404 or False for processed)
                     was_404 = bool(res)
                     checked_ok_ids.add(mal_id)
 
-                    # Cache new 404s
                     if was_404 and mal_id not in missing_mal_ids:
                         missing_mal_ids.add(mal_id)
 
-            # Track long runs of 404s to detect end-of-range
             if was_404:
                 consecutive_404 += 1
                 if debug_log:
@@ -1139,7 +1179,6 @@ def run_mal(client_id: str, start_id: int, end_id: int):
             else:
                 consecutive_404 = 0
 
-            # Periodically write results and save the missing cache
             if idx % FINALIZE_EVERY_N == 0:
                 log(f"--- Updating files at MAL ID {start_id + idx - 1} ---")
                 finalize_jsons("mal", checked_ok_ids)
@@ -1196,14 +1235,6 @@ def run_anilist(start_page: int | None, end_page: int | None):
 
 
 def run_hianime(api_host: str, start_page: int | None, end_page: int | None, source_file: str | None):
-    """
-    HiAnime mode:
-      - Build reverse map from a user-provided file to get slug -> MAL ID.
-      - Iterate pages from the local aniwatch API for 'dubbed-anime' category.
-      - If episodes.dub >= 1: add MAL ID to English set and record hianime mapping.
-      - Save dubbed_english.json under dubs/sources/automatic_hianime.
-      - Save mappings_hianime.jsonl with mal_id, hianime_id, episodes {sub, dub}.
-    """
     if not source_file:
         print("For --api hianime you must provide --source-file pointing to a JSON/JSONL mapping file.")
         sys.exit(1)
@@ -1218,7 +1249,6 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
             log(f"[HiAnime] Page {page}")
             data = hianime_get_page(api_host, page)
             if not data or "data" not in data:
-                # Nothing to process; stop if page fetch failed
                 break
 
             d = data["data"]
@@ -1236,37 +1266,30 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
                 if not hi_id:
                     continue
 
-                # only consider if there's at least one dub episode
                 if dub_count < 1:
                     continue
 
                 mal_id = slug_to_mal.get(hi_id)
                 if not mal_id:
-                    # unmapped; skip quietly
                     continue
 
-                # Record dubbed English
                 json_data["english"].add(int(mal_id))
                 checked_ok_ids.add(int(mal_id))
 
-                # Record mapping
                 hianime_mapping[int(mal_id)] = {
                     "hianime_id": hi_id,
                     "episodes": {"sub": sub_count, "dub": dub_count},
                 }
 
-            # Periodic finalize
             if current_page % 10 == 0:
                 finalize_jsons("hianime", checked_ok_ids)
 
-            # End conditions
             if end_page is not None and page >= end_page:
                 break
             if not has_next:
                 break
 
             page += 1
-            # (extra safety) Ensure at least 1s between page fetches
             now = time.time()
             to_wait = HIANIME_MIN_INTERVAL - (time.time() - hianime_last_call)
             if to_wait > 0:
@@ -1283,6 +1306,77 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
         print("Done (HiAnime).")
 
 
+def run_anisearch(start_page: int | None, end_page: int | None, source_file: str | None):
+    if not source_file:
+        print("For --api anisearch you must provide --source-file pointing to the JSON mapping file.")
+        sys.exit(1)
+
+    a2m = load_anisearch_map(source_file)
+    if not a2m:
+        print("[AniSearch] Empty AniSearch→MAL mapping; nothing to do.")
+        finalize_jsons("anisearch", set())
+        print("Done (AniSearch).")
+        return
+
+    checked_ok_ids: set[int] = set()
+    sp = start_page or 1
+
+    try:
+        for code in ANISEARCH_LANGS:
+            lang_key = ANISEARCH_CODE_TO_KEY.get(code)
+            if not lang_key:
+                continue
+
+            page = sp
+            while True:
+                try:
+                    html, final_url = anisearch_get_index_html(code, page)
+                except Exception as e:
+                    print(f"[AniSearch] Failed to fetch page {page} for {code}: {e}")
+                    break
+
+                if page > 1:
+                    m_pg = re.search(r"/page-(\d+)", final_url)
+                    m_lg = re.search(r"[?&]synchro=([a-z]+)", final_url)
+                    final_pg = int(m_pg.group(1)) if m_pg else None
+                    final_lg = m_lg.group(1) if m_lg else None
+                    if final_pg == 1 and final_lg == code:
+                        break
+
+                ids = anisearch_extract_ids(html)
+                if debug_log:
+                    log(f"[AniSearch] {code} page {page}: found {len(ids)} anisearch ids")
+
+                mapped = 0
+                for anisearch_id in ids:
+                    mal_id = a2m.get(anisearch_id)
+                    if mal_id:
+                        json_data[lang_key].add(int(mal_id))
+                        checked_ok_ids.add(int(mal_id))
+                        mapped += 1
+
+                if debug_log:
+                    log(f"[AniSearch] {code} page {page}: mapped {mapped} MAL ids")
+
+                if page % 10 == 0:
+                    finalize_jsons("anisearch", checked_ok_ids)
+
+                if end_page is not None and page >= end_page:
+                    break
+
+                page += 1
+
+    except KeyboardInterrupt:
+        print("\nInterrupted. Finalizing data...")
+    except Exception as e:
+        print(f"\nUnexpected error (AniSearch): {e}")
+        import traceback
+        traceback.print_exc()
+    finally:
+        finalize_jsons("anisearch", checked_ok_ids)
+        print("Done (AniSearch).")
+
+
 # ----------------------
 # Main
 # ----------------------
@@ -1296,7 +1390,7 @@ def main():
             "(only for IDs checked this run). Also writes per-API mappings and a merged mapping JSONL."
         )
     )
-    parser.add_argument("--api", choices=["mal", "anilist", "ann", "hianime"], default="mal", help="Which source to use.")
+    parser.add_argument("--api", choices=["mal", "anilist", "ann", "hianime", "anisearch"], default="mal", help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
 
     # MAL-specific
@@ -1306,22 +1400,22 @@ def main():
     parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann.")
 
     # Generic paging
-    parser.add_argument("--start-page", type=int, help="Start page number (1-based) for AniList/HiAnime.")
-    parser.add_argument("--end-page", type=int, help="End page number (inclusive) for AniList/HiAnime.")
+    parser.add_argument("--start-page", type=int, help="Start page number (1-based) for AniList/HiAnime/AniSearch.")
+    parser.add_argument("--end-page", type=int, help="End page number (inclusive) for AniList/HiAnime/AniSearch.")
 
     # AniList-specific
     parser.add_argument("--anilist-check-pages", default="false",
                         help="AniList: if true, prints total pages (perPage=50) and exits.")
 
-    # HiAnime-specific
+    # External-source-based modes
     parser.add_argument("--api-host", default="http://localhost:6969",
                         help="Base host for the aniwatch API (e.g., http://localhost:6969).")
-    parser.add_argument("--source-file", help="Path to a JSON/JSONL mapping file for HiAnime slug -> MAL ID. Required for --api hianime.")
+    parser.add_argument("--source-file",
+                        help="Path to a JSON/JSONL mapping file. For --api hianime: slug→MAL map source. For --api anisearch: JSON array with 'anisearch_id' and 'mal_id' fields.")
 
     args = parser.parse_args()
     debug_log = str(args.debug).lower() == "true"
 
-    # Ensure output dirs exist up-front
     os.makedirs(SOURCES_DIR, exist_ok=True)
     os.makedirs(MAPPINGS_DIR, exist_ok=True)
 
@@ -1348,8 +1442,10 @@ def main():
             sys.exit(1)
         run_ann(args.mal_start, args.mal_end)
 
+    elif args.api == "anisearch":
+        run_anisearch(args.start_page, args.end_page, args.source_file)
+
     else:  # hianime
-        # HiAnime uses pages, api-host, and source-file
         run_hianime(args.api_host, args.start_page, args.end_page, args.source_file)
 
 
