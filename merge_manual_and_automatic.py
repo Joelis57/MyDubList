@@ -199,7 +199,7 @@ def main():
     for filename in sorted(all_lang_files):
         build_confidence_outputs(filename)
 
-    print("Done. Updated 'dubs/counts' and 'dubs/confidence'.")
+    print("Done. Updated dub counts and confidences.")
 
 if __name__ == "__main__":
     main()

@@ -379,10 +379,17 @@ def merge_all_mappings():
 # MAL + Jikan helpers
 # ----------------------
 
+class TransientJikanError(Exception):
+    pass
+
 @lru_cache(maxsize=MAX_IN_MEMORY_CACHE)
 def get_anime_roles_for_va_cached(person_id):
-    log(f"    Fetching VA {person_id} from API")
-    return jikan_get(f"/people/{person_id}/voices")
+    data = jikan_get(f"/people/{person_id}/voices")
+    if data is None:
+        return None
+    if not isinstance(data, dict) or "data" not in data or not isinstance(data["data"], list):
+        raise TransientJikanError(f"Malformed VA payload for person {person_id}")  # don't cache
+    return data
 
 
 def mal_get(url, client_id):
@@ -398,23 +405,40 @@ def mal_get(url, client_id):
     for attempt in range(CALL_RETRIES):
         try:
             mal_last_call = time.time()
-            response = requests.get(url, headers=headers)
-            if response.status_code == 404:
+            resp = requests.get(url, headers=headers, timeout=20)
+
+            if resp.status_code == 404:
                 last_mal_404 = True
                 log("  404 Anime Not Found, skipping")
                 return None
-            response.raise_for_status()
+
+            if resp.status_code == 429:
+                ra = resp.headers.get("Retry-After")
+                try:
+                    delay = int(ra) if ra is not None else RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                except Exception:
+                    delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                print(f"  MAL 429. Retrying in {delay} seconds...", flush=True)
+                time.sleep(delay)
+                continue
+
+            resp.raise_for_status()
+            data = resp.json()
+            if not isinstance(data, dict):
+                raise ValueError("MAL returned non-object JSON")
+
             last_mal_404 = False
-            return response.json()
-        except Exception as e:
+            return data
+
+        except (requests.RequestException, ValueError) as e:
             last_exception = e
-            print(f"  Attempt {attempt + 1} failed: {e}")
+            print(f"  Attempt {attempt + 1} failed: {e}", flush=True)
             if attempt < CALL_RETRIES - 1:
                 delay = RETRY_DELAYS[attempt]
-                print(f"  MAL API call failed. Retrying in {delay} seconds...")
+                print(f"  MAL API call failed. Retrying in {delay} seconds...", flush=True)
                 time.sleep(delay)
 
-    print(f"  All {CALL_RETRIES} attempts failed for {url}")
+    print(f"  All {CALL_RETRIES} attempts failed for {url}", flush=True)
     raise last_exception
 
 
@@ -429,20 +453,39 @@ def jikan_get(url):
     last_exception = None
     for attempt in range(CALL_RETRIES):
         try:
-            response = requests.get(JIKAN_BASE + url)
-            if response.status_code == 404:
+            resp = requests.get(JIKAN_BASE + url, timeout=20)
+
+            if resp.status_code == 404:
                 log("    404 Not Found, skipping")
-                return None
-            response.raise_for_status()
-            return response.json()
-        except Exception as e:
+                return None  # permanent miss; safe to return/cached by caller
+
+            if resp.status_code == 429:
+                ra = resp.headers.get("Retry-After")
+                try:
+                    delay = int(ra) if ra is not None else RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                except Exception:
+                    delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                print(f"    429 Too Many Requests. Retrying in {delay} seconds...", flush=True)
+                time.sleep(delay)
+                continue
+
+            resp.raise_for_status()
+
+            data = resp.json()
+            if not isinstance(data, dict) or "data" not in data:
+                raise TransientJikanError(f"Malformed JSON for {url}")
+
+            return data
+
+        except (requests.RequestException, ValueError, TransientJikanError) as e:
             last_exception = e
-            print(f"    Attempt {attempt + 1} failed: {e}")
+            print(f"    Attempt {attempt + 1} failed: {e}", flush=True)
             if attempt < CALL_RETRIES - 1:
                 delay = RETRY_DELAYS[attempt]
-                print(f"    Jikan API call failed. Retrying in {delay} seconds...")
+                print(f"    Jikan API call failed. Retrying in {delay} seconds...", flush=True)
                 time.sleep(delay)
-    print(f"    All {CALL_RETRIES} attempts failed for {url}")
+
+    print(f"    All {CALL_RETRIES} attempts failed for {url}", flush=True)
     raise last_exception
 
 
@@ -454,14 +497,23 @@ def get_voice_actors(char_id):
     return jikan_get(f"/characters/{char_id}/voices")
 
 
-def process_anime_mal(mal_id, client_id):
+def process_anime_mal(mal_id: int, client_id: str) -> bool | None:
+    """
+    Process a single MAL anime id.
+
+    Returns:
+      True  -> MAL anime 404 (permanent; safe to cache & allow removals)
+      False -> processed successfully (reliable result, whether dubbed or not)
+      None  -> transient failure (do NOT mark as checked; prevents accidental removals)
+    """
     log(f"Processing MAL ID: {mal_id}")
     characters = get_characters(mal_id, client_id)
 
-    # If the characters call 404'd for the anime, short-circuit and report it
+    # If the MAL characters call 404'd, short-circuit as a permanent miss
     if 'last_mal_404' in globals() and last_mal_404:
         return True  # was_404
 
+    # If we got a valid response but no characters, treat as processed (not transient)
     if not characters or "data" not in characters or not characters["data"]:
         log("  No characters found, skipping")
         return False
@@ -469,9 +521,18 @@ def process_anime_mal(mal_id, client_id):
     first_char = characters["data"][0]["node"]
     char_id = first_char["id"]
 
-    voice_actors = get_voice_actors(char_id)
-    if not voice_actors or "data" not in voice_actors:
-        return False
+    # Fetch voice actors for the first character
+    try:
+        voice_actors = get_voice_actors(char_id)
+    except Exception as e:
+        log(f"  Transient error fetching character voices for char {char_id}: {e}")
+        return None
+
+    # Treat missing/invalid VA payload as transient to avoid false negatives
+    if voice_actors is None or "data" not in voice_actors or not isinstance(voice_actors["data"], list):
+        return None
+
+    had_transient = False
 
     for va_entry in voice_actors["data"]:
         raw_lang = va_entry.get("language")
@@ -486,17 +547,31 @@ def process_anime_mal(mal_id, client_id):
 
         log(f"  Processing voice actor: {person.get('name', 'Unknown')} ({raw_lang} -> {lang_key})")
 
-        va_roles = get_anime_roles_for_va_cached(person_id)
-        if not va_roles or "data" not in va_roles:
+        # Look up this VA's anime roles (cached), but DO NOT cache malformed/empty results
+        try:
+            va_roles = get_anime_roles_for_va_cached(person_id)
+        except TransientJikanError as e:
+            log(f"    Transient VA fetch failed for person {person_id}: {e}")
+            had_transient = True
+            continue
+        except Exception as e:
+            log(f"    Unexpected error fetching VA {person_id}: {e}")
+            had_transient = True
             continue
 
+        if not va_roles or "data" not in va_roles or not isinstance(va_roles["data"], list):
+            # Either 404 (None) or empty list: nothing to add; not transient here
+            continue
+
+        # Confirm this VA actually voiced this MAL anime; if yes, record the language
         for role_entry in va_roles["data"]:
             anime = role_entry.get("anime")
             if anime and anime.get("mal_id") == mal_id:
-                json_data[lang_key].add(mal_id)
+                json_data[lang_key].add(int(mal_id))
                 break
 
-    return False
+    # If any transient errors happened for any VA, mark whole anime as transient
+    return None if had_transient else False
 
 
 # ----------------------
@@ -1024,22 +1099,35 @@ def run_mal(client_id: str, start_id: int, end_id: int):
     MAX_CONSECUTIVE_404 = 500
     consecutive_404 = 0
     checked_ok_ids: set[int] = set()
+
     try:
         for idx, mal_id in enumerate(range(start_id, end_id + 1), 1):
-            # Skip using cache only if ID is <= largest_known_mal_id
+            # If we've previously cached that this ID 404s (and it's <= largest known),
+            # skip calling the API. Do NOT mark as checked this run.
             if largest_known_mal_id and mal_id <= largest_known_mal_id and mal_id in missing_mal_ids:
                 if debug_log:
                     log(f"  Skipping MAL ID {mal_id} (cached 404)")
                 was_404 = True
-                # Do NOT mark as checked_ok; we didn't actually check it this run
+                # Not adding to checked_ok_ids, because we didn't verify it this run.
             else:
-                was_404 = process_anime_mal(mal_id, client_id)
-                # mark as successfully checked this run (even if 404)
-                checked_ok_ids.add(mal_id)
-                # If MAL anime returned 404, record to cache
-                if was_404 and mal_id not in missing_mal_ids:
-                    missing_mal_ids.add(mal_id)
+                # Process this anime
+                res = process_anime_mal(mal_id, client_id)
 
+                if res is None:
+                    # Transient failure -> do NOT mark as checked. This prevents accidental removals.
+                    was_404 = False
+                    if debug_log:
+                        log(f"  MAL ID {mal_id}: transient failure; deferring")
+                else:
+                    # Reliable result (either True for 404 or False for processed)
+                    was_404 = bool(res)
+                    checked_ok_ids.add(mal_id)
+
+                    # Cache new 404s
+                    if was_404 and mal_id not in missing_mal_ids:
+                        missing_mal_ids.add(mal_id)
+
+            # Track long runs of 404s to detect end-of-range
             if was_404:
                 consecutive_404 += 1
                 if debug_log:
@@ -1051,10 +1139,12 @@ def run_mal(client_id: str, start_id: int, end_id: int):
             else:
                 consecutive_404 = 0
 
+            # Periodically write results and save the missing cache
             if idx % FINALIZE_EVERY_N == 0:
                 log(f"--- Updating files at MAL ID {start_id + idx - 1} ---")
                 finalize_jsons("mal", checked_ok_ids)
                 save_missing_cache()
+
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing data...")
     except Exception as e:
