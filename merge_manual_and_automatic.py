@@ -100,7 +100,7 @@ def load_language_sources(filename: str):
     # Manual lists
     manual_dubbed     = int_set(manual.get("dubbed"))
     manual_not_dubbed = int_set(manual.get("not_dubbed"))
-    manual_incomplete = int_set(manual.get("incomplete"))
+    manual_partial = int_set(manual.get("partial"))
 
     # Automatic lists
     auto_mal_dubbed       = int_set(auto_mal.get("dubbed"))
@@ -116,7 +116,7 @@ def load_language_sources(filename: str):
     return {
         "manual_dubbed": manual_dubbed,
         "manual_not_dubbed": manual_not_dubbed,
-        "manual_incomplete": manual_incomplete,
+        "manual_partial": manual_partial,
         "auto_sources": {
             "mal": auto_mal_dubbed,
             "anilist": auto_anilist_dubbed,
@@ -148,7 +148,7 @@ def build_confidence_outputs(filename: str):
 
     manual_dubbed     = info["manual_dubbed"]
     manual_not_dubbed = info["manual_not_dubbed"]
-    manual_incomplete = info["manual_incomplete"]
+    manual_partial = info["manual_partial"]
     auto_sources      = info["auto_sources"]
     language_value    = info["language_value"]
 
@@ -156,8 +156,8 @@ def build_confidence_outputs(filename: str):
 
     # Save counts file (IDs from automatic sources only)
     counts_out = {str(mid): counts[mid] for mid in sorted(counts.keys())}
-    # Incomplete is copied straight from manual (untouched)
-    counts_out["incomplete"] = sorted(manual_incomplete)
+    # partial is copied straight from manual (untouched)
+    counts_out["partial"] = sorted(manual_partial)
     save_json(os.path.join(COUNTS_DIR, filename), counts_out)
 
     # Build confidence-tier files
@@ -165,8 +165,8 @@ def build_confidence_outputs(filename: str):
         # candidates from automatic sources by threshold
         auto_candidates = {mid for mid, c in counts.items() if c >= threshold}
         # final dubbed = manual base ∪ candidates, then subtract manual exclusions
-        final_dubbed = (manual_dubbed | auto_candidates) - manual_not_dubbed - manual_incomplete
-        final_incomplete = sorted(manual_incomplete)
+        final_dubbed = (manual_dubbed | auto_candidates) - manual_not_dubbed - manual_partial
+        final_partial = sorted(manual_partial)
 
         result = {
             "_license": "CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
@@ -174,11 +174,11 @@ def build_confidence_outputs(filename: str):
             "_origin": "https://github.com/Joelis57/MyDubList",
             "language": language_value,
             "dubbed": sorted(final_dubbed),
-            "incomplete": final_incomplete,
+            "partial": final_partial,
         }
 
         save_json(os.path.join(CONFIDENCE_DIR, level, filename), result)
-        log(f"[{filename}] level={level} → dubbed={len(result['dubbed'])}, incomplete={len(result['incomplete'])}")
+        log(f"[{filename}] level={level} → dubbed={len(result['dubbed'])}, partial={len(result['partial'])}")
 
 def main():
     # Discover languages across manual and all automatic sources
