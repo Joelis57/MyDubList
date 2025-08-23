@@ -129,21 +129,15 @@ def load_language_sources(filename: str):
         "language_value": language_value,
     }
 
-def compute_counts(auto_sources: Dict[str, Set[int]]) -> Dict[int, int]:
+def compute_counts(sources: Dict[str, Set[int]]) -> Dict[int, int]:
     """Count in how many sources each MAL id appears."""
     counts: Dict[int, int] = {}
-    for _src_name, ids in auto_sources.items():
+    for _src_name, ids in sources.items():
         for mid in ids:
             counts[mid] = counts.get(mid, 0) + 1
     return counts
 
 def build_confidence_outputs(filename: str):
-    """
-    For one language file (dubbed_<lang>.json):
-      - compute source counts (auto sources + MANUAL as a source)
-      - write outputs into dubs/confidence/<level>/dubbed_<lang>.json
-      - write counts to dubs/counts/dubbed_<lang>.json
-    """
     info = load_language_sources(filename)
 
     manual_dubbed     = info["manual_dubbed"]
@@ -157,14 +151,21 @@ def build_confidence_outputs(filename: str):
 
     counts = compute_counts(sources_for_counts)
 
+    if manual_not_dubbed:
+        for mid in list(counts.keys()):
+            if mid in manual_not_dubbed:
+                del counts[mid]
+
+    manual_partial = manual_partial - manual_not_dubbed
+
     counts_out = {str(mid): counts[mid] for mid in sorted(counts.keys())}
     counts_out["partial"] = sorted(manual_partial)
     save_json(os.path.join(COUNTS_DIR, filename), counts_out)
 
     for level, threshold in CONFIDENCE_LEVELS.items():
-        # candidates from sources by threshold
+        # candidates from (overridden) counts by threshold
         candidates = {mid for mid, c in counts.items() if c >= threshold}
-        # final dubbed = manual base ∪ candidates, then subtract manual exclusions
+        # final dubbed = manual base ∪ candidates, then subtract manual exclusions & partial
         final_dubbed = (manual_dubbed | candidates) - manual_not_dubbed - manual_partial
         final_partial = sorted(manual_partial)
 
