@@ -17,6 +17,7 @@ AUTOMATIC_MAL_DIR       = os.path.join(DUBS_SOURCES_DIR, "automatic_mal")
 AUTOMATIC_ANILIST_DIR   = os.path.join(DUBS_SOURCES_DIR, "automatic_anilist")
 AUTOMATIC_ANN_DIR       = os.path.join(DUBS_SOURCES_DIR, "automatic_ann")
 AUTOMATIC_ANISEARCH_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_anisearch")
+AUTOMATIC_KITSU_DIR     = os.path.join(DUBS_SOURCES_DIR, "automatic_kitsu")
 AUTOMATIC_HIANIME_DIR   = os.path.join(DUBS_SOURCES_DIR, "automatic_hianime")
 AUTOMATIC_NSFW_DIR      = os.path.join(DUBS_SOURCES_DIR, "automatic_nsfw")
 AUTOMATIC_KENNY_DIR     = os.path.join(DUBS_SOURCES_DIR, "automatic_kenny")
@@ -84,6 +85,7 @@ def load_language_sources(filename: str):
     auto_anilist_path      = os.path.join(AUTOMATIC_ANILIST_DIR, filename)
     auto_ann_path          = os.path.join(AUTOMATIC_ANN_DIR, filename)
     auto_anisearch_path    = os.path.join(AUTOMATIC_ANISEARCH_DIR, filename)
+    auto_kitsu_path        = os.path.join(AUTOMATIC_KITSU_DIR, filename)
     auto_hianime_path      = os.path.join(AUTOMATIC_HIANIME_DIR, filename)
     auto_nsfw_path         = os.path.join(AUTOMATIC_NSFW_DIR, filename)
     auto_kenny_path        = os.path.join(AUTOMATIC_KENNY_DIR, filename)
@@ -93,6 +95,7 @@ def load_language_sources(filename: str):
     auto_anilist     = load_json(auto_anilist_path)
     auto_ann         = load_json(auto_ann_path)
     auto_anisearch   = load_json(auto_anisearch_path)
+    auto_kitsu       = load_json(auto_kitsu_path)
     auto_hianime     = load_json(auto_hianime_path)
     auto_nsfw        = load_json(auto_nsfw_path)
     auto_kenny       = load_json(auto_kenny_path)
@@ -107,6 +110,7 @@ def load_language_sources(filename: str):
     auto_anilist_dubbed   = int_set(auto_anilist.get("dubbed"))
     auto_ann_dubbed       = int_set(auto_ann.get("dubbed"))
     auto_anisearch_dubbed = int_set(auto_anisearch.get("dubbed"))
+    auto_kitsu_dubbed     = int_set(auto_kitsu.get("dubbed"))
     auto_hianime_dubbed   = int_set(auto_hianime.get("dubbed"))
     auto_nsfw_dubbed      = int_set(auto_nsfw.get("dubbed"))
     auto_kenny_dubbed     = int_set(auto_kenny.get("dubbed"))
@@ -122,6 +126,7 @@ def load_language_sources(filename: str):
             "anilist": auto_anilist_dubbed,
             "ann": auto_ann_dubbed,
             "anisearch": auto_anisearch_dubbed,
+            "kitsu": auto_kitsu_dubbed,
             "hianime": auto_hianime_dubbed,
             "nsfw": auto_nsfw_dubbed,
             "kenny": auto_kenny_dubbed,
@@ -189,6 +194,7 @@ def main():
         AUTOMATIC_ANILIST_DIR,
         AUTOMATIC_ANN_DIR,
         AUTOMATIC_ANISEARCH_DIR,
+        AUTOMATIC_KITSU_DIR,
         AUTOMATIC_HIANIME_DIR,
         AUTOMATIC_NSFW_DIR,
         AUTOMATIC_KENNY_DIR,

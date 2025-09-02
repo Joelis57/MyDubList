@@ -19,6 +19,8 @@ MAL_BASE = "https://api.myanimelist.net/v2"
 JIKAN_BASE = "https://api.jikan.moe/v4"
 ANILIST_BASE = "https://graphql.anilist.co"
 ANN_API = "https://cdn.animenewsnetwork.com/encyclopedia/api.xml"
+KITSU_BASE = "https://kitsu.io/api/edge"
+KITSU_TOKEN_URL = "https://kitsu.io/api/oauth/token"
 
 MAX_IN_MEMORY_CACHE = 5000
 CALL_RETRIES = 4
@@ -38,6 +40,7 @@ SOURCES_DIR = "dubs/sources"
 MAPPINGS_DIR = "dubs/mappings"
 ANILIST_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_anilist.jsonl")
 ANN_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_ann.jsonl")
+KITSU_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_kitsu.jsonl")
 MERGED_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_merged.jsonl")
 HIANIME_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_hianime.jsonl")
 
@@ -72,12 +75,19 @@ ANN_MIN_INTERVAL = 1.0  # seconds between ANN calls
 HIANIME_MIN_INTERVAL = 1.0  # seconds
 hianime_last_call = 0.0
 
+# Kitsu throttle
+KITSU_MIN_INTERVAL = 1.0
+kitsu_last_call = 0.0
+KITSU_PAGE_LIMIT = 20
+kitsu_auth_header = None
+
 missing_mal_ids = set()
 largest_known_mal_id = 0  # determined from dubs/sources/automatic_mal/dubbed_japanese.json
 
 # Per-API mappings accumulated this run
 anilist_mapping: dict[int, int] = {}
 ann_mapping: dict[int, int] = {}
+kitsu_mapping: dict[int, int] = {}
 hianime_mapping: dict[int, dict] = {}
 
 
@@ -106,18 +116,22 @@ def sanitize_lang(lang: str) -> str:
 
     s = lang.strip().lower()
 
+    # Brazilian (and common misspelling) → Portuguese
+    if s.startswith("brazil") or "brazilian" in s or "brazillian" in s:
+        return "portuguese"
+
     # Portuguese variants → "portuguese"
     if s.startswith("portuguese"):
         return "portuguese"
 
-    # Mandarin → Chinese (unify MAL + AniList)
+    # Mandarin → Chinese (unify MAL + AniList + Kitsu)
     if s.startswith("mandarin"):
         return "chinese"
 
     # Map Filipino to Tagalog (only 1 occurrence of Filipino)
     if s.startswith("filipino"):
         return "tagalog"
-    
+
     # Remove any (...) parenthetical chunk(s)
     s = re.sub(r"\(.*?\)", "", s).strip()
 
@@ -275,6 +289,13 @@ def load_simple_jsonl_map(path: str, value_key: str) -> dict[int, int]:
                     continue
                 mid = obj.get("mal_id")
                 val = obj.get(value_key)
+                try:
+                    if isinstance(mid, str) and mid.isdigit():
+                        mid = int(mid)
+                    if isinstance(val, str) and val.isdigit():
+                        val = int(val)
+                except Exception:
+                    pass
                 if isinstance(mid, int) and isinstance(val, int):
                     result[mid] = val
     except Exception as e:
@@ -290,8 +311,8 @@ def save_simple_jsonl_map(path: str, mapping: dict[int, int], value_key: str):
         existing = load_simple_jsonl_map(path, value_key)
         existing.update(mapping)
         with open(path, "w", encoding="utf-8") as f:
-            for mid in sorted(existing.keys()):
-                rec = {"mal_id": mid, value_key: int(existing[mid])}
+            for mid in sorted(existing.keys(), key=int):
+                rec = {"mal_id": int(mid), value_key: int(existing[mid])}
                 f.write(json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n")
         log(f"[map] Wrote {len(existing)} lines to {path}")
     except Exception as e:
@@ -314,10 +335,13 @@ def load_jsonl_map(path: str) -> dict[int, dict]:
                 except Exception:
                     continue
                 mid = obj.get("mal_id")
+                try:
+                    if isinstance(mid, str) and str(mid).isdigit():
+                        mid = int(mid)
+                except Exception:
+                    pass
                 if isinstance(mid, int):
-                    # store the rest of the fields
                     rec = {k: v for k, v in obj.items() if k != "mal_id"}
-                    # ensure 'sites' key is a dict if present
                     if "sites" in rec and not isinstance(rec["sites"], dict):
                         rec["sites"] = {}
                     result[mid] = rec
@@ -331,10 +355,9 @@ def save_jsonl_map(path: str, mapping: dict[int, dict]):
     _ensure_dir_for(path)
     try:
         with open(path, "w", encoding="utf-8") as f:
-            for mid in sorted(mapping.keys()):
+            for mid in sorted(mapping.keys(), key=int):
                 rec = mapping[mid] if isinstance(mapping[mid], dict) else {}
-                # Ensure minimal structure
-                out_line = {"mal_id": mid, **rec}
+                out_line = {"mal_id": int(mid), **rec}
                 f.write(json.dumps(out_line, ensure_ascii=False, separators=(",", ":")) + "\n")
         log(f"[jsonl] Wrote {len(mapping)} lines to {path}")
     except Exception as e:
@@ -355,6 +378,11 @@ def merge_all_mappings():
     for mid, annid in ann_map.items():
         master.setdefault(mid, {})["ann_id"] = annid
 
+    # Kitsu
+    ki_map = load_simple_jsonl_map(KITSU_MAPPING_JSONL, "kitsu_id")
+    for mid, kid in ki_map.items():
+        master.setdefault(mid, {})["kitsu_id"] = kid
+
     # HiAnime
     hi_map = load_jsonl_map(HIANIME_MAPPING_JSONL)
     for mid, rec in hi_map.items():
@@ -367,8 +395,8 @@ def merge_all_mappings():
     _ensure_dir_for(MERGED_MAPPING_JSONL)
     try:
         with open(MERGED_MAPPING_JSONL, "w", encoding="utf-8") as f:
-            for mid in sorted(master.keys()):
-                line = {"mal_id": mid, **master[mid]}
+            for mid in sorted(master.keys(), key=int):
+                line = {"mal_id": int(mid), **master[mid]}
                 f.write(json.dumps(line, ensure_ascii=False, separators=(",", ":")) + "\n")
         log(f"[merge] Wrote merged mappings: {len(master)} to {MERGED_MAPPING_JSONL}")
     except Exception as e:
@@ -457,7 +485,7 @@ def jikan_get(url):
 
             if resp.status_code == 404:
                 log("    404 Not Found, skipping")
-                return None  # permanent miss; safe to return/cached by caller
+                return None
 
             if resp.status_code == 429:
                 ra = resp.headers.get("Retry-After")
@@ -792,7 +820,7 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
             "_attribution": "MyDubList - https://mydublist.com - (CC BY 4.0)",
             "_origin": "https://github.com/Joelis57/MyDubList",
             "language": lang_key.capitalize(),
-            "dubbed": sorted(int(x) for x in updated_ids),
+            "dubbed": sorted((int(x) for x in updated_ids), key=int),
         }
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(obj, f, ensure_ascii=False, indent=2)
@@ -802,6 +830,8 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
         save_simple_jsonl_map(ANILIST_MAPPING_JSONL, anilist_mapping, "anilist_id")
     if api_mode == "ann" and ann_mapping:
         save_simple_jsonl_map(ANN_MAPPING_JSONL, ann_mapping, "ann_id")
+    if api_mode == "kitsu" and kitsu_mapping:
+        save_simple_jsonl_map(KITSU_MAPPING_JSONL, kitsu_mapping, "kitsu_id")
     if api_mode == "hianime" and hianime_mapping:
         save_jsonl_map(HIANIME_MAPPING_JSONL, hianime_mapping)
 
@@ -847,12 +877,10 @@ def extract_ann_id_from_url(url: str) -> int | None:
     if not url:
         return None
     try:
-        # Be liberal: handle www/cdn subdomains and any query params
         parsed = urlparse(url)
         if "animenewsnetwork.com" not in parsed.netloc:
             return None
         if not parsed.path.endswith("/encyclopedia/anime.php"):
-            # Also accept direct 'encyclopedia/anime.php' without leading slash variants
             if "encyclopedia/anime.php" not in parsed.path:
                 return None
         qs = parse_qs(parsed.query)
@@ -1042,10 +1070,155 @@ def hianime_get_page(api_host: str, page: int) -> dict | None:
 
 
 # ----------------------
+# Kitsu helpers
+# ----------------------
+
+def kitsu_login(email: str, password: str) -> str | None:
+    payload = {
+        "grant_type": "password",
+        "username": email,
+        "password": password,
+    }
+    try:
+        r = requests.post(KITSU_TOKEN_URL, data=payload, timeout=20)
+        r.raise_for_status()
+        data = r.json()
+        token = data.get("access_token")
+        if token:
+            return token
+    except Exception as e:
+        print(f"[Kitsu] Login failed: {e}")
+    return None
+
+
+def kitsu_get(url: str) -> dict | None:
+    """Throttled GET for Kitsu JSON:API."""
+    global kitsu_last_call
+    now = time.time()
+    to_wait = KITSU_MIN_INTERVAL - (now - kitsu_last_call)
+    if to_wait > 0:
+        time.sleep(to_wait)
+    kitsu_last_call = time.time()
+
+    last_exception = None
+    for attempt in range(CALL_RETRIES):
+        try:
+            headers = {"Accept": "application/vnd.api+json"}
+            if kitsu_auth_header:
+                headers.update(kitsu_auth_header)
+            if debug_log:
+                log(f"[Kitsu] GET {url}")
+            resp = requests.get(url, headers=headers, timeout=20)
+            if resp.status_code in (401, 403, 404):
+                log(f"[Kitsu] {resp.status_code} for {url} (skipping)")
+                return None
+            if resp.status_code == 429:
+                delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                print(f"  Kitsu 429. Retrying in {delay} seconds...", flush=True)
+                time.sleep(delay)
+                continue
+            resp.raise_for_status()
+            return resp.json()
+        except Exception as e:
+            last_exception = e
+            print(f"  Kitsu attempt {attempt + 1} failed: {e}")
+            if attempt < CALL_RETRIES - 1:
+                delay = RETRY_DELAYS[attempt]
+                print(f"  Kitsu call failed. Retrying in {delay} seconds...")
+                time.sleep(delay)
+    print("  All Kitsu attempts failed.")
+    raise last_exception
+
+
+def kitsu_find_kitsu_id_by_mal(mal_id: int) -> int | None:
+    """Use /mappings to find the Kitsu anime id by MAL id."""
+    url = (f"{KITSU_BASE}/mappings?"
+           f"filter[externalSite]=myanimelist/anime&filter[externalId]={int(mal_id)}&include=item")
+    data = kitsu_get(url)
+    if not data or "data" not in data:
+        return None
+    incl = {x.get("id"): x for x in data.get("included", []) if isinstance(x, dict)}
+    for m in data.get("data") or []:
+        attrs = m.get("attributes") or {}
+        if attrs.get("externalSite") == "myanimelist/anime" and str(attrs.get("externalId")) == str(mal_id):
+            rel = m.get("relationships", {}).get("item", {}).get("data") or {}
+            kid = rel.get("id")
+            try:
+                return int(kid)
+            except Exception:
+                # try included
+                itm = incl.get(kid) if kid else None
+                if itm and itm.get("type") == "anime":
+                    try:
+                        return int(itm.get("id"))
+                    except Exception:
+                        pass
+    return None
+
+
+def kitsu_get_mal_for_kitsu(kitsu_id: int) -> int | None:
+    """Use /anime/{id}/mappings to find the MAL id."""
+    url = f"{KITSU_BASE}/anime/{int(kitsu_id)}/mappings"
+    data = kitsu_get(url)
+    if not data or "data" not in data:
+        return None
+    for m in data.get("data") or []:
+        attrs = m.get("attributes") or {}
+        if attrs.get("externalSite") == "myanimelist/anime":
+            eid = attrs.get("externalId")
+            try:
+                return int(eid)
+            except Exception:
+                continue
+    return None
+
+
+def kitsu_list_anime_castings(kitsu_anime_id: int) -> list[dict]:
+    """
+    Fetch all casting records for a single Kitsu anime, following pagination.
+    """
+    results: list[dict] = []
+    url = f"{KITSU_BASE}/anime/{kitsu_anime_id}/castings?page[limit]={KITSU_PAGE_LIMIT}"
+    page_idx = 1
+    while True:
+        data = kitsu_get(url)
+        if not data or "data" not in data:
+            log(f"[Kitsu] No data for anime {kitsu_anime_id} (page {page_idx})")
+            break
+        items = data.get("data") or []
+        log(f"[Kitsu] anime {kitsu_anime_id}: received {len(items)} castings (page {page_idx})")
+        if not isinstance(items, list) or not items:
+            break
+        results.extend(items)
+        links = data.get("links") or {}
+        next_url = links.get("next")
+        if not next_url:
+            break
+        url = next_url
+        page_idx += 1
+    return results
+
+
+def kitsu_lang_to_key(raw: str) -> str:
+    """Map Kitsu casting language to our normalized key."""
+    if not raw:
+        return ""
+    iso_try = ann_lang_to_key(raw)
+    return sanitize_lang(iso_try or raw)
+
+
+# ----------------------
 # Runners
 # ----------------------
 
 def run_ann(mal_start: int, mal_end: int):
+    """
+    ANN mode:
+      - Load existing mappings (mal_id -> ann_id) from JSONL.
+      - For MAL IDs missing a mapping, call Jikan /external to discover ANN id.
+      - Batch ANN ids to fetch dub languages.
+    """
+    existing_map = load_simple_jsonl_map(ANN_MAPPING_JSONL, "ann_id")
     pending: list[int] = []
     ann_to_mal: dict[int, int] = {}
     processed = 0
@@ -1053,12 +1226,16 @@ def run_ann(mal_start: int, mal_end: int):
 
     try:
         for mal_id in range(mal_start, mal_end + 1):
-            ann_id = jikan_ann_id_for_mal(mal_id)
+            ann_id = existing_map.get(mal_id)
             if ann_id:
-                pending.append(ann_id)
                 ann_to_mal[ann_id] = mal_id
-                # Also record mapping immediately
-                ann_mapping[int(mal_id)] = int(ann_id)
+                pending.append(ann_id)
+            else:
+                found = jikan_ann_id_for_mal(mal_id)
+                if found:
+                    ann_mapping[int(mal_id)] = int(found)
+                    ann_to_mal[int(found)] = mal_id
+                    pending.append(int(found))
 
             if len(pending) >= ANN_BATCH_SIZE:
                 if debug_log:
@@ -1108,26 +1285,20 @@ def run_mal(client_id: str, start_id: int, end_id: int):
                 if debug_log:
                     log(f"  Skipping MAL ID {mal_id} (cached 404)")
                 was_404 = True
-                # Not adding to checked_ok_ids, because we didn't verify it this run.
             else:
-                # Process this anime
                 res = process_anime_mal(mal_id, client_id)
 
                 if res is None:
-                    # Transient failure -> do NOT mark as checked. This prevents accidental removals.
                     was_404 = False
                     if debug_log:
                         log(f"  MAL ID {mal_id}: transient failure; deferring")
                 else:
-                    # Reliable result (either True for 404 or False for processed)
                     was_404 = bool(res)
                     checked_ok_ids.add(mal_id)
 
-                    # Cache new 404s
                     if was_404 and mal_id not in missing_mal_ids:
                         missing_mal_ids.add(mal_id)
 
-            # Track long runs of 404s to detect end-of-range
             if was_404:
                 consecutive_404 += 1
                 if debug_log:
@@ -1139,7 +1310,6 @@ def run_mal(client_id: str, start_id: int, end_id: int):
             else:
                 consecutive_404 = 0
 
-            # Periodically write results and save the missing cache
             if idx % FINALIZE_EVERY_N == 0:
                 log(f"--- Updating files at MAL ID {start_id + idx - 1} ---")
                 finalize_jsons("mal", checked_ok_ids)
@@ -1218,7 +1388,6 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
             log(f"[HiAnime] Page {page}")
             data = hianime_get_page(api_host, page)
             if not data or "data" not in data:
-                # Nothing to process; stop if page fetch failed
                 break
 
             d = data["data"]
@@ -1236,37 +1405,30 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
                 if not hi_id:
                     continue
 
-                # only consider if there's at least one dub episode
                 if dub_count < 1:
                     continue
 
                 mal_id = slug_to_mal.get(hi_id)
                 if not mal_id:
-                    # unmapped; skip quietly
                     continue
 
-                # Record dubbed English
                 json_data["english"].add(int(mal_id))
                 checked_ok_ids.add(int(mal_id))
 
-                # Record mapping
                 hianime_mapping[int(mal_id)] = {
                     "hianime_id": hi_id,
                     "episodes": {"sub": sub_count, "dub": dub_count},
                 }
 
-            # Periodic finalize
             if current_page % 10 == 0:
                 finalize_jsons("hianime", checked_ok_ids)
 
-            # End conditions
             if end_page is not None and page >= end_page:
                 break
             if not has_next:
                 break
 
             page += 1
-            # (extra safety) Ensure at least 1s between page fetches
             now = time.time()
             to_wait = HIANIME_MIN_INTERVAL - (time.time() - hianime_last_call)
             if to_wait > 0:
@@ -1283,12 +1445,82 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
         print("Done (HiAnime).")
 
 
+def run_kitsu(mal_start: int, mal_end: int):
+    """
+    Kitsu mode:
+      - Load existing MAL→Kitsu mappings from JSONL.
+      - For MAL IDs missing a mapping, query /mappings with externalSite=myanimelist/anime to discover Kitsu id.
+        (If needed we can also confirm via /anime/{kitsu}/mappings to get MAL id.)
+      - For each mapped Kitsu anime, fetch castings and record languages.
+      - Save dubbed_* under dubs/sources/automatic_kitsu and update mappings_kitsu.jsonl.
+    """
+    existing_map = load_simple_jsonl_map(KITSU_MAPPING_JSONL, "kitsu_id")
+    checked_ok_ids: set[int] = set()
+    processed = 0
+    with_langs = 0
+    without_langs = 0
+    missing_map = 0
+
+    try:
+        for idx, mal_id in enumerate(range(mal_start, mal_end + 1), 1):
+            kid = existing_map.get(mal_id)
+            if not kid:
+                kid = kitsu_find_kitsu_id_by_mal(mal_id)
+                if kid:
+                    kitsu_mapping[int(mal_id)] = int(kid)  # accumulate new ones
+                    existing_map[int(mal_id)] = int(kid)
+                    log(f"[Kitsu] Discovered mapping MAL {mal_id} -> Kitsu {kid}")
+                else:
+                    missing_map += 1
+                    log(f"[Kitsu] MAL {mal_id}: no Kitsu ID found")
+                    continue
+
+            log(f"[Kitsu] MAL {mal_id} -> Kitsu {kid}: fetching castings")
+            castings = kitsu_list_anime_castings(kid)
+            langs_found = set()
+
+            for c in castings or []:
+                attrs = c.get("attributes") or {}
+                raw_lang = attrs.get("language") or attrs.get("locale")
+                key = kitsu_lang_to_key(raw_lang)
+                if key:
+                    langs_found.add(key)
+
+            if langs_found:
+                for key in langs_found:
+                    json_data[key].add(int(mal_id))
+                with_langs += 1
+                log(f"[Kitsu] MAL {mal_id}: languages={sorted(langs_found)}")
+            else:
+                without_langs += 1
+                log(f"[Kitsu] MAL {mal_id}: no languages found")
+
+            checked_ok_ids.add(int(mal_id))
+            processed += 1
+
+            if idx % FINALIZE_EVERY_N == 0:
+                log(f"[Kitsu] --- Updating files at MAL ID {mal_id} ---")
+                finalize_jsons("kitsu", checked_ok_ids)
+
+    except KeyboardInterrupt:
+        print("\nInterrupted. Finalizing data...")
+    except Exception as e:
+        print(f"\nUnexpected error (Kitsu): {e}")
+        import traceback
+        traceback.print_exc()
+    finally:
+        finalize_jsons("kitsu", checked_ok_ids)
+        log(f"[Kitsu] Summary: processed={processed}, with_langs={with_langs}, "
+            f"without_langs={without_langs}, missing_map={missing_map}")
+        print("Done (Kitsu).")
+
+
 # ----------------------
 # Main
 # ----------------------
 
 def main():
-    global debug_log
+    global debug_log, kitsu_auth_header
 
     parser = argparse.ArgumentParser(
         description=(
@@ -1296,14 +1528,14 @@ def main():
             "(only for IDs checked this run). Also writes per-API mappings and a merged mapping JSONL."
         )
     )
-    parser.add_argument("--api", choices=["mal", "anilist", "ann", "hianime"], default="mal", help="Which source to use.")
+    parser.add_argument("--api", choices=["mal", "anilist", "ann", "hianime", "kitsu"], default="mal", help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
 
     # MAL-specific
     parser.add_argument("--client-id", help="MyAnimeList API Client ID (required for --api mal).")
 
-    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann.")
-    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann.")
+    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann/kitsu.")
+    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann/kitsu.")
 
     # Generic paging
     parser.add_argument("--start-page", type=int, help="Start page number (1-based) for AniList/HiAnime.")
@@ -1313,10 +1545,16 @@ def main():
     parser.add_argument("--anilist-check-pages", default="false",
                         help="AniList: if true, prints total pages (perPage=50) and exits.")
 
-    # HiAnime-specific
+    # API host
     parser.add_argument("--api-host", default="http://localhost:6969",
                         help="Base host for the aniwatch API (e.g., http://localhost:6969).")
-    parser.add_argument("--source-file", help="Path to a JSON/JSONL mapping file for HiAnime slug -> MAL ID. Required for --api hianime.")
+    # Source file
+    parser.add_argument("--source-file", help="Path to a JSON/JSONL mapping file for HiAnime slug→MAL.")
+
+    # Authentication
+    parser.add_argument("--email", help="Account email for OAuth (optional).")
+    parser.add_argument("--password", help="Account password for OAuth (optional).")
+    parser.add_argument("--token", help="Bearer token (optional, overrides email/password).")
 
     args = parser.parse_args()
     debug_log = str(args.debug).lower() == "true"
@@ -1324,6 +1562,18 @@ def main():
     # Ensure output dirs exist up-front
     os.makedirs(SOURCES_DIR, exist_ok=True)
     os.makedirs(MAPPINGS_DIR, exist_ok=True)
+
+    # Kitsu auth setup
+    if args.token:
+        kitsu_auth_header = {"Authorization": f"Bearer {args.token}"}
+        log("[Kitsu] Using provided token")
+    elif args.email and args.password:
+        token = kitsu_login(args.email, args.password)
+        if token:
+            kitsu_auth_header = {"Authorization": f"Bearer {token}"}
+            log("[Kitsu] Logged in and obtained token")
+        else:
+            print("[Kitsu] Warning: proceeding without auth (NSFW may be hidden)")
 
     if args.api == "mal":
         if not args.client_id or args.mal_start is None or args.mal_end is None:
@@ -1348,9 +1598,14 @@ def main():
             sys.exit(1)
         run_ann(args.mal_start, args.mal_end)
 
-    else:  # hianime
-        # HiAnime uses pages, api-host, and source-file
+    elif args.api == "hianime":
         run_hianime(args.api_host, args.start_page, args.end_page, args.source_file)
+
+    else:  # kitsu
+        if args.mal_start is None or args.mal_end is None:
+            print("For --api kitsu you must provide --mal-start and --mal-end.")
+            sys.exit(1)
+        run_kitsu(args.mal_start, args.mal_end)
 
 
 if __name__ == "__main__":
