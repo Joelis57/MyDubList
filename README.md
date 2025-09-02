@@ -30,12 +30,12 @@
 | English | English | 5002 |
 | Spanish | Español | 2802 |
 | German | Deutsch | 2257 |
-| French | Français | 2220 |
+| French | Français | 2222 |
 | Italian | Italiano | 2087 |
 | Portuguese | Português | 1676 |
 | Korean | 한국어 | 1363 |
 | Tagalog | Tagalog | 812 |
-| Chinese | 中文 | 664 |
+| Chinese | 中文 | 685 |
 | Arabic | العربية | 316 |
 | Polish | Polski | 272 |
 | Hungarian | Magyar | 169 |
