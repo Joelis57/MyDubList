@@ -29,7 +29,7 @@
 | Japanese | 日本語 | 13573 |
 | English | English | 5002 |
 | Spanish | Español | 2802 |
-| German | Deutsch | 2257 |
+| German | Deutsch | 2258 |
 | French | Français | 2222 |
 | Italian | Italiano | 2087 |
 | Portuguese | Português | 1676 |
