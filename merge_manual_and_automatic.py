@@ -32,6 +32,39 @@ CONFIDENCE_LEVELS      = {
 }
 COUNTS_DIR             = os.path.join(ROOT, "dubs", "counts")
 
+README_DIR             = os.path.join(ROOT, "README.md")
+DUBS_LOW_DIR           = os.path.join(ROOT, "dubs", "confidence", "low")
+# Optional native names (fallback to Title Case English if missing)
+NATIVE_NAMES = {
+    "arabic": "العربية",
+    "catalan": "Català",
+    "chinese": "中文",
+    "danish": "Dansk",
+    "dutch": "Nederlands",
+    "english": "English",
+    "filipino": "Filipino",
+    "finnish": "Suomi",
+    "french": "Français",
+    "german": "Deutsch",
+    "hebrew": "עברית",
+    "hindi": "हिन्दी",
+    "hungarian": "Magyar",
+    "indonesian": "Bahasa Indonesia",
+    "italian": "Italiano",
+    "japanese": "日本語",
+    "korean": "한국어",
+    "norwegian": "Norsk",
+    "polish": "Polski",
+    "portuguese": "Português",
+    "russian": "Русский",
+    "spanish": "Español",
+    "swedish": "Svenska",
+    "tagalog": "Tagalog",
+    "thai": "ไทย",
+    "turkish": "Türkçe",
+    "vietnamese": "Tiếng Việt",
+}
+
 DEBUG = False
 
 def log(msg: str):
@@ -77,6 +110,67 @@ def list_language_files(*dirs: str) -> Set[str]:
             if fname.startswith("dubbed_") and fname.endswith(".json"):
                 files.add(fname)
     return files
+
+def build_language_index():
+    index = []
+    for fname in sorted(os.listdir(DUBS_LOW_DIR)):
+        if not (fname.startswith("dubbed_") and fname.endswith(".json")):
+            continue
+        path = os.path.join(DUBS_LOW_DIR, fname)
+        data = load_json(path) or {}
+        key = infer_language_from_filename(fname)
+        english_name = key.replace("_", " ").title()
+        native_name = NATIVE_NAMES.get(key, english_name)
+        dubbed_count = len(data.get("dubbed", []) or [])
+        index.append({
+            "key": key,
+            "english_name": english_name,
+            "native_name": native_name,
+            "dubbed_count": dubbed_count,
+        })
+    index.sort(key=lambda x: x["dubbed_count"], reverse=True)
+    return index
+
+def render_lang_table(index):
+    header = "| Language | Native name | Dubbed |\n|---|---:|---:|"
+    lines = [header]
+    for row in index:
+        lines.append(
+            f'| {row["english_name"]} | {row["native_name"]} | '
+            f'{row["dubbed_count"]} |'
+        )
+    return "\n".join(lines)
+
+def update_readme_language_stats():
+    index = build_language_index()
+    table = render_lang_table(index)
+    block = f"<!-- LANG-STATS:START -->\n{table}\n<!-- LANG-STATS:END -->"
+
+    try:
+        with open(README_DIR, "r", encoding="utf-8") as fh:
+            content = fh.read()
+    except FileNotFoundError:
+        print(f"README not found at {README_DIR}, skipping README update.")
+        return False
+
+    if "<!-- LANG-STATS:START -->" in content and "<!-- LANG-STATS:END -->" in content:
+        new = re.sub(
+            r"<!-- LANG-STATS:START -->.*?<!-- LANG-STATS:END -->",
+            block,
+            content,
+            flags=re.S,
+        )
+    else:
+        suffix = "\n\n## Language statistics\n\n" + block + "\n"
+        new = content + suffix
+
+    if new != content:
+        with open(README_DIR, "w", encoding="utf-8") as fh:
+            fh.write(new)
+        return True
+
+    print("README language stats already up to date.")
+    return False
 
 def load_language_sources(filename: str):
     """Load per-language sets from manual and each automatic source."""
@@ -212,6 +306,7 @@ def main():
     for filename in sorted(all_lang_files):
         build_confidence_outputs(filename)
 
+    update_readme_language_stats()
     print("Done. Updated dub counts and confidences.")
 
 if __name__ == "__main__":
