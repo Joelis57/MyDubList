@@ -52,6 +52,7 @@
 | Turkish | Türkçe | 10 |
 | Catalan | Català | 3 |
 | Vietnamese | Tiếng Việt | 1 |
+| Lithuanian | Lietuvių | 0 |
 <!-- LANG-STATS:END -->
 
 ## App integrations

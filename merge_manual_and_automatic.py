@@ -53,6 +53,7 @@ NATIVE_NAMES = {
     "italian": "Italiano",
     "japanese": "日本語",
     "korean": "한국어",
+    "lithuanian": "Lietuvių",
     "norwegian": "Norsk",
     "polish": "Polski",
     "portuguese": "Português",
