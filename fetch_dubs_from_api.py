@@ -43,6 +43,7 @@ ANN_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_ann.jsonl")
 KITSU_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_kitsu.jsonl")
 MERGED_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_merged.jsonl")
 HIANIME_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_hianime.jsonl")
+ANISEARCH_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_anisearch.jsonl")
 
 MISSING_CACHE_PATH = "cache/missing_mal_ids.json"
 # Used to detect end-of-range for MAL scanning
@@ -89,6 +90,7 @@ anilist_mapping: dict[int, int] = {}
 ann_mapping: dict[int, int] = {}
 kitsu_mapping: dict[int, int] = {}
 hianime_mapping: dict[int, dict] = {}
+anisearch_mapping: dict[int, int] = {}
 
 
 def log(message: str):
@@ -319,6 +321,19 @@ def save_simple_jsonl_map(path: str, mapping: dict[int, int], value_key: str):
         print(f"[map] Failed to save {path}: {e}")
 
 
+def save_simple_jsonl_map_overwrite(path: str, mapping: dict[int, int], value_key: str):
+    """Overwrite JSONL file with mapping exactly as provided."""
+    _ensure_dir_for(path)
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            for mid in sorted(mapping.keys(), key=int):
+                rec = {"mal_id": int(mid), value_key: int(mapping[mid])}
+                f.write(json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n")
+        log(f"[map] Overwrote {path} with {len(mapping)} mappings")
+    except Exception as e:
+        print(f"[map] Failed to overwrite {path}: {e}")
+
+
 def load_jsonl_map(path: str) -> dict[int, dict]:
     """Load JSONL (mal_id -> record dict) into a dict. If multiple lines for same mal_id, last one wins."""
     if not os.path.exists(path):
@@ -390,6 +405,11 @@ def merge_all_mappings():
             "id": rec.get("hianime_id"),
             "episodes": rec.get("episodes"),
         }
+
+    # aniSearch
+    as_map = load_simple_jsonl_map(ANISEARCH_MAPPING_JSONL, "anisearch_id")
+    for mid, asid in as_map.items():
+        master.setdefault(mid, {})["anisearch_id"] = asid
 
     # Write merged
     _ensure_dir_for(MERGED_MAPPING_JSONL)
@@ -839,6 +859,46 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     merge_all_mappings()
 
 
+def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]]):
+    """Completely overwrite dubbed_* files for a given api_mode with the provided data.
+    Removes any language files that are not present in per_lang_ids.
+    """
+    output_dir = os.path.join(SOURCES_DIR, f"automatic_{api_mode}")
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Remove obsolete files
+    existing = []
+    try:
+        existing = [fn for fn in os.listdir(output_dir) if fn.startswith("dubbed_") and fn.endswith(".json")]
+    except FileNotFoundError:
+        pass
+
+    new_langs = set(per_lang_ids.keys())
+    for fn in existing:
+        lang_key = fn[len("dubbed_"):-len(".json")].replace("_", " ")
+        if lang_key not in new_langs:
+            try:
+                os.remove(os.path.join(output_dir, fn))
+                log(f"[anisearch] Removed obsolete file {fn}")
+            except Exception as e:
+                print(f"[anisearch] Failed to remove {fn}: {e}")
+
+    # Write new files
+    for lang_key in sorted(new_langs):
+        fname_lang = filename_for_lang(lang_key)
+        filename = os.path.join(output_dir, f"dubbed_{fname_lang}.json")
+        ids_sorted = sorted((int(x) for x in per_lang_ids.get(lang_key, set())), key=int)
+        obj = {
+            "_license": "CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
+            "_attribution": "MyDubList - https://mydublist.com - (CC BY 4.0)",
+            "_origin": "https://github.com/Joelis57/MyDubList",
+            "language": lang_key.capitalize(),
+            "dubbed": ids_sorted,
+        }
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump(obj, f, ensure_ascii=False, indent=2)
+
+
 # ----------------------
 # ANN helpers
 # ----------------------
@@ -1208,6 +1268,64 @@ def kitsu_lang_to_key(raw: str) -> str:
 
 
 # ----------------------
+# aniSearch helpers
+# ----------------------
+
+def load_anisearch_source(source_file: str) -> tuple[dict[str, set[int]], dict[int, int]]:
+    """Load a JSON mapping of MAL → { 'anisearch-id': str/int, 'dubbed': ["en", ...] }.
+    Returns (per_language_ids, anisearch_mapping).
+    """
+    if not source_file or not os.path.exists(source_file):
+        print(f"[aniSearch] Source file not found: {source_file}")
+        return {}, {}
+
+    try:
+        with open(source_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"[aniSearch] Failed to parse source file '{source_file}': {e}")
+        return {}, {}
+
+    per_lang: dict[str, set[int]] = defaultdict(set)
+    mapping: dict[int, int] = {}
+
+    if not isinstance(data, dict):
+        print("[aniSearch] Source JSON must be an object keyed by MAL id")
+        return {}, {}
+
+    for mal_key, rec in data.items():
+        try:
+            mal_id = int(mal_key)
+        except Exception:
+            continue
+        if not isinstance(rec, dict):
+            continue
+        as_id = rec.get("anisearch-id")
+        try:
+            if isinstance(as_id, str) and as_id.isdigit():
+                as_id = int(as_id)
+            elif isinstance(as_id, (int, float)):
+                as_id = int(as_id)
+            else:
+                as_id = None
+        except Exception:
+            as_id = None
+        if as_id:
+            mapping[mal_id] = as_id
+
+        # dubbed languages: ISO codes like ["ja","en",...]
+        langs = rec.get("dubbed") or []
+        if isinstance(langs, list):
+            for code in langs:
+                key = ann_lang_to_key(str(code))  # handles ISO codes
+                key = sanitize_lang(key)
+                if key:
+                    per_lang[key].add(mal_id)
+
+    return per_lang, mapping
+
+
+# ----------------------
 # Runners
 # ----------------------
 
@@ -1515,6 +1633,25 @@ def run_kitsu(mal_start: int, mal_end: int):
         print("Done (Kitsu).")
 
 
+def run_anisearch(source_file: str):
+    per_lang, mapping = load_anisearch_source(source_file)
+    if not per_lang and not mapping:
+        print("[aniSearch] Nothing to write (empty or invalid source).")
+        return
+
+    # Write dubbed files (overwrite mode)
+    write_dubbed_files_overwrite("anisearch", per_lang)
+
+    # Write mapping JSONL (overwrite)
+    save_simple_jsonl_map_overwrite(ANISEARCH_MAPPING_JSONL, mapping, "anisearch_id")
+
+    # Refresh merged mappings
+    merge_all_mappings()
+
+    total_ids = len({i for s in per_lang.values() for i in s})
+    print(f"Done (aniSearch). Languages={len(per_lang)} unique MAL IDs={total_ids} mappings={len(mapping)}.")
+
+
 # ----------------------
 # Main
 # ----------------------
@@ -1528,7 +1665,7 @@ def main():
             "(only for IDs checked this run). Also writes per-API mappings and a merged mapping JSONL."
         )
     )
-    parser.add_argument("--api", choices=["mal", "anilist", "ann", "hianime", "kitsu"], default="mal", help="Which source to use.")
+    parser.add_argument("--api", choices=["mal", "anilist", "ann", "hianime", "kitsu", "anisearch"], default="mal", help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
 
     # MAL-specific
@@ -1549,7 +1686,7 @@ def main():
     parser.add_argument("--api-host", default="http://localhost:6969",
                         help="Base host for the aniwatch API (e.g., http://localhost:6969).")
     # Source file
-    parser.add_argument("--source-file", help="Path to a JSON/JSONL mapping file for HiAnime slug→MAL.")
+    parser.add_argument("--source-file", help="Path to a JSON/JSONL mapping file.")
 
     # Authentication
     parser.add_argument("--email", help="Account email for OAuth (optional).")
@@ -1600,6 +1737,12 @@ def main():
 
     elif args.api == "hianime":
         run_hianime(args.api_host, args.start_page, args.end_page, args.source_file)
+
+    elif args.api == "anisearch":
+        if not args.source_file:
+            print("For --api anisearch you must provide --source-file pointing to the aniSearch JSON file.")
+            sys.exit(1)
+        run_anisearch(args.source_file)
 
     else:  # kitsu
         if args.mal_start is None or args.mal_end is None:
