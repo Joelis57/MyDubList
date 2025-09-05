@@ -39,8 +39,8 @@
 | Arabic | العربية | 316 |
 | Polish | Polski | 273 |
 | Hungarian | Magyar | 185 |
-| Swedish | Svenska | 141 |
-| Norwegian | Norsk | 134 |
+| Swedish | Svenska | 142 |
+| Norwegian | Norsk | 135 |
 | Hebrew | עברית | 120 |
 | Dutch | Nederlands | 102 |
 | Russian | Русский | 78 |
