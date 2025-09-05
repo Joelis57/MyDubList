@@ -88,7 +88,7 @@ largest_known_mal_id = 0  # determined from dubs/sources/automatic_mal/dubbed_ja
 anilist_mapping: dict[int, int] = {}
 ann_mapping: dict[int, int] = {}
 kitsu_mapping: dict[int, int] = {}
-hianime_mapping: dict[int, dict] = {}
+hianime_mapping: dict[int, str] = {}
 anisearch_mapping: dict[int, int] = {}
 
 
@@ -273,11 +273,10 @@ def get_largest_known_mal_id() -> int:
 # Mapping JSONL helpers
 # ----------------------
 
-def load_simple_jsonl_map(path: str, value_key: str) -> dict[int, int]:
-    """Load JSONL file of lines like {"mal_id": <int>, value_key: <int>} into dict."""
+def load_simple_jsonl_map(path: str, value_key: str) -> dict[int, object]:
     if not os.path.exists(path):
         return {}
-    result: dict[int, int] = {}
+    result: dict[int, object] = {}
     try:
         with open(path, "r", encoding="utf-8") as f:
             for line in f:
@@ -293,27 +292,32 @@ def load_simple_jsonl_map(path: str, value_key: str) -> dict[int, int]:
                 try:
                     if isinstance(mid, str) and mid.isdigit():
                         mid = int(mid)
-                    if isinstance(val, str) and val.isdigit():
+                    if isinstance(val, (int, float)):
                         val = int(val)
+                    elif isinstance(val, str) and val.isdigit():
+                        val = int(val)
+                    # else: leave non-numeric strings untouched
                 except Exception:
                     pass
-                if isinstance(mid, int) and isinstance(val, int):
+                if isinstance(mid, int) and (isinstance(val, int) or isinstance(val, str)):
                     result[mid] = val
     except Exception as e:
         print(f"[map] Failed to load {path}: {e}")
     return result
 
 
-def save_simple_jsonl_map(path: str, mapping: dict[int, int], value_key: str):
-    """Save dict[int,int] to JSONL with keys mal_id and value_key."""
+def save_simple_jsonl_map(path: str, mapping: dict[int, int | str], value_key: str):
+    """Save dict[int,int|str] to JSONL with keys mal_id and value_key."""
     _ensure_dir_for(path)
     try:
         # merge with existing
         existing = load_simple_jsonl_map(path, value_key)
-        existing.update(mapping)
+        existing.update({int(k): (int(v) if isinstance(v, (int, float)) or str(v).isdigit() else v)
+                         for k, v in mapping.items()})
         with open(path, "w", encoding="utf-8") as f:
             for mid in sorted(existing.keys(), key=int):
-                rec = {"mal_id": int(mid), value_key: int(existing[mid])}
+                val = existing[mid]
+                rec = {"mal_id": int(mid), value_key: val}
                 f.write(json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n")
         log(f"[map] Wrote {len(existing)} lines to {path}")
     except Exception as e:
@@ -398,12 +402,9 @@ def merge_all_mappings():
         master.setdefault(mid, {})["kitsu_id"] = kid
 
     # HiAnime
-    hi_map = load_jsonl_map(HIANIME_MAPPING_JSONL)
-    for mid, rec in hi_map.items():
-        master.setdefault(mid, {})["hianime"] = {
-            "id": rec.get("hianime_id"),
-            "episodes": rec.get("episodes"),
-        }
+    hi_map = load_simple_jsonl_map(HIANIME_MAPPING_JSONL, "hianime_id")
+    for mid, hiid in hi_map.items():
+        master.setdefault(mid, {})["hianime_id"] = hiid
 
     # aniSearch
     as_map = load_simple_jsonl_map(ANISEARCH_MAPPING_JSONL, "anisearch_id")
@@ -852,7 +853,8 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     if api_mode == "kitsu" and kitsu_mapping:
         save_simple_jsonl_map(KITSU_MAPPING_JSONL, kitsu_mapping, "kitsu_id")
     if api_mode == "hianime" and hianime_mapping:
-        save_jsonl_map(HIANIME_MAPPING_JSONL, hianime_mapping)
+
+        save_simple_jsonl_map(HIANIME_MAPPING_JSONL, hianime_mapping, "hianime_id")
 
     # Always refresh merged mappings after a finalize
     merge_all_mappings()
@@ -1451,14 +1453,6 @@ def run_anilist(start_page: int | None, end_page: int | None):
 
 
 def run_hianime(api_host: str, start_page: int | None, end_page: int | None, source_file: str | None):
-    """
-    HiAnime mode:
-      - Build reverse map from a user-provided file to get slug -> MAL ID.
-      - Iterate pages from the local aniwatch API for 'dubbed-anime' category.
-      - If episodes.dub >= 1: add MAL ID to English set and record hianime mapping.
-      - Save dubbed_english.json under dubs/sources/automatic_hianime.
-      - Save mappings_hianime.jsonl with mal_id, hianime_id, episodes {sub, dub}.
-    """
     if not source_file:
         print("For --api hianime you must provide --source-file pointing to a JSON/JSONL mapping file.")
         sys.exit(1)
@@ -1500,10 +1494,7 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
                 json_data["english"].add(int(mal_id))
                 checked_ok_ids.add(int(mal_id))
 
-                hianime_mapping[int(mal_id)] = {
-                    "hianime_id": hi_id,
-                    "episodes": {"sub": sub_count, "dub": dub_count},
-                }
+                hianime_mapping[int(mal_id)] = hi_id
 
             if current_page % 10 == 0:
                 finalize_jsons("hianime", checked_ok_ids)
