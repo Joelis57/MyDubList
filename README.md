@@ -26,22 +26,22 @@
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| Japanese | 日本語 | 14931 |
-| English | English | 5218 |
-| Spanish | Español | 2939 |
-| German | Deutsch | 2892 |
-| French | Français | 2392 |
-| Italian | Italiano | 2248 |
-| Portuguese | Português | 1676 |
-| Korean | 한국어 | 1363 |
+| Japanese | 日本語 | 14935 |
+| English | English | 5222 |
+| Spanish | Español | 2947 |
+| German | Deutsch | 2898 |
+| French | Français | 2393 |
+| Italian | Italiano | 2268 |
+| Portuguese | Português | 1682 |
+| Korean | 한국어 | 1367 |
 | Tagalog | Tagalog | 812 |
 | Chinese | 中文 | 687 |
 | Arabic | العربية | 316 |
 | Polish | Polski | 273 |
-| Hungarian | Magyar | 169 |
+| Hungarian | Magyar | 185 |
 | Swedish | Svenska | 141 |
 | Norwegian | Norsk | 134 |
-| Hebrew | עברית | 116 |
+| Hebrew | עברית | 120 |
 | Dutch | Nederlands | 102 |
 | Russian | Русский | 78 |
 | Danish | Dansk | 62 |
