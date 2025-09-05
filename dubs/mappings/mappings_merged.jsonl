@@ -22251,7 +22251,7 @@
 {"mal_id":59150,"anilist_id":182445,"kitsu_id":49223}
 {"mal_id":59156,"anilist_id":181834}
 {"mal_id":59160,"anilist_id":178680,"ann_id":32849,"kitsu_id":48992,"hianime":{"id":"wind-breaker-season-2-19542","episodes":{"sub":12,"dub":12}},"anisearch_id":19385}
-{"mal_id":59161,"anilist_id":178675,"ann_id":32848,"anisearch_id":19452}
+{"mal_id":59161,"anilist_id":178675,"ann_id":32848,"kitsu_id":48997,"anisearch_id":19452}
 {"mal_id":59162,"ann_id":30111,"kitsu_id":49022,"anisearch_id":19458}
 {"mal_id":59165,"anilist_id":178620,"ann_id":32829}
 {"mal_id":59166,"anilist_id":179911}
@@ -22562,7 +22562,7 @@
 {"mal_id":59946,"kitsu_id":49260}
 {"mal_id":59951,"anilist_id":185750}
 {"mal_id":59953,"anilist_id":185721,"kitsu_id":49725}
-{"mal_id":59957,"anilist_id":182158,"anisearch_id":19645}
+{"mal_id":59957,"anilist_id":182158,"kitsu_id":49233,"anisearch_id":19645}
 {"mal_id":59961,"anilist_id":195209,"ann_id":33838,"kitsu_id":50028,"anisearch_id":19648}
 {"mal_id":59967,"anilist_id":185725}
 {"mal_id":59969,"anilist_id":185723,"kitsu_id":49349}
@@ -22684,7 +22684,7 @@
 {"mal_id":60280,"anilist_id":184182,"ann_id":33976,"anisearch_id":20327}
 {"mal_id":60283,"kitsu_id":49442}
 {"mal_id":60284,"anisearch_id":20112}
-{"mal_id":60285,"anilist_id":184237,"ann_id":35291,"hianime":{"id":"sakamoto-days-part-2-19787","episodes":{"sub":9,"dub":9}},"anisearch_id":19797}
+{"mal_id":60285,"anilist_id":184237,"ann_id":35291,"kitsu_id":49332,"hianime":{"id":"sakamoto-days-part-2-19787","episodes":{"sub":9,"dub":9}},"anisearch_id":19797}
 {"mal_id":60293,"anilist_id":184279,"ann_id":34018,"kitsu_id":49336,"anisearch_id":19762}
 {"mal_id":60294,"anilist_id":184280,"ann_id":34017,"kitsu_id":49335}
 {"mal_id":60295,"anilist_id":184288,"anisearch_id":20110}
@@ -23109,6 +23109,7 @@
 {"mal_id":61535,"anilist_id":191013}
 {"mal_id":61538,"anilist_id":187404,"kitsu_id":50093,"anisearch_id":20304}
 {"mal_id":61539,"anilist_id":188933,"anisearch_id":20352}
+{"mal_id":61541,"kitsu_id":50122}
 {"mal_id":61546,"kitsu_id":49866}
 {"mal_id":61549,"anilist_id":191205,"ann_id":35781,"anisearch_id":20464}
 {"mal_id":61555,"kitsu_id":49874,"anisearch_id":20740}
@@ -23234,7 +23235,7 @@
 {"mal_id":61950,"anilist_id":195886}
 {"mal_id":61952,"anilist_id":166475,"kitsu_id":50045}
 {"mal_id":61954,"anilist_id":196250}
-{"mal_id":61963,"anisearch_id":20741}
+{"mal_id":61963,"kitsu_id":50124,"anisearch_id":20741}
 {"mal_id":61964,"anilist_id":195384,"ann_id":36838}
 {"mal_id":61967,"anilist_id":195604,"ann_id":36880}
 {"mal_id":61968,"anilist_id":195448,"ann_id":36842}
@@ -23257,6 +23258,7 @@
 {"mal_id":62026,"anilist_id":195916}
 {"mal_id":62027,"kitsu_id":50034}
 {"mal_id":62031,"anilist_id":195833}
+{"mal_id":62033,"kitsu_id":50127}
 {"mal_id":62035,"anilist_id":196063}
 {"mal_id":62037,"anilist_id":196064,"anisearch_id":20747}
 {"mal_id":62039,"anilist_id":194207,"ann_id":36449}
@@ -23330,6 +23332,7 @@
 {"mal_id":62324,"kitsu_id":50114}
 {"mal_id":62328,"anilist_id":196750}
 {"mal_id":62331,"anilist_id":197754,"ann_id":37594}
+{"mal_id":62341,"kitsu_id":50118}
 {"mal_id":62342,"anilist_id":197868,"ann_id":37618,"anisearch_id":20859}
 {"mal_id":62349,"anilist_id":194087,"ann_id":34713}
 {"mal_id":62352,"anisearch_id":20861}

@@ -79,7 +79,6 @@ hianime_last_call = 0.0
 # Kitsu throttle
 KITSU_MIN_INTERVAL = 1.0
 kitsu_last_call = 0.0
-KITSU_PAGE_LIMIT = 20
 kitsu_auth_header = None
 
 missing_mal_ids = set()
@@ -1216,49 +1215,6 @@ def kitsu_find_kitsu_id_by_mal(mal_id: int) -> int | None:
     return None
 
 
-def kitsu_get_mal_for_kitsu(kitsu_id: int) -> int | None:
-    """Use /anime/{id}/mappings to find the MAL id."""
-    url = f"{KITSU_BASE}/anime/{int(kitsu_id)}/mappings"
-    data = kitsu_get(url)
-    if not data or "data" not in data:
-        return None
-    for m in data.get("data") or []:
-        attrs = m.get("attributes") or {}
-        if attrs.get("externalSite") == "myanimelist/anime":
-            eid = attrs.get("externalId")
-            try:
-                return int(eid)
-            except Exception:
-                continue
-    return None
-
-
-def kitsu_list_anime_castings(kitsu_anime_id: int) -> list[dict]:
-    """
-    Fetch all casting records for a single Kitsu anime, following pagination.
-    """
-    results: list[dict] = []
-    url = f"{KITSU_BASE}/anime/{kitsu_anime_id}/castings?page[limit]={KITSU_PAGE_LIMIT}"
-    page_idx = 1
-    while True:
-        data = kitsu_get(url)
-        if not data or "data" not in data:
-            log(f"[Kitsu] No data for anime {kitsu_anime_id} (page {page_idx})")
-            break
-        items = data.get("data") or []
-        log(f"[Kitsu] anime {kitsu_anime_id}: received {len(items)} castings (page {page_idx})")
-        if not isinstance(items, list) or not items:
-            break
-        results.extend(items)
-        links = data.get("links") or {}
-        next_url = links.get("next")
-        if not next_url:
-            break
-        url = next_url
-        page_idx += 1
-    return results
-
-
 def kitsu_lang_to_key(raw: str) -> str:
     """Map Kitsu casting language to our normalized key."""
     if not raw:
@@ -1266,6 +1222,17 @@ def kitsu_lang_to_key(raw: str) -> str:
     iso_try = ann_lang_to_key(raw)
     return sanitize_lang(iso_try or raw)
 
+
+def kitsu_list_languages(kitsu_anime_id: int) -> set[str]:
+    url = f"{KITSU_BASE}/anime/{int(kitsu_anime_id)}/_languages"
+    data = kitsu_get(url)
+    langs: set[str] = set()
+    if isinstance(data, list):
+        for raw in data:
+            key = kitsu_lang_to_key(str(raw))
+            if key:
+                langs.add(key)
+    return langs
 
 # ----------------------
 # aniSearch helpers
@@ -1573,6 +1540,7 @@ def run_kitsu(mal_start: int, mal_end: int):
       - Save dubbed_* under dubs/sources/automatic_kitsu and update mappings_kitsu.jsonl.
     """
     existing_map = load_simple_jsonl_map(KITSU_MAPPING_JSONL, "kitsu_id")
+    known_missing = load_missing_cache()
     checked_ok_ids: set[int] = set()
     processed = 0
     with_langs = 0
@@ -1581,11 +1549,16 @@ def run_kitsu(mal_start: int, mal_end: int):
 
     try:
         for idx, mal_id in enumerate(range(mal_start, mal_end + 1), 1):
+            if mal_id in known_missing:
+                if debug_log:
+                    log(f"[Kitsu] Skipping MAL {mal_id} (cached missing)")
+                continue
+
             kid = existing_map.get(mal_id)
             if not kid:
                 kid = kitsu_find_kitsu_id_by_mal(mal_id)
                 if kid:
-                    kitsu_mapping[int(mal_id)] = int(kid)  # accumulate new ones
+                    kitsu_mapping[int(mal_id)] = int(kid)
                     existing_map[int(mal_id)] = int(kid)
                     log(f"[Kitsu] Discovered mapping MAL {mal_id} -> Kitsu {kid}")
                 else:
@@ -1593,16 +1566,8 @@ def run_kitsu(mal_start: int, mal_end: int):
                     log(f"[Kitsu] MAL {mal_id}: no Kitsu ID found")
                     continue
 
-            log(f"[Kitsu] MAL {mal_id} -> Kitsu {kid}: fetching castings")
-            castings = kitsu_list_anime_castings(kid)
-            langs_found = set()
-
-            for c in castings or []:
-                attrs = c.get("attributes") or {}
-                raw_lang = attrs.get("language") or attrs.get("locale")
-                key = kitsu_lang_to_key(raw_lang)
-                if key:
-                    langs_found.add(key)
+            log(f"[Kitsu] MAL {mal_id} -> Kitsu {kid}: fetching languages")
+            langs_found = kitsu_list_languages(kid)
 
             if langs_found:
                 for key in langs_found:

@@ -19803,6 +19803,7 @@
 {"mal_id":59149,"kitsu_id":49032}
 {"mal_id":59150,"kitsu_id":49223}
 {"mal_id":59160,"kitsu_id":48992}
+{"mal_id":59161,"kitsu_id":48997}
 {"mal_id":59162,"kitsu_id":49022}
 {"mal_id":59169,"kitsu_id":49005}
 {"mal_id":59173,"kitsu_id":49415}
@@ -19959,6 +19960,7 @@
 {"mal_id":59944,"kitsu_id":49238}
 {"mal_id":59946,"kitsu_id":49260}
 {"mal_id":59953,"kitsu_id":49725}
+{"mal_id":59957,"kitsu_id":49233}
 {"mal_id":59961,"kitsu_id":50028}
 {"mal_id":59969,"kitsu_id":49349}
 {"mal_id":59970,"kitsu_id":49235}
@@ -20035,6 +20037,7 @@
 {"mal_id":60278,"kitsu_id":49330}
 {"mal_id":60279,"kitsu_id":49348}
 {"mal_id":60283,"kitsu_id":49442}
+{"mal_id":60285,"kitsu_id":49332}
 {"mal_id":60293,"kitsu_id":49336}
 {"mal_id":60294,"kitsu_id":49335}
 {"mal_id":60297,"kitsu_id":49510}
@@ -20242,6 +20245,7 @@
 {"mal_id":61512,"kitsu_id":49858}
 {"mal_id":61517,"kitsu_id":49861}
 {"mal_id":61538,"kitsu_id":50093}
+{"mal_id":61541,"kitsu_id":50122}
 {"mal_id":61546,"kitsu_id":49866}
 {"mal_id":61555,"kitsu_id":49874}
 {"mal_id":61556,"kitsu_id":49944}
@@ -20296,12 +20300,14 @@
 {"mal_id":61942,"kitsu_id":50007}
 {"mal_id":61944,"kitsu_id":50009}
 {"mal_id":61952,"kitsu_id":50045}
+{"mal_id":61963,"kitsu_id":50124}
 {"mal_id":61971,"kitsu_id":50027}
 {"mal_id":61973,"kitsu_id":50060}
 {"mal_id":62001,"kitsu_id":50023}
 {"mal_id":62002,"kitsu_id":50067}
 {"mal_id":62012,"kitsu_id":50030}
 {"mal_id":62027,"kitsu_id":50034}
+{"mal_id":62033,"kitsu_id":50127}
 {"mal_id":62072,"kitsu_id":50061}
 {"mal_id":62079,"kitsu_id":50042}
 {"mal_id":62082,"kitsu_id":50058}
@@ -20328,3 +20334,4 @@
 {"mal_id":62295,"kitsu_id":45879}
 {"mal_id":62296,"kitsu_id":46588}
 {"mal_id":62324,"kitsu_id":50114}
+{"mal_id":62341,"kitsu_id":50118}
