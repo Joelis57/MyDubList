@@ -35,7 +35,7 @@
 | Portuguese | Português | 1682 |
 | Korean | 한국어 | 1368 |
 | Tagalog | Tagalog | 812 |
-| Chinese | 中文 | 690 |
+| Chinese | 中文 | 691 |
 | Arabic | العربية | 316 |
 | Polish | Polski | 274 |
 | Hungarian | Magyar | 185 |
