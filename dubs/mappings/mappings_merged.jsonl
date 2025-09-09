@@ -9690,7 +9690,7 @@
 {"mal_id":27843,"anilist_id":165983,"ann_id":21643,"kitsu_id":9762,"anisearch_id":19693}
 {"mal_id":27845,"kitsu_id":9792}
 {"mal_id":27847,"kitsu_id":9895}
-{"mal_id":27849,"kitsu_id":9793}
+{"mal_id":27849,"anilist_id":198412,"kitsu_id":9793}
 {"mal_id":27851,"kitsu_id":9795,"anisearch_id":20511}
 {"mal_id":27853,"kitsu_id":9747}
 {"mal_id":27855,"kitsu_id":9814}
@@ -22587,6 +22587,7 @@
 {"mal_id":60014,"ann_id":1872}
 {"mal_id":60018,"kitsu_id":49822}
 {"mal_id":60019,"kitsu_id":49823}
+{"mal_id":60020,"anilist_id":163788}
 {"mal_id":60021,"anilist_id":182466}
 {"mal_id":60022,"anilist_id":182469,"ann_id":33643,"kitsu_id":49259,"anisearch_id":19696}
 {"mal_id":60023,"kitsu_id":49263}
@@ -23309,7 +23310,7 @@
 {"mal_id":62213,"ann_id":17527}
 {"mal_id":62214,"anilist_id":197179}
 {"mal_id":62230,"kitsu_id":50097}
-{"mal_id":62231,"ann_id":37291}
+{"mal_id":62231,"anilist_id":198413,"ann_id":37291}
 {"mal_id":62233,"ann_id":37416,"kitsu_id":50089}
 {"mal_id":62238,"kitsu_id":50096,"hianime_id":"dungeons-and-television-19841","anisearch_id":20707}
 {"mal_id":62243,"kitsu_id":50116}
@@ -23328,11 +23329,15 @@
 {"mal_id":62296,"anilist_id":155346,"kitsu_id":46588}
 {"mal_id":62311,"anilist_id":197619,"ann_id":37525}
 {"mal_id":62312,"anilist_id":197620,"ann_id":37526,"anisearch_id":20850}
+{"mal_id":62314,"anilist_id":196540}
+{"mal_id":62315,"anilist_id":196722}
+{"mal_id":62316,"anilist_id":194353}
 {"mal_id":62320,"ann_id":19852}
 {"mal_id":62322,"anilist_id":197715,"ann_id":37557,"anisearch_id":20844}
 {"mal_id":62324,"kitsu_id":50114}
 {"mal_id":62328,"anilist_id":196750}
 {"mal_id":62331,"anilist_id":197754,"ann_id":37594}
+{"mal_id":62339,"anilist_id":195360}
 {"mal_id":62341,"anilist_id":198380,"kitsu_id":50118}
 {"mal_id":62342,"anilist_id":197868,"ann_id":37618,"anisearch_id":20859}
 {"mal_id":62349,"anilist_id":194087,"ann_id":34713}
@@ -23349,3 +23354,4 @@
 {"mal_id":62406,"anilist_id":188928}
 {"mal_id":62417,"anilist_id":198379}
 {"mal_id":62422,"ann_id":33080}
+{"mal_id":62435,"anilist_id":198409}
