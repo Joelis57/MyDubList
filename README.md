@@ -26,7 +26,7 @@
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| Japanese | 日本語 | 14944 |
+| Japanese | 日本語 | 14945 |
 | English | English | 5223 |
 | Spanish | Español | 2948 |
 | German | Deutsch | 2898 |
