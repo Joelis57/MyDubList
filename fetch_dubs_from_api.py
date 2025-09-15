@@ -306,14 +306,23 @@ def load_simple_jsonl_map(path: str, value_key: str) -> dict[int, object]:
     return result
 
 
-def save_simple_jsonl_map(path: str, mapping: dict[int, int | str], value_key: str):
-    """Save dict[int,int|str] to JSONL with keys mal_id and value_key."""
+def save_simple_jsonl_map(path: str, mapping: dict[int, int | str | None], value_key: str):
     _ensure_dir_for(path)
     try:
-        # merge with existing
         existing = load_simple_jsonl_map(path, value_key)
-        existing.update({int(k): (int(v) if isinstance(v, (int, float)) or str(v).isdigit() else v)
-                         for k, v in mapping.items()})
+
+        for k, v in mapping.items():
+            mid = int(k)
+            if v is None:
+                if mid in existing:
+                    existing.pop(mid, None)
+                continue
+
+            if isinstance(v, (int, float)) or (isinstance(v, str) and v.isdigit()):
+                v = int(v)
+
+            existing[mid] = v
+
         with open(path, "w", encoding="utf-8") as f:
             for mid in sorted(existing.keys(), key=int):
                 val = existing[mid]
@@ -1299,12 +1308,6 @@ def load_anisearch_source(source_file: str) -> tuple[dict[str, set[int]], dict[i
 # ----------------------
 
 def run_ann(mal_start: int, mal_end: int):
-    """
-    ANN mode:
-      - Load existing mappings (mal_id -> ann_id) from JSONL.
-      - For MAL IDs missing a mapping, call Jikan /external to discover ANN id.
-      - Batch ANN ids to fetch dub languages.
-    """
     existing_map = load_simple_jsonl_map(ANN_MAPPING_JSONL, "ann_id")
     pending: list[int] = []
     ann_to_mal: dict[int, int] = {}
@@ -1313,16 +1316,31 @@ def run_ann(mal_start: int, mal_end: int):
 
     try:
         for mal_id in range(mal_start, mal_end + 1):
-            ann_id = existing_map.get(mal_id)
-            if ann_id:
-                ann_to_mal[ann_id] = mal_id
-                pending.append(ann_id)
-            else:
+            try:
                 found = jikan_ann_id_for_mal(mal_id)
-                if found:
-                    ann_mapping[int(mal_id)] = int(found)
-                    ann_to_mal[int(found)] = mal_id
-                    pending.append(int(found))
+            except Exception as e:
+                log(f"[ANN] Transient Jikan failure for MAL {mal_id}: {e} (keeping existing mapping, skipping)")
+                continue
+
+            if found is not None:
+                try:
+                    found = int(found)
+                except Exception:
+                    found = None
+
+            if found:
+                prev = existing_map.get(mal_id)
+                if prev != found:
+                    log(f"[ANN] Mapping update MAL {mal_id}: {prev} -> {found}")
+                ann_mapping[int(mal_id)] = int(found)
+                ann_to_mal[int(found)] = int(mal_id)
+                pending.append(int(found))
+            else:
+                # Successful Jikan call but no ANN link => mapping removal
+                if mal_id in existing_map:
+                    log(f"[ANN] Mapping removed for MAL {mal_id} (was {existing_map[mal_id]}), will delete")
+                ann_mapping[int(mal_id)] = None
+                checked_ok_ids.add(int(mal_id))
 
             if len(pending) >= ANN_BATCH_SIZE:
                 if debug_log:
