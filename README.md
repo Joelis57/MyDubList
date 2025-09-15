@@ -27,8 +27,8 @@
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | Japanese | 日本語 | 14952 |
-| English | English | 5223 |
-| Spanish | Español | 2949 |
+| English | English | 5224 |
+| Spanish | Español | 2950 |
 | German | Deutsch | 2898 |
 | French | Français | 2394 |
 | Italian | Italiano | 2270 |
