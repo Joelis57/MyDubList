@@ -27,14 +27,14 @@
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | Japanese | 日本語 | 14959 |
-| English | English | 5225 |
+| English | English | 5226 |
 | Spanish | Español | 2951 |
 | German | Deutsch | 2906 |
 | French | Français | 2396 |
 | Italian | Italiano | 2272 |
-| Portuguese | Português | 1685 |
+| Portuguese | Português | 1686 |
 | Korean | 한국어 | 1369 |
-| Tagalog | Tagalog | 812 |
+| Tagalog | Tagalog | 811 |
 | Chinese | 中文 | 694 |
 | Arabic | العربية | 316 |
 | Polish | Polski | 274 |
@@ -42,7 +42,7 @@
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 135 |
 | Hebrew | עברית | 120 |
-| Dutch | Nederlands | 102 |
+| Dutch | Nederlands | 103 |
 | Russian | Русский | 78 |
 | Danish | Dansk | 62 |
 | Indonesian | Bahasa Indonesia | 60 |
