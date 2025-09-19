@@ -27,11 +27,11 @@
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | Japanese | 日本語 | 14965 |
-| English | English | 5227 |
-| Spanish | Español | 2951 |
-| German | Deutsch | 2907 |
-| French | Français | 2396 |
-| Italian | Italiano | 2272 |
+| English | English | 5228 |
+| Spanish | Español | 2952 |
+| German | Deutsch | 2908 |
+| French | Français | 2397 |
+| Italian | Italiano | 2273 |
 | Portuguese | Português | 1686 |
 | Korean | 한국어 | 1369 |
 | Tagalog | Tagalog | 811 |
