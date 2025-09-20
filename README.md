@@ -26,15 +26,15 @@
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| Japanese | 日本語 | 14965 |
+| Japanese | 日本語 | 14963 |
 | English | English | 5228 |
-| Spanish | Español | 2952 |
+| Spanish | Español | 2951 |
 | German | Deutsch | 2908 |
-| French | Français | 2397 |
-| Italian | Italiano | 2273 |
+| French | Français | 2396 |
+| Italian | Italiano | 2272 |
 | Portuguese | Português | 1686 |
 | Korean | 한국어 | 1369 |
-| Tagalog | Tagalog | 811 |
+| Tagalog | Tagalog | 810 |
 | Chinese | 中文 | 695 |
 | Arabic | العربية | 316 |
 | Polish | Polski | 274 |
