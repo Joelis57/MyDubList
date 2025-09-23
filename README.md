@@ -26,10 +26,10 @@
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| Japanese | 日本語 | 14969 |
+| Japanese | 日本語 | 14973 |
 | English | English | 5230 |
-| Spanish | Español | 2953 |
-| German | Deutsch | 2910 |
+| Spanish | Español | 2954 |
+| German | Deutsch | 2911 |
 | French | Français | 2396 |
 | Italian | Italiano | 2273 |
 | Portuguese | Português | 1687 |
