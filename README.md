@@ -26,13 +26,13 @@
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| Japanese | 日本語 | 14967 |
+| Japanese | 日本語 | 14968 |
 | English | English | 5229 |
 | Spanish | Español | 2953 |
 | German | Deutsch | 2910 |
 | French | Français | 2395 |
 | Italian | Italiano | 2273 |
-| Portuguese | Português | 1686 |
+| Portuguese | Português | 1687 |
 | Korean | 한국어 | 1369 |
 | Tagalog | Tagalog | 810 |
 | Chinese | 中文 | 698 |
