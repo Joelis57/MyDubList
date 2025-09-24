@@ -34,7 +34,7 @@
 | Italian | Italiano | 2273 |
 | Portuguese | Português | 1687 |
 | Korean | 한국어 | 1369 |
-| Tagalog | Tagalog | 810 |
+| Tagalog | Tagalog | 811 |
 | Chinese | 中文 | 698 |
 | Arabic | العربية | 316 |
 | Polish | Polski | 274 |
