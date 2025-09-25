@@ -31,7 +31,7 @@
 | Spanish | Español | 2954 |
 | German | Deutsch | 2911 |
 | French | Français | 2396 |
-| Italian | Italiano | 2273 |
+| Italian | Italiano | 2274 |
 | Portuguese | Português | 1687 |
 | Korean | 한국어 | 1369 |
 | Tagalog | Tagalog | 811 |
