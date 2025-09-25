@@ -30,7 +30,7 @@
 | English | English | 5230 |
 | Spanish | Español | 2954 |
 | German | Deutsch | 2911 |
-| French | Français | 2396 |
+| French | Français | 2397 |
 | Italian | Italiano | 2274 |
 | Portuguese | Português | 1687 |
 | Korean | 한국어 | 1369 |
