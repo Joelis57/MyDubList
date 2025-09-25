@@ -14,7 +14,7 @@
 {"mal_id":23,"anilist_id":23,"ann_id":4420,"kitsu_id":14,"anisearch_id":1141}
 {"mal_id":24,"anilist_id":24,"ann_id":4114,"kitsu_id":15,"hianime_id":"school-rumble-606","anisearch_id":1437}
 {"mal_id":25,"anilist_id":25,"ann_id":4128,"kitsu_id":16,"hianime_id":"desert-punk-1782","anisearch_id":2175}
-{"mal_id":26,"anilist_id":26,"ann_id":2304,"kitsu_id":17,"anisearch_id":825}
+{"mal_id":26,"anilist_id":26,"ann_id":2304,"kitsu_id":17,"hianime_id":"texhnolyze-908","anisearch_id":825}
 {"mal_id":27,"anilist_id":27,"ann_id":4874,"kitsu_id":18,"hianime_id":"trinity-blood-2201","anisearch_id":2570}
 {"mal_id":28,"anilist_id":28,"ann_id":4454,"kitsu_id":19,"anisearch_id":2782}
 {"mal_id":29,"anilist_id":29,"ann_id":4649,"kitsu_id":20,"hianime_id":"zipang-1545","anisearch_id":3180}
@@ -1052,8 +1052,8 @@
 {"mal_id":1155,"anilist_id":1155,"ann_id":1008,"kitsu_id":1036,"anisearch_id":3406}
 {"mal_id":1156,"anilist_id":1156,"ann_id":845,"kitsu_id":1037,"anisearch_id":527}
 {"mal_id":1157,"anilist_id":1157,"ann_id":639,"kitsu_id":1038,"hianime_id":"final-fantasy-unlimited-7152","anisearch_id":1600}
-{"mal_id":1158,"anilist_id":1158,"ann_id":668,"kitsu_id":1039,"anisearch_id":1664}
-{"mal_id":1159,"anilist_id":1159,"ann_id":997,"kitsu_id":1040,"anisearch_id":493}
+{"mal_id":1158,"anilist_id":1158,"ann_id":668,"kitsu_id":1039,"hianime_id":"geobreeders-file-x-get-back-the-kitty-6700","anisearch_id":1664}
+{"mal_id":1159,"anilist_id":1159,"ann_id":997,"kitsu_id":1040,"hianime_id":"geobreeders-breakthrough-6512","anisearch_id":493}
 {"mal_id":1160,"anilist_id":1160,"ann_id":368,"kitsu_id":1041,"anisearch_id":2264}
 {"mal_id":1161,"anilist_id":1161,"ann_id":44,"kitsu_id":1042,"hianime_id":"maze-the-mega-burst-space-5031","anisearch_id":3075}
 {"mal_id":1162,"anilist_id":1162,"ann_id":2045,"kitsu_id":1043,"hianime_id":"maze-the-mega-burst-space-ova-7611","anisearch_id":2164}
@@ -11519,7 +11519,7 @@
 {"mal_id":32691,"anilist_id":99657,"kitsu_id":12302,"hianime_id":"flowering-heart-7498","anisearch_id":11283}
 {"mal_id":32693,"anilist_id":120773,"kitsu_id":12365,"anisearch_id":5907}
 {"mal_id":32695,"kitsu_id":12085,"anisearch_id":16084}
-{"mal_id":32696,"anilist_id":21643,"ann_id":18061,"kitsu_id":11826,"anisearch_id":11161}
+{"mal_id":32696,"anilist_id":21643,"ann_id":18061,"kitsu_id":11826,"hianime_id":"the-morose-mononokean-1829","anisearch_id":11161}
 {"mal_id":32697,"anilist_id":21641,"ann_id":18331,"kitsu_id":11829,"anisearch_id":11177}
 {"mal_id":32698,"anilist_id":21650,"kitsu_id":11836,"anisearch_id":11227}
 {"mal_id":32700,"anilist_id":102618,"kitsu_id":11843}
@@ -18978,7 +18978,7 @@
 {"mal_id":51293,"anilist_id":146438,"ann_id":25445,"anisearch_id":17233}
 {"mal_id":51294,"anilist_id":146282,"kitsu_id":46246,"anisearch_id":17213}
 {"mal_id":51296,"kitsu_id":46008,"anisearch_id":17235}
-{"mal_id":51297,"anilist_id":146493,"ann_id":25452,"kitsu_id":46000,"anisearch_id":17216}
+{"mal_id":51297,"anilist_id":146493,"ann_id":25452,"kitsu_id":46000,"hianime_id":"ragna-crimson-18566","anisearch_id":17216}
 {"mal_id":51299,"anilist_id":145852,"anisearch_id":17948}
 {"mal_id":51300,"anilist_id":146485,"ann_id":25428,"kitsu_id":48724,"anisearch_id":17262}
 {"mal_id":51304,"anilist_id":146472,"ann_id":25447,"kitsu_id":45975,"hianime_id":"flcl-grunge-18532","anisearch_id":17247}
