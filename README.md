@@ -28,7 +28,7 @@
 |---|---:|---:|
 | Japanese | 日本語 | 14973 |
 | English | English | 5230 |
-| Spanish | Español | 2954 |
+| Spanish | Español | 2955 |
 | German | Deutsch | 2911 |
 | French | Français | 2398 |
 | Italian | Italiano | 2275 |
