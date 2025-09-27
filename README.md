@@ -72,7 +72,7 @@ final/                       # DEPRECATED: legacy per‑language JSONs
 ```
 
 - `<lang>` is a lowercase language key (e.g., `english`, `french`, `spanish`, `german`, `italian`, `japanese`, `korean`, `mandarin`, `hebrew`, `hungarian`, `portuguese_br`, etc.).
-- `<confidence>` can be `low` (≥1 source), `normal` (≥2 sources), `high` (≥3 sources) and `very-high` (≥4 sources).
+- `<confidence>` can be `low` (≥1 source), `normal` (≥2 sources), `high` (≥3 sources) or `very-high` (≥4 sources).
 
 
 ## Sources
@@ -82,9 +82,9 @@ The dataset aggregates information from multiple sources, including:
 - **MyAnimeList** (official API) and **Jikan** (community API)
 - **AniList** (official API)
 - **Anime News Network** (official API)
-- **aniSearch API** (custom API for MyDubList)
-- **Kitsu API** (official API)
-- **HiAnime API** (community API)
+- **aniSearch** (custom API for MyDubList)
+- **Kitsu** (official API)
+- **HiAnime** (community API)
 - Curated community lists (e.g., *Kenny Stryker’s English dubs list* on MAL forums)
 - Manual overrides by MyDubList
 
