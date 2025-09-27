@@ -117,6 +117,8 @@ def build_language_index():
     for fname in sorted(os.listdir(DUBS_LOW_DIR)):
         if not (fname.startswith("dubbed_") and fname.endswith(".json")):
             continue
+        if fname == "dubbed_japanese.json":
+            continue  # skip Japanese
         path = os.path.join(DUBS_LOW_DIR, fname)
         data = load_json(path) or {}
         key = infer_language_from_filename(fname)

@@ -22,7 +22,6 @@ The JSON datasets are licensed under **CC BY 4.0** (only requiring attribution) 
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| Japanese | 日本語 | 14978 |
 | English | English | 5231 |
 | Spanish | Español | 2955 |
 | German | Deutsch | 2911 |
