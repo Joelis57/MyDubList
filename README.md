@@ -1,12 +1,8 @@
 # MyDubList
 
-**MyDubList** is an open-source project that builds and maintains a multi-language database of anime with released dubs. The dataset is designed to be dependable, simple to consume, and permissively licensed (only requiring attribution) so anyone-from hobby scripts to large closed-source apps-can use it.
+MyDubList is an open-source project that builds and maintains a **multi‑language** database of anime **dubs**.
+The JSON datasets are licensed under **CC BY 4.0** (only requiring attribution) so anyone-from hobby scripts to large closed-source apps-can use it.
 
-## Overview
-
-- Continuously updated, language-keyed dataset of dubbed anime (by MyAnimeList ID).
-- Final JSON files under `final/`, one per language (e.g. `final/dubbed_english.json`).
-- Optional `incomplete` array tracks edge cases (partial/lost/unverified) when relevant.
 
 ## Database search website
 
@@ -55,6 +51,46 @@
 | Lithuanian | Lietuvių | 0 |
 <!-- LANG-STATS:END -->
 
+## Data layout
+
+```
+dubs/
+  confidence/
+    <confidence>/
+      dubbed_<lang>.json
+  counts/
+    dubbed_<lang>.json       # { "<mal_id>": <num_sources>, ... }
+  sources/
+    <source>/
+      dubbed_<lang>.json     # { "dubbed": [<mal_id>, <mal_id>, ...] }
+  mappings/
+    mappings_<source>.jsonl  # { "mal_id":<mal_id>,"<source>_id":<source_id>, ... }
+
+cache/
+  missing_mal_ids.json       # List of MAL IDs returning 404
+
+final/                       # DEPRECATED: legacy per‑language JSONs
+```
+
+- `<lang>` is a lowercase language key (e.g., `english`, `french`, `spanish`, `german`, `italian`, `japanese`, `korean`, `mandarin`, `hebrew`, `hungarian`, `portuguese_br`, etc.).
+- `<confidence>` can be `low` (≥1 source), `normal` (≥2 sources), `high` (≥3 sources) and `very-high` (≥4 sources).
+
+
+## Sources
+
+The dataset aggregates information from multiple sources, including:
+
+- **MyAnimeList** (official API) and **Jikan** (community API)
+- **AniList** (official API)
+- **Anime News Network** (official API)
+- **aniSearch API** (custom API for MyDubList)
+- **Kitsu API** (official API)
+- **HiAnime API** (community API)
+- Curated community lists (e.g., *Kenny Stryker’s English dubs list* on MAL forums)
+- Manual overrides by MyDubList
+
+If you have an authoritative source to add, please open an issue/PR.
+
 ## App integrations
 
 ### DailyAL
@@ -62,41 +98,15 @@
 
 With enough interest, support may be added to MoeList and other iOS/Android clients.
 
-## Data sources (automatic)
+## Contributing
 
-The database is automatically assembled and constantly refreshed from multiple sources:
+- **Issues:** Please include the anime link (MAL preferred), the **language**, what’s missing/incorrect, and a verifying **source URL** (streaming page, official news/announcement, etc.).
+- **Pull Requests:** Welcome for new sources, data corrections, language keys, validation logic, and tooling improvements.
+- Be mindful of rate limits and terms of the upstream sources.
 
-- MyAnimeList API
-- AniList API
-- Kenny Stryker's ("Mr. Dub McQueen") community forum post on MAL
-- Select NSFW dub sources (where applicable)
+## Attribution & License
 
-All sources are ingested, normalized, de-duplicated, and merged by the merge_manual_and_automatic script to keep the dataset current. If something looks wrong or missing for your language, please open an issue.
-
-## Output format
-
-Each language file in `final/` contains two arrays of MAL IDs:
-
-```json
-{
-  "dubbed": [16498, 40028, 38524],
-  "incomplete": [50197]
-}
-```
-
-## ☕ Support the Project
-
-If you find this project helpful, consider supporting its development.
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/joelis)
-
----
-
-## 📄 License
-
-- **Code:** MIT © MyDubList. See [LICENSE](./LICENSE).
-- **Dataset (JSON files)**: **Creative Commons Attribution 4.0 International (CC BY 4.0)**.  
-  See [DATA-LICENSE](./DATA-LICENSE) and [NOTICE](./NOTICE).
+**Dataset** (all JSON files inside the repository): Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).  
 
 ### Required attribution for dataset (CC BY 4.0)
 
@@ -117,15 +127,8 @@ I kindly ask integrators who display dub info to include:
 - A small "**Powered by MyDubList**" credit linking to https://mydublist.com  
 - **Report inaccurate dubs** → https://github.com/Joelis57/MyDubList/issues/new/choose  
 - **Support MyDubList** → https://ko-fi.com/joelis
+If you need a different data license for a specific use case, open an issue to discuss.
 
----
+## ☕ Support
 
-## 📫 Contributing
-
-Your contributions are highly appreciated!
-
-- **Report issues**: please include the anime link, language, what’s missing/incorrect, and a source (streaming page, official post, etc.).
-- **Manual overrides**: see manual/ for the override format. Manual entries supersede automated results during merge.
-- **Pull requests**: welcome for new sources, language keys, validation, and tooling.
-
----
+If this project helps you, consider supporting: https://ko-fi.com/joelis
