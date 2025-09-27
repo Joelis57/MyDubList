@@ -17,6 +17,21 @@ The JSON datasets are licensed under **CC BY 4.0** (only requiring attribution) 
 [![Install for Chrome](https://img.shields.io/badge/Install-Chrome%20Web%20Store-4285F4?logo=google-chrome&logoColor=white)](https://chrome.google.com/webstore/detail/mydublist/hdpppphfhlhmehghmndopednfpbimkco)
 [![Install for Firefox](https://img.shields.io/badge/Install-Firefox%20Add--ons-FF7139?logo=firefox-browser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/mydublist)
 
+## Sources
+
+The dataset aggregates information from multiple sources, including:
+
+- **MyAnimeList** (official API) and **Jikan** (community API)
+- **AniList** (official API)
+- **Anime News Network** (official API)
+- **aniSearch** (custom API for MyDubList)
+- **Kitsu** (official API)
+- **HiAnime** (community API)
+- Curated community lists (e.g., *Kenny Stryker’s English dubs list* on MAL forums)
+- Manual overrides by MyDubList
+
+If you have an authoritative source to add, please open an issue/PR.
+
 ## Language statistics
 
 <!-- LANG-STATS:START -->
@@ -73,22 +88,6 @@ final/                       # DEPRECATED: legacy per‑language JSONs
 
 - `<lang>` is a lowercase language key (e.g., `english`, `french`, `spanish`, `german`, `italian`, `japanese`, `korean`, `mandarin`, `hebrew`, `hungarian`, `portuguese_br`, etc.).
 - `<confidence>` can be `low` (≥1 source), `normal` (≥2 sources), `high` (≥3 sources) or `very-high` (≥4 sources).
-
-
-## Sources
-
-The dataset aggregates information from multiple sources, including:
-
-- **MyAnimeList** (official API) and **Jikan** (community API)
-- **AniList** (official API)
-- **Anime News Network** (official API)
-- **aniSearch** (custom API for MyDubList)
-- **Kitsu** (official API)
-- **HiAnime** (community API)
-- Curated community lists (e.g., *Kenny Stryker’s English dubs list* on MAL forums)
-- Manual overrides by MyDubList
-
-If you have an authoritative source to add, please open an issue/PR.
 
 ## App integrations
 
