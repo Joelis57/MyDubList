@@ -42,10 +42,10 @@ If you have an authoritative source to add, please open an issue/PR.
 | German | Deutsch | 2911 |
 | French | Français | 2399 |
 | Italian | Italiano | 2276 |
-| Portuguese | Português | 1687 |
+| Portuguese | Português | 1688 |
 | Korean | 한국어 | 1369 |
 | Tagalog | Tagalog | 811 |
-| Chinese | 中文 | 699 |
+| Chinese | 中文 | 701 |
 | Arabic | العربية | 316 |
 | Polish | Polski | 274 |
 | Hungarian | Magyar | 185 |
@@ -56,7 +56,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Russian | Русский | 78 |
 | Danish | Dansk | 62 |
 | Indonesian | Bahasa Indonesia | 60 |
-| Thai | ไทย | 39 |
+| Thai | ไทย | 41 |
 | Hindi | हिन्दी | 19 |
 | Finnish | Suomi | 16 |
 | Turkish | Türkçe | 10 |
