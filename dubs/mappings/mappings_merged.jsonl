@@ -17526,6 +17526,7 @@
 {"mal_id":44702,"anilist_id":127689,"ann_id":23846}
 {"mal_id":44746,"anisearch_id":10415}
 {"mal_id":44752,"anilist_id":133353,"kitsu_id":44935}
+{"mal_id":44760,"anilist_id":199416}
 {"mal_id":44775,"anilist_id":104363,"kitsu_id":13288}
 {"mal_id":44776,"anilist_id":103993,"kitsu_id":44793}
 {"mal_id":44807,"anilist_id":127271,"ann_id":24058,"kitsu_id":43808,"hianime_id":"belle-17395","anisearch_id":15867}
@@ -17573,6 +17574,7 @@
 {"mal_id":45178,"anilist_id":129292}
 {"mal_id":45179,"anilist_id":129293}
 {"mal_id":45180,"anilist_id":129356}
+{"mal_id":45181,"anilist_id":199415}
 {"mal_id":45182,"anilist_id":129465}
 {"mal_id":45188,"anilist_id":129354}
 {"mal_id":45195,"anilist_id":115830,"kitsu_id":43913}
@@ -21252,6 +21254,7 @@
 {"mal_id":56790,"anilist_id":169773,"kitsu_id":48032}
 {"mal_id":56791,"anilist_id":169750,"anisearch_id":18841}
 {"mal_id":56793,"anilist_id":169825,"kitsu_id":48075}
+{"mal_id":56795,"anilist_id":146583}
 {"mal_id":56798,"anisearch_id":19532}
 {"mal_id":56800,"anilist_id":166461,"kitsu_id":48286,"anisearch_id":18653}
 {"mal_id":56801,"anilist_id":183799}
@@ -21714,7 +21717,7 @@
 {"mal_id":57796,"anilist_id":173263,"ann_id":31453,"kitsu_id":48417,"anisearch_id":19009}
 {"mal_id":57797,"anilist_id":173311}
 {"mal_id":57798,"anilist_id":172395,"ann_id":31169,"kitsu_id":48536,"anisearch_id":19001}
-{"mal_id":57801,"kitsu_id":47907}
+{"mal_id":57801,"anilist_id":199433,"kitsu_id":47907}
 {"mal_id":57804,"anilist_id":179741}
 {"mal_id":57805,"anilist_id":179800}
 {"mal_id":57806,"anilist_id":178644}
@@ -21763,7 +21766,7 @@
 {"mal_id":57877,"anilist_id":155313}
 {"mal_id":57878,"anilist_id":177071}
 {"mal_id":57881,"anilist_id":173647}
-{"mal_id":57882,"kitsu_id":48551}
+{"mal_id":57882,"anilist_id":199478,"kitsu_id":48551}
 {"mal_id":57883,"anilist_id":179873,"anisearch_id":20339}
 {"mal_id":57886,"kitsu_id":48470}
 {"mal_id":57888,"anilist_id":173692,"ann_id":31706,"kitsu_id":48448,"anisearch_id":19023}
@@ -22667,6 +22670,7 @@
 {"mal_id":60226,"ann_id":33889,"anisearch_id":20748}
 {"mal_id":60230,"anilist_id":183692,"ann_id":33890}
 {"mal_id":60233,"anilist_id":186758}
+{"mal_id":60234,"anilist_id":199412}
 {"mal_id":60235,"anilist_id":168243}
 {"mal_id":60246,"anilist_id":187509}
 {"mal_id":60247,"anilist_id":188453,"kitsu_id":49583}
@@ -22700,7 +22704,7 @@
 {"mal_id":60311,"anilist_id":126370}
 {"mal_id":60315,"anilist_id":184574,"ann_id":34040,"kitsu_id":49357,"hianime_id":"dekin-no-mogura-the-earthbound-mole-19755","anisearch_id":19765}
 {"mal_id":60316,"anilist_id":184575,"ann_id":34043,"kitsu_id":49356,"anisearch_id":20431}
-{"mal_id":60317,"kitsu_id":49856}
+{"mal_id":60317,"anilist_id":184651,"kitsu_id":49856}
 {"mal_id":60320,"anilist_id":194229}
 {"mal_id":60326,"anilist_id":184591,"ann_id":34056,"kitsu_id":49358,"anisearch_id":19769}
 {"mal_id":60328,"anilist_id":193831}
@@ -22798,17 +22802,24 @@
 {"mal_id":60563,"anilist_id":198696}
 {"mal_id":60564,"anilist_id":185731,"ann_id":34225,"anisearch_id":19989}
 {"mal_id":60565,"anilist_id":186757}
+{"mal_id":60566,"anilist_id":199449}
 {"mal_id":60567,"anilist_id":141867}
 {"mal_id":60568,"kitsu_id":49803}
 {"mal_id":60569,"anilist_id":199366}
 {"mal_id":60570,"anilist_id":135580,"kitsu_id":48310}
 {"mal_id":60571,"anilist_id":186833}
 {"mal_id":60572,"anilist_id":191974,"kitsu_id":49892,"anisearch_id":20496}
+{"mal_id":60574,"anilist_id":199436}
 {"mal_id":60575,"anilist_id":185671}
 {"mal_id":60577,"anilist_id":175645,"kitsu_id":49521}
+{"mal_id":60578,"anilist_id":199431}
+{"mal_id":60579,"anilist_id":199439}
+{"mal_id":60580,"anilist_id":199414}
 {"mal_id":60581,"anilist_id":156104,"kitsu_id":50038}
+{"mal_id":60582,"anilist_id":199430}
 {"mal_id":60583,"anilist_id":185858}
 {"mal_id":60586,"anilist_id":198695}
+{"mal_id":60587,"anilist_id":199411}
 {"mal_id":60589,"anilist_id":191978}
 {"mal_id":60593,"anilist_id":185736,"ann_id":34226,"kitsu_id":49435,"hianime_id":"my-hero-academia-vigilantes-19544","anisearch_id":19991}
 {"mal_id":60595,"anilist_id":185716,"ann_id":31075,"anisearch_id":20746}
@@ -22829,7 +22840,7 @@
 {"mal_id":60624,"kitsu_id":49755}
 {"mal_id":60627,"anisearch_id":20059}
 {"mal_id":60629,"anilist_id":179333,"ann_id":32920,"anisearch_id":20004}
-{"mal_id":60632,"kitsu_id":49450}
+{"mal_id":60632,"anilist_id":199479,"kitsu_id":49450}
 {"mal_id":60633,"kitsu_id":49507}
 {"mal_id":60636,"anilist_id":185874,"ann_id":34242}
 {"mal_id":60637,"anilist_id":185875,"ann_id":34245}
@@ -23129,8 +23140,11 @@
 {"mal_id":61558,"anilist_id":191403,"ann_id":35818,"anisearch_id":20482}
 {"mal_id":61559,"kitsu_id":47460}
 {"mal_id":61561,"anilist_id":191976,"kitsu_id":49943}
+{"mal_id":61562,"anilist_id":199410}
 {"mal_id":61564,"anilist_id":195883}
+{"mal_id":61565,"anilist_id":199432}
 {"mal_id":61566,"anilist_id":166419,"kitsu_id":50031}
+{"mal_id":61568,"anilist_id":199437}
 {"mal_id":61578,"anilist_id":191656,"ann_id":35866}
 {"mal_id":61579,"anilist_id":191689,"anisearch_id":20478}
 {"mal_id":61582,"kitsu_id":49887}
@@ -23138,7 +23152,7 @@
 {"mal_id":61584,"kitsu_id":49885}
 {"mal_id":61585,"kitsu_id":49884}
 {"mal_id":61587,"anilist_id":191718,"ann_id":35878,"anisearch_id":20475}
-{"mal_id":61590,"kitsu_id":49308}
+{"mal_id":61590,"anilist_id":124117,"kitsu_id":49308}
 {"mal_id":61592,"anilist_id":198694,"kitsu_id":49947}
 {"mal_id":61595,"anilist_id":192002,"kitsu_id":49950,"hianime_id":"lost-in-starlight-19702","anisearch_id":18645}
 {"mal_id":61599,"anilist_id":178445,"kitsu_id":50010,"anisearch_id":20160}
@@ -23148,6 +23162,7 @@
 {"mal_id":61608,"anilist_id":191967,"ann_id":35934}
 {"mal_id":61609,"anilist_id":155333}
 {"mal_id":61610,"anilist_id":198707}
+{"mal_id":61612,"anilist_id":199434}
 {"mal_id":61616,"anilist_id":191884,"ann_id":35942,"anisearch_id":20554}
 {"mal_id":61618,"anilist_id":166412}
 {"mal_id":61621,"anilist_id":198697}
@@ -23156,8 +23171,10 @@
 {"mal_id":61627,"anilist_id":191491,"kitsu_id":49906,"anisearch_id":20769}
 {"mal_id":61628,"anilist_id":191492,"anisearch_id":20824}
 {"mal_id":61637,"anilist_id":192261,"ann_id":36012,"anisearch_id":20479}
+{"mal_id":61639,"anilist_id":166417}
+{"mal_id":61642,"anilist_id":199418}
 {"mal_id":61645,"kitsu_id":49957}
-{"mal_id":61650,"kitsu_id":49956}
+{"mal_id":61650,"anilist_id":199413,"kitsu_id":49956}
 {"mal_id":61652,"kitsu_id":49946}
 {"mal_id":61657,"anilist_id":166422}
 {"mal_id":61663,"anilist_id":192507,"ann_id":36048,"anisearch_id":20485}
@@ -23342,6 +23359,7 @@
 {"mal_id":62268,"anilist_id":198408,"ann_id":37469,"anisearch_id":20912}
 {"mal_id":62270,"anilist_id":197543}
 {"mal_id":62273,"kitsu_id":50100}
+{"mal_id":62276,"anilist_id":199448}
 {"mal_id":62277,"anilist_id":197474,"anisearch_id":20836}
 {"mal_id":62279,"anilist_id":198704}
 {"mal_id":62289,"ann_id":37520}
@@ -23381,7 +23399,7 @@
 {"mal_id":62421,"anisearch_id":20872}
 {"mal_id":62422,"ann_id":33080}
 {"mal_id":62428,"anilist_id":198312,"anisearch_id":20870}
-{"mal_id":62430,"ann_id":37829}
+{"mal_id":62430,"anilist_id":198376,"ann_id":37829}
 {"mal_id":62432,"ann_id":37828,"anisearch_id":20879}
 {"mal_id":62435,"anilist_id":198409,"ann_id":37831}
 {"mal_id":62444,"anilist_id":199358}
@@ -23422,3 +23440,4 @@
 {"mal_id":62580,"anilist_id":199337,"anisearch_id":20927}
 {"mal_id":62582,"anilist_id":199340,"anisearch_id":20924}
 {"mal_id":62584,"anilist_id":199342}
+{"mal_id":62590,"anilist_id":199426}
