@@ -1401,7 +1401,12 @@ def run_mal(client_id: str, start_id: int, end_id: int):
                     was_404 = bool(res)
                     checked_ok_ids.add(mal_id)
 
-                    if was_404 and mal_id not in missing_mal_ids:
+                    if (
+                        was_404
+                        and largest_known_mal_id
+                        and mal_id < largest_known_mal_id
+                        and mal_id not in missing_mal_ids
+                    ):
                         missing_mal_ids.add(mal_id)
 
             if was_404:
