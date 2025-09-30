@@ -17278,7 +17278,7 @@
 {"mal_id":43735,"anilist_id":125682,"ann_id":24629,"kitsu_id":44979,"anisearch_id":15712}
 {"mal_id":43739,"kitsu_id":48271}
 {"mal_id":43741,"anilist_id":125640,"ann_id":24291,"kitsu_id":43712,"hianime_id":"getter-robo-arc-17300","anisearch_id":15714}
-{"mal_id":43745,"anilist_id":125796,"kitsu_id":43723}
+{"mal_id":43745,"anilist_id":125796,"kitsu_id":43723,"anisearch_id":20936}
 {"mal_id":43746,"anilist_id":145317}
 {"mal_id":43751,"anilist_id":125785,"kitsu_id":43724}
 {"mal_id":43755,"anilist_id":125838,"ann_id":24356,"kitsu_id":43717,"anisearch_id":15723}
@@ -19622,6 +19622,7 @@
 {"mal_id":52857,"anilist_id":127980,"kitsu_id":45643}
 {"mal_id":52858,"anilist_id":127979}
 {"mal_id":52859,"anilist_id":148576,"kitsu_id":46425}
+{"mal_id":52863,"anisearch_id":20937}
 {"mal_id":52865,"anilist_id":153930,"ann_id":26235,"kitsu_id":46371,"hianime_id":"romantic-killer-18197","anisearch_id":17631}
 {"mal_id":52867,"anilist_id":177458,"kitsu_id":46630}
 {"mal_id":52869,"kitsu_id":49804}
@@ -22917,7 +22918,7 @@
 {"mal_id":60834,"kitsu_id":49516}
 {"mal_id":60847,"kitsu_id":49534}
 {"mal_id":60848,"kitsu_id":49578}
-{"mal_id":60852,"anilist_id":186497,"ann_id":34506}
+{"mal_id":60852,"anilist_id":186497,"ann_id":34506,"anisearch_id":20149}
 {"mal_id":60857,"anilist_id":186307,"kitsu_id":49771,"anisearch_id":20143}
 {"mal_id":60862,"anilist_id":185537,"ann_id":34171,"anisearch_id":20393}
 {"mal_id":60865,"anilist_id":186496}
@@ -23441,4 +23442,4 @@
 {"mal_id":62580,"anilist_id":199337,"anisearch_id":20927}
 {"mal_id":62582,"anilist_id":199340,"anisearch_id":20924}
 {"mal_id":62584,"anilist_id":199342,"anisearch_id":20926}
-{"mal_id":62590,"anilist_id":199426}
+{"mal_id":62590,"anilist_id":199426,"anisearch_id":20932}
