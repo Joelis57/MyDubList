@@ -23346,7 +23346,7 @@
 {"mal_id":62214,"anilist_id":197179}
 {"mal_id":62221,"anilist_id":199357}
 {"mal_id":62230,"kitsu_id":50097}
-{"mal_id":62231,"anilist_id":198413,"ann_id":37291}
+{"mal_id":62231,"anilist_id":198413,"ann_id":37291,"anisearch_id":20954}
 {"mal_id":62233,"ann_id":37416,"kitsu_id":50089}
 {"mal_id":62238,"anilist_id":198560,"kitsu_id":50096,"hianime_id":"dungeons-and-television-19841","anisearch_id":20707}
 {"mal_id":62243,"anilist_id":153455,"kitsu_id":50116}
@@ -23444,4 +23444,6 @@
 {"mal_id":62584,"anilist_id":199342,"anisearch_id":20926}
 {"mal_id":62589,"anilist_id":199404}
 {"mal_id":62590,"anilist_id":199426,"anisearch_id":20932}
+{"mal_id":62593,"anisearch_id":20956}
 {"mal_id":62601,"anilist_id":199547,"anisearch_id":20938}
+{"mal_id":62602,"anisearch_id":16176}
