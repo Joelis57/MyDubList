@@ -37,15 +37,15 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5233 |
+| English | English | 5234 |
 | Spanish | Español | 2955 |
 | German | Deutsch | 2912 |
 | French | Français | 2401 |
 | Italian | Italiano | 2278 |
-| Portuguese | Português | 1688 |
+| Portuguese | Português | 1689 |
 | Korean | 한국어 | 1369 |
 | Tagalog | Tagalog | 811 |
-| Chinese | 中文 | 702 |
+| Chinese | 中文 | 703 |
 | Arabic | العربية | 316 |
 | Polish | Polski | 274 |
 | Hungarian | Magyar | 185 |
