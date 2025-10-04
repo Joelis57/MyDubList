@@ -17279,7 +17279,7 @@
 {"mal_id":43741,"anilist_id":125640,"ann_id":24291,"kitsu_id":43712,"hianime_id":"getter-robo-arc-17300","anisearch_id":15714}
 {"mal_id":43745,"anilist_id":125796,"kitsu_id":43723,"anisearch_id":20936}
 {"mal_id":43746,"anilist_id":145317}
-{"mal_id":43751,"anilist_id":125785,"kitsu_id":43724}
+{"mal_id":43751,"anilist_id":125785,"kitsu_id":43724,"anisearch_id":20882}
 {"mal_id":43755,"anilist_id":125838,"ann_id":24356,"kitsu_id":43717,"anisearch_id":15723}
 {"mal_id":43756,"anilist_id":125839,"ann_id":23955,"kitsu_id":44123,"anisearch_id":15726}
 {"mal_id":43760,"anilist_id":125869,"ann_id":25262,"kitsu_id":45818,"anisearch_id":15725}
@@ -19614,6 +19614,7 @@
 {"mal_id":52829,"kitsu_id":46392}
 {"mal_id":52830,"anilist_id":153845,"ann_id":26234,"kitsu_id":46370,"hianime_id":"i-got-a-cheat-skill-in-another-world-and-became-unrivaled-in-the-real-world-too-18343","anisearch_id":17627}
 {"mal_id":52832,"anilist_id":153959,"kitsu_id":46384}
+{"mal_id":52841,"anisearch_id":18673}
 {"mal_id":52845,"kitsu_id":46426}
 {"mal_id":52846,"anilist_id":153986,"kitsu_id":46389}
 {"mal_id":52847,"anilist_id":153966,"kitsu_id":46386}
@@ -23186,7 +23187,7 @@
 {"mal_id":61677,"anilist_id":192298}
 {"mal_id":61679,"kitsu_id":49952}
 {"mal_id":61686,"anilist_id":192800,"ann_id":36100,"anisearch_id":20492}
-{"mal_id":61687,"anilist_id":192808,"ann_id":36124}
+{"mal_id":61687,"anilist_id":192808,"ann_id":36124,"anisearch_id":20491}
 {"mal_id":61694,"anilist_id":192867,"ann_id":36127}
 {"mal_id":61699,"anilist_id":120756}
 {"mal_id":61704,"anilist_id":193240}
@@ -23211,7 +23212,7 @@
 {"mal_id":61783,"anilist_id":194029,"ann_id":35963}
 {"mal_id":61784,"anilist_id":181181,"kitsu_id":49985}
 {"mal_id":61788,"anilist_id":193348,"anisearch_id":20674}
-{"mal_id":61789,"anilist_id":193347}
+{"mal_id":61789,"anilist_id":193347,"anisearch_id":20915}
 {"mal_id":61790,"anilist_id":186829,"anisearch_id":20692}
 {"mal_id":61793,"anilist_id":194088,"ann_id":36440,"anisearch_id":20653}
 {"mal_id":61806,"anilist_id":194167}
@@ -23447,5 +23448,5 @@
 {"mal_id":62601,"anilist_id":199547,"anisearch_id":20938}
 {"mal_id":62602,"anisearch_id":16176}
 {"mal_id":62604,"anilist_id":199588}
-{"mal_id":62613,"anilist_id":199597}
-{"mal_id":62617,"anilist_id":199748}
+{"mal_id":62613,"anilist_id":199597,"anisearch_id":20960}
+{"mal_id":62617,"anilist_id":199748,"anisearch_id":20962}
