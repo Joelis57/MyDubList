@@ -38,26 +38,26 @@ If you have an authoritative source to add, please open an issue/PR.
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | English | English | 5237 |
-| Spanish | Español | 2958 |
-| German | Deutsch | 2914 |
+| Spanish | Español | 2959 |
+| German | Deutsch | 2915 |
 | French | Français | 2402 |
 | Italian | Italiano | 2279 |
-| Portuguese | Português | 1689 |
+| Portuguese | Português | 1690 |
 | Korean | 한국어 | 1370 |
 | Tagalog | Tagalog | 811 |
 | Chinese | 中文 | 703 |
 | Arabic | العربية | 315 |
 | Polish | Polski | 274 |
-| Hungarian | Magyar | 185 |
+| Hungarian | Magyar | 186 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 135 |
 | Hebrew | עברית | 120 |
 | Dutch | Nederlands | 104 |
 | Russian | Русский | 78 |
+| Indonesian | Bahasa Indonesia | 63 |
 | Danish | Dansk | 62 |
-| Indonesian | Bahasa Indonesia | 62 |
-| Thai | ไทย | 41 |
-| Hindi | हिन्दी | 19 |
+| Thai | ไทย | 42 |
+| Hindi | हिन्दी | 20 |
 | Finnish | Suomi | 16 |
 | Turkish | Türkçe | 10 |
 | Catalan | Català | 3 |
