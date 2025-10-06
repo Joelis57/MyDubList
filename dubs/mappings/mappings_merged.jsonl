@@ -21798,7 +21798,7 @@
 {"mal_id":57946,"anilist_id":171080,"ann_id":31828,"anisearch_id":19041}
 {"mal_id":57947,"anilist_id":174044,"ann_id":31813,"kitsu_id":48467,"anisearch_id":19043}
 {"mal_id":57949,"anilist_id":173807,"kitsu_id":48452}
-{"mal_id":57950,"kitsu_id":48752}
+{"mal_id":57950,"anilist_id":199795,"kitsu_id":48752}
 {"mal_id":57952,"kitsu_id":48705}
 {"mal_id":57953,"anilist_id":174128,"kitsu_id":48471}
 {"mal_id":57956,"kitsu_id":48613}
@@ -23348,6 +23348,7 @@
 {"mal_id":62230,"kitsu_id":50097}
 {"mal_id":62231,"anilist_id":198413,"ann_id":37291,"anisearch_id":20954}
 {"mal_id":62233,"ann_id":37416,"kitsu_id":50089}
+{"mal_id":62236,"anilist_id":199797}
 {"mal_id":62238,"anilist_id":198560,"kitsu_id":50096,"hianime_id":"dungeons-and-television-19841","anisearch_id":20707}
 {"mal_id":62243,"anilist_id":153455,"kitsu_id":50116}
 {"mal_id":62244,"anilist_id":198705}
@@ -23448,8 +23449,13 @@
 {"mal_id":62601,"anilist_id":199547,"anisearch_id":20938}
 {"mal_id":62602,"ann_id":29415,"anisearch_id":16176}
 {"mal_id":62604,"anilist_id":199588}
+{"mal_id":62607,"anilist_id":199799}
+{"mal_id":62608,"anilist_id":199800}
 {"mal_id":62613,"anilist_id":199597,"anisearch_id":20960}
 {"mal_id":62615,"ann_id":37888}
 {"mal_id":62617,"anilist_id":199748,"anisearch_id":20962}
 {"mal_id":62618,"anilist_id":155303}
 {"mal_id":62643,"anilist_id":199794,"ann_id":37867}
+{"mal_id":62647,"anilist_id":199798}
+{"mal_id":62648,"anilist_id":199801}
+{"mal_id":62650,"anilist_id":199793}
