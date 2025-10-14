@@ -10160,7 +10160,7 @@
 {"mal_id":29729,"kitsu_id":10429}
 {"mal_id":29730,"anilist_id":21169,"ann_id":33093,"kitsu_id":10363,"anisearch_id":10147}
 {"mal_id":29731,"kitsu_id":10375}
-{"mal_id":29733,"kitsu_id":10435}
+{"mal_id":29733,"anilist_id":200376,"kitsu_id":10435}
 {"mal_id":29738,"kitsu_id":10405}
 {"mal_id":29739,"kitsu_id":10449}
 {"mal_id":29740,"kitsu_id":10420}
@@ -12352,7 +12352,7 @@
 {"mal_id":34191,"kitsu_id":12627}
 {"mal_id":34192,"kitsu_id":13021,"anisearch_id":18319}
 {"mal_id":34193,"kitsu_id":40607,"anisearch_id":18336}
-{"mal_id":34194,"kitsu_id":40608,"anisearch_id":16410}
+{"mal_id":34194,"anilist_id":200379,"kitsu_id":40608,"anisearch_id":16410}
 {"mal_id":34197,"anilist_id":110208,"kitsu_id":13089,"anisearch_id":12182}
 {"mal_id":34198,"anilist_id":110643,"kitsu_id":12820,"anisearch_id":12327}
 {"mal_id":34201,"anilist_id":129819,"kitsu_id":12636,"anisearch_id":9870}
@@ -23289,6 +23289,7 @@
 {"mal_id":62005,"anilist_id":194389,"ann_id":36508,"anisearch_id":20867}
 {"mal_id":62012,"kitsu_id":50030}
 {"mal_id":62018,"anilist_id":195734,"ann_id":36923}
+{"mal_id":62023,"anilist_id":200373}
 {"mal_id":62024,"anilist_id":195787,"ann_id":36957}
 {"mal_id":62026,"anilist_id":195916}
 {"mal_id":62027,"kitsu_id":50034}
@@ -23296,6 +23297,7 @@
 {"mal_id":62033,"kitsu_id":50127}
 {"mal_id":62035,"anilist_id":196063}
 {"mal_id":62037,"anilist_id":196064,"anisearch_id":20747}
+{"mal_id":62038,"anilist_id":200372}
 {"mal_id":62039,"anilist_id":194207,"ann_id":36449}
 {"mal_id":62046,"anilist_id":196229,"ann_id":34399,"anisearch_id":20669}
 {"mal_id":62047,"ann_id":36579}
@@ -23341,6 +23343,7 @@
 {"mal_id":62188,"anilist_id":197095,"ann_id":37371}
 {"mal_id":62193,"anilist_id":197097,"anisearch_id":20813}
 {"mal_id":62203,"kitsu_id":50084}
+{"mal_id":62207,"anilist_id":200377}
 {"mal_id":62212,"ann_id":17528}
 {"mal_id":62213,"ann_id":17527}
 {"mal_id":62214,"anilist_id":197179}
@@ -23466,8 +23469,9 @@
 {"mal_id":62650,"anilist_id":199793,"ann_id":37898,"anisearch_id":20982}
 {"mal_id":62653,"anisearch_id":20980}
 {"mal_id":62654,"anilist_id":199603}
-{"mal_id":62658,"ann_id":37740}
+{"mal_id":62658,"anilist_id":200375,"ann_id":37740}
 {"mal_id":62662,"anilist_id":199931,"ann_id":37907}
+{"mal_id":62674,"anilist_id":200374}
 {"mal_id":62676,"anilist_id":199635,"ann_id":37891}
 {"mal_id":62682,"anilist_id":199812}
 {"mal_id":62683,"anilist_id":200230}
