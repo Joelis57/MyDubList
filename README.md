@@ -37,12 +37,12 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5254 |
+| English | English | 5255 |
 | Spanish | Español | 2964 |
 | German | Deutsch | 2920 |
 | French | Français | 2405 |
 | Italian | Italiano | 2283 |
-| Portuguese | Português | 1696 |
+| Portuguese | Português | 1697 |
 | Korean | 한국어 | 1371 |
 | Tagalog | Tagalog | 812 |
 | Chinese | 中文 | 714 |
