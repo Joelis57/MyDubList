@@ -37,17 +37,17 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5255 |
-| Spanish | Español | 2964 |
+| English | English | 5254 |
+| Spanish | Español | 2966 |
 | German | Deutsch | 2920 |
-| French | Français | 2405 |
-| Italian | Italiano | 2283 |
-| Portuguese | Português | 1697 |
+| French | Français | 2404 |
+| Italian | Italiano | 2282 |
+| Portuguese | Português | 1696 |
 | Korean | 한국어 | 1371 |
-| Tagalog | Tagalog | 812 |
+| Tagalog | Tagalog | 811 |
 | Chinese | 中文 | 714 |
-| Arabic | العربية | 315 |
-| Polish | Polski | 274 |
+| Arabic | العربية | 314 |
+| Polish | Polski | 273 |
 | Hungarian | Magyar | 186 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 135 |
