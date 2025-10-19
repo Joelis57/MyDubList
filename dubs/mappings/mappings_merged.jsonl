@@ -10777,7 +10777,7 @@
 {"mal_id":30939,"kitsu_id":11045,"anisearch_id":9259}
 {"mal_id":30940,"kitsu_id":11046}
 {"mal_id":30941,"kitsu_id":11047}
-{"mal_id":30942,"kitsu_id":11048}
+{"mal_id":30942,"anilist_id":200646,"kitsu_id":11048}
 {"mal_id":30943,"kitsu_id":11049}
 {"mal_id":30944,"kitsu_id":11050}
 {"mal_id":30947,"anilist_id":21223,"ann_id":17205,"kitsu_id":11051,"anisearch_id":10473}
@@ -11101,7 +11101,7 @@
 {"mal_id":31668,"anilist_id":21437,"kitsu_id":11444,"anisearch_id":14556}
 {"mal_id":31669,"anilist_id":21436,"kitsu_id":11443}
 {"mal_id":31670,"anilist_id":21427,"ann_id":17998,"kitsu_id":11393,"anisearch_id":11033}
-{"mal_id":31672,"kitsu_id":11723}
+{"mal_id":31672,"anilist_id":200648,"kitsu_id":11723}
 {"mal_id":31673,"anilist_id":104385,"kitsu_id":12368}
 {"mal_id":31674,"anilist_id":104386,"kitsu_id":12369}
 {"mal_id":31675,"anilist_id":107263,"kitsu_id":11395,"anisearch_id":15021}
@@ -12936,7 +12936,7 @@
 {"mal_id":35172,"kitsu_id":40720,"anisearch_id":12650}
 {"mal_id":35173,"kitsu_id":40721,"anisearch_id":20833}
 {"mal_id":35174,"anisearch_id":20843}
-{"mal_id":35176,"kitsu_id":41544}
+{"mal_id":35176,"anilist_id":200645,"kitsu_id":41544}
 {"mal_id":35177,"kitsu_id":40722,"anisearch_id":19814}
 {"mal_id":35178,"anilist_id":98480,"ann_id":24403,"kitsu_id":41543,"anisearch_id":12305}
 {"mal_id":35180,"anilist_id":98478,"ann_id":19356,"kitsu_id":13401,"hianime_id":"march-comes-in-like-a-lion-2nd-season-9","anisearch_id":12304}
@@ -20748,6 +20748,7 @@
 {"mal_id":55616,"anilist_id":168253,"ann_id":26456,"anisearch_id":18414}
 {"mal_id":55617,"kitsu_id":49545}
 {"mal_id":55619,"anilist_id":169464}
+{"mal_id":55622,"anilist_id":200641}
 {"mal_id":55625,"kitsu_id":50000}
 {"mal_id":55629,"anilist_id":166050}
 {"mal_id":55636,"anilist_id":166093,"ann_id":28588,"kitsu_id":48184,"anisearch_id":18503}
@@ -21094,7 +21095,7 @@
 {"mal_id":56508,"kitsu_id":48086}
 {"mal_id":56511,"anilist_id":168539,"kitsu_id":48301,"anisearch_id":18654}
 {"mal_id":56512,"anilist_id":168538,"kitsu_id":48344,"anisearch_id":18655}
-{"mal_id":56518,"ann_id":1765}
+{"mal_id":56518,"anilist_id":200647,"ann_id":1765}
 {"mal_id":56520,"anilist_id":171036}
 {"mal_id":56521,"anilist_id":169812}
 {"mal_id":56522,"anilist_id":179238}
@@ -21747,6 +21748,7 @@
 {"mal_id":57853,"anilist_id":179794}
 {"mal_id":57854,"anilist_id":178661}
 {"mal_id":57855,"kitsu_id":48478}
+{"mal_id":57857,"anilist_id":200643}
 {"mal_id":57858,"kitsu_id":48623,"anisearch_id":19036}
 {"mal_id":57859,"anilist_id":173523,"ann_id":31611,"kitsu_id":48433,"anisearch_id":19018}
 {"mal_id":57860,"anilist_id":171016,"kitsu_id":48675}
@@ -23120,6 +23122,7 @@
 {"mal_id":61485,"anilist_id":191374}
 {"mal_id":61491,"anilist_id":193242,"anisearch_id":20553}
 {"mal_id":61492,"anilist_id":190668,"ann_id":35668}
+{"mal_id":61494,"anilist_id":200649}
 {"mal_id":61495,"ann_id":35667}
 {"mal_id":61496,"anilist_id":195880}
 {"mal_id":61501,"anilist_id":190704,"ann_id":35674}
@@ -23411,6 +23414,7 @@
 {"mal_id":62469,"anilist_id":198692,"ann_id":37832}
 {"mal_id":62472,"anilist_id":199406}
 {"mal_id":62476,"anilist_id":198709,"ann_id":37834,"anisearch_id":20881}
+{"mal_id":62479,"anilist_id":200644}
 {"mal_id":62480,"anilist_id":199405}
 {"mal_id":62483,"ann_id":37839,"anisearch_id":20887}
 {"mal_id":62484,"anilist_id":198727}
@@ -23440,7 +23444,7 @@
 {"mal_id":62564,"anilist_id":199185,"ann_id":37869,"anisearch_id":20923}
 {"mal_id":62567,"anilist_id":199217,"ann_id":37872,"anisearch_id":20913}
 {"mal_id":62568,"anilist_id":199221,"ann_id":37873}
-{"mal_id":62579,"ann_id":37524}
+{"mal_id":62579,"anilist_id":200642,"ann_id":37524}
 {"mal_id":62580,"anilist_id":199337,"ann_id":37876,"anisearch_id":20927}
 {"mal_id":62582,"anilist_id":199340,"ann_id":37877,"anisearch_id":20924}
 {"mal_id":62584,"anilist_id":199342,"ann_id":37878,"anisearch_id":20926}
@@ -23475,3 +23479,4 @@
 {"mal_id":62689,"anilist_id":200228}
 {"mal_id":62696,"anilist_id":200294}
 {"mal_id":62804,"anilist_id":200556}
+{"mal_id":62811,"anilist_id":200637}
