@@ -37,10 +37,10 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5258 |
-| Spanish | Español | 2966 |
-| German | Deutsch | 2920 |
-| French | Français | 2404 |
+| English | English | 5259 |
+| Spanish | Español | 2967 |
+| German | Deutsch | 2921 |
+| French | Français | 2405 |
 | Italian | Italiano | 2282 |
 | Portuguese | Português | 1696 |
 | Korean | 한국어 | 1371 |

@@ -23125,7 +23125,7 @@
 {"mal_id":61494,"anilist_id":200649}
 {"mal_id":61495,"ann_id":35667}
 {"mal_id":61496,"anilist_id":195880}
-{"mal_id":61501,"anilist_id":190704,"ann_id":35674}
+{"mal_id":61501,"anilist_id":190704,"ann_id":35674,"anisearch_id":20461}
 {"mal_id":61508,"anilist_id":195879,"kitsu_id":49870}
 {"mal_id":61512,"kitsu_id":49858}
 {"mal_id":61517,"anilist_id":190840,"ann_id":35719,"kitsu_id":49861,"anisearch_id":20459}
@@ -23204,7 +23204,7 @@
 {"mal_id":61756,"anilist_id":194030,"ann_id":36321}
 {"mal_id":61758,"anilist_id":193699,"ann_id":36324}
 {"mal_id":61765,"anilist_id":193883,"ann_id":36347,"kitsu_id":49962,"anisearch_id":20642}
-{"mal_id":61770,"anilist_id":193923,"ann_id":36393}
+{"mal_id":61770,"anilist_id":193923,"ann_id":36393,"anisearch_id":20647}
 {"mal_id":61773,"anilist_id":193968,"ann_id":30375,"hianime_id":"lets-play-19891","anisearch_id":20563}
 {"mal_id":61778,"anilist_id":194033}
 {"mal_id":61782,"anilist_id":194028,"ann_id":36413,"anisearch_id":20575}
@@ -23435,6 +23435,7 @@
 {"mal_id":62524,"anilist_id":199007,"ann_id":37853}
 {"mal_id":62534,"anilist_id":199068,"ann_id":37857}
 {"mal_id":62535,"anilist_id":199066,"ann_id":37858}
+{"mal_id":62537,"anisearch_id":20899}
 {"mal_id":62542,"anilist_id":199111,"ann_id":37864,"anisearch_id":20906}
 {"mal_id":62543,"anilist_id":199112,"ann_id":37865,"anisearch_id":20905}
 {"mal_id":62544,"anilist_id":199368}
