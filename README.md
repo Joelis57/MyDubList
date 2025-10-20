@@ -37,7 +37,7 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5260 |
+| English | English | 5261 |
 | Spanish | Español | 2967 |
 | German | Deutsch | 2921 |
 | French | Français | 2405 |
@@ -45,7 +45,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Portuguese | Português | 1696 |
 | Korean | 한국어 | 1371 |
 | Tagalog | Tagalog | 811 |
-| Chinese | 中文 | 720 |
+| Chinese | 中文 | 722 |
 | Arabic | العربية | 314 |
 | Polish | Polski | 273 |
 | Hungarian | Magyar | 186 |
