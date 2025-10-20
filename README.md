@@ -40,11 +40,11 @@ If you have an authoritative source to add, please open an issue/PR.
 | English | English | 5261 |
 | Spanish | Español | 2967 |
 | German | Deutsch | 2921 |
-| French | Français | 2405 |
-| Italian | Italiano | 2282 |
+| French | Français | 2406 |
+| Italian | Italiano | 2284 |
 | Portuguese | Português | 1696 |
 | Korean | 한국어 | 1371 |
-| Tagalog | Tagalog | 811 |
+| Tagalog | Tagalog | 812 |
 | Chinese | 中文 | 722 |
 | Arabic | العربية | 314 |
 | Polish | Polski | 273 |
