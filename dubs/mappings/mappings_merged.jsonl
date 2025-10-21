@@ -6419,7 +6419,7 @@
 {"mal_id":10824,"anilist_id":10824,"kitsu_id":6371}
 {"mal_id":10825,"anilist_id":10825,"kitsu_id":6372}
 {"mal_id":10827,"anilist_id":10827,"ann_id":13157,"kitsu_id":6373,"anisearch_id":7170}
-{"mal_id":10832,"anilist_id":10832,"kitsu_id":6375}
+{"mal_id":10832,"anilist_id":10832,"kitsu_id":6375,"anisearch_id":8538}
 {"mal_id":10834,"anilist_id":10834,"kitsu_id":6376,"anisearch_id":8780}
 {"mal_id":10838,"anilist_id":10838,"ann_id":12982,"kitsu_id":6377,"anisearch_id":7131}
 {"mal_id":10842,"anilist_id":10842,"kitsu_id":6378}
@@ -6445,7 +6445,7 @@
 {"mal_id":10897,"anilist_id":10897,"ann_id":13249,"kitsu_id":6397,"anisearch_id":7200}
 {"mal_id":10901,"anilist_id":10901,"ann_id":15244,"kitsu_id":6398,"anisearch_id":5570}
 {"mal_id":10904,"anilist_id":10904,"kitsu_id":6399,"anisearch_id":7197}
-{"mal_id":10905,"anilist_id":10905,"kitsu_id":6400}
+{"mal_id":10905,"anilist_id":10905,"kitsu_id":6400,"anisearch_id":8430}
 {"mal_id":10906,"anilist_id":10906,"ann_id":13158,"kitsu_id":6401,"anisearch_id":7201}
 {"mal_id":10908,"anilist_id":10908,"kitsu_id":6402,"anisearch_id":7271}
 {"mal_id":10909,"anilist_id":10909,"ann_id":11076,"kitsu_id":6403}
@@ -7836,7 +7836,7 @@
 {"mal_id":18041,"anilist_id":18041,"ann_id":15072,"kitsu_id":7678,"hianime_id":"rozen-maiden-zuruckspulen-2080","anisearch_id":8256}
 {"mal_id":18045,"anilist_id":18045,"kitsu_id":7737,"anisearch_id":8475}
 {"mal_id":18047,"anilist_id":18047,"kitsu_id":8914,"anisearch_id":7016}
-{"mal_id":18053,"anilist_id":18053,"kitsu_id":8815}
+{"mal_id":18053,"anilist_id":18053,"kitsu_id":8815,"anisearch_id":8531}
 {"mal_id":18055,"anilist_id":18055,"ann_id":15387,"kitsu_id":7679,"hianime_id":"hakkenden-eight-dogs-of-the-east-season-2-1077","anisearch_id":8666}
 {"mal_id":18061,"anilist_id":18061,"kitsu_id":9670}
 {"mal_id":18063,"anilist_id":18063,"kitsu_id":9056}
@@ -23187,7 +23187,7 @@
 {"mal_id":61679,"kitsu_id":49952}
 {"mal_id":61686,"anilist_id":192800,"ann_id":36100,"anisearch_id":20492}
 {"mal_id":61687,"anilist_id":192808,"ann_id":36124,"anisearch_id":20491}
-{"mal_id":61694,"anilist_id":192867,"ann_id":36127}
+{"mal_id":61694,"anilist_id":192867,"ann_id":36127,"anisearch_id":20493}
 {"mal_id":61699,"anilist_id":120756}
 {"mal_id":61704,"anilist_id":193240}
 {"mal_id":61727,"anilist_id":192976,"kitsu_id":49917}
@@ -23476,7 +23476,7 @@
 {"mal_id":62674,"anilist_id":200374}
 {"mal_id":62676,"anilist_id":199635,"ann_id":37891}
 {"mal_id":62682,"anilist_id":199812}
-{"mal_id":62683,"anilist_id":200230}
+{"mal_id":62683,"anilist_id":200230,"anisearch_id":20988}
 {"mal_id":62686,"anilist_id":198511}
 {"mal_id":62689,"anilist_id":200228}
 {"mal_id":62696,"anilist_id":200294,"ann_id":37912}
@@ -23484,3 +23484,4 @@
 {"mal_id":62804,"anilist_id":200556}
 {"mal_id":62811,"anilist_id":200637}
 {"mal_id":62817,"anilist_id":200640}
+{"mal_id":62825,"anisearch_id":20987}
