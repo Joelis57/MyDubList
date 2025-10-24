@@ -37,18 +37,18 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5262 |
-| Spanish | Español | 2970 |
-| German | Deutsch | 2922 |
+| English | English | 5264 |
+| Spanish | Español | 2969 |
+| German | Deutsch | 2920 |
 | French | Français | 2406 |
 | Italian | Italiano | 2287 |
 | Portuguese | Português | 1699 |
-| Korean | 한국어 | 1372 |
+| Korean | 한국어 | 1375 |
 | Tagalog | Tagalog | 812 |
 | Chinese | 中文 | 739 |
 | Arabic | العربية | 314 |
 | Polish | Polski | 273 |
-| Hungarian | Magyar | 186 |
+| Hungarian | Magyar | 187 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 135 |
 | Hebrew | עברית | 120 |
