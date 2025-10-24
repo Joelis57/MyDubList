@@ -42,10 +42,10 @@ If you have an authoritative source to add, please open an issue/PR.
 | German | Deutsch | 2922 |
 | French | Français | 2406 |
 | Italian | Italiano | 2286 |
-| Portuguese | Português | 1698 |
+| Portuguese | Português | 1699 |
 | Korean | 한국어 | 1372 |
 | Tagalog | Tagalog | 812 |
-| Chinese | 中文 | 735 |
+| Chinese | 中文 | 738 |
 | Arabic | العربية | 314 |
 | Polish | Polski | 273 |
 | Hungarian | Magyar | 186 |
