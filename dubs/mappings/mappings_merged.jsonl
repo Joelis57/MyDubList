@@ -23279,7 +23279,7 @@
 {"mal_id":61973,"anilist_id":195496,"ann_id":36855,"kitsu_id":50060}
 {"mal_id":61983,"anilist_id":195515,"ann_id":36859,"anisearch_id":20703}
 {"mal_id":61984,"anilist_id":195494,"ann_id":36857,"hianime_id":"baan-the-boundary-of-adulthood-19933","anisearch_id":20729}
-{"mal_id":61987,"anilist_id":195516}
+{"mal_id":61987,"anilist_id":195516,"anisearch_id":20704}
 {"mal_id":61990,"anilist_id":195539,"ann_id":36864}
 {"mal_id":61997,"anilist_id":195517,"ann_id":36861,"anisearch_id":20711}
 {"mal_id":61999,"ann_id":36879}
@@ -23486,3 +23486,5 @@
 {"mal_id":62811,"anilist_id":200637}
 {"mal_id":62817,"anilist_id":200640}
 {"mal_id":62825,"anilist_id":200769,"anisearch_id":20987}
+{"mal_id":62841,"anisearch_id":20989}
+{"mal_id":62844,"anisearch_id":20990}
