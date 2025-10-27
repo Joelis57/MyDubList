@@ -22198,6 +22198,7 @@
 {"mal_id":59001,"anilist_id":135511,"kitsu_id":49042}
 {"mal_id":59002,"anilist_id":178100,"ann_id":32795,"kitsu_id":48973,"anisearch_id":19363}
 {"mal_id":59005,"anilist_id":177887,"ann_id":32799,"kitsu_id":48942,"hianime_id":"leviathan-19724","anisearch_id":19340}
+{"mal_id":59008,"ann_id":29326}
 {"mal_id":59010,"anilist_id":177922,"ann_id":32802,"kitsu_id":48934,"anisearch_id":19333}
 {"mal_id":59011,"anilist_id":184812,"anisearch_id":19145}
 {"mal_id":59012,"anilist_id":156087,"kitsu_id":49025}
@@ -23437,6 +23438,7 @@
 {"mal_id":62522,"anilist_id":198926,"anisearch_id":20981}
 {"mal_id":62523,"anilist_id":199008,"ann_id":35852}
 {"mal_id":62524,"anilist_id":199007,"ann_id":37853}
+{"mal_id":62525,"ann_id":37854}
 {"mal_id":62534,"anilist_id":199068,"ann_id":37857}
 {"mal_id":62535,"anilist_id":199066,"ann_id":37858}
 {"mal_id":62537,"anisearch_id":20899}
@@ -23484,10 +23486,12 @@
 {"mal_id":62689,"anilist_id":200228}
 {"mal_id":62696,"anilist_id":200294,"ann_id":37912}
 {"mal_id":62753,"anisearch_id":20986}
-{"mal_id":62804,"anilist_id":200556}
+{"mal_id":62804,"anilist_id":200556,"ann_id":37919}
+{"mal_id":62805,"ann_id":37161}
+{"mal_id":62808,"ann_id":37920}
 {"mal_id":62811,"anilist_id":200637}
 {"mal_id":62817,"anilist_id":200640}
-{"mal_id":62825,"anilist_id":200769,"anisearch_id":20987}
+{"mal_id":62825,"anilist_id":200769,"ann_id":37926,"anisearch_id":20987}
 {"mal_id":62841,"anisearch_id":20989}
 {"mal_id":62844,"anilist_id":200929,"anisearch_id":20990}
 {"mal_id":62856,"anilist_id":103303}
