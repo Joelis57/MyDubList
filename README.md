@@ -37,11 +37,11 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5270 |
-| Spanish | Español | 2981 |
-| German | Deutsch | 2926 |
-| French | Français | 2411 |
-| Italian | Italiano | 2291 |
+| English | English | 5257 |
+| Spanish | Español | 2976 |
+| German | Deutsch | 2901 |
+| French | Français | 2396 |
+| Italian | Italiano | 2284 |
 | Portuguese | Português | 1703 |
 | Korean | 한국어 | 1375 |
 | Tagalog | Tagalog | 812 |
