@@ -13476,7 +13476,7 @@
 {"mal_id":36116,"anilist_id":103742,"kitsu_id":13954}
 {"mal_id":36117,"anilist_id":103499,"kitsu_id":13857}
 {"mal_id":36118,"anilist_id":180848,"kitsu_id":40863,"anisearch_id":12719}
-{"mal_id":36119,"anilist_id":99790,"ann_id":18799,"kitsu_id":13742}
+{"mal_id":36119,"anilist_id":99790,"ann_id":18799,"kitsu_id":13742,"anisearch_id":12780}
 {"mal_id":36121,"anilist_id":99818,"kitsu_id":41122,"anisearch_id":12802}
 {"mal_id":36122,"anilist_id":99819,"kitsu_id":13985,"anisearch_id":12831}
 {"mal_id":36124,"anilist_id":99940,"ann_id":20207,"kitsu_id":13717,"hianime_id":"the-junji-ito-collection-7363","anisearch_id":12745}
@@ -14262,7 +14262,7 @@
 {"mal_id":37403,"anilist_id":101239,"ann_id":22207,"kitsu_id":41399,"hianime_id":"ahiru-no-sora-1896","anisearch_id":13416}
 {"mal_id":37404,"anilist_id":102650,"kitsu_id":41782}
 {"mal_id":37405,"anilist_id":101240,"kitsu_id":41341,"anisearch_id":13591}
-{"mal_id":37406,"anilist_id":101777,"kitsu_id":41484}
+{"mal_id":37406,"anilist_id":101777,"kitsu_id":41484,"anisearch_id":13442}
 {"mal_id":37407,"anilist_id":101249,"ann_id":20710,"kitsu_id":41007,"hianime_id":"penguin-highway-1087","anisearch_id":13420}
 {"mal_id":37408,"anilist_id":103924,"kitsu_id":41436,"anisearch_id":13814}
 {"mal_id":37409,"anilist_id":107198,"ann_id":23195,"kitsu_id":41428,"anisearch_id":13570}
@@ -14727,7 +14727,7 @@
 {"mal_id":38078,"kitsu_id":41915,"anisearch_id":17786}
 {"mal_id":38080,"anilist_id":103302,"ann_id":21237,"kitsu_id":42101,"hianime_id":"kono-oto-tomare-sounds-of-life-728","anisearch_id":13772}
 {"mal_id":38081,"anilist_id":107208,"ann_id":19354,"kitsu_id":42947,"hianime_id":"girls-panzer-saishuushou-part-2-463","anisearch_id":11767}
-{"mal_id":38082,"kitsu_id":41923}
+{"mal_id":38082,"kitsu_id":41923,"anisearch_id":13774}
 {"mal_id":38083,"anilist_id":104103,"ann_id":21250,"kitsu_id":41946,"anisearch_id":13793}
 {"mal_id":38084,"anilist_id":103275,"ann_id":21240,"kitsu_id":42269,"hianime_id":"fategrand-order-absolute-demonic-front-babylonia-564","anisearch_id":13776}
 {"mal_id":38085,"anilist_id":103276,"ann_id":22020,"kitsu_id":42270,"hianime_id":"fategrand-order-shinsei-entaku-ryouiki-camelot-1-wandering-agateram-15701","anisearch_id":13775}
@@ -19468,6 +19468,7 @@
 {"mal_id":52460,"anilist_id":153412,"ann_id":26081,"kitsu_id":46316,"anisearch_id":17517}
 {"mal_id":52461,"anilist_id":152765,"ann_id":26137,"kitsu_id":46304,"hianime_id":"saving-80000-gold-in-another-world-for-my-retirement-18297","anisearch_id":17549}
 {"mal_id":52463,"anilist_id":181831}
+{"mal_id":52470,"anisearch_id":13800}
 {"mal_id":52473,"anilist_id":176874,"ann_id":20541}
 {"mal_id":52480,"anilist_id":152677,"ann_id":26119,"anisearch_id":17546}
 {"mal_id":52481,"anilist_id":152681,"ann_id":26123,"kitsu_id":46276,"anisearch_id":17544}
@@ -22128,7 +22129,7 @@
 {"mal_id":58822,"anilist_id":177506,"ann_id":32719,"kitsu_id":48842,"hianime_id":"possibly-the-greatest-alchemist-of-all-time-19451","anisearch_id":19264}
 {"mal_id":58827,"anilist_id":177603,"ann_id":32710,"kitsu_id":49322,"anisearch_id":19683}
 {"mal_id":58828,"anilist_id":177503}
-{"mal_id":58832,"anilist_id":177508,"ann_id":32721,"kitsu_id":48845}
+{"mal_id":58832,"anilist_id":177508,"ann_id":32721,"kitsu_id":48845,"anisearch_id":19290}
 {"mal_id":58833,"anilist_id":177509,"ann_id":32723,"kitsu_id":48843,"hianime_id":"kakushite-makina-san-19562","anisearch_id":19259}
 {"mal_id":58837,"anilist_id":177518,"ann_id":32725,"kitsu_id":48836,"anisearch_id":19999}
 {"mal_id":58844,"anilist_id":177602,"ann_id":32724,"kitsu_id":48894,"anisearch_id":19347}
@@ -22750,7 +22751,7 @@
 {"mal_id":60441,"anilist_id":185717}
 {"mal_id":60442,"anilist_id":187833,"kitsu_id":49809}
 {"mal_id":60443,"anilist_id":182094,"kitsu_id":49559}
-{"mal_id":60444,"ann_id":34122}
+{"mal_id":60444,"ann_id":34122,"anisearch_id":19935}
 {"mal_id":60445,"anilist_id":185212,"ann_id":34123,"kitsu_id":49539,"anisearch_id":19934}
 {"mal_id":60446,"anilist_id":185259,"ann_id":34124,"kitsu_id":49894,"anisearch_id":20248}
 {"mal_id":60447,"anilist_id":196193,"kitsu_id":49536}
@@ -23126,7 +23127,7 @@
 {"mal_id":61483,"anilist_id":190569,"ann_id":35665}
 {"mal_id":61485,"anilist_id":191374}
 {"mal_id":61491,"anilist_id":193242,"anisearch_id":20553}
-{"mal_id":61492,"anilist_id":190668,"ann_id":35668}
+{"mal_id":61492,"anilist_id":190668,"ann_id":35668,"anisearch_id":20625}
 {"mal_id":61494,"anilist_id":200649}
 {"mal_id":61495,"ann_id":35667}
 {"mal_id":61496,"anilist_id":195880}
@@ -23229,7 +23230,7 @@
 {"mal_id":61832,"kitsu_id":49986}
 {"mal_id":61833,"kitsu_id":49987}
 {"mal_id":61834,"anilist_id":194872,"kitsu_id":49982,"anisearch_id":20712}
-{"mal_id":61839,"anilist_id":194393,"ann_id":36531}
+{"mal_id":61839,"anilist_id":194393,"ann_id":36531,"anisearch_id":20637}
 {"mal_id":61840,"kitsu_id":49980}
 {"mal_id":61841,"anilist_id":194390}
 {"mal_id":61846,"anilist_id":198745,"ann_id":36538}
@@ -23242,7 +23243,7 @@
 {"mal_id":61872,"anilist_id":194724}
 {"mal_id":61876,"kitsu_id":50029}
 {"mal_id":61884,"anilist_id":194742,"ann_id":36660,"anisearch_id":20651}
-{"mal_id":61886,"anilist_id":197731,"ann_id":36663}
+{"mal_id":61886,"anilist_id":197731,"ann_id":36663,"anisearch_id":20679}
 {"mal_id":61890,"kitsu_id":50011}
 {"mal_id":61891,"anilist_id":194835}
 {"mal_id":61892,"kitsu_id":50022,"anisearch_id":20709}
