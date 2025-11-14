@@ -40,7 +40,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | English | English | 5262 |
 | Spanish | Español | 2980 |
 | German | Deutsch | 2903 |
-| French | Français | 2397 |
+| French | Français | 2398 |
 | Italian | Italiano | 2287 |
 | Portuguese | Português | 1712 |
 | Korean | 한국어 | 1375 |
