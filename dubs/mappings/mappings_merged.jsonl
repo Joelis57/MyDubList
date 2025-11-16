@@ -22751,7 +22751,7 @@
 {"mal_id":60441,"anilist_id":185717}
 {"mal_id":60442,"anilist_id":187833,"kitsu_id":49809}
 {"mal_id":60443,"anilist_id":182094,"kitsu_id":49559}
-{"mal_id":60444,"ann_id":34122,"anisearch_id":19935}
+{"mal_id":60444,"anilist_id":185211,"ann_id":34122,"anisearch_id":19935}
 {"mal_id":60445,"anilist_id":185212,"ann_id":34123,"kitsu_id":49539,"anisearch_id":19934}
 {"mal_id":60446,"anilist_id":185259,"ann_id":34124,"kitsu_id":49894,"anisearch_id":20248}
 {"mal_id":60447,"anilist_id":196193,"kitsu_id":49536}
@@ -23515,3 +23515,4 @@
 {"mal_id":62897,"anilist_id":198767,"ann_id":37799}
 {"mal_id":62913,"anilist_id":202102}
 {"mal_id":62924,"anilist_id":202251}
+{"mal_id":62927,"anilist_id":137662}
