@@ -54,8 +54,8 @@ If you have an authoritative source to add, please open an issue/PR.
 | Hebrew | עברית | 121 |
 | Dutch | Nederlands | 104 |
 | Russian | Русский | 78 |
+| Indonesian | Bahasa Indonesia | 64 |
 | Danish | Dansk | 63 |
-| Indonesian | Bahasa Indonesia | 63 |
 | Thai | ไทย | 42 |
 | Hindi | हिन्दी | 20 |
 | Finnish | Suomi | 16 |

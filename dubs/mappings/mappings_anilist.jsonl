@@ -9238,6 +9238,7 @@
 {"mal_id":27921,"anilist_id":140024}
 {"mal_id":27927,"anilist_id":20949}
 {"mal_id":27939,"anilist_id":99713}
+{"mal_id":27943,"anilist_id":202424}
 {"mal_id":27945,"anilist_id":20904}
 {"mal_id":27947,"anilist_id":20906}
 {"mal_id":27949,"anilist_id":20975}
@@ -10854,6 +10855,7 @@
 {"mal_id":33195,"anilist_id":103360}
 {"mal_id":33196,"anilist_id":103361}
 {"mal_id":33197,"anilist_id":21772}
+{"mal_id":33199,"anilist_id":202387}
 {"mal_id":33201,"anilist_id":21774}
 {"mal_id":33203,"anilist_id":21773}
 {"mal_id":33204,"anilist_id":21788}
@@ -13470,6 +13472,7 @@
 {"mal_id":39165,"anilist_id":107176}
 {"mal_id":39166,"anilist_id":124115}
 {"mal_id":39167,"anilist_id":132420}
+{"mal_id":39168,"anilist_id":202390}
 {"mal_id":39173,"anilist_id":148680}
 {"mal_id":39174,"anilist_id":106919}
 {"mal_id":39175,"anilist_id":107625}
@@ -15539,6 +15542,7 @@
 {"mal_id":48245,"anilist_id":176084}
 {"mal_id":48252,"anilist_id":130392}
 {"mal_id":48266,"anilist_id":177122}
+{"mal_id":48305,"anilist_id":202420}
 {"mal_id":48310,"anilist_id":141167}
 {"mal_id":48312,"anilist_id":103174}
 {"mal_id":48313,"anilist_id":128059}
@@ -16568,6 +16572,8 @@
 {"mal_id":51249,"anilist_id":148642}
 {"mal_id":51251,"anilist_id":146321}
 {"mal_id":51252,"anilist_id":146323}
+{"mal_id":51254,"anilist_id":202425}
+{"mal_id":51255,"anilist_id":202426}
 {"mal_id":51261,"anilist_id":149345}
 {"mal_id":51262,"anilist_id":149346}
 {"mal_id":51263,"anilist_id":146885}
@@ -17522,6 +17528,7 @@
 {"mal_id":54388,"anilist_id":166251}
 {"mal_id":54398,"anilist_id":161441}
 {"mal_id":54399,"anilist_id":168584}
+{"mal_id":54405,"anilist_id":202428}
 {"mal_id":54431,"anilist_id":161364}
 {"mal_id":54437,"anilist_id":165524}
 {"mal_id":54440,"anilist_id":161410}
@@ -18151,10 +18158,12 @@
 {"mal_id":56419,"anilist_id":168553}
 {"mal_id":56420,"anilist_id":168537}
 {"mal_id":56425,"anilist_id":159074}
+{"mal_id":56430,"anilist_id":202423}
 {"mal_id":56435,"anilist_id":169793}
 {"mal_id":56439,"anilist_id":166588}
 {"mal_id":56449,"anilist_id":168623}
 {"mal_id":56450,"anilist_id":168633}
+{"mal_id":56452,"anilist_id":202421}
 {"mal_id":56457,"anilist_id":168609}
 {"mal_id":56461,"anilist_id":169098}
 {"mal_id":56471,"anilist_id":169372}
@@ -20103,11 +20112,14 @@
 {"mal_id":62808,"anilist_id":200578}
 {"mal_id":62811,"anilist_id":200637}
 {"mal_id":62817,"anilist_id":200640}
+{"mal_id":62820,"anilist_id":202422}
 {"mal_id":62825,"anilist_id":200769}
+{"mal_id":62830,"anilist_id":202418}
 {"mal_id":62844,"anilist_id":200929}
 {"mal_id":62856,"anilist_id":103303}
 {"mal_id":62857,"anilist_id":201140}
 {"mal_id":62863,"anilist_id":201262}
+{"mal_id":62864,"anilist_id":202419}
 {"mal_id":62865,"anilist_id":201388}
 {"mal_id":62873,"anilist_id":194889}
 {"mal_id":62883,"anilist_id":201667}
@@ -20116,3 +20128,5 @@
 {"mal_id":62913,"anilist_id":202102}
 {"mal_id":62924,"anilist_id":202251}
 {"mal_id":62927,"anilist_id":137662}
+{"mal_id":62964,"anilist_id":202381}
+{"mal_id":62967,"anilist_id":202385}
