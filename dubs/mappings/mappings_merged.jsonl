@@ -7668,7 +7668,7 @@
 {"mal_id":17339,"anilist_id":17339,"ann_id":23376,"kitsu_id":9376}
 {"mal_id":17341,"anilist_id":17341,"kitsu_id":7766,"anisearch_id":8358}
 {"mal_id":17345,"anilist_id":17345,"kitsu_id":7818,"anisearch_id":8814}
-{"mal_id":17351,"anilist_id":17351,"kitsu_id":7886}
+{"mal_id":17351,"anilist_id":17351,"kitsu_id":7886,"anisearch_id":8747}
 {"mal_id":17353,"anilist_id":17353,"kitsu_id":7720,"anisearch_id":8395}
 {"mal_id":17357,"anilist_id":17357,"ann_id":15403,"kitsu_id":7857,"anisearch_id":8343}
 {"mal_id":17359,"anilist_id":17359,"kitsu_id":7764}
@@ -22795,7 +22795,7 @@
 {"mal_id":60537,"anilist_id":185648,"kitsu_id":49525}
 {"mal_id":60541,"anilist_id":185748,"kitsu_id":49520}
 {"mal_id":60543,"anilist_id":185660,"ann_id":34211,"kitsu_id":49425,"hianime_id":"dan-da-dan-season-2-19793","anisearch_id":19952}
-{"mal_id":60544,"anilist_id":186861,"kitsu_id":49524}
+{"mal_id":60544,"anilist_id":186861,"kitsu_id":49524,"anisearch_id":20125}
 {"mal_id":60546,"anilist_id":199369}
 {"mal_id":60548,"anilist_id":185657,"ann_id":34215,"anisearch_id":19961}
 {"mal_id":60549,"anilist_id":185697,"ann_id":34217}
@@ -23344,7 +23344,7 @@
 {"mal_id":62126,"anilist_id":196553,"ann_id":37203,"anisearch_id":20794}
 {"mal_id":62136,"anilist_id":196694}
 {"mal_id":62144,"anilist_id":198561,"ann_id":37245,"anisearch_id":20804}
-{"mal_id":62145,"anilist_id":196547}
+{"mal_id":62145,"anilist_id":196547,"anisearch_id":20790}
 {"mal_id":62146,"anilist_id":197824,"ann_id":37606,"anisearch_id":20857}
 {"mal_id":62149,"anilist_id":197094,"anisearch_id":20807}
 {"mal_id":62155,"anilist_id":196840,"ann_id":37269}
@@ -23499,7 +23499,7 @@
 {"mal_id":62696,"anilist_id":200294,"ann_id":37912}
 {"mal_id":62753,"anisearch_id":20986}
 {"mal_id":62804,"anilist_id":200556,"ann_id":37919,"anisearch_id":20991}
-{"mal_id":62805,"ann_id":37161}
+{"mal_id":62805,"ann_id":37161,"anisearch_id":20803}
 {"mal_id":62808,"anilist_id":200578,"ann_id":37920}
 {"mal_id":62811,"anilist_id":200637,"anisearch_id":20994}
 {"mal_id":62817,"anilist_id":200640}
