@@ -39,8 +39,8 @@ If you have an authoritative source to add, please open an issue/PR.
 |---|---:|---:|
 | English | English | 5267 |
 | Spanish | Español | 2980 |
-| German | Deutsch | 2910 |
-| French | Français | 2401 |
+| German | Deutsch | 2913 |
+| French | Français | 2402 |
 | Italian | Italiano | 2288 |
 | Portuguese | Português | 1714 |
 | Korean | 한국어 | 1376 |
