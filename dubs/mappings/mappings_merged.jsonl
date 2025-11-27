@@ -22985,7 +22985,7 @@
 {"mal_id":61114,"anilist_id":187267,"anisearch_id":20494}
 {"mal_id":61115,"anilist_id":187217}
 {"mal_id":61119,"anilist_id":187508}
-{"mal_id":61120,"anilist_id":184756,"ann_id":34885}
+{"mal_id":61120,"anilist_id":184756,"ann_id":34885,"anisearch_id":20832}
 {"mal_id":61125,"anilist_id":187261,"ann_id":34910}
 {"mal_id":61126,"anilist_id":187260,"ann_id":34913,"kitsu_id":49607,"anisearch_id":20227}
 {"mal_id":61127,"kitsu_id":49601}
@@ -23287,7 +23287,7 @@
 {"mal_id":61964,"anilist_id":195384,"ann_id":36838}
 {"mal_id":61967,"anilist_id":195604,"ann_id":36880}
 {"mal_id":61968,"anilist_id":195448,"ann_id":36842}
-{"mal_id":61969,"ann_id":36820}
+{"mal_id":61969,"ann_id":36820,"anisearch_id":20723}
 {"mal_id":61971,"ann_id":31519,"kitsu_id":50027}
 {"mal_id":61973,"anilist_id":195496,"ann_id":36855,"kitsu_id":50060}
 {"mal_id":61983,"anilist_id":195515,"ann_id":36859,"anisearch_id":20703}
@@ -23534,8 +23534,9 @@
 {"mal_id":62964,"anilist_id":202381,"ann_id":38019,"anisearch_id":21015}
 {"mal_id":62967,"anilist_id":202385}
 {"mal_id":62978,"anilist_id":202503}
-{"mal_id":62981,"anilist_id":202508}
+{"mal_id":62981,"anilist_id":202508,"anisearch_id":21023}
 {"mal_id":62983,"anilist_id":202523}
-{"mal_id":62989,"ann_id":38035}
+{"mal_id":62989,"ann_id":38035,"anisearch_id":21021}
 {"mal_id":63000,"anilist_id":153458}
 {"mal_id":63011,"anilist_id":202717}
+{"mal_id":63014,"anisearch_id":21022}
