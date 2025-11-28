@@ -4737,7 +4737,7 @@
 {"mal_id":6743,"anilist_id":6743,"kitsu_id":4695,"anisearch_id":9084}
 {"mal_id":6746,"anilist_id":6746,"ann_id":10947,"kitsu_id":4696,"hianime_id":"durarara-303","anisearch_id":5473}
 {"mal_id":6747,"anilist_id":6747,"ann_id":10948,"kitsu_id":4697,"hianime_id":"dance-in-the-vampire-bund-3338","anisearch_id":5472}
-{"mal_id":6748,"anilist_id":6748,"kitsu_id":4698}
+{"mal_id":6748,"anilist_id":6748,"kitsu_id":4698,"anisearch_id":8578}
 {"mal_id":6749,"anilist_id":6749,"kitsu_id":4699}
 {"mal_id":6758,"anilist_id":6758,"ann_id":10951,"kitsu_id":4700,"hianime_id":"armed-librarians-the-book-of-bantorra-2543","anisearch_id":5455}
 {"mal_id":6759,"anilist_id":6759,"ann_id":9082,"kitsu_id":4701,"anisearch_id":4666}
@@ -23508,6 +23508,7 @@
 {"mal_id":62753,"anisearch_id":20986}
 {"mal_id":62804,"anilist_id":200556,"ann_id":37919,"anisearch_id":20991}
 {"mal_id":62805,"ann_id":37161,"anisearch_id":20803}
+{"mal_id":62807,"anisearch_id":21032}
 {"mal_id":62808,"anilist_id":200578,"ann_id":37920}
 {"mal_id":62811,"anilist_id":200637,"anisearch_id":20994}
 {"mal_id":62817,"anilist_id":200640}
@@ -23544,4 +23545,4 @@
 {"mal_id":63011,"anilist_id":202717}
 {"mal_id":63014,"anilist_id":202985,"anisearch_id":21022}
 {"mal_id":63016,"anilist_id":202906}
-{"mal_id":63019,"anilist_id":202955}
+{"mal_id":63019,"anilist_id":202955,"anisearch_id":21031}
