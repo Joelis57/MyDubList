@@ -37,14 +37,14 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5267 |
+| English | English | 5266 |
 | Spanish | Español | 2981 |
 | German | Deutsch | 2913 |
 | French | Français | 2402 |
 | Italian | Italiano | 2290 |
 | Portuguese | Português | 1715 |
 | Korean | 한국어 | 1376 |
-| Chinese | 中文 | 813 |
+| Chinese | 中文 | 814 |
 | Tagalog | Tagalog | 812 |
 | Arabic | العربية | 314 |
 | Polish | Polski | 274 |
