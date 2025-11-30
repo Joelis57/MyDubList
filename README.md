@@ -48,7 +48,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Tagalog | Tagalog | 812 |
 | Arabic | العربية | 314 |
 | Polish | Polski | 274 |
-| Hungarian | Magyar | 187 |
+| Hungarian | Magyar | 189 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 135 |
 | Hebrew | עברית | 122 |
