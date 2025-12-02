@@ -5188,7 +5188,7 @@
 {"mal_id":7858,"anilist_id":7858,"ann_id":12146,"kitsu_id":5143,"hianime_id":"heavens-lost-property-ova-1730","anisearch_id":6505}
 {"mal_id":7861,"kitsu_id":5144}
 {"mal_id":7862,"anilist_id":7862,"kitsu_id":5145,"anisearch_id":7325}
-{"mal_id":7864,"anilist_id":7864,"kitsu_id":5146}
+{"mal_id":7864,"anilist_id":7864,"kitsu_id":5146,"anisearch_id":5138}
 {"mal_id":7867,"anilist_id":7867,"ann_id":14078,"kitsu_id":5147,"anisearch_id":7624}
 {"mal_id":7870,"anilist_id":7870,"kitsu_id":5148,"anisearch_id":9747}
 {"mal_id":7875,"anilist_id":7875,"kitsu_id":5149}
@@ -13667,7 +13667,7 @@
 {"mal_id":36423,"anilist_id":103425,"kitsu_id":14064}
 {"mal_id":36424,"kitsu_id":13860,"anisearch_id":15120}
 {"mal_id":36425,"anilist_id":103424,"kitsu_id":14065}
-{"mal_id":36427,"anilist_id":103423,"kitsu_id":14066}
+{"mal_id":36427,"anilist_id":103423,"kitsu_id":14066,"anisearch_id":12331}
 {"mal_id":36428,"anilist_id":101907,"kitsu_id":14012}
 {"mal_id":36429,"anilist_id":103328,"kitsu_id":14067}
 {"mal_id":36431,"anilist_id":100133,"ann_id":20897,"kitsu_id":13905,"anisearch_id":12826}
@@ -14410,7 +14410,7 @@
 {"mal_id":37610,"kitsu_id":41825}
 {"mal_id":37611,"anilist_id":101385,"ann_id":20812,"kitsu_id":41031,"anisearch_id":13535}
 {"mal_id":37614,"anilist_id":101386,"ann_id":20806,"kitsu_id":41124,"anisearch_id":13528}
-{"mal_id":37616,"anilist_id":101387,"kitsu_id":42338}
+{"mal_id":37616,"anilist_id":101387,"kitsu_id":42338,"anisearch_id":13521}
 {"mal_id":37618,"anilist_id":101973,"kitsu_id":41250}
 {"mal_id":37619,"anilist_id":103334,"kitsu_id":41246}
 {"mal_id":37620,"anilist_id":103333,"kitsu_id":41245}
@@ -14882,7 +14882,7 @@
 {"mal_id":38373,"anilist_id":118126,"ann_id":22253,"kitsu_id":45244,"anisearch_id":14304}
 {"mal_id":38375,"anilist_id":138946,"kitsu_id":42800}
 {"mal_id":38376,"anilist_id":139755,"kitsu_id":47143}
-{"mal_id":38378,"kitsu_id":44343}
+{"mal_id":38378,"kitsu_id":44343,"anisearch_id":12336}
 {"mal_id":38379,"kitsu_id":44344,"anisearch_id":12337}
 {"mal_id":38383,"anilist_id":104278,"ann_id":20484,"kitsu_id":41970,"anisearch_id":13929}
 {"mal_id":38384,"ann_id":20635}
@@ -17398,6 +17398,7 @@
 {"mal_id":44097,"anilist_id":122672,"kitsu_id":43885}
 {"mal_id":44129,"anilist_id":126874,"kitsu_id":44251,"hianime_id":"code-zero-daily-report-17341"}
 {"mal_id":44130,"anilist_id":126506,"kitsu_id":43826,"anisearch_id":15750}
+{"mal_id":44138,"anisearch_id":18539}
 {"mal_id":44141,"anilist_id":126425,"ann_id":24875,"kitsu_id":45323,"anisearch_id":16296}
 {"mal_id":44144,"anilist_id":129586}
 {"mal_id":44145,"anilist_id":129587}
@@ -17521,6 +17522,7 @@
 {"mal_id":44692,"anilist_id":129274}
 {"mal_id":44700,"anilist_id":129472}
 {"mal_id":44702,"anilist_id":127689,"ann_id":23846}
+{"mal_id":44746,"anisearch_id":10415}
 {"mal_id":44752,"anilist_id":133353,"kitsu_id":44935}
 {"mal_id":44760,"anilist_id":199416}
 {"mal_id":44775,"anilist_id":104363,"kitsu_id":13288}
@@ -23281,7 +23283,7 @@
 {"mal_id":61937,"anilist_id":195033,"anisearch_id":18733}
 {"mal_id":61939,"anisearch_id":20800}
 {"mal_id":61942,"anilist_id":195322,"ann_id":36817,"kitsu_id":50007,"anisearch_id":20687}
-{"mal_id":61943,"anilist_id":195333,"ann_id":36824}
+{"mal_id":61943,"anilist_id":195333,"ann_id":36824,"anisearch_id":20708}
 {"mal_id":61944,"anilist_id":195350,"ann_id":36826,"kitsu_id":50009}
 {"mal_id":61948,"anilist_id":195887}
 {"mal_id":61950,"anilist_id":195886}
@@ -23489,7 +23491,7 @@
 {"mal_id":62607,"anilist_id":199799}
 {"mal_id":62608,"anilist_id":199800}
 {"mal_id":62613,"anilist_id":199597,"ann_id":37889,"anisearch_id":20960}
-{"mal_id":62615,"ann_id":37888}
+{"mal_id":62615,"ann_id":37888,"anisearch_id":20961}
 {"mal_id":62617,"anilist_id":199748,"ann_id":37890,"anisearch_id":20962}
 {"mal_id":62618,"anilist_id":155303}
 {"mal_id":62630,"anilist_id":199636}
