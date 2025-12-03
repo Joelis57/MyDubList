@@ -15822,7 +15822,7 @@
 {"mal_id":40105,"anilist_id":127891,"kitsu_id":45080}
 {"mal_id":40106,"anilist_id":127887,"kitsu_id":45083}
 {"mal_id":40109,"anilist_id":112308,"ann_id":21286,"kitsu_id":46576,"anisearch_id":12179}
-{"mal_id":40111,"anilist_id":110464,"kitsu_id":42851,"anisearch_id":14121}
+{"mal_id":40111,"anilist_id":110464,"kitsu_id":42851,"hianime_id":"ne-zha-1042","anisearch_id":14121}
 {"mal_id":40112,"kitsu_id":44328}
 {"mal_id":40121,"anilist_id":110495,"ann_id":22949,"anisearch_id":14874}
 {"mal_id":40124,"ann_id":20367}
@@ -18238,7 +18238,7 @@
 {"mal_id":49510,"anilist_id":151987}
 {"mal_id":49513,"kitsu_id":48874}
 {"mal_id":49514,"anilist_id":137247,"ann_id":24576,"anisearch_id":16518}
-{"mal_id":49515,"anilist_id":137309,"ann_id":24593,"kitsu_id":44946,"anisearch_id":16532}
+{"mal_id":49515,"anilist_id":137309,"ann_id":24593,"kitsu_id":44946,"hianime_id":"digimon-ghost-game-17907","anisearch_id":16532}
 {"mal_id":49518,"anilist_id":138717,"ann_id":24701,"kitsu_id":45070,"anisearch_id":16569}
 {"mal_id":49519,"anilist_id":137312,"ann_id":24595,"anisearch_id":16515}
 {"mal_id":49520,"anilist_id":137281,"ann_id":24589,"kitsu_id":44944,"hianime_id":"aharen-is-indecipherable-17976","anisearch_id":16522}
@@ -20299,7 +20299,7 @@
 {"mal_id":54595,"anilist_id":161964,"ann_id":27193,"kitsu_id":47099,"hianime_id":"the-eminence-in-shadow-season-2-18505","anisearch_id":18236}
 {"mal_id":54596,"kitsu_id":47205}
 {"mal_id":54602,"anilist_id":161958,"anisearch_id":19728}
-{"mal_id":54603,"anilist_id":158641,"ann_id":26404,"kitsu_id":48891,"anisearch_id":19103}
+{"mal_id":54603,"anilist_id":158641,"ann_id":26404,"kitsu_id":48891,"hianime_id":"ghost-cat-anzu-19191","anisearch_id":19103}
 {"mal_id":54616,"anilist_id":161992,"ann_id":27194,"kitsu_id":47154,"hianime_id":"i-shall-survive-using-potions-18609","anisearch_id":18248}
 {"mal_id":54617,"anilist_id":162002,"ann_id":27196,"kitsu_id":47153,"anisearch_id":18247}
 {"mal_id":54618,"kitsu_id":48274}
@@ -22801,7 +22801,7 @@
 {"mal_id":60537,"anilist_id":185648,"kitsu_id":49525}
 {"mal_id":60541,"anilist_id":185748,"kitsu_id":49520}
 {"mal_id":60543,"anilist_id":185660,"ann_id":34211,"kitsu_id":49425,"hianime_id":"dan-da-dan-season-2-19793","anisearch_id":19952}
-{"mal_id":60544,"anilist_id":186861,"kitsu_id":49524,"anisearch_id":20125}
+{"mal_id":60544,"anilist_id":186861,"kitsu_id":49524,"hianime_id":"ne-zha-2-19835","anisearch_id":20125}
 {"mal_id":60546,"anilist_id":199369}
 {"mal_id":60548,"anilist_id":185657,"ann_id":34215,"anisearch_id":19961}
 {"mal_id":60549,"anilist_id":185697,"ann_id":34217}
