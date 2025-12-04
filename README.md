@@ -94,7 +94,10 @@ final/                       # DEPRECATED: legacy per‑language JSONs
 ### DailyAL
 ![DailyAL integration](https://raw.githubusercontent.com/Joelis57/MyDubList/main/images/DailyAL.jpg)
 
-With enough interest, support may be added to MoeList and other iOS/Android clients.
+### Seanime
+![Seanime integration](https://raw.githubusercontent.com/Joelis57/MyDubList/main/images/Seanime.jpg)
+
+[Seanime plugin](https://github.com/Bas1874/MyDubList-Seanime) by [Bas1874](https://github.com/Bas1874).
 
 ## Contributing
 
