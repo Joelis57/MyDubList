@@ -11,16 +11,17 @@ from typing import Dict, Set
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Input roots
-DUBS_SOURCES_DIR        = os.path.join(ROOT, "dubs", "sources")
-MANUAL_DIR              = os.path.join(DUBS_SOURCES_DIR, "manual")
-AUTOMATIC_MAL_DIR       = os.path.join(DUBS_SOURCES_DIR, "automatic_mal")
-AUTOMATIC_ANILIST_DIR   = os.path.join(DUBS_SOURCES_DIR, "automatic_anilist")
-AUTOMATIC_ANN_DIR       = os.path.join(DUBS_SOURCES_DIR, "automatic_ann")
-AUTOMATIC_ANISEARCH_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_anisearch")
-AUTOMATIC_KITSU_DIR     = os.path.join(DUBS_SOURCES_DIR, "automatic_kitsu")
-AUTOMATIC_HIANIME_DIR   = os.path.join(DUBS_SOURCES_DIR, "automatic_hianime")
-AUTOMATIC_NSFW_DIR      = os.path.join(DUBS_SOURCES_DIR, "automatic_nsfw")
-AUTOMATIC_KENNY_DIR     = os.path.join(DUBS_SOURCES_DIR, "automatic_kenny")
+DUBS_SOURCES_DIR            = os.path.join(ROOT, "dubs", "sources")
+MANUAL_DIR                  = os.path.join(DUBS_SOURCES_DIR, "manual")
+AUTOMATIC_MAL_DIR           = os.path.join(DUBS_SOURCES_DIR, "automatic_mal")
+AUTOMATIC_ANILIST_DIR       = os.path.join(DUBS_SOURCES_DIR, "automatic_anilist")
+AUTOMATIC_ANN_DIR           = os.path.join(DUBS_SOURCES_DIR, "automatic_ann")
+AUTOMATIC_ANISEARCH_DIR     = os.path.join(DUBS_SOURCES_DIR, "automatic_anisearch")
+AUTOMATIC_KITSU_DIR         = os.path.join(DUBS_SOURCES_DIR, "automatic_kitsu")
+AUTOMATIC_HIANIME_DIR       = os.path.join(DUBS_SOURCES_DIR, "automatic_hianime")
+AUTOMATIC_NSFW_DIR          = os.path.join(DUBS_SOURCES_DIR, "automatic_nsfw")
+AUTOMATIC_KENNY_DIR         = os.path.join(DUBS_SOURCES_DIR, "automatic_kenny")
+AUTOMATIC_ANIMESCHEDULE_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_animeschedule")
 
 # Output roots
 CONFIDENCE_DIR         = os.path.join(ROOT, "dubs", "confidence")
@@ -34,6 +35,7 @@ COUNTS_DIR             = os.path.join(ROOT, "dubs", "counts")
 
 README_DIR             = os.path.join(ROOT, "README.md")
 DUBS_LOW_DIR           = os.path.join(ROOT, "dubs", "confidence", "low")
+
 # Optional native names (fallback to Title Case English if missing)
 NATIVE_NAMES = {
     "arabic": "العربية",
@@ -177,25 +179,27 @@ def update_readme_language_stats():
 
 def load_language_sources(filename: str):
     """Load per-language sets from manual and each automatic source."""
-    manual_path            = os.path.join(MANUAL_DIR, filename)
-    auto_mal_path          = os.path.join(AUTOMATIC_MAL_DIR, filename)
-    auto_anilist_path      = os.path.join(AUTOMATIC_ANILIST_DIR, filename)
-    auto_ann_path          = os.path.join(AUTOMATIC_ANN_DIR, filename)
-    auto_anisearch_path    = os.path.join(AUTOMATIC_ANISEARCH_DIR, filename)
-    auto_kitsu_path        = os.path.join(AUTOMATIC_KITSU_DIR, filename)
-    auto_hianime_path      = os.path.join(AUTOMATIC_HIANIME_DIR, filename)
-    auto_nsfw_path         = os.path.join(AUTOMATIC_NSFW_DIR, filename)
-    auto_kenny_path        = os.path.join(AUTOMATIC_KENNY_DIR, filename)
+    manual_path             = os.path.join(MANUAL_DIR, filename)
+    auto_mal_path           = os.path.join(AUTOMATIC_MAL_DIR, filename)
+    auto_anilist_path       = os.path.join(AUTOMATIC_ANILIST_DIR, filename)
+    auto_ann_path           = os.path.join(AUTOMATIC_ANN_DIR, filename)
+    auto_anisearch_path     = os.path.join(AUTOMATIC_ANISEARCH_DIR, filename)
+    auto_kitsu_path         = os.path.join(AUTOMATIC_KITSU_DIR, filename)
+    auto_hianime_path       = os.path.join(AUTOMATIC_HIANIME_DIR, filename)
+    auto_nsfw_path          = os.path.join(AUTOMATIC_NSFW_DIR, filename)
+    auto_kenny_path         = os.path.join(AUTOMATIC_KENNY_DIR, filename)
+    auto_animeschedule_path = os.path.join(AUTOMATIC_ANIMESCHEDULE_DIR, filename)
 
-    manual           = load_json(manual_path)
-    auto_mal         = load_json(auto_mal_path)
-    auto_anilist     = load_json(auto_anilist_path)
-    auto_ann         = load_json(auto_ann_path)
-    auto_anisearch   = load_json(auto_anisearch_path)
-    auto_kitsu       = load_json(auto_kitsu_path)
-    auto_hianime     = load_json(auto_hianime_path)
-    auto_nsfw        = load_json(auto_nsfw_path)
-    auto_kenny       = load_json(auto_kenny_path)
+    manual             = load_json(manual_path)
+    auto_mal           = load_json(auto_mal_path)
+    auto_anilist       = load_json(auto_anilist_path)
+    auto_ann           = load_json(auto_ann_path)
+    auto_anisearch     = load_json(auto_anisearch_path)
+    auto_kitsu         = load_json(auto_kitsu_path)
+    auto_hianime       = load_json(auto_hianime_path)
+    auto_nsfw          = load_json(auto_nsfw_path)
+    auto_kenny         = load_json(auto_kenny_path)
+    auto_animeschedule = load_json(auto_animeschedule_path)
 
     # Manual lists
     manual_dubbed     = int_set(manual.get("dubbed"))
@@ -203,14 +207,15 @@ def load_language_sources(filename: str):
     manual_partial    = int_set(manual.get("partial"))
 
     # Automatic lists
-    auto_mal_dubbed       = int_set(auto_mal.get("dubbed"))
-    auto_anilist_dubbed   = int_set(auto_anilist.get("dubbed"))
-    auto_ann_dubbed       = int_set(auto_ann.get("dubbed"))
-    auto_anisearch_dubbed = int_set(auto_anisearch.get("dubbed"))
-    auto_kitsu_dubbed     = int_set(auto_kitsu.get("dubbed"))
-    auto_hianime_dubbed   = int_set(auto_hianime.get("dubbed"))
-    auto_nsfw_dubbed      = int_set(auto_nsfw.get("dubbed"))
-    auto_kenny_dubbed     = int_set(auto_kenny.get("dubbed"))
+    auto_mal_dubbed           = int_set(auto_mal.get("dubbed"))
+    auto_anilist_dubbed       = int_set(auto_anilist.get("dubbed"))
+    auto_ann_dubbed           = int_set(auto_ann.get("dubbed"))
+    auto_anisearch_dubbed     = int_set(auto_anisearch.get("dubbed"))
+    auto_kitsu_dubbed         = int_set(auto_kitsu.get("dubbed"))
+    auto_hianime_dubbed       = int_set(auto_hianime.get("dubbed"))
+    auto_nsfw_dubbed          = int_set(auto_nsfw.get("dubbed"))
+    auto_kenny_dubbed         = int_set(auto_kenny.get("dubbed"))
+    auto_animeschedule_dubbed = int_set(auto_animeschedule.get("dubbed"))
 
     language_value = manual.get("language") or infer_language_from_filename(filename).replace("_", " ").title()
 
@@ -227,6 +232,7 @@ def load_language_sources(filename: str):
             "hianime": auto_hianime_dubbed,
             "nsfw": auto_nsfw_dubbed,
             "kenny": auto_kenny_dubbed,
+            "animeschedule": auto_animeschedule_dubbed,
         },
         "language_value": language_value,
     }
@@ -295,6 +301,7 @@ def main():
         AUTOMATIC_HIANIME_DIR,
         AUTOMATIC_NSFW_DIR,
         AUTOMATIC_KENNY_DIR,
+        AUTOMATIC_ANIMESCHEDULE_DIR,
     )
 
     if not all_lang_files:

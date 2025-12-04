@@ -21,6 +21,7 @@ ANILIST_BASE = "https://graphql.anilist.co"
 ANN_API = "https://cdn.animenewsnetwork.com/encyclopedia/api.xml"
 KITSU_BASE = "https://kitsu.io/api/edge"
 KITSU_TOKEN_URL = "https://kitsu.io/api/oauth/token"
+ANIMESCHEDULE_BASE = "https://animeschedule.net/api/v3"
 
 MAX_IN_MEMORY_CACHE = 5000
 CALL_RETRIES = 4
@@ -44,6 +45,7 @@ KITSU_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_kitsu.jsonl")
 MERGED_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_merged.jsonl")
 HIANIME_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_hianime.jsonl")
 ANISEARCH_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_anisearch.jsonl")
+ANIMESCHEDULE_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_animeschedule.jsonl")
 
 MISSING_CACHE_PATH = "cache/missing_mal_ids.json"
 # Used to detect end-of-range for MAL scanning
@@ -73,8 +75,13 @@ last_mal_404 = False
 ann_last_call = 0
 ANN_MIN_INTERVAL = 1.0  # seconds between ANN calls
 
+# HiAnime throttle
 HIANIME_MIN_INTERVAL = 1.0  # seconds
 hianime_last_call = 0.0
+
+# AnimeSchedule throttle
+ANIMESCHEDULE_MIN_INTERVAL = 0.5  # seconds
+animeschedule_last_call = 0.0
 
 # Kitsu throttle
 KITSU_MIN_INTERVAL = 1.0
@@ -90,6 +97,7 @@ ann_mapping: dict[int, int] = {}
 kitsu_mapping: dict[int, int] = {}
 hianime_mapping: dict[int, str] = {}
 anisearch_mapping: dict[int, int] = {}
+animeschedule_mapping: dict[int, str] = {}
 
 
 def log(message: str):
@@ -419,6 +427,11 @@ def merge_all_mappings():
     as_map = load_simple_jsonl_map(ANISEARCH_MAPPING_JSONL, "anisearch_id")
     for mid, asid in as_map.items():
         master.setdefault(mid, {})["anisearch_id"] = asid
+
+    # AnimeSchedule
+    asched_map = load_simple_jsonl_map(ANIMESCHEDULE_MAPPING_JSONL, "animeschedule_id")
+    for mid, asid in asched_map.items():
+        master.setdefault(mid, {})["animeschedule_id"] = asid
 
     # Write merged
     _ensure_dir_for(MERGED_MAPPING_JSONL)
@@ -862,9 +875,10 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     if api_mode == "kitsu" and kitsu_mapping:
         save_simple_jsonl_map(KITSU_MAPPING_JSONL, kitsu_mapping, "kitsu_id")
     if api_mode == "hianime" and hianime_mapping:
-
         save_simple_jsonl_map(HIANIME_MAPPING_JSONL, hianime_mapping, "hianime_id")
-
+    if api_mode == "animeschedule" and animeschedule_mapping:
+        save_simple_jsonl_map(ANIMESCHEDULE_MAPPING_JSONL, animeschedule_mapping, "animeschedule_id")
+                              
     # Always refresh merged mappings after a finalize
     merge_all_mappings()
 
@@ -960,6 +974,45 @@ def extract_ann_id_from_url(url: str) -> int | None:
         return None
     return None
 
+def extract_mal_id_from_string(val: object) -> int | None:
+    if val is None:
+        return None
+
+    if isinstance(val, (int, float)):
+        try:
+            return int(val)
+        except Exception:
+            return None
+
+    s = str(val).strip()
+    if not s:
+        return None
+
+    if s.isdigit():
+        try:
+            return int(s)
+        except Exception:
+            return None
+
+    if "myanimelist.net" not in s:
+        return None
+
+    if not s.startswith(("http://", "https://")):
+        s = "https://" + s
+
+    try:
+        parsed = urlparse(s)
+        if "myanimelist.net" not in parsed.netloc:
+            return None
+
+        parts = [seg for seg in parsed.path.split("/") if seg]
+        # Expect /anime/<id>/...
+        if len(parts) >= 2 and parts[0] == "anime" and parts[1].isdigit():
+            return int(parts[1])
+    except Exception:
+        return None
+
+    return None
 
 def jikan_ann_id_for_mal(mal_id: int) -> int | None:
     """Use Jikan external links to find ANN id for a MAL anime id."""
@@ -1304,6 +1357,118 @@ def load_anisearch_source(source_file: str) -> tuple[dict[str, set[int]], dict[i
 
 
 # ----------------------
+# AnimeSchedule helpers
+# ----------------------
+
+def animeschedule_get_page(token: str, page: int) -> dict | None:
+    global animeschedule_last_call
+
+    if not token:
+        raise ValueError("AnimeSchedule token is required")
+
+    # Base throttle
+    now = time.time()
+    to_wait = ANIMESCHEDULE_MIN_INTERVAL - (now - animeschedule_last_call)
+    if to_wait > 0:
+        time.sleep(to_wait)
+
+    url = f"{ANIMESCHEDULE_BASE}/anime?page={int(page)}"
+    last_exception = None
+
+    for attempt in range(CALL_RETRIES):
+        try:
+            headers = {
+                "Accept": "application/json",
+                "Authorization": f"Bearer {token}",
+            }
+            resp = requests.get(url, headers=headers, timeout=20)
+
+            if resp.status_code == 404:
+                log(f"[AnimeSchedule] 404 on page {page}, stopping.")
+                return None
+
+            if resp.status_code == 429:
+                reset_header = resp.headers.get("X-RateLimit-Reset")
+                retry_after = resp.headers.get("Retry-After")
+                delay = None
+
+                if reset_header:
+                    try:
+                        reset_ts = float(reset_header)
+                        delay = max(reset_ts - time.time(), 0)
+                    except Exception:
+                        delay = None
+
+                if delay is None and retry_after:
+                    try:
+                        delay = float(retry_after)
+                    except Exception:
+                        delay = None
+
+                if delay is None:
+                    delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)]
+
+                print(f"  AnimeSchedule 429. Retrying in {int(delay)} seconds...", flush=True)
+                time.sleep(delay)
+                continue
+
+            resp.raise_for_status()
+            animeschedule_last_call = time.time()
+
+            limit_header = resp.headers.get("X-RateLimit-Limit")
+            remaining_header = resp.headers.get("X-RateLimit-Remaining")
+            reset_header = resp.headers.get("X-RateLimit-Reset")
+
+            try:
+                limit_val = int(limit_header) if limit_header is not None else None
+            except Exception:
+                limit_val = None
+
+            try:
+                remaining_val = int(remaining_header) if remaining_header is not None else None
+            except Exception:
+                remaining_val = None
+
+            try:
+                reset_ts = float(reset_header) if reset_header is not None else None
+            except Exception:
+                reset_ts = None
+
+            if (
+                limit_val is not None
+                and remaining_val is not None
+                and reset_ts is not None
+                and remaining_val <= 1
+                and reset_ts > time.time()
+            ):
+                delay = reset_ts - time.time() + 0.1  # small safety margin
+                if delay > 0:
+                    if debug_log:
+                        log(f"[AnimeSchedule] Rate limit nearly exhausted "
+                            f"(limit={limit_val}, remaining={remaining_val}). "
+                            f"Sleeping {delay:.1f}s until reset.")
+                    time.sleep(delay)
+
+            data = resp.json()
+            if not isinstance(data, (dict, list)):
+                raise ValueError("AnimeSchedule returned non-object/non-array JSON")
+            return data
+
+        except Exception as e:
+            last_exception = e
+            print(f"  AnimeSchedule attempt {attempt + 1} failed for page {page}: {e}", flush=True)
+            if attempt < CALL_RETRIES - 1:
+                delay = RETRY_DELAYS[attempt]
+                print(f"  AnimeSchedule call failed. Retrying in {delay} seconds...", flush=True)
+                time.sleep(delay)
+
+    print(f"  All {CALL_RETRIES} AnimeSchedule attempts failed for page {page}", flush=True)
+    if last_exception:
+        raise last_exception
+    return None
+
+
+# ----------------------
 # Runners
 # ----------------------
 
@@ -1631,6 +1796,121 @@ def run_anisearch(source_file: str):
     print(f"Done (aniSearch). Languages={len(per_lang)} unique MAL IDs={total_ids} mappings={len(mapping)}.")
 
 
+def run_animeschedule(token: str, start_page: int | None, end_page: int | None):
+    if not token:
+        print("For --api animeschedule you must provide --token with your AnimeSchedule application or OAuth token.")
+        sys.exit(1)
+
+    page = start_page or 1
+    checked_ok_ids: set[int] = set()
+    total_processed = 0
+
+    total_amount: int | None = None
+    seen_count = 0
+
+    try:
+        while True:
+            log(f"[AnimeSchedule] Page {page}")
+            data = animeschedule_get_page(token, page)
+            if not data:
+                if debug_log:
+                    log(f"[AnimeSchedule] No data for page {page}, stopping.")
+                break
+
+            if isinstance(data, dict):
+                if total_amount is None:
+                    ta = data.get("totalAmount")
+                    try:
+                        if ta is not None:
+                            total_amount = int(ta)
+                            if debug_log:
+                                log(f"[AnimeSchedule] totalAmount={total_amount}")
+                    except Exception:
+                        total_amount = None
+
+                if isinstance(data.get("anime"), list):
+                    anime_list = data["anime"]
+                elif isinstance(data.get("animes"), list):
+                    anime_list = data["animes"]
+                elif isinstance(data.get("data"), list):
+                    anime_list = data["data"]
+                elif isinstance(data.get("items"), list):
+                    anime_list = data["items"]
+                else:
+                    anime_list = []
+            elif isinstance(data, list):
+                anime_list = data
+            else:
+                anime_list = []
+
+            if not anime_list:
+                if debug_log:
+                    log(f"[AnimeSchedule] Empty anime list on page {page}, stopping.")
+                break
+
+            seen_count += len(anime_list)
+
+            for anime in anime_list:
+                if not isinstance(anime, dict):
+                    continue
+
+                websites = anime.get("websites") or {}
+                mal_val = websites.get("mal")
+                mal_id = extract_mal_id_from_string(mal_val)
+                if not mal_id:
+                    continue
+
+                try:
+                    mid_int = int(mal_id)
+                except Exception:
+                    continue
+
+                route = anime.get("route")
+                if route:
+                    animeschedule_mapping[mid_int] = str(route)
+
+                # English dub: dubPremier is a datetime, null is 0001-01-01T00:00:00Z
+                dub_premier = anime.get("dubPremier")
+                has_dub = False
+                if isinstance(dub_premier, str):
+                    if dub_premier and not dub_premier.startswith("0001-01-01"):
+                        has_dub = True
+                elif dub_premier:
+                    has_dub = True
+
+                if has_dub:
+                    json_data["english"].add(mid_int)
+
+                checked_ok_ids.add(mid_int)
+                total_processed += 1
+
+            if page % 10 == 0:
+                finalize_jsons("animeschedule", checked_ok_ids)
+
+            if total_amount is not None and seen_count >= total_amount:
+                if debug_log:
+                    log(
+                        f"[AnimeSchedule] Reached totalAmount={total_amount} "
+                        f"after page {page} (seen_count={seen_count}), stopping."
+                    )
+                break
+
+            if end_page is not None and page >= end_page:
+                break
+
+            page += 1
+
+    except KeyboardInterrupt:
+        print("\nInterrupted. Finalizing data...")
+    except Exception as e:
+        print(f"\nUnexpected error (AnimeSchedule): {e}")
+        import traceback
+        traceback.print_exc()
+    finally:
+        finalize_jsons("animeschedule", checked_ok_ids)
+        print(f"Done (AnimeSchedule). Processed ~{total_processed} anime.")
+
+
 # ----------------------
 # Main
 # ----------------------
@@ -1644,7 +1924,7 @@ def main():
             "(only for IDs checked this run). Also writes per-API mappings and a merged mapping JSONL."
         )
     )
-    parser.add_argument("--api", choices=["mal", "anilist", "ann", "hianime", "kitsu", "anisearch"], default="mal", help="Which source to use.")
+    parser.add_argument("--api", choices=["mal", "anilist", "ann", "hianime", "kitsu", "anisearch", "animeschedule"], default="mal", help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
 
     # MAL-specific
@@ -1680,16 +1960,17 @@ def main():
     os.makedirs(MAPPINGS_DIR, exist_ok=True)
 
     # Kitsu auth setup
-    if args.token:
-        kitsu_auth_header = {"Authorization": f"Bearer {args.token}"}
-        log("[Kitsu] Using provided token")
-    elif args.email and args.password:
-        token = kitsu_login(args.email, args.password)
-        if token:
-            kitsu_auth_header = {"Authorization": f"Bearer {token}"}
-            log("[Kitsu] Logged in and obtained token")
-        else:
-            print("[Kitsu] Warning: proceeding without auth (NSFW may be hidden)")
+    if args.api == "kitsu":
+        if args.token:
+            kitsu_auth_header = {"Authorization": f"Bearer {args.token}"}
+            log("[Kitsu] Using provided token")
+        elif args.email and args.password:
+            token = kitsu_login(args.email, args.password)
+            if token:
+                kitsu_auth_header = {"Authorization": f"Bearer {token}"}
+                log("[Kitsu] Logged in and obtained token")
+            else:
+                print("[Kitsu] Warning: proceeding without auth (NSFW may be hidden)")
 
     if args.api == "mal":
         if not args.client_id or args.mal_start is None or args.mal_end is None:
@@ -1723,12 +2004,21 @@ def main():
             sys.exit(1)
         run_anisearch(args.source_file)
 
-    else:  # kitsu
+    elif args.api == "kitsu":
         if args.mal_start is None or args.mal_end is None:
             print("For --api kitsu you must provide --mal-start and --mal-end.")
             sys.exit(1)
         run_kitsu(args.mal_start, args.mal_end)
+    
+    elif args.api == "animeschedule":
+        if not args.token:
+            print("For --api animeschedule you must provide --token with your AnimeSchedule application or OAuth token.")
+            sys.exit(1)
+        run_animeschedule(args.token, args.start_page, args.end_page)
 
+    else:
+        print(f"Unknown API: {args.api}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
