@@ -39,7 +39,7 @@ If you have an authoritative source to add, please open an issue/PR.
 |---|---:|---:|
 | English | English | 5275 |
 | Spanish | Español | 2984 |
-| German | Deutsch | 2915 |
+| German | Deutsch | 2916 |
 | French | Français | 2403 |
 | Italian | Italiano | 2292 |
 | Portuguese | Português | 1717 |
