@@ -22968,7 +22968,7 @@
 {"mal_id":60586,"anilist_id":198695,"animeschedule_id":"kaiju-ditan-mai-dali"}
 {"mal_id":60587,"anilist_id":199411,"animeschedule_id":"yu-ling-shi"}
 {"mal_id":60589,"anilist_id":191978,"animeschedule_id":"da-xia-qing-shang-gong"}
-{"mal_id":60591,"animeschedule_id":"wei-miao-rensheng"}
+{"mal_id":60591,"anilist_id":203710,"animeschedule_id":"wei-miao-rensheng"}
 {"mal_id":60593,"anilist_id":185736,"ann_id":34226,"kitsu_id":49435,"hianime_id":"my-hero-academia-vigilantes-19544","anisearch_id":19991,"animeschedule_id":"vigilante-boku-no-hero-academia-illegals"}
 {"mal_id":60595,"anilist_id":185716,"ann_id":31075,"anisearch_id":20746,"animeschedule_id":"hyakushou-kizoku-2-ova"}
 {"mal_id":60596,"anilist_id":185718,"ann_id":34220,"animeschedule_id":"sai-kyo-oh-zukan-the-ultimate-tournament"}
@@ -23086,7 +23086,7 @@
 {"mal_id":60969,"anilist_id":186621,"ann_id":34655,"hianime_id":"a-star-brighter-than-the-sun-19898","anisearch_id":20171,"animeschedule_id":"taiyou-yori-mo-mabushii-hoshi"}
 {"mal_id":60979,"animeschedule_id":"secret-jouju-star-jewel-season-1"}
 {"mal_id":60980,"anilist_id":186058,"kitsu_id":50072,"anisearch_id":20771}
-{"mal_id":60983,"anisearch_id":20615,"animeschedule_id":"kagaku-x-bouken-survival-2nd-season"}
+{"mal_id":60983,"anilist_id":186736,"anisearch_id":20615,"animeschedule_id":"kagaku-x-bouken-survival-2nd-season"}
 {"mal_id":60984,"anilist_id":189893,"animeschedule_id":"sorairo-utility-birdie-wing-golf-girls-story-mini-anime"}
 {"mal_id":60987,"anilist_id":187236,"animeschedule_id":"princess-connect-michibiki-no-hatsuhana-fiore-storia"}
 {"mal_id":60988,"anilist_id":186837,"kitsu_id":49565,"animeschedule_id":"tian-guan-ci-fu-short-film"}
@@ -23471,6 +23471,7 @@
 {"mal_id":62048,"ann_id":37025}
 {"mal_id":62050,"anilist_id":196029,"ann_id":37026,"anisearch_id":20878,"animeschedule_id":"kami-no-niwatsuki-kusunoki-tei"}
 {"mal_id":62051,"ann_id":37027,"animeschedule_id":"grow-up-show-himawari-no-circus-dan"}
+{"mal_id":62053,"anilist_id":178151}
 {"mal_id":62055,"anisearch_id":20756}
 {"mal_id":62063,"anilist_id":196224,"animeschedule_id":"tomoshibi"}
 {"mal_id":62066,"anilist_id":196230,"ann_id":37024,"anisearch_id":20793,"animeschedule_id":"monster-strike-deadverse-reloaded"}
@@ -23689,6 +23690,7 @@
 {"mal_id":62873,"anilist_id":194889}
 {"mal_id":62876,"ann_id":37952,"animeschedule_id":"saijo-no-osewa-takane-no-hanadarake-na-meimonkou-de-gakuin-ichi-no-ojousama-seikatsu-nouryoku-kaimu-wo-kagenagara-osewa-suru-koto-ni-narimashita"}
 {"mal_id":62883,"anilist_id":201667,"ann_id":37954,"anisearch_id":21002,"animeschedule_id":"bungou-stray-dogs-wan-2"}
+{"mal_id":62892,"anilist_id":201808}
 {"mal_id":62893,"ann_id":37959,"anisearch_id":21003,"animeschedule_id":"nigashita-sakana-wa-ookikatta-ga-tsuriageta-sakana-ga-ookisugita-ken"}
 {"mal_id":62896,"anilist_id":201903,"ann_id":37969,"anisearch_id":21004,"animeschedule_id":"chou-kaguya-hime"}
 {"mal_id":62897,"anilist_id":198767,"ann_id":37799}
@@ -23725,3 +23727,4 @@
 {"mal_id":63046,"anilist_id":194712}
 {"mal_id":63053,"anilist_id":203473}
 {"mal_id":63061,"anilist_id":203490}
+{"mal_id":63066,"anilist_id":203651}
