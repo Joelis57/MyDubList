@@ -40,10 +40,10 @@ If you have an authoritative source to add, please open an issue/PR.
 | English | English | 5275 |
 | Spanish | Español | 2984 |
 | German | Deutsch | 2916 |
-| French | Français | 2403 |
+| French | Français | 2404 |
 | Italian | Italiano | 2292 |
 | Portuguese | Português | 1717 |
-| Korean | 한국어 | 1376 |
+| Korean | 한국어 | 1377 |
 | Chinese | 中文 | 827 |
 | Tagalog | Tagalog | 813 |
 | Arabic | العربية | 314 |
