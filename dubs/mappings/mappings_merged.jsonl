@@ -13682,7 +13682,7 @@
 {"mal_id":36455,"anilist_id":100296,"kitsu_id":14022,"animeschedule_id":"wo-de-tian-jie-nuyou"}
 {"mal_id":36456,"anilist_id":100166,"ann_id":20356,"kitsu_id":13881,"hianime_id":"my-hero-academia-3-189","anisearch_id":12846,"animeschedule_id":"boku-no-hero-academia-3"}
 {"mal_id":36458,"anilist_id":119123,"ann_id":22023,"kitsu_id":43807,"hianime_id":"lbx-girls-15560","anisearch_id":13750,"animeschedule_id":"soukou-musume-senki"}
-{"mal_id":36461,"anilist_id":100167,"kitsu_id":14268}
+{"mal_id":36461,"anilist_id":100167,"kitsu_id":14268,"anisearch_id":12867}
 {"mal_id":36464,"kitsu_id":40953,"anisearch_id":12902}
 {"mal_id":36466,"anilist_id":100181,"ann_id":20474,"kitsu_id":11550,"hianime_id":"digimon-adventure-tri-future-2626","anisearch_id":9754,"animeschedule_id":"digimon-adventure-tri-6-bokura-no-mirai"}
 {"mal_id":36468,"anilist_id":100180,"ann_id":19827,"kitsu_id":13953,"anisearch_id":12904,"animeschedule_id":"shoujo-shuumatsu-jugyou"}
@@ -21862,7 +21862,7 @@
 {"mal_id":57883,"anilist_id":179873,"anisearch_id":20339,"animeschedule_id":"monster-strike-anime-masamune-shimei-no-akaki-yaiba"}
 {"mal_id":57886,"kitsu_id":48470}
 {"mal_id":57888,"anilist_id":173692,"ann_id":31706,"kitsu_id":48448,"anisearch_id":19023,"animeschedule_id":"chichi-wa-eiyuu-haha-wa-seirei-musume-no-watashi-wa-tenseisha"}
-{"mal_id":57889,"anilist_id":173640,"kitsu_id":48445,"animeschedule_id":"aru-hi-no-gogo"}
+{"mal_id":57889,"anilist_id":173640,"kitsu_id":48445,"anisearch_id":21075,"animeschedule_id":"aru-hi-no-gogo"}
 {"mal_id":57890,"anilist_id":164675,"kitsu_id":47532,"animeschedule_id":"yume-juuya"}
 {"mal_id":57891,"anilist_id":173693,"ann_id":31707,"kitsu_id":48449,"hianime_id":"loner-life-in-another-world-19337","anisearch_id":19025,"animeschedule_id":"hitoribocchi-no-isekai-kouryaku"}
 {"mal_id":57892,"anilist_id":173694,"ann_id":31709,"kitsu_id":48450,"hianime_id":"failure-frame-i-became-the-strongest-and-annihilated-everything-with-low-level-spells-19237","anisearch_id":19024,"animeschedule_id":"hazurewaku-no-joutai-ijou-skill-de-saikyou-ni-natta-ore-ga-subete-wo-juurin-suru-made"}
@@ -21997,7 +21997,7 @@
 {"mal_id":58182,"anilist_id":153771,"animeschedule_id":"brunetto-sensei-koko-ni-oide-deshita-ka"}
 {"mal_id":58183,"anilist_id":153770,"animeschedule_id":"yuuyake"}
 {"mal_id":58184,"anilist_id":154038,"animeschedule_id":"kasabuta"}
-{"mal_id":58185,"anilist_id":174633,"kitsu_id":48990}
+{"mal_id":58185,"anilist_id":174633,"kitsu_id":48990,"anisearch_id":19087}
 {"mal_id":58196,"anilist_id":175120,"ann_id":32176,"kitsu_id":48789,"anisearch_id":19095,"animeschedule_id":"koneko-no-chi-ponponraa-natsuyasumi"}
 {"mal_id":58197,"anilist_id":175124,"ann_id":32177,"kitsu_id":48564,"hianime_id":"nyaight-of-the-living-cat-19757","anisearch_id":19082,"animeschedule_id":"nyaight-of-the-living-cat"}
 {"mal_id":58198,"anilist_id":163544,"kitsu_id":48637}
@@ -22352,7 +22352,7 @@
 {"mal_id":59115,"anilist_id":178435,"kitsu_id":48980,"animeschedule_id":"empurple"}
 {"mal_id":59117,"anisearch_id":19417}
 {"mal_id":59118,"anilist_id":177707,"anisearch_id":19308}
-{"mal_id":59119,"anilist_id":177789,"kitsu_id":49275}
+{"mal_id":59119,"anilist_id":177789,"kitsu_id":49275,"anisearch_id":19339}
 {"mal_id":59120,"anilist_id":177856,"anisearch_id":19677}
 {"mal_id":59123,"anilist_id":178395,"ann_id":32830,"anisearch_id":19664,"animeschedule_id":"kumarba-season-2"}
 {"mal_id":59128,"anilist_id":179717,"animeschedule_id":"hai-yorokonde"}
@@ -23158,7 +23158,7 @@
 {"mal_id":61166,"anilist_id":185166,"kitsu_id":49662,"anisearch_id":20102}
 {"mal_id":61167,"anisearch_id":20826}
 {"mal_id":61168,"kitsu_id":49743}
-{"mal_id":61169,"anilist_id":187538,"ann_id":35029,"animeschedule_id":"black-torch"}
+{"mal_id":61169,"anilist_id":187538,"ann_id":35029,"anisearch_id":20259,"animeschedule_id":"black-torch"}
 {"mal_id":61171,"kitsu_id":49688}
 {"mal_id":61174,"anilist_id":187663,"ann_id":35048,"kitsu_id":49927,"hianime_id":"a-gatherers-adventure-in-isekai-19901","anisearch_id":20264,"animeschedule_id":"souzai-saishuka-no-isekai-ryokouki"}
 {"mal_id":61175,"kitsu_id":49659}
@@ -23380,7 +23380,7 @@
 {"mal_id":61789,"anilist_id":193347,"anisearch_id":20915}
 {"mal_id":61790,"anilist_id":186829,"anisearch_id":20692}
 {"mal_id":61793,"anilist_id":194088,"ann_id":36440,"anisearch_id":20653,"animeschedule_id":"yami-shibai-15"}
-{"mal_id":61806,"anilist_id":194167,"animeschedule_id":"love-live-hasunosora-jogakuin-school-idol-club-movie-bloom-garden-party"}
+{"mal_id":61806,"anilist_id":194167,"anisearch_id":20645,"animeschedule_id":"love-live-hasunosora-jogakuin-school-idol-club-movie-bloom-garden-party"}
 {"mal_id":61813,"anilist_id":194213,"ann_id":36458}
 {"mal_id":61814,"anilist_id":194219,"ann_id":36475,"anisearch_id":20646,"animeschedule_id":"oni-no-hanayome"}
 {"mal_id":61830,"anilist_id":194318,"ann_id":36518,"anisearch_id":20617,"animeschedule_id":"yoroi-shin-den-samurai-troopers"}
@@ -23736,4 +23736,4 @@
 {"mal_id":63074,"anilist_id":203367}
 {"mal_id":63078,"anilist_id":203855}
 {"mal_id":63082,"anilist_id":203880}
-{"mal_id":63087,"anilist_id":203939}
+{"mal_id":63087,"anilist_id":203939,"anisearch_id":21076}
