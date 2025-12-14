@@ -42,9 +42,9 @@ If you have an authoritative source to add, please open an issue/PR.
 | German | Deutsch | 2920 |
 | French | Français | 2408 |
 | Italian | Italiano | 2296 |
-| Portuguese | Português | 1717 |
-| Korean | 한국어 | 1377 |
-| Chinese | 中文 | 830 |
+| Portuguese | Português | 1718 |
+| Korean | 한국어 | 1378 |
+| Chinese | 中文 | 831 |
 | Tagalog | Tagalog | 813 |
 | Arabic | العربية | 315 |
 | Polish | Polski | 276 |
