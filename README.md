@@ -24,6 +24,7 @@ The dataset aggregates information from multiple sources, including:
 - **MyAnimeList** (official API) and **Jikan** (community API)
 - **AniList** (official API)
 - **Anime News Network** (official API)
+- **AnimeSchedule** (official API)
 - **aniSearch** (custom API for MyDubList)
 - **Kitsu** (official API)
 - **HiAnime** (community API)
