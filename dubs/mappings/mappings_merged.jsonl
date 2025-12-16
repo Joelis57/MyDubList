@@ -22611,7 +22611,7 @@
 {"mal_id":59702,"anilist_id":185576,"kitsu_id":49168,"animeschedule_id":"start-again"}
 {"mal_id":59703,"kitsu_id":49940}
 {"mal_id":59706,"anilist_id":180704,"kitsu_id":49413}
-{"mal_id":59707,"kitsu_id":50054,"animeschedule_id":"bakutsuri-hunters"}
+{"mal_id":59707,"kitsu_id":50054,"anisearch_id":21087,"animeschedule_id":"bakutsuri-hunters"}
 {"mal_id":59708,"anilist_id":180745,"ann_id":33451,"kitsu_id":49194,"anisearch_id":19569,"animeschedule_id":"youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-4th-season"}
 {"mal_id":59709,"anilist_id":180804,"ann_id":33453,"anisearch_id":19753,"animeschedule_id":"inazuma-eleven-soushuuhen-densetsu-no-kickoff"}
 {"mal_id":59710,"anilist_id":180806,"ann_id":33454,"anisearch_id":19622,"animeschedule_id":"inazuma-eleven-aratanaru-eiyuutachi-no-joshou"}
@@ -23621,6 +23621,7 @@
 {"mal_id":62512,"anilist_id":198939,"ann_id":37849,"anisearch_id":20893,"animeschedule_id":"jidou-hanbaiki-ni-umarekawatta-ore-wa-meikyuu-wo-samayou-3rd-season"}
 {"mal_id":62513,"anilist_id":198946,"ann_id":37848,"animeschedule_id":"clevatess-ii-majuu-no-ou-to-itsuwari-no-yuusha-denshou"}
 {"mal_id":62516,"anilist_id":198966,"ann_id":37850,"anisearch_id":20892,"animeschedule_id":"dandadan-3rd-season"}
+{"mal_id":62518,"anisearch_id":21094}
 {"mal_id":62520,"ann_id":37847}
 {"mal_id":62521,"anilist_id":199005,"ann_id":37645,"anisearch_id":20966,"animeschedule_id":"kanagawa-ni-sunderu-elf"}
 {"mal_id":62522,"anilist_id":198926,"anisearch_id":20981,"animeschedule_id":"chou-futsuu-mahou-shoujo-asumi-toruverse"}
@@ -23755,3 +23756,4 @@
 {"mal_id":63087,"anilist_id":203939,"anisearch_id":21076,"animeschedule_id":"yami-shibai-16"}
 {"mal_id":63096,"anilist_id":189259}
 {"mal_id":63098,"anilist_id":204011,"animeschedule_id":"psyren"}
+{"mal_id":63100,"anisearch_id":21083}
