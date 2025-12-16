@@ -20750,7 +20750,7 @@
 {"mal_id":55466,"anilist_id":148622,"animeschedule_id":"ame-yo-ame-yo-fure"}
 {"mal_id":55467,"anilist_id":149848,"animeschedule_id":"neuromance"}
 {"mal_id":55468,"anilist_id":139649,"kitsu_id":49225,"animeschedule_id":"juukyuu-gatsu"}
-{"mal_id":55471,"animeschedule_id":"darling-klaxon-baby"}
+{"mal_id":55471,"anilist_id":148623,"animeschedule_id":"darling-klaxon-baby"}
 {"mal_id":55472,"anilist_id":163621,"kitsu_id":48911,"animeschedule_id":"nero"}
 {"mal_id":55473,"anilist_id":148661,"animeschedule_id":"candy-alien"}
 {"mal_id":55477,"anilist_id":152434,"kitsu_id":48686,"animeschedule_id":"dreaming-all-alone"}
@@ -22197,7 +22197,7 @@
 {"mal_id":58695,"animeschedule_id":"do-ka"}
 {"mal_id":58696,"kitsu_id":48907}
 {"mal_id":58698,"anilist_id":177048,"animeschedule_id":"zettai-reido"}
-{"mal_id":58699,"animeschedule_id":"friday-night"}
+{"mal_id":58699,"anilist_id":170982,"animeschedule_id":"friday-night"}
 {"mal_id":58701,"animeschedule_id":"cult-2023"}
 {"mal_id":58705,"anisearch_id":19238}
 {"mal_id":58711,"anilist_id":179807,"animeschedule_id":"jueshi-zhan-hun"}
@@ -23583,6 +23583,7 @@
 {"mal_id":62385,"anilist_id":198033,"animeschedule_id":"ano-hi-no-kanojotachi-day09-miu-takigawa"}
 {"mal_id":62387,"anilist_id":198369,"anisearch_id":20864,"animeschedule_id":"meitantei-conan-highway-no-datenshi"}
 {"mal_id":62391,"ann_id":37722,"anisearch_id":20865,"animeschedule_id":"kill-ao"}
+{"mal_id":62392,"anilist_id":204066}
 {"mal_id":62394,"anisearch_id":20866}
 {"mal_id":62401,"anilist_id":198377,"animeschedule_id":"ashita-no-arika"}
 {"mal_id":62404,"animeschedule_id":"queens"}
