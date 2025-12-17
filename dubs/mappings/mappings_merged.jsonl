@@ -19283,7 +19283,7 @@
 {"mal_id":51798,"anilist_id":169043,"animeschedule_id":"natsu-wa-kinu"}
 {"mal_id":51799,"anilist_id":169042,"kitsu_id":46324,"animeschedule_id":"apple-papple-princess"}
 {"mal_id":51804,"kitsu_id":47693}
-{"mal_id":51805,"anilist_id":148970,"ann_id":25693,"kitsu_id":46114,"animeschedule_id":"ginga-eiyuu-densetsu-die-neue-these-sakubou-1"}
+{"mal_id":51805,"anilist_id":148970,"ann_id":25693,"kitsu_id":46114,"anisearch_id":17445,"animeschedule_id":"ginga-eiyuu-densetsu-die-neue-these-sakubou-1"}
 {"mal_id":51806,"anilist_id":148070,"animeschedule_id":"akashi"}
 {"mal_id":51807,"anilist_id":169838,"animeschedule_id":"furui-oshiro-no-monogatari"}
 {"mal_id":51808,"anilist_id":178522,"animeschedule_id":"arigatou-kokoro-no-bara"}
@@ -23748,7 +23748,7 @@
 {"mal_id":63046,"anilist_id":194712,"anisearch_id":21063}
 {"mal_id":63048,"anilist_id":203448,"animeschedule_id":"world-trigger-reboot"}
 {"mal_id":63053,"anilist_id":203473,"ann_id":38113,"animeschedule_id":"kyoufu-collector"}
-{"mal_id":63061,"anilist_id":203490,"ann_id":38115,"animeschedule_id":"uchi-no-otouto-domo-ga-sumimasen"}
+{"mal_id":63061,"anilist_id":203490,"ann_id":38115,"anisearch_id":21096,"animeschedule_id":"uchi-no-otouto-domo-ga-sumimasen"}
 {"mal_id":63062,"anilist_id":153467}
 {"mal_id":63066,"anilist_id":203651,"ann_id":38116,"animeschedule_id":"code-geass-hoshi-oi-no-aspal"}
 {"mal_id":63074,"anilist_id":203367}
@@ -23756,5 +23756,5 @@
 {"mal_id":63082,"anilist_id":203880,"animeschedule_id":"reiwa-no-dara-san"}
 {"mal_id":63087,"anilist_id":203939,"anisearch_id":21076,"animeschedule_id":"yami-shibai-16"}
 {"mal_id":63096,"anilist_id":189259}
-{"mal_id":63098,"anilist_id":204011,"animeschedule_id":"psyren"}
+{"mal_id":63098,"anilist_id":204011,"anisearch_id":21084,"animeschedule_id":"psyren"}
 {"mal_id":63100,"anisearch_id":21083,"animeschedule_id":"tetsunabe-no-jan"}
