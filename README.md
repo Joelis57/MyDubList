@@ -38,9 +38,9 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5278 |
+| English | English | 5279 |
 | Spanish | Español | 2991 |
-| German | Deutsch | 2920 |
+| German | Deutsch | 2921 |
 | French | Français | 2408 |
 | Italian | Italiano | 2296 |
 | Portuguese | Português | 1719 |
