@@ -21286,7 +21286,7 @@
 {"mal_id":56700,"anilist_id":169440,"ann_id":29983,"kitsu_id":47968,"hianime_id":"reborn-as-a-vending-machine-i-now-wander-the-dungeon-season-2-19776","anisearch_id":18704,"animeschedule_id":"jidou-hanbaiki-ni-umarekawatta-ore-wa-meikyuu-wo-samayou-2nd-season"}
 {"mal_id":56701,"anilist_id":169441,"ann_id":29984,"kitsu_id":47969,"hianime_id":"my-happy-marriage-season-2-19432","anisearch_id":18701,"animeschedule_id":"watashi-no-shiawase-na-kekkon-2nd-season"}
 {"mal_id":56702,"anilist_id":169442,"anisearch_id":18707,"animeschedule_id":"odekake-kozame-gamera-rebirth"}
-{"mal_id":56703,"anisearch_id":18726}
+{"mal_id":56703,"anilist_id":204324,"anisearch_id":18726}
 {"mal_id":56704,"anilist_id":169692,"ann_id":25466,"kitsu_id":47971,"hianime_id":"kengan-ashura-2nd-season-part-2-19201","anisearch_id":18703,"animeschedule_id":"kengan-ashura-second-season-part-2"}
 {"mal_id":56706,"anilist_id":169446,"kitsu_id":49713,"animeschedule_id":"internet-yamero"}
 {"mal_id":56708,"anilist_id":170963,"animeschedule_id":"oni-no-negai"}
@@ -23686,6 +23686,7 @@
 {"mal_id":62689,"anilist_id":200228,"anisearch_id":21056}
 {"mal_id":62696,"anilist_id":200294,"ann_id":37912,"animeschedule_id":"choujun-choujou-senpai"}
 {"mal_id":62703,"anilist_id":195877,"animeschedule_id":"bai-lian-cheng-shen-3rd-season"}
+{"mal_id":62708,"anilist_id":155311}
 {"mal_id":62738,"anilist_id":168195}
 {"mal_id":62753,"anisearch_id":20986}
 {"mal_id":62804,"anilist_id":200556,"ann_id":37919,"anisearch_id":20991,"animeschedule_id":"high-school-kimengumi-2026"}
@@ -23761,3 +23762,6 @@
 {"mal_id":63100,"anisearch_id":21083,"animeschedule_id":"tetsunabe-no-jan"}
 {"mal_id":63120,"anilist_id":204293}
 {"mal_id":63121,"animeschedule_id":"taiyou-yori-mo-mabushii-hoshi-2nd-season"}
+{"mal_id":63125,"anilist_id":204269}
+{"mal_id":63128,"anilist_id":204348}
+{"mal_id":63130,"anilist_id":204356}
