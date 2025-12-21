@@ -17465,6 +17465,7 @@
 {"mal_id":44235,"anilist_id":127690,"ann_id":24208,"kitsu_id":43850,"animeschedule_id":"pui-pui-molcar"}
 {"mal_id":44236,"anisearch_id":16628}
 {"mal_id":44243,"kitsu_id":43814}
+{"mal_id":44246,"anilist_id":204399}
 {"mal_id":44248,"anilist_id":127149,"ann_id":24414,"kitsu_id":43857,"hianime_id":"fategrand-carnival-17421","anisearch_id":15810,"animeschedule_id":"fate-grand-carnival"}
 {"mal_id":44250,"animeschedule_id":"nouri-ue-no-cracker"}
 {"mal_id":44251,"animeschedule_id":"kangurei"}
@@ -22217,7 +22218,7 @@
 {"mal_id":58754,"anilist_id":137708,"kitsu_id":48852,"animeschedule_id":"xiao-bing-chuanqi"}
 {"mal_id":58755,"anilist_id":177191,"ann_id":32701,"kitsu_id":48807,"anisearch_id":19242,"animeschedule_id":"go-toubun-no-hanayome-star"}
 {"mal_id":58756,"anilist_id":176910,"ann_id":32664,"anisearch_id":20724,"animeschedule_id":"killtube"}
-{"mal_id":58758,"animeschedule_id":"prima-rabbit"}
+{"mal_id":58758,"anilist_id":183795,"animeschedule_id":"prima-rabbit"}
 {"mal_id":58772,"anilist_id":177271,"ann_id":32707,"kitsu_id":48822,"hianime_id":"kakuriyo-bed-and-breakfast-for-spirits-2-19919","anisearch_id":19237,"animeschedule_id":"kakuriyo-no-yadomeshi-2"}
 {"mal_id":58773,"anilist_id":176636,"anisearch_id":19457,"animeschedule_id":"keroro-gunsou-movie"}
 {"mal_id":58776,"anilist_id":177255,"kitsu_id":49255,"anisearch_id":19240}
@@ -22713,7 +22714,7 @@
 {"mal_id":59985,"anilist_id":182317,"ann_id":33630,"kitsu_id":49249,"anisearch_id":19636,"animeschedule_id":"boku-no-kokoro-no-yabai-yatsu-movie"}
 {"mal_id":59986,"anilist_id":182309,"ann_id":33631,"kitsu_id":49247,"anisearch_id":19637,"animeschedule_id":"grand-blue-2nd-season"}
 {"mal_id":59987,"kitsu_id":49242}
-{"mal_id":59988,"animeschedule_id":"neppuu"}
+{"mal_id":59988,"anilist_id":190619,"animeschedule_id":"neppuu"}
 {"mal_id":59989,"ann_id":33478,"kitsu_id":49244,"hianime_id":"tower-of-god-season-2-workshop-battle-19400","anisearch_id":17577}
 {"mal_id":59990,"ann_id":29375,"anisearch_id":19479}
 {"mal_id":59991,"ann_id":13224}
@@ -23650,6 +23651,7 @@
 {"mal_id":62580,"anilist_id":199337,"ann_id":37876,"anisearch_id":20927,"animeschedule_id":"shin-samurai-den-yaiba-kaguya-hen"}
 {"mal_id":62582,"anilist_id":199340,"ann_id":37877,"anisearch_id":20924,"animeschedule_id":"seishun-buta-yarou-wa-dear-friend-no-yume-wo-minai"}
 {"mal_id":62584,"anilist_id":199342,"ann_id":37878,"anisearch_id":20926,"animeschedule_id":"hikaru-ga-shinda-natsu-2nd-season"}
+{"mal_id":62587,"anilist_id":204393}
 {"mal_id":62589,"anilist_id":199404,"ann_id":37879,"animeschedule_id":"blue-lock-shin-series"}
 {"mal_id":62590,"anilist_id":199426,"ann_id":37881,"anisearch_id":20932,"animeschedule_id":"hotel-inhumans-2nd-season"}
 {"mal_id":62593,"anisearch_id":20956}
@@ -23724,7 +23726,7 @@
 {"mal_id":62932,"ann_id":37999,"anisearch_id":21014,"animeschedule_id":"kyoukai-no-melody"}
 {"mal_id":62933,"animeschedule_id":"shou-3-ashibe-qq-goma-chan"}
 {"mal_id":62936,"ann_id":38002,"animeschedule_id":"toumei-na-yoru-ni-kakeru-kimi-to-me-ni-mienai-koi-wo-shita"}
-{"mal_id":62955,"animeschedule_id":"you-shou-yan-5"}
+{"mal_id":62955,"anilist_id":204394,"animeschedule_id":"you-shou-yan-5"}
 {"mal_id":62964,"anilist_id":202381,"ann_id":38019,"anisearch_id":21015,"animeschedule_id":"mata-korosarete-shimatta-no-desu-ne-tantei-sama"}
 {"mal_id":62965,"animeschedule_id":"blue-gale-xabungle-side-r"}
 {"mal_id":62967,"anilist_id":202385,"ann_id":38020,"animeschedule_id":"daikaijuu-gaea-tima"}
@@ -23736,6 +23738,7 @@
 {"mal_id":62987,"ann_id":37840}
 {"mal_id":62989,"ann_id":38035,"anisearch_id":21021,"animeschedule_id":"kakunaru-ue-wa"}
 {"mal_id":63000,"anilist_id":153458,"animeschedule_id":"san-xian-lun-hui"}
+{"mal_id":63006,"anilist_id":204396}
 {"mal_id":63011,"anilist_id":202717,"animeschedule_id":"chiikawa-ningyo-no-shima-no-himitsu"}
 {"mal_id":63013,"anilist_id":203146,"ann_id":37934}
 {"mal_id":63014,"anilist_id":202985,"ann_id":38055,"anisearch_id":21022,"animeschedule_id":"tadaima-ojamasaremasu"}
@@ -23765,3 +23768,8 @@
 {"mal_id":63125,"anilist_id":204269}
 {"mal_id":63128,"anilist_id":204348}
 {"mal_id":63130,"anilist_id":204356}
+{"mal_id":63134,"anilist_id":204361}
+{"mal_id":63136,"anilist_id":204362}
+{"mal_id":63139,"anilist_id":204363}
+{"mal_id":63140,"anilist_id":204389}
+{"mal_id":63143,"anilist_id":204429}
