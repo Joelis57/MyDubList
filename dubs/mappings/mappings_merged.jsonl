@@ -17636,7 +17636,7 @@
 {"mal_id":45558,"anilist_id":129202,"kitsu_id":43877,"animeschedule_id":"fanren-xiu-xian-zhuan-yanjiabao-pu-zhan"}
 {"mal_id":45560,"anilist_id":128034,"ann_id":24572,"kitsu_id":44205,"hianime_id":"orient-17468","anisearch_id":15886,"animeschedule_id":"orient"}
 {"mal_id":45567,"anilist_id":128535,"kitsu_id":48494,"anisearch_id":15861,"animeschedule_id":"gekidan-nanatsu-no-taizai"}
-{"mal_id":45571,"kitsu_id":47795}
+{"mal_id":45571,"anilist_id":204471,"kitsu_id":47795}
 {"mal_id":45572,"anilist_id":127688,"ann_id":23898,"kitsu_id":43847,"hianime_id":"the-honor-student-at-magic-high-school-17466","anisearch_id":15859,"animeschedule_id":"mahouka-koukou-no-yuutousei"}
 {"mal_id":45574,"anilist_id":127957,"ann_id":23967,"kitsu_id":43900,"anisearch_id":15868,"animeschedule_id":"holy-knight-light"}
 {"mal_id":45576,"anilist_id":127720,"ann_id":24164,"kitsu_id":43907,"hianime_id":"mushoku-tensei-jobless-reincarnation-part-2-17633","anisearch_id":15862,"animeschedule_id":"mushoku-tensei-isekai-ittara-honki-dasu-part-2"}
@@ -22145,7 +22145,7 @@
 {"mal_id":58522,"anilist_id":176319,"ann_id":32573,"kitsu_id":48664,"anisearch_id":19149,"animeschedule_id":"stpri-hajimari-no-monogatari-strawberry-school-festival"}
 {"mal_id":58523,"anilist_id":178758,"kitsu_id":48659,"animeschedule_id":"huan-chong-shi"}
 {"mal_id":58524,"anilist_id":176370,"ann_id":32594,"kitsu_id":48667,"anisearch_id":19135,"animeschedule_id":"himesama-goumon-no-jikan-desu-2nd-season"}
-{"mal_id":58526,"animeschedule_id":"pipapo-pipipu"}
+{"mal_id":58526,"anilist_id":176226,"animeschedule_id":"pipapo-pipipu"}
 {"mal_id":58531,"anilist_id":176369,"ann_id":32593,"kitsu_id":48665,"anisearch_id":19139,"animeschedule_id":"high-card-the-flowers-bloom"}
 {"mal_id":58535,"anilist_id":176300,"ann_id":32595,"animeschedule_id":"ojamajo-doremi-1620-s"}
 {"mal_id":58537,"anilist_id":184747,"kitsu_id":48832}
@@ -22277,7 +22277,7 @@
 {"mal_id":58908,"anilist_id":177633,"ann_id":32735,"anisearch_id":19298,"animeschedule_id":"muzik-tiger-in-the-forest"}
 {"mal_id":58909,"anisearch_id":19324}
 {"mal_id":58911,"anilist_id":177683,"animeschedule_id":"uso-ja-nai"}
-{"mal_id":58912,"kitsu_id":48902}
+{"mal_id":58912,"anilist_id":177688,"kitsu_id":48902}
 {"mal_id":58913,"anilist_id":177689,"ann_id":32758,"kitsu_id":48893,"hianime_id":"the-summer-hikaru-died-19783","anisearch_id":19294,"animeschedule_id":"hikaru-ga-shinda-natsu"}
 {"mal_id":58915,"anilist_id":177686,"ann_id":32761,"kitsu_id":49932,"anisearch_id":19297,"animeschedule_id":"housenka-clap"}
 {"mal_id":58919,"anilist_id":177687,"ann_id":32760,"kitsu_id":49072,"anisearch_id":19296,"animeschedule_id":"hyakuemu"}
@@ -23776,3 +23776,4 @@
 {"mal_id":63139,"anilist_id":204363,"animeschedule_id":"sakamoto-days-2nd-season"}
 {"mal_id":63140,"anilist_id":204389,"animeschedule_id":"yasei-no-last-boss-ga-arawareta-2nd-season"}
 {"mal_id":63143,"anilist_id":204429}
+{"mal_id":63150,"anilist_id":204466}
