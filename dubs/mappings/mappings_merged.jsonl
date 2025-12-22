@@ -12221,7 +12221,7 @@
 {"mal_id":33926,"anilist_id":98861,"kitsu_id":12611,"animeschedule_id":"quanzhi-gaoshou"}
 {"mal_id":33927,"kitsu_id":12938}
 {"mal_id":33929,"anilist_id":87486,"ann_id":19307,"kitsu_id":12511,"anisearch_id":11696,"animeschedule_id":"boku-no-hero-academia-sukue-kyuujo-kunren"}
-{"mal_id":33933,"anilist_id":87518,"kitsu_id":12651,"animeschedule_id":"yasamura-yasashi-no-yasashii-seikai"}
+{"mal_id":33933,"anilist_id":87518,"kitsu_id":12651,"anisearch_id":11727,"animeschedule_id":"yasamura-yasashi-no-yasashii-seikai"}
 {"mal_id":33934,"anilist_id":99002,"kitsu_id":12546,"animeschedule_id":"trigger-chan"}
 {"mal_id":33936,"kitsu_id":13116}
 {"mal_id":33937,"anilist_id":103469,"kitsu_id":13168,"animeschedule_id":"kirai-demo-suki"}
@@ -22746,7 +22746,7 @@
 {"mal_id":60055,"anilist_id":182578,"ann_id":33661,"kitsu_id":49269,"anisearch_id":19687,"animeschedule_id":"yozakura-san-chi-no-daisakusen-2nd-season"}
 {"mal_id":60057,"anilist_id":166442,"kitsu_id":49739,"anisearch_id":20355,"animeschedule_id":"chao-neng-lifang"}
 {"mal_id":60058,"anilist_id":182587,"ann_id":33662,"kitsu_id":49264,"anisearch_id":19667,"animeschedule_id":"oshi-no-ko-3rd-season"}
-{"mal_id":60059,"anilist_id":182616,"ann_id":33669,"animeschedule_id":"nige-jouzu-no-wakagimi-2nd-season"}
+{"mal_id":60059,"anilist_id":182616,"ann_id":33669,"anisearch_id":19694,"animeschedule_id":"nige-jouzu-no-wakagimi-2nd-season"}
 {"mal_id":60062,"anilist_id":183383,"kitsu_id":49276,"animeschedule_id":"liella-no-uta-3"}
 {"mal_id":60063,"anisearch_id":19796}
 {"mal_id":60066,"anilist_id":185796,"animeschedule_id":"xian-ji-xun-zong"}
@@ -22992,7 +22992,7 @@
 {"mal_id":60629,"anilist_id":179333,"ann_id":32920,"anisearch_id":20004}
 {"mal_id":60632,"anilist_id":199479,"kitsu_id":49450,"animeschedule_id":"ganbare-chrome"}
 {"mal_id":60633,"kitsu_id":49507}
-{"mal_id":60636,"anilist_id":185874,"ann_id":34242,"animeschedule_id":"bleach-sennen-kessen-hen-kashin-tan"}
+{"mal_id":60636,"anilist_id":185874,"ann_id":34242,"anisearch_id":20029,"animeschedule_id":"bleach-sennen-kessen-hen-kashin-tan"}
 {"mal_id":60637,"anilist_id":185875,"ann_id":34245,"animeschedule_id":"mahou-shoujo-lyrical-nanoha-exceeds-gun-blaze-vengeance"}
 {"mal_id":60642,"anilist_id":184824,"kitsu_id":49763}
 {"mal_id":60645,"anilist_id":194403,"anisearch_id":20093,"animeschedule_id":"boku-no-hero-academia-the-movie-you-re-next-a-piece-of-cake"}
@@ -23323,7 +23323,7 @@
 {"mal_id":61601,"anilist_id":191734,"animeschedule_id":"a-horny-money-world-densetsu-no-yoru"}
 {"mal_id":61603,"anilist_id":191788,"ann_id":35916,"kitsu_id":49883,"animeschedule_id":"ao-ashi-2nd-season"}
 {"mal_id":61607,"anilist_id":191832,"kitsu_id":49889}
-{"mal_id":61608,"anilist_id":191967,"ann_id":35934,"animeschedule_id":"jigoku-sensei-nube-2025-part-2"}
+{"mal_id":61608,"anilist_id":191967,"ann_id":35934,"anisearch_id":20664,"animeschedule_id":"jigoku-sensei-nube-2025-part-2"}
 {"mal_id":61609,"anilist_id":155333,"animeschedule_id":"ke-jin-wanjia"}
 {"mal_id":61610,"anilist_id":198707}
 {"mal_id":61612,"anilist_id":199434}
@@ -23739,7 +23739,7 @@
 {"mal_id":62989,"ann_id":38035,"anisearch_id":21021,"animeschedule_id":"kakunaru-ue-wa"}
 {"mal_id":63000,"anilist_id":153458,"animeschedule_id":"san-xian-lun-hui"}
 {"mal_id":63006,"anilist_id":204396}
-{"mal_id":63011,"anilist_id":202717,"animeschedule_id":"chiikawa-ningyo-no-shima-no-himitsu"}
+{"mal_id":63011,"anilist_id":202717,"anisearch_id":21019,"animeschedule_id":"chiikawa-ningyo-no-shima-no-himitsu"}
 {"mal_id":63013,"anilist_id":203146,"ann_id":37934}
 {"mal_id":63014,"anilist_id":202985,"ann_id":38055,"anisearch_id":21022,"animeschedule_id":"tadaima-ojamasaremasu"}
 {"mal_id":63016,"anilist_id":202906,"animeschedule_id":"girl-crush"}
@@ -23775,5 +23775,5 @@
 {"mal_id":63138,"animeschedule_id":"kaijuu-8-gou-narumi-no-heijitsu"}
 {"mal_id":63139,"anilist_id":204363,"animeschedule_id":"sakamoto-days-2nd-season"}
 {"mal_id":63140,"anilist_id":204389,"animeschedule_id":"yasei-no-last-boss-ga-arawareta-2nd-season"}
-{"mal_id":63143,"anilist_id":204429}
+{"mal_id":63143,"anilist_id":204429,"anisearch_id":21123}
 {"mal_id":63150,"anilist_id":204466}
