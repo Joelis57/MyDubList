@@ -10337,7 +10337,7 @@
 {"mal_id":30028,"ann_id":1038,"kitsu_id":10595}
 {"mal_id":30029,"anilist_id":130366,"ann_id":17602,"kitsu_id":10596,"anisearch_id":7039}
 {"mal_id":30030,"anilist_id":21134,"ann_id":16865,"kitsu_id":10597,"anisearch_id":10225,"animeschedule_id":"jewelpet-magical-change"}
-{"mal_id":30034,"kitsu_id":10598,"anisearch_id":10602}
+{"mal_id":30034,"anilist_id":204484,"kitsu_id":10598,"anisearch_id":10602}
 {"mal_id":30036,"anilist_id":175804,"kitsu_id":10599,"animeschedule_id":"tokai-no-butchy"}
 {"mal_id":30039,"anilist_id":21157,"ann_id":16828,"kitsu_id":10600,"hianime_id":"future-card-buddyfight-hundred-4929","anisearch_id":10228,"animeschedule_id":"future-card-buddyfight-100"}
 {"mal_id":30042,"anilist_id":121757,"kitsu_id":10601,"animeschedule_id":"geori-ui-mubeopja"}
@@ -12377,7 +12377,7 @@
 {"mal_id":34238,"anilist_id":97915,"kitsu_id":12720,"anisearch_id":12074,"animeschedule_id":"osomatsu-san-ouma-de-kobanashi"}
 {"mal_id":34239,"anilist_id":97916,"ann_id":18793,"kitsu_id":12719,"animeschedule_id":"mutsugo-to-ouma-no-monogatari"}
 {"mal_id":34240,"anilist_id":97731,"kitsu_id":12668,"anisearch_id":11871,"animeschedule_id":"shelter"}
-{"mal_id":34243,"kitsu_id":12991}
+{"mal_id":34243,"anilist_id":204491,"kitsu_id":12991}
 {"mal_id":34244,"anilist_id":100290,"kitsu_id":12682,"anisearch_id":12259,"animeschedule_id":"crayon-shin-chan-shuurai-uchuujin-shiriri"}
 {"mal_id":34246,"anilist_id":97775,"kitsu_id":12663,"anisearch_id":11875}
 {"mal_id":34248,"anilist_id":103921,"kitsu_id":12988,"animeschedule_id":"wu-kong-da-zhan-er-lang-shen"}
@@ -20055,6 +20055,7 @@
 {"mal_id":53748,"anilist_id":158988,"ann_id":26683,"kitsu_id":46920,"hianime_id":"saint-seiya-knights-of-the-zodiac-battle-for-sanctuary-part-2-19090","anisearch_id":17930,"animeschedule_id":"knights-of-the-zodiac-saint-seiya-3rd-season"}
 {"mal_id":53749,"anilist_id":110953,"kitsu_id":46797,"animeschedule_id":"american-football-for-all-of-us"}
 {"mal_id":53753,"anilist_id":169029,"animeschedule_id":"chiisana-yume"}
+{"mal_id":53754,"anilist_id":204472}
 {"mal_id":53755,"kitsu_id":46826}
 {"mal_id":53756,"kitsu_id":46814}
 {"mal_id":53757,"kitsu_id":46824}
@@ -20978,7 +20979,7 @@
 {"mal_id":55934,"anilist_id":150008,"animeschedule_id":"taihen-daa"}
 {"mal_id":55935,"anilist_id":148246,"animeschedule_id":"omoikkiri-yume"}
 {"mal_id":55937,"kitsu_id":47734}
-{"mal_id":55939,"anilist_id":169363,"anisearch_id":18442,"animeschedule_id":"synduality-kagaku-kouza"}
+{"mal_id":55939,"anilist_id":204506,"anisearch_id":18442,"animeschedule_id":"synduality-kagaku-kouza"}
 {"mal_id":55948,"anilist_id":170220,"ann_id":28701,"animeschedule_id":"sylvanian-families-freya-no-go-for-dream"}
 {"mal_id":55949,"anilist_id":182549,"ann_id":14677,"animeschedule_id":"ultraman-company"}
 {"mal_id":55950,"anilist_id":148477,"animeschedule_id":"picnic"}
@@ -22119,7 +22120,7 @@
 {"mal_id":58463,"anilist_id":173249,"ann_id":30491,"anisearch_id":19156,"animeschedule_id":"kumarba"}
 {"mal_id":58473,"anilist_id":176158,"ann_id":32502,"kitsu_id":48628,"hianime_id":"beheneko-the-elf-girls-cat-is-secretly-an-s-ranked-monster-19450","anisearch_id":19127,"animeschedule_id":"s-rank-monster-no-behemoth-dakedo-neko-to-machigawarete-elf-musume-no-pet-toshite-kurashitemasu"}
 {"mal_id":58476,"anilist_id":141913,"kitsu_id":48895,"animeschedule_id":"fanpai-chushihua"}
-{"mal_id":58477,"animeschedule_id":"benghuai-xingqiong-tiedao-donghua-duanpian-yong-jie-lun-wu"}
+{"mal_id":58477,"anilist_id":177514,"animeschedule_id":"benghuai-xingqiong-tiedao-donghua-duanpian-yong-jie-lun-wu"}
 {"mal_id":58484,"anilist_id":176234,"ann_id":32519,"kitsu_id":48635,"hianime_id":"ishura-2nd-season-19447","anisearch_id":19131,"animeschedule_id":"ishura-2nd-season"}
 {"mal_id":58487,"anilist_id":156095,"kitsu_id":48810,"animeschedule_id":"xuwu-bianjing"}
 {"mal_id":58488,"anilist_id":176660,"ann_id":32644,"kitsu_id":48690,"anisearch_id":19130,"animeschedule_id":"sengoku-youko-senma-konton-hen"}
@@ -22669,7 +22670,7 @@
 {"mal_id":59868,"anilist_id":183744,"kitsu_id":49312,"animeschedule_id":"jibi-eopseo"}
 {"mal_id":59873,"anilist_id":181641,"ann_id":33584,"kitsu_id":49217,"anisearch_id":19603,"animeschedule_id":"tokidoki-bosotto-russia-go-de-dereru-tonari-no-alya-san-2nd-season"}
 {"mal_id":59874,"animeschedule_id":"sarangui-heartsping"}
-{"mal_id":59875,"kitsu_id":49218}
+{"mal_id":59875,"anilist_id":204473,"kitsu_id":49218}
 {"mal_id":59881,"anilist_id":182301,"animeschedule_id":"wish-cat"}
 {"mal_id":59883,"anilist_id":188805,"animeschedule_id":"metal-cardbot-s"}
 {"mal_id":59889,"anilist_id":113555,"animeschedule_id":"kidou-keisatsu-patlabor-ezy"}
@@ -22726,7 +22727,7 @@
 {"mal_id":60012,"anilist_id":182417,"kitsu_id":49258,"anisearch_id":19685,"animeschedule_id":"re-zero-kara-hajimeru-break-time-3rd-season"}
 {"mal_id":60014,"ann_id":1872}
 {"mal_id":60018,"anilist_id":203043,"kitsu_id":49822,"animeschedule_id":"slime-boukenki"}
-{"mal_id":60019,"kitsu_id":49823}
+{"mal_id":60019,"anilist_id":204505,"kitsu_id":49823}
 {"mal_id":60020,"anilist_id":163788,"animeschedule_id":"yeonui-pyeonji"}
 {"mal_id":60021,"anilist_id":182466,"animeschedule_id":"good-morning-2024"}
 {"mal_id":60022,"anilist_id":182469,"ann_id":33643,"kitsu_id":49259,"anisearch_id":19696,"animeschedule_id":"one-piece-fan-letter"}
@@ -23221,7 +23222,7 @@
 {"mal_id":61279,"anilist_id":188661,"kitsu_id":49705,"anisearch_id":20455,"animeschedule_id":"go-go-vehicle-zoo-norimono-star-hen"}
 {"mal_id":61280,"anilist_id":188525,"ann_id":35280,"animeschedule_id":"kore-kaite-shine"}
 {"mal_id":61282,"anilist_id":188546,"ann_id":35281,"animeschedule_id":"shota-oni"}
-{"mal_id":61286,"kitsu_id":49997,"anisearch_id":20329}
+{"mal_id":61286,"anilist_id":204482,"kitsu_id":49997,"anisearch_id":20329}
 {"mal_id":61290,"anilist_id":188653,"ann_id":35282,"kitsu_id":49736,"anisearch_id":20610,"animeschedule_id":"punirunes-puni-3"}
 {"mal_id":61292,"anilist_id":188665,"animeschedule_id":"rurouni-kenshin-meiji-kenkaku-romantan-3rd-season"}
 {"mal_id":61293,"anilist_id":188668,"ann_id":35293,"anisearch_id":20342,"animeschedule_id":"koisuru-one-piece"}
