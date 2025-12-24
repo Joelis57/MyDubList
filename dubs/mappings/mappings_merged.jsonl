@@ -17550,6 +17550,7 @@
 {"mal_id":44698,"animeschedule_id":"tao-hua-yuan-ji"}
 {"mal_id":44700,"anilist_id":129472,"animeschedule_id":"taoqi-bao-ma-xiao-tiao-2008"}
 {"mal_id":44702,"anilist_id":127689,"ann_id":23846,"animeschedule_id":"kintamani-dog"}
+{"mal_id":44708,"anilist_id":204530}
 {"mal_id":44746,"anisearch_id":10415}
 {"mal_id":44752,"anilist_id":133353,"kitsu_id":44935,"animeschedule_id":"chinzei-hachirou-tametomo"}
 {"mal_id":44760,"anilist_id":199416}
@@ -21553,8 +21554,8 @@
 {"mal_id":57181,"anilist_id":170942,"ann_id":30789,"kitsu_id":48239,"hianime_id":"blue-box-19326","anisearch_id":18873,"animeschedule_id":"ao-no-hako"}
 {"mal_id":57183,"anilist_id":153495,"kitsu_id":48242,"animeschedule_id":"wu-dong-qian-kun-4"}
 {"mal_id":57184,"anilist_id":170935,"ann_id":30684,"kitsu_id":48236,"anisearch_id":18869,"animeschedule_id":"great-pretender-razbliuto"}
-{"mal_id":57185,"ann_id":26926}
-{"mal_id":57186,"ann_id":26926}
+{"mal_id":57185,"anilist_id":204544,"ann_id":26926}
+{"mal_id":57186,"anilist_id":204545,"ann_id":26926}
 {"mal_id":57189,"anilist_id":170936,"ann_id":30685,"anisearch_id":18870,"animeschedule_id":"debu-to-love-to-ayamachi-to"}
 {"mal_id":57192,"anilist_id":152184,"ann_id":30697,"kitsu_id":46271,"hianime_id":"true-beauty-19274","anisearch_id":18868,"animeschedule_id":"yeosingangnim"}
 {"mal_id":57193,"anilist_id":180802,"animeschedule_id":"mori-no-chiisana-restaurant"}
@@ -22770,6 +22771,7 @@
 {"mal_id":60128,"anilist_id":186199,"animeschedule_id":"compu-movie"}
 {"mal_id":60130,"anilist_id":183128,"ann_id":33756,"kitsu_id":49284,"anisearch_id":19703,"animeschedule_id":"muchuu-sa-kimi-ni"}
 {"mal_id":60131,"anilist_id":183127,"ann_id":33755,"kitsu_id":49285,"anisearch_id":19702,"animeschedule_id":"karaoke-iko"}
+{"mal_id":60133,"anilist_id":204540}
 {"mal_id":60137,"anilist_id":185728,"animeschedule_id":"tudi-ge-ge-shi-da-lao"}
 {"mal_id":60139,"anilist_id":183393,"kitsu_id":49290,"animeschedule_id":"neverland"}
 {"mal_id":60140,"anilist_id":183133,"ann_id":33767,"kitsu_id":49740,"hianime_id":"the-unaware-atelier-master-19569","anisearch_id":19708,"animeschedule_id":"kanchigai-no-atelier-meister-eiyuu-party-no-moto-zatsuyougakari-ga-jitsu-wa-sentou-igai-ga-sss-rank-datta-to-iu-yoku-aru-hanashi"}
@@ -23252,6 +23254,7 @@
 {"mal_id":61335,"anilist_id":189275,"ann_id":35420,"kitsu_id":49767,"anisearch_id":20379,"animeschedule_id":"medalist-2nd-season"}
 {"mal_id":61338,"anilist_id":189323,"ann_id":35428,"animeschedule_id":"shangri-la-frontier-kusoge-hunter-kamige-ni-idoman-to-su-3rd-season"}
 {"mal_id":61339,"anilist_id":189326,"ann_id":35444,"kitsu_id":49776,"hianime_id":"toilet-bound-hanako-kun-season-2-part-2-19771","anisearch_id":20381,"animeschedule_id":"jibaku-shounen-hanako-kun-2-zoku-hen"}
+{"mal_id":61352,"anilist_id":204517}
 {"mal_id":61353,"anilist_id":185779,"kitsu_id":49772}
 {"mal_id":61358,"kitsu_id":49829}
 {"mal_id":61359,"anilist_id":189565,"ann_id":35487,"anisearch_id":20396,"animeschedule_id":"osananajimi-to-wa-love-comedy-ni-naranai"}
