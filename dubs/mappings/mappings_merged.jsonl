@@ -18696,7 +18696,7 @@
 {"mal_id":50400,"anilist_id":141880,"kitsu_id":45522,"animeschedule_id":"wo-jia-da-shixiong-youdian-kaopu"}
 {"mal_id":50401,"anilist_id":132530,"kitsu_id":46645,"animeschedule_id":"hanhua-riji-3"}
 {"mal_id":50403,"anilist_id":141877,"kitsu_id":45539,"animeschedule_id":"liang-bu-yi-2"}
-{"mal_id":50404,"anilist_id":141852,"kitsu_id":45524,"hianime_id":"the-daily-life-of-the-immortal-king-3-18199","animeschedule_id":"xian-wang-de-richang-shenghuo-3"}
+{"mal_id":50404,"anilist_id":141852,"kitsu_id":45524,"hianime_id":"the-daily-life-of-the-immortal-king-3-18199","anisearch_id":17102,"animeschedule_id":"xian-wang-de-richang-shenghuo-3"}
 {"mal_id":50405,"anilist_id":137296,"kitsu_id":45536,"animeschedule_id":"tianbao-fuyao-lu-3"}
 {"mal_id":50406,"anilist_id":141893,"kitsu_id":45531,"animeschedule_id":"yuan-long-3"}
 {"mal_id":50407,"anilist_id":122585,"kitsu_id":45557,"animeschedule_id":"wu-shan-wu-xing-xi-chuan-huan-zi-lin"}
@@ -21313,7 +21313,7 @@
 {"mal_id":56731,"anilist_id":169559,"ann_id":30076,"kitsu_id":47999,"hianime_id":"synduality-noir-part-2-18754","anisearch_id":18708,"animeschedule_id":"synduality-noir-part-2"}
 {"mal_id":56732,"anilist_id":169579,"ann_id":30078,"kitsu_id":47986,"anisearch_id":18713,"animeschedule_id":"sekai-saikou-no-ansatsusha-isekai-kizoku-ni-tensei-suru-2"}
 {"mal_id":56733,"anilist_id":169581,"ann_id":30077,"animeschedule_id":"magical-explorer"}
-{"mal_id":56734,"anilist_id":169580,"ann_id":30079,"animeschedule_id":"class-de-2-banme-ni-kawaii-onnanoko-to-tomodachi-ni-natta"}
+{"mal_id":56734,"anilist_id":169580,"ann_id":30079,"anisearch_id":18710,"animeschedule_id":"class-de-2-banme-ni-kawaii-onnanoko-to-tomodachi-ni-natta"}
 {"mal_id":56735,"anilist_id":169583,"ann_id":30081,"anisearch_id":18714,"animeschedule_id":"tenkou-saki-no-seiso-karen-na-bishoujo-ga-mukashi-danshi-to-omotte-issho-ni-asonda-osananajimi-datta-ken"}
 {"mal_id":56736,"anilist_id":169582,"ann_id":30080,"animeschedule_id":"saikyou-degarashi-ouji-no-anyaku-teii-arasoi"}
 {"mal_id":56738,"anilist_id":169584,"ann_id":30082,"kitsu_id":47984,"hianime_id":"the-duke-of-death-and-his-maid-season-3-19128","anisearch_id":18716,"animeschedule_id":"shinigami-bocchan-to-kuro-maid-3rd-season"}
@@ -23512,7 +23512,7 @@
 {"mal_id":62145,"anilist_id":196547,"anisearch_id":20790}
 {"mal_id":62146,"anilist_id":197824,"ann_id":37606,"anisearch_id":20857,"animeschedule_id":"isekai-nonbiri-nouka-2"}
 {"mal_id":62149,"anilist_id":197094,"anisearch_id":20807,"animeschedule_id":"fate-grand-order-fujimaru-ritsuka-wa-wakaranai-season-3"}
-{"mal_id":62155,"anilist_id":196840,"ann_id":37269}
+{"mal_id":62155,"anilist_id":196840,"ann_id":37269,"anisearch_id":20815}
 {"mal_id":62164,"anilist_id":196935,"ann_id":37292,"anisearch_id":20808,"animeschedule_id":"akane-banashi"}
 {"mal_id":62165,"animeschedule_id":"wan-jian-wangzuo"}
 {"mal_id":62167,"animeschedule_id":"piaomiao-jian-xian-chuan"}
@@ -23662,7 +23662,7 @@
 {"mal_id":62593,"anisearch_id":20956}
 {"mal_id":62601,"anilist_id":199547,"ann_id":37882,"anisearch_id":20938,"animeschedule_id":"marriagetoxin"}
 {"mal_id":62602,"ann_id":29415,"anisearch_id":16176}
-{"mal_id":62604,"anilist_id":199588,"ann_id":37884,"animeschedule_id":"otaku-ni-yasashii-gal-wa-inai"}
+{"mal_id":62604,"anilist_id":199588,"ann_id":37884,"anisearch_id":20953,"animeschedule_id":"otaku-ni-yasashii-gal-wa-inai"}
 {"mal_id":62605,"ann_id":37883,"animeschedule_id":"matsurika-kanriden"}
 {"mal_id":62606,"ann_id":37885,"animeschedule_id":"ikyou-no-tsume-nuri-minarai"}
 {"mal_id":62607,"anilist_id":199799,"animeschedule_id":"ottamagettan"}
@@ -23782,6 +23782,6 @@
 {"mal_id":63140,"anilist_id":204389,"animeschedule_id":"yasei-no-last-boss-ga-arawareta-2nd-season"}
 {"mal_id":63143,"anilist_id":204429,"anisearch_id":21123,"animeschedule_id":"chainsaw-man-shikaku-hen"}
 {"mal_id":63147,"animeschedule_id":"gachiakuta-2nd-season"}
-{"mal_id":63150,"anilist_id":204466,"animeschedule_id":"otome-kaijuu-caramelise"}
+{"mal_id":63150,"anilist_id":204466,"anisearch_id":21130,"animeschedule_id":"otome-kaijuu-caramelise"}
 {"mal_id":63153,"anilist_id":204349}
 {"mal_id":63167,"anilist_id":204561}
