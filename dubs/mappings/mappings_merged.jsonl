@@ -21504,8 +21504,8 @@
 {"mal_id":57078,"anilist_id":137684,"kitsu_id":48325,"animeschedule_id":"gei-wo-lai-ge-xiao-heshang"}
 {"mal_id":57084,"kitsu_id":48784}
 {"mal_id":57093,"anilist_id":186716,"ann_id":23071,"anisearch_id":13597,"animeschedule_id":"princess-principal-crown-handler-chapter-4"}
-{"mal_id":57094,"ann_id":23071,"anisearch_id":13597,"animeschedule_id":"princess-principal-crown-handler-chapter-5"}
-{"mal_id":57095,"ann_id":23071,"anisearch_id":13597}
+{"mal_id":57094,"anilist_id":204584,"ann_id":23071,"anisearch_id":13597,"animeschedule_id":"princess-principal-crown-handler-chapter-5"}
+{"mal_id":57095,"anilist_id":204585,"ann_id":23071,"anisearch_id":13597}
 {"mal_id":57096,"anilist_id":156088,"kitsu_id":48259,"animeschedule_id":"bu-shi-bu-mie"}
 {"mal_id":57097,"anilist_id":166455,"kitsu_id":48266,"animeschedule_id":"wanneng-lianai-zahuodian"}
 {"mal_id":57098,"kitsu_id":48252}
@@ -23553,7 +23553,7 @@
 {"mal_id":62276,"anilist_id":199448}
 {"mal_id":62277,"anilist_id":197474,"anisearch_id":20836,"animeschedule_id":"gintama-movie-3-yoshiwara-daienjou"}
 {"mal_id":62279,"anilist_id":198704,"animeschedule_id":"wangu-jian-di"}
-{"mal_id":62289,"ann_id":37520}
+{"mal_id":62289,"anilist_id":199408,"ann_id":37520}
 {"mal_id":62290,"kitsu_id":50112,"animeschedule_id":"tokyo-great-bears-opening-movie"}
 {"mal_id":62292,"anilist_id":178402,"animeschedule_id":"mugen-ni-tomaranai"}
 {"mal_id":62293,"animeschedule_id":"anime-to-susume"}
@@ -23784,4 +23784,8 @@
 {"mal_id":63147,"animeschedule_id":"gachiakuta-2nd-season"}
 {"mal_id":63150,"anilist_id":204466,"anisearch_id":21130,"animeschedule_id":"otome-kaijuu-caramelise"}
 {"mal_id":63153,"anilist_id":204349}
+{"mal_id":63158,"anilist_id":204463}
+{"mal_id":63159,"anilist_id":200930}
 {"mal_id":63167,"anilist_id":204561,"animeschedule_id":"mahou-no-princess-minky-momo-ova"}
+{"mal_id":63174,"anilist_id":204579}
+{"mal_id":63177,"anilist_id":204604}
