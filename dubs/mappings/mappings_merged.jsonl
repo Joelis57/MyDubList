@@ -8885,7 +8885,7 @@
 {"mal_id":23125,"kitsu_id":8323}
 {"mal_id":23129,"anilist_id":104148,"kitsu_id":9118,"anisearch_id":8953,"animeschedule_id":"mahou-no-princess-minky-momo-hitomi-no-seiza-minky-momo-song-special"}
 {"mal_id":23133,"anilist_id":20647,"ann_id":15897,"kitsu_id":8335,"anisearch_id":9523,"animeschedule_id":"m3-sono-kuroki-hagane"}
-{"mal_id":23135,"anilist_id":20742,"ann_id":15916,"kitsu_id":8555,"anisearch_id":9554,"animeschedule_id":"pripara-3"}
+{"mal_id":23135,"anilist_id":20742,"ann_id":15916,"kitsu_id":8555,"anisearch_id":9554,"animeschedule_id":"pripara-2"}
 {"mal_id":23137,"kitsu_id":8749}
 {"mal_id":23149,"anilist_id":108743,"kitsu_id":8953,"anisearch_id":9444,"animeschedule_id":"47-todoufuken-r"}
 {"mal_id":23151,"anilist_id":20648,"ann_id":16084,"kitsu_id":8521,"anisearch_id":9522,"animeschedule_id":"shounen-hollywood-holly-stage-for-49"}
@@ -13187,7 +13187,7 @@
 {"mal_id":35589,"anilist_id":98747,"ann_id":20019,"kitsu_id":13710,"hianime_id":"katana-maidens-toji-no-miko-4188","anisearch_id":12458,"animeschedule_id":"toji-no-miko"}
 {"mal_id":35590,"ann_id":18226,"kitsu_id":14241}
 {"mal_id":35592,"anilist_id":98528,"kitsu_id":13590,"anisearch_id":12444}
-{"mal_id":35593,"ann_id":1697,"kitsu_id":41572}
+{"mal_id":35593,"ann_id":1697,"kitsu_id":41572,"animeschedule_id":"meiken-lassie-yume-ni-mukatte-hashire"}
 {"mal_id":35594,"anilist_id":121891,"kitsu_id":41573,"animeschedule_id":"ylion-to-callysia"}
 {"mal_id":35596,"kitsu_id":41574}
 {"mal_id":35602,"kitsu_id":13522,"anisearch_id":12493}
@@ -17637,7 +17637,7 @@
 {"mal_id":45558,"anilist_id":129202,"kitsu_id":43877,"animeschedule_id":"fanren-xiu-xian-zhuan-yanjiabao-pu-zhan"}
 {"mal_id":45560,"anilist_id":128034,"ann_id":24572,"kitsu_id":44205,"hianime_id":"orient-17468","anisearch_id":15886,"animeschedule_id":"orient"}
 {"mal_id":45567,"anilist_id":128535,"kitsu_id":48494,"anisearch_id":15861,"animeschedule_id":"gekidan-nanatsu-no-taizai"}
-{"mal_id":45571,"anilist_id":204471,"kitsu_id":47795}
+{"mal_id":45571,"anilist_id":204471,"kitsu_id":47795,"animeschedule_id":"g-r-m-the-record-of-garm-war"}
 {"mal_id":45572,"anilist_id":127688,"ann_id":23898,"kitsu_id":43847,"hianime_id":"the-honor-student-at-magic-high-school-17466","anisearch_id":15859,"animeschedule_id":"mahouka-koukou-no-yuutousei"}
 {"mal_id":45574,"anilist_id":127957,"ann_id":23967,"kitsu_id":43900,"anisearch_id":15868,"animeschedule_id":"holy-knight-light"}
 {"mal_id":45576,"anilist_id":127720,"ann_id":24164,"kitsu_id":43907,"hianime_id":"mushoku-tensei-jobless-reincarnation-part-2-17633","anisearch_id":15862,"animeschedule_id":"mushoku-tensei-isekai-ittara-honki-dasu-part-2"}
@@ -20056,7 +20056,7 @@
 {"mal_id":53748,"anilist_id":158988,"ann_id":26683,"kitsu_id":46920,"hianime_id":"saint-seiya-knights-of-the-zodiac-battle-for-sanctuary-part-2-19090","anisearch_id":17930,"animeschedule_id":"knights-of-the-zodiac-saint-seiya-3rd-season"}
 {"mal_id":53749,"anilist_id":110953,"kitsu_id":46797,"animeschedule_id":"american-football-for-all-of-us"}
 {"mal_id":53753,"anilist_id":169029,"animeschedule_id":"chiisana-yume"}
-{"mal_id":53754,"anilist_id":204472}
+{"mal_id":53754,"anilist_id":204472,"animeschedule_id":"g2-5"}
 {"mal_id":53755,"kitsu_id":46826}
 {"mal_id":53756,"kitsu_id":46814}
 {"mal_id":53757,"kitsu_id":46824}
@@ -20930,6 +20930,7 @@
 {"mal_id":55848,"anilist_id":166710,"ann_id":28894,"kitsu_id":47687,"anisearch_id":18512,"animeschedule_id":"suicide-squad-isekai"}
 {"mal_id":55849,"anilist_id":166493,"kitsu_id":48207,"anisearch_id":18491}
 {"mal_id":55850,"anilist_id":166459,"kitsu_id":48167,"anisearch_id":18513}
+{"mal_id":55851,"animeschedule_id":"hikouki"}
 {"mal_id":55854,"anilist_id":166989,"kitsu_id":47980,"animeschedule_id":"hero-music"}
 {"mal_id":55855,"anilist_id":166715,"ann_id":28897,"kitsu_id":47688,"hianime_id":"black-butler-public-school-arc-19137","anisearch_id":18516,"animeschedule_id":"kuroshitsuji-kishuku-gakkou-hen"}
 {"mal_id":55856,"kitsu_id":48290}
@@ -21056,7 +21057,7 @@
 {"mal_id":56086,"anilist_id":147940,"animeschedule_id":"daimyou-gyoretsu"}
 {"mal_id":56087,"kitsu_id":49646}
 {"mal_id":56088,"kitsu_id":47798}
-{"mal_id":56089,"kitsu_id":48868}
+{"mal_id":56089,"kitsu_id":48868,"animeschedule_id":"know-your-heart"}
 {"mal_id":56090,"kitsu_id":49316}
 {"mal_id":56091,"kitsu_id":48683}
 {"mal_id":56092,"kitsu_id":49317}
@@ -22672,7 +22673,7 @@
 {"mal_id":59868,"anilist_id":183744,"kitsu_id":49312,"animeschedule_id":"jibi-eopseo"}
 {"mal_id":59873,"anilist_id":181641,"ann_id":33584,"kitsu_id":49217,"anisearch_id":19603,"animeschedule_id":"tokidoki-bosotto-russia-go-de-dereru-tonari-no-alya-san-2nd-season"}
 {"mal_id":59874,"animeschedule_id":"sarangui-heartsping"}
-{"mal_id":59875,"anilist_id":204473,"kitsu_id":49218}
+{"mal_id":59875,"anilist_id":204473,"kitsu_id":49218,"animeschedule_id":"danyuan-meng-changjiu"}
 {"mal_id":59881,"anilist_id":182301,"animeschedule_id":"wish-cat"}
 {"mal_id":59883,"anilist_id":188805,"animeschedule_id":"metal-cardbot-s"}
 {"mal_id":59889,"anilist_id":113555,"animeschedule_id":"kidou-keisatsu-patlabor-ezy"}
@@ -23031,11 +23032,12 @@
 {"mal_id":60714,"anilist_id":186007,"ann_id":34264,"kitsu_id":49484,"animeschedule_id":"ghost-of-tsushima-legends"}
 {"mal_id":60720,"anilist_id":183742,"kitsu_id":49773,"anisearch_id":20008}
 {"mal_id":60722,"kitsu_id":49515}
-{"mal_id":60725,"kitsu_id":49810}
+{"mal_id":60725,"kitsu_id":49810,"animeschedule_id":"yuanshen-ci-shi-zhi-yi"}
 {"mal_id":60726,"anilist_id":186043,"hianime_id":"my-melody-and-kuromi-19723","anisearch_id":20101,"animeschedule_id":"my-melody-and-kuromi"}
 {"mal_id":60729,"kitsu_id":49491,"anisearch_id":20084}
 {"mal_id":60730,"anilist_id":123746,"animeschedule_id":"hukakumei-zenya"}
 {"mal_id":60732,"anilist_id":186052,"ann_id":34273,"kitsu_id":49493,"hianime_id":"the-water-magician-19770","anisearch_id":20053,"animeschedule_id":"mizu-zokusei-no-mahoutsukai"}
+{"mal_id":60735,"animeschedule_id":"benghuai-xingqiong-tiedao-the-her-ta-de-mo-fa-chu-fang"}
 {"mal_id":60736,"kitsu_id":49500}
 {"mal_id":60739,"anilist_id":186057,"ann_id":34281,"animeschedule_id":"otome-game-no-heroine-de-saikyou-survival"}
 {"mal_id":60746,"kitsu_id":50044}
@@ -23043,7 +23045,7 @@
 {"mal_id":60752,"anilist_id":166132,"animeschedule_id":"purple-rain"}
 {"mal_id":60765,"anilist_id":186161,"ann_id":34321,"hianime_id":"with-you-our-love-will-make-it-through-19899","anisearch_id":20099,"animeschedule_id":"kimi-to-koete-koi-ni-naru"}
 {"mal_id":60766,"anilist_id":186836,"animeschedule_id":"tianming-da-zhuzai"}
-{"mal_id":60771,"kitsu_id":49499}
+{"mal_id":60771,"kitsu_id":49499,"animeschedule_id":"shinitai-himawari"}
 {"mal_id":60772,"anilist_id":166438,"animeschedule_id":"xiang-huo-er-sheng"}
 {"mal_id":60773,"anilist_id":183414,"anisearch_id":20088,"animeschedule_id":"kimi-to-idol-precure-movie"}
 {"mal_id":60774,"anilist_id":186169,"ann_id":34335,"kitsu_id":49925,"anisearch_id":20098,"animeschedule_id":"chao"}
@@ -23074,6 +23076,7 @@
 {"mal_id":60857,"anilist_id":186307,"kitsu_id":49771,"anisearch_id":20143}
 {"mal_id":60862,"anilist_id":185537,"ann_id":34171,"anisearch_id":20393,"animeschedule_id":"crayon-shin-chan-chou-karei-shakunetsu-no-kasukabe-dancers"}
 {"mal_id":60865,"anilist_id":186496,"animeschedule_id":"sui-kin-chi-ka-moku-dotten-amen-sp-dance-pv"}
+{"mal_id":60867,"animeschedule_id":"haven"}
 {"mal_id":60877,"anilist_id":199372,"kitsu_id":49974,"animeschedule_id":"shi-jian-zhi-zi"}
 {"mal_id":60890,"anilist_id":195965,"animeschedule_id":"xing-qia-meng-shao-nu-2-menghuan-jingling"}
 {"mal_id":60891,"anilist_id":195966,"animeschedule_id":"xing-qia-meng-shao-nu-3-xing-jie-chuanshuo"}
@@ -23130,9 +23133,11 @@
 {"mal_id":61097,"anilist_id":192634,"kitsu_id":49597,"anisearch_id":20502,"animeschedule_id":"akai-kitsune-midori-no-tanuki-web-cm-hitori-no-yoru-to-akamidori"}
 {"mal_id":61098,"kitsu_id":49707}
 {"mal_id":61103,"animeschedule_id":"hito-no-kurashi-no-hyakumannen-mani-mani-march"}
+{"mal_id":61106,"animeschedule_id":"shade-no-hokori-wa-enchou"}
 {"mal_id":61107,"anilist_id":187166,"animeschedule_id":"ganso-bandori-chan"}
 {"mal_id":61108,"anilist_id":194879,"ann_id":34871,"kitsu_id":49660,"anisearch_id":20225,"animeschedule_id":"mumei-no-jinsei"}
 {"mal_id":61111,"animeschedule_id":"fukuji-to-yumihiko-umi-wo-watatte-kita-ushikai-shounen"}
+{"mal_id":61112,"animeschedule_id":"gavvtto-anime-sweety-days-okashi-na-nichijou"}
 {"mal_id":61114,"anilist_id":187267,"anisearch_id":20494,"animeschedule_id":"beastars-final-season-part-2"}
 {"mal_id":61115,"anilist_id":187217,"anisearch_id":20226,"animeschedule_id":"gochuumon-wa-usagi-desu-ka-shinsaku-anime"}
 {"mal_id":61119,"anilist_id":187508,"animeschedule_id":"duel-masters-lost-boukyaku-no-taiyou"}
@@ -23495,7 +23500,7 @@
 {"mal_id":62081,"anilist_id":196222,"ann_id":37101,"anisearch_id":20777,"animeschedule_id":"ore-wa-subete-wo-parry-suru-gyaku-kanchigai-no-sekai-saikyou-wa-boukensha-ni-naritai-2nd-season"}
 {"mal_id":62082,"kitsu_id":50058}
 {"mal_id":62083,"anilist_id":196227,"kitsu_id":50059,"anisearch_id":20660}
-{"mal_id":62092,"anilist_id":137716}
+{"mal_id":62092,"anilist_id":137716,"animeschedule_id":"zaixia-yingtai"}
 {"mal_id":62093,"kitsu_id":50057}
 {"mal_id":62100,"anilist_id":196333,"ann_id":37119,"anisearch_id":20781,"animeschedule_id":"hirayasumi"}
 {"mal_id":62101,"kitsu_id":50056}
@@ -23590,7 +23595,7 @@
 {"mal_id":62385,"anilist_id":198033,"animeschedule_id":"ano-hi-no-kanojotachi-day09-miu-takigawa"}
 {"mal_id":62387,"anilist_id":198369,"anisearch_id":20864,"animeschedule_id":"meitantei-conan-highway-no-datenshi"}
 {"mal_id":62391,"ann_id":37722,"anisearch_id":20865,"animeschedule_id":"kill-ao"}
-{"mal_id":62392,"anilist_id":204066,"anisearch_id":20983}
+{"mal_id":62392,"anilist_id":204066,"anisearch_id":20983,"animeschedule_id":"jujutsu-kaisen-shibuya-jihen-tokubetsu-henshuu-ban-x-shimetsu-kaiyuu-senkou-jouei"}
 {"mal_id":62394,"anisearch_id":20866}
 {"mal_id":62401,"anilist_id":198377,"animeschedule_id":"ashita-no-arika"}
 {"mal_id":62404,"animeschedule_id":"queens"}
@@ -23656,7 +23661,7 @@
 {"mal_id":62580,"anilist_id":199337,"ann_id":37876,"anisearch_id":20927,"animeschedule_id":"shin-samurai-den-yaiba-kaguya-hen"}
 {"mal_id":62582,"anilist_id":199340,"ann_id":37877,"anisearch_id":20924,"animeschedule_id":"seishun-buta-yarou-wa-dear-friend-no-yume-wo-minai"}
 {"mal_id":62584,"anilist_id":199342,"ann_id":37878,"anisearch_id":20926,"animeschedule_id":"hikaru-ga-shinda-natsu-2nd-season"}
-{"mal_id":62587,"anilist_id":204393}
+{"mal_id":62587,"anilist_id":204393,"animeschedule_id":"wo-zai-tianting-shou-feipin"}
 {"mal_id":62589,"anilist_id":199404,"ann_id":37879,"animeschedule_id":"blue-lock-shin-series"}
 {"mal_id":62590,"anilist_id":199426,"ann_id":37881,"anisearch_id":20932,"animeschedule_id":"hotel-inhumans-2nd-season"}
 {"mal_id":62593,"anisearch_id":20956}
@@ -23740,7 +23745,7 @@
 {"mal_id":62978,"anilist_id":202503,"ann_id":38027,"animeschedule_id":"majutsu-wo-kiwamete-tabi-ni-deta-tensei-elf-moteamashita-jumyou-de-ikeru-densetsu-to-naru"}
 {"mal_id":62981,"anilist_id":202508,"ann_id":38028,"anisearch_id":21023,"animeschedule_id":"kami-no-shizuku"}
 {"mal_id":62983,"anilist_id":202523,"ann_id":38030}
-{"mal_id":62987,"ann_id":37840,"anisearch_id":21064}
+{"mal_id":62987,"ann_id":37840,"anisearch_id":21064,"animeschedule_id":"hokuto-no-ken-kenougun-zako-tachi-no-banka"}
 {"mal_id":62989,"ann_id":38035,"anisearch_id":21021,"animeschedule_id":"kakunaru-ue-wa"}
 {"mal_id":63000,"anilist_id":153458,"animeschedule_id":"san-xian-lun-hui"}
 {"mal_id":63006,"anilist_id":204396}
