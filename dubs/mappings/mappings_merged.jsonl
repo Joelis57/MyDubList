@@ -15128,6 +15128,7 @@
 {"mal_id":38814,"anilist_id":106239,"ann_id":21679,"kitsu_id":42093,"anisearch_id":14026,"animeschedule_id":"nobunaga-sensei-no-osanazuma"}
 {"mal_id":38815,"anilist_id":106494,"ann_id":21677,"kitsu_id":42027,"anisearch_id":14028,"animeschedule_id":"aggressive-retsuko-we-wish-you-a-metal-christmas"}
 {"mal_id":38816,"anilist_id":106240,"ann_id":22139,"kitsu_id":42030,"anisearch_id":14104,"animeschedule_id":"hello-world"}
+{"mal_id":38817,"anisearch_id":15178}
 {"mal_id":38818,"anilist_id":106676,"kitsu_id":44516,"animeschedule_id":"please-marry-me"}
 {"mal_id":38819,"anilist_id":106675,"kitsu_id":42751,"animeschedule_id":"bad-bad-bad"}
 {"mal_id":38820,"kitsu_id":45743}
@@ -19227,7 +19228,7 @@
 {"mal_id":51655,"anilist_id":204622,"anisearch_id":12955}
 {"mal_id":51656,"anilist_id":204623}
 {"mal_id":51662,"anilist_id":147578,"kitsu_id":46260,"anisearch_id":17314}
-{"mal_id":51663,"anilist_id":146741,"kitsu_id":46247}
+{"mal_id":51663,"anilist_id":146741,"kitsu_id":46247,"anisearch_id":17324}
 {"mal_id":51664,"anilist_id":144996,"kitsu_id":46245,"anisearch_id":17087}
 {"mal_id":51673,"anilist_id":147850,"ann_id":27403,"kitsu_id":46079,"anisearch_id":17339,"animeschedule_id":"shaman-king-zoku-hen"}
 {"mal_id":51678,"anilist_id":147864,"ann_id":25571,"kitsu_id":46077,"anisearch_id":17323,"animeschedule_id":"onii-chan-wa-oshimai"}
@@ -23508,7 +23509,7 @@
 {"mal_id":62100,"anilist_id":196333,"ann_id":37119,"anisearch_id":20781,"animeschedule_id":"hirayasumi"}
 {"mal_id":62101,"kitsu_id":50056}
 {"mal_id":62102,"anilist_id":196356,"ann_id":37123,"kitsu_id":50055,"anisearch_id":20783,"animeschedule_id":"ibitte-konai-gibo-to-gishi"}
-{"mal_id":62106,"kitsu_id":50062}
+{"mal_id":62106,"kitsu_id":50062,"anisearch_id":20750}
 {"mal_id":62108,"anilist_id":193613,"ann_id":34411,"anisearch_id":21065,"animeschedule_id":"synapusyu-the-movie-pushu-hoppe-dancing-party"}
 {"mal_id":62114,"ann_id":33672}
 {"mal_id":62116,"kitsu_id":50069}
@@ -23561,7 +23562,7 @@
 {"mal_id":62276,"anilist_id":199448}
 {"mal_id":62277,"anilist_id":197474,"anisearch_id":20836,"animeschedule_id":"gintama-movie-3-yoshiwara-daienjou"}
 {"mal_id":62279,"anilist_id":198704,"animeschedule_id":"wangu-jian-di"}
-{"mal_id":62289,"anilist_id":199408,"ann_id":37520}
+{"mal_id":62289,"anilist_id":199408,"ann_id":37520,"anisearch_id":20839}
 {"mal_id":62290,"kitsu_id":50112,"animeschedule_id":"tokyo-great-bears-opening-movie"}
 {"mal_id":62292,"anilist_id":178402,"animeschedule_id":"mugen-ni-tomaranai"}
 {"mal_id":62293,"animeschedule_id":"anime-to-susume"}
