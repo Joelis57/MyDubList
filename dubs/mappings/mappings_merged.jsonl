@@ -12815,7 +12815,7 @@
 {"mal_id":35022,"kitsu_id":40651,"anisearch_id":18369}
 {"mal_id":35023,"kitsu_id":40652}
 {"mal_id":35024,"kitsu_id":40653}
-{"mal_id":35025,"kitsu_id":40654,"anisearch_id":12361}
+{"mal_id":35025,"anilist_id":204615,"kitsu_id":40654,"anisearch_id":12361}
 {"mal_id":35026,"kitsu_id":40655}
 {"mal_id":35027,"kitsu_id":40656}
 {"mal_id":35028,"anilist_id":98435,"kitsu_id":41483,"anisearch_id":12298}
@@ -12831,8 +12831,8 @@
 {"mal_id":35038,"anilist_id":131976,"kitsu_id":40665,"animeschedule_id":"eigo-de-utatte-asobou"}
 {"mal_id":35039,"kitsu_id":40666}
 {"mal_id":35040,"kitsu_id":40667}
-{"mal_id":35041,"kitsu_id":40668}
-{"mal_id":35042,"kitsu_id":40669}
+{"mal_id":35041,"anilist_id":204632,"kitsu_id":40668}
+{"mal_id":35042,"anilist_id":204633,"kitsu_id":40669}
 {"mal_id":35044,"anilist_id":98575,"ann_id":20900,"kitsu_id":40592,"anisearch_id":13510,"animeschedule_id":"tu-bian-yingxiong-leaf"}
 {"mal_id":35047,"anilist_id":179759,"kitsu_id":40670,"anisearch_id":11286,"animeschedule_id":"mirai-e-no-tegami-kono-michi-no-tochuu-kara"}
 {"mal_id":35048,"anilist_id":129047,"kitsu_id":40671,"anisearch_id":19804,"animeschedule_id":"anime-tengu-no-kakuresato"}
@@ -19224,7 +19224,8 @@
 {"mal_id":51646,"anilist_id":185663,"kitsu_id":46878,"animeschedule_id":"jarinko-chie-kotetsu-jr-no-himerareta-kako"}
 {"mal_id":51648,"anilist_id":147642,"ann_id":25566,"kitsu_id":46059,"hianime_id":"the-unwanted-undead-adventurer-18808","anisearch_id":17302,"animeschedule_id":"nozomanu-fushi-no-boukensha"}
 {"mal_id":51653,"anilist_id":147729,"ann_id":25567,"hianime_id":"ultraman-final-18381","anisearch_id":17317,"animeschedule_id":"ultraman-final"}
-{"mal_id":51655,"anisearch_id":12955}
+{"mal_id":51655,"anilist_id":204622,"anisearch_id":12955}
+{"mal_id":51656,"anilist_id":204623}
 {"mal_id":51662,"anilist_id":147578,"kitsu_id":46260,"anisearch_id":17314}
 {"mal_id":51663,"anilist_id":146741,"kitsu_id":46247}
 {"mal_id":51664,"anilist_id":144996,"kitsu_id":46245,"anisearch_id":17087}
@@ -19581,6 +19582,7 @@
 {"mal_id":52542,"kitsu_id":48162}
 {"mal_id":52543,"kitsu_id":48163}
 {"mal_id":52544,"kitsu_id":48164}
+{"mal_id":52545,"anilist_id":204627}
 {"mal_id":52551,"anilist_id":153322,"kitsu_id":46306,"animeschedule_id":"futsal-boys-short-anime"}
 {"mal_id":52558,"kitsu_id":46400}
 {"mal_id":52561,"anilist_id":145069,"kitsu_id":46683,"anisearch_id":17561}
@@ -23485,7 +23487,8 @@
 {"mal_id":62050,"anilist_id":196029,"ann_id":37026,"anisearch_id":20878,"animeschedule_id":"kami-no-niwatsuki-kusunoki-tei"}
 {"mal_id":62051,"ann_id":37027,"animeschedule_id":"grow-up-show-himawari-no-circus-dan"}
 {"mal_id":62053,"anilist_id":178151}
-{"mal_id":62055,"anisearch_id":20756}
+{"mal_id":62055,"anilist_id":204624,"anisearch_id":20756}
+{"mal_id":62058,"anilist_id":204625}
 {"mal_id":62063,"anilist_id":196224,"animeschedule_id":"tomoshibi"}
 {"mal_id":62066,"anilist_id":196230,"ann_id":37024,"anisearch_id":20793,"animeschedule_id":"monster-strike-deadverse-reloaded"}
 {"mal_id":62067,"ann_id":37047,"anisearch_id":20772,"animeschedule_id":"golden-kamuy-sapporo-beer-koujou-hen"}
@@ -23519,7 +23522,7 @@
 {"mal_id":62149,"anilist_id":197094,"anisearch_id":20807,"animeschedule_id":"fate-grand-order-fujimaru-ritsuka-wa-wakaranai-season-3"}
 {"mal_id":62155,"anilist_id":196840,"ann_id":37269,"anisearch_id":20815,"animeschedule_id":"iya-na-kao-sare-nagara-opantsu-misete-moraitai-returns"}
 {"mal_id":62164,"anilist_id":196935,"ann_id":37292,"anisearch_id":20808,"animeschedule_id":"akane-banashi"}
-{"mal_id":62165,"animeschedule_id":"wan-jian-wangzuo"}
+{"mal_id":62165,"anilist_id":199419,"animeschedule_id":"wan-jian-wangzuo"}
 {"mal_id":62167,"animeschedule_id":"piaomiao-jian-xian-chuan"}
 {"mal_id":62168,"kitsu_id":50077}
 {"mal_id":62169,"kitsu_id":50078}
@@ -23649,9 +23652,15 @@
 {"mal_id":62544,"anilist_id":199368,"animeschedule_id":"shen-zai-jiong-tu"}
 {"mal_id":62546,"anilist_id":195200,"animeschedule_id":"kimetsu-no-yaiba-movie-2-mugenjou-hen"}
 {"mal_id":62547,"anilist_id":195201,"animeschedule_id":"kimetsu-no-yaiba-movie-3-mugenjou-hen"}
-{"mal_id":62548,"anisearch_id":20972}
+{"mal_id":62548,"anilist_id":204628,"anisearch_id":20972}
 {"mal_id":62549,"anilist_id":199150,"ann_id":37866,"animeschedule_id":"death-stranding-mosquito"}
 {"mal_id":62550,"anilist_id":199152,"animeschedule_id":"girls-band-cry-movie"}
+{"mal_id":62556,"anilist_id":204616}
+{"mal_id":62557,"anilist_id":204617}
+{"mal_id":62558,"anilist_id":204618}
+{"mal_id":62559,"anilist_id":204619}
+{"mal_id":62560,"anilist_id":204620}
+{"mal_id":62561,"anilist_id":204621}
 {"mal_id":62564,"anilist_id":199185,"ann_id":37869,"anisearch_id":20923,"animeschedule_id":"tate-no-yuusha-no-nariagari-5"}
 {"mal_id":62567,"anilist_id":199217,"ann_id":37872,"anisearch_id":20913}
 {"mal_id":62568,"anilist_id":199221,"ann_id":37873,"animeschedule_id":"dr-stone-science-future-part-3"}
@@ -23770,9 +23779,11 @@
 {"mal_id":63078,"anilist_id":203855,"ann_id":38119,"animeschedule_id":"saijaku-tamer-wa-gomi-hiroi-no-tabi-wo-hajimemashita-2nd-season"}
 {"mal_id":63082,"anilist_id":203880,"animeschedule_id":"reiwa-no-dara-san"}
 {"mal_id":63087,"anilist_id":203939,"anisearch_id":21076,"animeschedule_id":"yami-shibai-16"}
+{"mal_id":63092,"anilist_id":204629}
 {"mal_id":63096,"anilist_id":189259,"ann_id":35393}
 {"mal_id":63098,"anilist_id":204011,"ann_id":38129,"anisearch_id":21084,"animeschedule_id":"psyren"}
 {"mal_id":63100,"anisearch_id":21083,"animeschedule_id":"tetsunabe-no-jan"}
+{"mal_id":63106,"anilist_id":203148}
 {"mal_id":63120,"anilist_id":204293,"animeschedule_id":"akatsuki-no-yona-zoku-hen"}
 {"mal_id":63121,"animeschedule_id":"taiyou-yori-mo-mabushii-hoshi-2nd-season"}
 {"mal_id":63125,"anilist_id":204269,"animeschedule_id":"odekake-kozame-2nd-season"}
@@ -23785,6 +23796,7 @@
 {"mal_id":63138,"animeschedule_id":"kaijuu-8-gou-narumi-no-heijitsu"}
 {"mal_id":63139,"anilist_id":204363,"animeschedule_id":"sakamoto-days-2nd-season"}
 {"mal_id":63140,"anilist_id":204389,"animeschedule_id":"yasei-no-last-boss-ga-arawareta-2nd-season"}
+{"mal_id":63142,"anilist_id":204626}
 {"mal_id":63143,"anilist_id":204429,"anisearch_id":21123,"animeschedule_id":"chainsaw-man-shikaku-hen"}
 {"mal_id":63147,"animeschedule_id":"gachiakuta-2nd-season"}
 {"mal_id":63150,"anilist_id":204466,"anisearch_id":21130,"animeschedule_id":"otome-kaijuu-caramelise"}
@@ -23794,3 +23806,4 @@
 {"mal_id":63167,"anilist_id":204561,"animeschedule_id":"mahou-no-princess-minky-momo-ova"}
 {"mal_id":63174,"anilist_id":204579,"anisearch_id":21135}
 {"mal_id":63177,"anilist_id":204604}
+{"mal_id":63181,"anilist_id":204650}
