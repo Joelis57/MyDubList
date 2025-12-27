@@ -8885,7 +8885,7 @@
 {"mal_id":23125,"kitsu_id":8323}
 {"mal_id":23129,"anilist_id":104148,"kitsu_id":9118,"anisearch_id":8953,"animeschedule_id":"mahou-no-princess-minky-momo-hitomi-no-seiza-minky-momo-song-special"}
 {"mal_id":23133,"anilist_id":20647,"ann_id":15897,"kitsu_id":8335,"anisearch_id":9523,"animeschedule_id":"m3-sono-kuroki-hagane"}
-{"mal_id":23135,"anilist_id":20742,"ann_id":15916,"kitsu_id":8555,"anisearch_id":9554,"animeschedule_id":"pripara-2"}
+{"mal_id":23135,"anilist_id":20742,"ann_id":15916,"kitsu_id":8555,"anisearch_id":9554,"animeschedule_id":"pripara-3"}
 {"mal_id":23137,"kitsu_id":8749}
 {"mal_id":23149,"anilist_id":108743,"kitsu_id":8953,"anisearch_id":9444,"animeschedule_id":"47-todoufuken-r"}
 {"mal_id":23151,"anilist_id":20648,"ann_id":16084,"kitsu_id":8521,"anisearch_id":9522,"animeschedule_id":"shounen-hollywood-holly-stage-for-49"}
@@ -23709,6 +23709,7 @@
 {"mal_id":62696,"anilist_id":200294,"ann_id":37912,"animeschedule_id":"choujun-choujou-senpai"}
 {"mal_id":62703,"anilist_id":195877,"animeschedule_id":"bai-lian-cheng-shen-3rd-season"}
 {"mal_id":62708,"anilist_id":155311}
+{"mal_id":62728,"animeschedule_id":"jian-lai-2nd-season"}
 {"mal_id":62738,"anilist_id":168195}
 {"mal_id":62753,"anisearch_id":20986}
 {"mal_id":62804,"anilist_id":200556,"ann_id":37919,"anisearch_id":20991,"animeschedule_id":"high-school-kimengumi-2026"}
@@ -23727,7 +23728,7 @@
 {"mal_id":62856,"anilist_id":103303,"ann_id":37941,"animeschedule_id":"nijuuseiki-denki-mokuroku"}
 {"mal_id":62857,"anilist_id":201140,"ann_id":37942,"animeschedule_id":"ousama-no-proposal"}
 {"mal_id":62863,"anilist_id":201262,"ann_id":29217,"anisearch_id":21006,"animeschedule_id":"poketoon-2025"}
-{"mal_id":62864,"anilist_id":202419,"ann_id":37944}
+{"mal_id":62864,"anilist_id":202419,"ann_id":37944,"animeschedule_id":"omae-wa-mada-gunma-wo-shiranai-reiwa-ban"}
 {"mal_id":62865,"anilist_id":201388,"ann_id":37948,"anisearch_id":20998,"animeschedule_id":"dark-gathering-2nd-season"}
 {"mal_id":62873,"anilist_id":194889,"animeschedule_id":"aikatsu-memorial-stage-kagayaki-no-unit-cup"}
 {"mal_id":62876,"ann_id":37952,"animeschedule_id":"saijo-no-osewa-takane-no-hanadarake-na-meimonkou-de-gakuin-ichi-no-ojousama-seikatsu-nouryoku-kaimu-wo-kagenagara-osewa-suru-koto-ni-narimashita"}
@@ -23801,10 +23802,11 @@
 {"mal_id":63143,"anilist_id":204429,"anisearch_id":21123,"animeschedule_id":"chainsaw-man-shikaku-hen"}
 {"mal_id":63147,"animeschedule_id":"gachiakuta-2nd-season"}
 {"mal_id":63150,"anilist_id":204466,"anisearch_id":21130,"animeschedule_id":"otome-kaijuu-caramelise"}
+{"mal_id":63151,"animeschedule_id":"mofusand"}
 {"mal_id":63153,"anilist_id":204349}
 {"mal_id":63158,"anilist_id":204463}
 {"mal_id":63159,"anilist_id":200930}
 {"mal_id":63167,"anilist_id":204561,"animeschedule_id":"mahou-no-princess-minky-momo-ova"}
-{"mal_id":63174,"anilist_id":204579,"anisearch_id":21135}
-{"mal_id":63177,"anilist_id":204604}
+{"mal_id":63174,"anilist_id":204579,"anisearch_id":21135,"animeschedule_id":"jirai-nan-desu-ka-chihara-san"}
+{"mal_id":63177,"anilist_id":204604,"animeschedule_id":"undead-unluck-2nd-season"}
 {"mal_id":63181,"anilist_id":204650}
