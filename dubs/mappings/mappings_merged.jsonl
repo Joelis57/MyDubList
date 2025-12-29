@@ -22230,7 +22230,7 @@
 {"mal_id":58773,"anilist_id":176636,"anisearch_id":19457,"animeschedule_id":"keroro-gunsou-movie"}
 {"mal_id":58776,"anilist_id":177255,"kitsu_id":49255,"anisearch_id":19240}
 {"mal_id":58779,"anilist_id":170578,"ann_id":30534,"kitsu_id":48191,"anisearch_id":18810,"animeschedule_id":"shi-cao-lao-long-bei-guan-yi-e-long-zhi-ming-2nd-season"}
-{"mal_id":58780,"ann_id":32665,"kitsu_id":48761,"anisearch_id":19233,"animeschedule_id":"enter-the-garden"}
+{"mal_id":58780,"anilist_id":204762,"ann_id":32665,"kitsu_id":48761,"anisearch_id":19233,"animeschedule_id":"enter-the-garden"}
 {"mal_id":58783,"anilist_id":183798,"animeschedule_id":"yeonae-jehan-guyeok"}
 {"mal_id":58785,"animeschedule_id":"micchiri-neko-march-deluxe"}
 {"mal_id":58788,"anilist_id":177385,"ann_id":32711,"kitsu_id":48830,"anisearch_id":19241,"animeschedule_id":"ikoku-nikki"}
@@ -23301,7 +23301,7 @@
 {"mal_id":61496,"anilist_id":195880,"animeschedule_id":"xiao-xian-zhi-yao"}
 {"mal_id":61501,"anilist_id":190704,"ann_id":35674,"anisearch_id":20461,"animeschedule_id":"kanan-sama-wa-akumade-choroi"}
 {"mal_id":61508,"anilist_id":195879,"kitsu_id":49870,"animeschedule_id":"shen-yin-wangzuo-movie-yi-lai-ke-si-chuanqi"}
-{"mal_id":61512,"kitsu_id":49858}
+{"mal_id":61512,"anilist_id":204741,"kitsu_id":49858}
 {"mal_id":61517,"anilist_id":190840,"ann_id":35719,"kitsu_id":49861,"anisearch_id":20459,"animeschedule_id":"kingdom-6th-season"}
 {"mal_id":61535,"anilist_id":191013}
 {"mal_id":61538,"anilist_id":187404,"kitsu_id":50093,"anisearch_id":20304}
@@ -23758,7 +23758,7 @@
 {"mal_id":62981,"anilist_id":202508,"ann_id":38028,"anisearch_id":21023,"animeschedule_id":"kami-no-shizuku"}
 {"mal_id":62983,"anilist_id":202523,"ann_id":38030}
 {"mal_id":62987,"ann_id":37840,"anisearch_id":21064,"animeschedule_id":"hokuto-no-ken-kenougun-zako-tachi-no-banka"}
-{"mal_id":62989,"ann_id":38035,"anisearch_id":21021,"animeschedule_id":"kakunaru-ue-wa"}
+{"mal_id":62989,"anilist_id":202564,"ann_id":38035,"anisearch_id":21021,"animeschedule_id":"kakunaru-ue-wa"}
 {"mal_id":63000,"anilist_id":153458,"animeschedule_id":"san-xian-lun-hui"}
 {"mal_id":63006,"anilist_id":204396}
 {"mal_id":63011,"anilist_id":202717,"anisearch_id":21019,"animeschedule_id":"chiikawa-ningyo-no-shima-no-himitsu"}
@@ -23767,7 +23767,7 @@
 {"mal_id":63016,"anilist_id":202906,"animeschedule_id":"girl-crush"}
 {"mal_id":63019,"anilist_id":202955,"ann_id":38059,"anisearch_id":21031,"animeschedule_id":"prism-rondo"}
 {"mal_id":63021,"ann_id":38064,"animeschedule_id":"akutou-ikka-no-manamusume-tensei-saki-mo-otome-game-no-gokudou-reijou-deshita-saijoukyuu-rank-no-akuyaku-sama-sono-dekiai-wa-fuyou-desu"}
-{"mal_id":63033,"ann_id":38080,"animeschedule_id":"himitsu-no-aipri-movie-mankai-buzzlume-live"}
+{"mal_id":63033,"anilist_id":203100,"ann_id":38080,"animeschedule_id":"himitsu-no-aipri-movie-mankai-buzzlume-live"}
 {"mal_id":63035,"anilist_id":203141,"ann_id":38082,"anisearch_id":21050,"animeschedule_id":"everyday-host-zoku-hen"}
 {"mal_id":63038,"ann_id":38081,"anisearch_id":21052,"animeschedule_id":"charisma"}
 {"mal_id":63042,"anilist_id":202957,"ann_id":38058,"animeschedule_id":"meitantei-precure"}
@@ -23811,4 +23811,5 @@
 {"mal_id":63174,"anilist_id":204579,"anisearch_id":21135,"animeschedule_id":"jirai-nan-desu-ka-chihara-san"}
 {"mal_id":63177,"anilist_id":204604,"animeschedule_id":"undead-unluck-2nd-season"}
 {"mal_id":63181,"anilist_id":204650,"animeschedule_id":"tougen-anki-nikko-kegon-no-taki-hen"}
+{"mal_id":63183,"anilist_id":204742}
 {"mal_id":63188,"anilist_id":204738}
