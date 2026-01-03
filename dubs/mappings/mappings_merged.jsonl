@@ -21570,6 +21570,7 @@
 {"mal_id":57202,"anilist_id":182149,"animeschedule_id":"boku-wa-jinkou-eisei"}
 {"mal_id":57203,"anilist_id":179789,"animeschedule_id":"dare-mo-inai-umi"}
 {"mal_id":57204,"anilist_id":170950,"animeschedule_id":"yuki-wa-non-non-kumakko-tachi-no-komori-uta"}
+{"mal_id":57205,"anilist_id":205284}
 {"mal_id":57207,"kitsu_id":48248}
 {"mal_id":57214,"anilist_id":179782,"animeschedule_id":"haru-no-kaze"}
 {"mal_id":57215,"anilist_id":179781,"animeschedule_id":"chikyuu-wo-nana-kai-han-maware"}
@@ -23066,6 +23067,7 @@
 {"mal_id":60805,"anilist_id":198690,"kitsu_id":50099,"anisearch_id":20104,"animeschedule_id":"amedama"}
 {"mal_id":60810,"anilist_id":186333,"ann_id":34425,"anisearch_id":20134,"animeschedule_id":"majutsushi-kunon-wa-mieteiru"}
 {"mal_id":60813,"kitsu_id":49806}
+{"mal_id":60816,"anilist_id":205287}
 {"mal_id":60818,"anilist_id":166415,"animeschedule_id":"fengwu-yao-chu"}
 {"mal_id":60820,"kitsu_id":49518}
 {"mal_id":60821,"anilist_id":168244,"kitsu_id":49920,"animeschedule_id":"shiye-mowang"}
@@ -23711,7 +23713,7 @@
 {"mal_id":62696,"anilist_id":200294,"ann_id":37912,"animeschedule_id":"choujun-choujou-senpai"}
 {"mal_id":62703,"anilist_id":195877,"animeschedule_id":"bai-lian-cheng-shen-3rd-season"}
 {"mal_id":62708,"anilist_id":155311,"animeschedule_id":"shanhai-jing-mima"}
-{"mal_id":62728,"animeschedule_id":"jian-lai-2nd-season"}
+{"mal_id":62728,"anilist_id":205290,"animeschedule_id":"jian-lai-2nd-season"}
 {"mal_id":62738,"anilist_id":168195}
 {"mal_id":62753,"anisearch_id":20986}
 {"mal_id":62804,"anilist_id":200556,"ann_id":37919,"anisearch_id":20991,"animeschedule_id":"high-school-kimengumi-2026"}
@@ -23820,4 +23822,6 @@
 {"mal_id":63212,"anilist_id":205081}
 {"mal_id":63215,"anilist_id":205130}
 {"mal_id":63216,"anilist_id":204698}
+{"mal_id":63221,"anilist_id":205289}
 {"mal_id":63222,"anilist_id":205154}
+{"mal_id":63232,"anilist_id":204560}

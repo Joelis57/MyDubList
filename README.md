@@ -38,7 +38,7 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5287 |
+| English | English | 5288 |
 | Spanish | Español | 2996 |
 | German | Deutsch | 2923 |
 | French | Français | 2414 |
@@ -57,7 +57,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Russian | Русский | 78 |
 | Indonesian | Bahasa Indonesia | 64 |
 | Danish | Dansk | 63 |
-| Thai | ไทย | 50 |
+| Thai | ไทย | 51 |
 | Hindi | हिन्दी | 20 |
 | Finnish | Suomi | 16 |
 | Turkish | Türkçe | 10 |
