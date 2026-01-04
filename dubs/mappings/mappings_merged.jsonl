@@ -7828,7 +7828,7 @@
 {"mal_id":18001,"anilist_id":18001,"ann_id":15226,"kitsu_id":7710,"hianime_id":"freezing-vibration-4198","anisearch_id":8456,"animeschedule_id":"freezing-vibration"}
 {"mal_id":18003,"anilist_id":18003,"kitsu_id":8778,"anisearch_id":17675,"animeschedule_id":"thermae-romae-thermae-romae-x-toto-collaboration"}
 {"mal_id":18005,"anilist_id":18005,"ann_id":1855,"kitsu_id":9262,"anisearch_id":3688,"animeschedule_id":"forza-hidemaru"}
-{"mal_id":18007,"kitsu_id":9938}
+{"mal_id":18007,"kitsu_id":9938,"anisearch_id":9970}
 {"mal_id":18029,"kitsu_id":9855,"anisearch_id":6426}
 {"mal_id":18031,"anilist_id":18031,"kitsu_id":9846,"animeschedule_id":"hello-kitty-no-happy-kasou-taikai"}
 {"mal_id":18033,"anilist_id":18033,"kitsu_id":9860,"anisearch_id":6407,"animeschedule_id":"hello-kitty-no-yuubinya-san-arigatou"}
@@ -21044,7 +21044,7 @@
 {"mal_id":56053,"kitsu_id":47794}
 {"mal_id":56055,"anilist_id":167404,"ann_id":29140,"kitsu_id":47781,"hianime_id":"monsters-103-mercies-dragon-damnation-18883","anisearch_id":18567,"animeschedule_id":"monsters-ippyaku-sanjou-hiryuu-jigoku"}
 {"mal_id":56057,"kitsu_id":46143,"anisearch_id":19445}
-{"mal_id":56059,"anilist_id":170013,"ann_id":28982,"animeschedule_id":"penetrate-blue-vapor-trail-another-age-2824"}
+{"mal_id":56059,"anilist_id":170013,"ann_id":28982,"anisearch_id":21152,"animeschedule_id":"penetrate-blue-vapor-trail-another-age-2824"}
 {"mal_id":56062,"anilist_id":167419,"ann_id":29143,"kitsu_id":47786,"hianime_id":"why-does-nobody-remember-me-in-this-world-19240","anisearch_id":18564,"animeschedule_id":"naze-boku-no-sekai-wo-daremo-oboeteinai-no-ka"}
 {"mal_id":56063,"anilist_id":167420,"ann_id":29144,"kitsu_id":47784,"hianime_id":"nierautomata-ver11a-cour-2-19248","anisearch_id":18565,"animeschedule_id":"nier-automata-ver1-1a-part-2"}
 {"mal_id":56064,"anilist_id":167418,"kitsu_id":47788,"anisearch_id":18626,"animeschedule_id":"pokemon-wcs2023"}
@@ -23413,7 +23413,7 @@
 {"mal_id":61847,"anilist_id":168631,"kitsu_id":49989,"animeschedule_id":"pyramid-game"}
 {"mal_id":61851,"anilist_id":194447,"ann_id":36547,"kitsu_id":43114,"hianime_id":"isekai-quartet-3-19951","anisearch_id":20638,"animeschedule_id":"isekai-quartet-3rd-season"}
 {"mal_id":61862,"kitsu_id":50068}
-{"mal_id":61865,"anilist_id":194706,"ann_id":28983}
+{"mal_id":61865,"anilist_id":194706,"ann_id":28983,"anisearch_id":21153}
 {"mal_id":61869,"ann_id":11360}
 {"mal_id":61870,"ann_id":11360}
 {"mal_id":61872,"anilist_id":194724}
@@ -23746,6 +23746,7 @@
 {"mal_id":62907,"ann_id":37985,"animeschedule_id":"ojisan-wa-kawaii-mono-ga-osuki"}
 {"mal_id":62911,"anilist_id":186834,"animeschedule_id":"yong-sheng-5"}
 {"mal_id":62913,"anilist_id":202102,"ann_id":37986,"animeschedule_id":"needy-girl-overdose"}
+{"mal_id":62921,"anisearch_id":21081}
 {"mal_id":62922,"ann_id":37992,"animeschedule_id":"kashita-maryoku-wa-revo-barai-de-kyousei-choushuu"}
 {"mal_id":62924,"anilist_id":202251,"ann_id":37993,"animeschedule_id":"kanchigai-no-atelier-meister-eiyuu-party-no-moto-zatsuyougakari-ga-jitsu-wa-sentou-igai-ga-sss-rank-datta-to-iu-yoku-aru-hanashi-2nd-season"}
 {"mal_id":62927,"anilist_id":137662}
