@@ -22886,7 +22886,7 @@
 {"mal_id":60415,"anilist_id":168116,"kitsu_id":49793,"animeschedule_id":"zuoshou-shanglan-2"}
 {"mal_id":60416,"anilist_id":153473,"animeschedule_id":"wu-lian-dianfeng"}
 {"mal_id":60418,"anilist_id":185720,"kitsu_id":49396,"animeschedule_id":"wan-jie-du-zun-3rd-season"}
-{"mal_id":60419,"animeschedule_id":"new-me"}
+{"mal_id":60419,"anilist_id":185968,"animeschedule_id":"new-me"}
 {"mal_id":60420,"anilist_id":185719,"kitsu_id":49036,"animeschedule_id":"cang-yuan-tu-2nd-season"}
 {"mal_id":60425,"anilist_id":185462,"ann_id":34104,"kitsu_id":49405,"anisearch_id":20003,"animeschedule_id":"0-saiji-start-dash-monogatari-season-2"}
 {"mal_id":60426,"anilist_id":198708}
@@ -23752,7 +23752,7 @@
 {"mal_id":62931,"anilist_id":202253,"animeschedule_id":"death-stranding-isolations"}
 {"mal_id":62932,"ann_id":37999,"anisearch_id":21014,"animeschedule_id":"kyoukai-no-melody"}
 {"mal_id":62933,"animeschedule_id":"shou-3-ashibe-qq-goma-chan"}
-{"mal_id":62936,"ann_id":38002,"animeschedule_id":"toumei-na-yoru-ni-kakeru-kimi-to-me-ni-mienai-koi-wo-shita"}
+{"mal_id":62936,"anilist_id":202269,"ann_id":38002,"animeschedule_id":"toumei-na-yoru-ni-kakeru-kimi-to-me-ni-mienai-koi-wo-shita"}
 {"mal_id":62955,"anilist_id":204394,"animeschedule_id":"you-shou-yan-5"}
 {"mal_id":62964,"anilist_id":202381,"ann_id":38019,"anisearch_id":21015,"animeschedule_id":"mata-korosarete-shimatta-no-desu-ne-tantei-sama"}
 {"mal_id":62965,"animeschedule_id":"blue-gale-xabungle-side-r"}
@@ -23832,3 +23832,6 @@
 {"mal_id":63232,"anilist_id":204560}
 {"mal_id":63235,"anilist_id":205375}
 {"mal_id":63245,"anilist_id":205307}
+{"mal_id":63253,"anilist_id":205444}
+{"mal_id":63254,"anilist_id":205432}
+{"mal_id":63256,"anilist_id":205430}
