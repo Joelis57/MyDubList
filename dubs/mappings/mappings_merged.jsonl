@@ -10047,7 +10047,7 @@
 {"mal_id":29411,"anilist_id":99211,"kitsu_id":10365,"animeschedule_id":"12-gatsu-no-uta"}
 {"mal_id":29413,"kitsu_id":10345}
 {"mal_id":29419,"kitsu_id":10458}
-{"mal_id":29421,"kitsu_id":10288,"animeschedule_id":"liv-and-bell"}
+{"mal_id":29421,"anilist_id":154042,"kitsu_id":10288,"animeschedule_id":"liv-and-bell"}
 {"mal_id":29423,"kitsu_id":10250}
 {"mal_id":29425,"kitsu_id":10321}
 {"mal_id":29427,"anilist_id":101906,"kitsu_id":10478,"animeschedule_id":"mori-no-ratio"}
@@ -23837,3 +23837,4 @@
 {"mal_id":63254,"anilist_id":205432,"animeschedule_id":"isshun-de-chiryou-shiteita-noni-yakutatazu-to-tsuihou-sareta-tensai-chiyushi-yami-healer-toshite-tanoshiku-ikiru-2nd-season"}
 {"mal_id":63256,"anilist_id":205430,"animeschedule_id":"boukensha-license-wo-hakudatsu-sareta-ossan-dakedo-manamusume-ga-dekita-no-de-nonbiri-jinsei-wo-ouka-suru"}
 {"mal_id":63268,"anilist_id":205619,"animeschedule_id":"koi-shita-hito-wa-imouto-no-kawari-ni-shindekure-to-itta"}
+{"mal_id":63276,"anilist_id":205772}
