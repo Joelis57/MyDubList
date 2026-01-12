@@ -22597,6 +22597,7 @@
 {"mal_id":59631,"anilist_id":186832,"kitsu_id":49150}
 {"mal_id":59632,"anilist_id":180460,"ann_id":33370,"kitsu_id":49146,"anisearch_id":19556,"animeschedule_id":"mattaku-saikin-no-tantei-to-kitara"}
 {"mal_id":59636,"anilist_id":180516,"ann_id":33371,"kitsu_id":49143,"anisearch_id":19554,"animeschedule_id":"uma-musume-cinderella-gray"}
+{"mal_id":59637,"anilist_id":205907}
 {"mal_id":59640,"anilist_id":199488,"animeschedule_id":"hoshi-x-kara-no-rakko"}
 {"mal_id":59641,"anilist_id":185823,"animeschedule_id":"bun-nuketa"}
 {"mal_id":59644,"anilist_id":180523,"ann_id":33372,"kitsu_id":49147,"anisearch_id":19558,"animeschedule_id":"yasei-no-last-boss-ga-arawareta"}
@@ -23408,7 +23409,7 @@
 {"mal_id":61833,"kitsu_id":49987}
 {"mal_id":61834,"anilist_id":194872,"kitsu_id":49982,"anisearch_id":20712,"animeschedule_id":"golden-kamuy-inazuma-goutou-to-mamushi-no-ogin-shimaenaga"}
 {"mal_id":61839,"anilist_id":194393,"ann_id":36531,"anisearch_id":20637,"animeschedule_id":"aishiteru-game-wo-owarasetai"}
-{"mal_id":61840,"kitsu_id":49980}
+{"mal_id":61840,"anilist_id":205941,"kitsu_id":49980}
 {"mal_id":61841,"anilist_id":194390,"animeschedule_id":"katachi"}
 {"mal_id":61846,"anilist_id":198745,"ann_id":36538,"animeschedule_id":"shuukan-ranobe-anime"}
 {"mal_id":61847,"anilist_id":168631,"kitsu_id":49989,"animeschedule_id":"pyramid-game"}
@@ -23564,6 +23565,7 @@
 {"mal_id":62273,"kitsu_id":50100}
 {"mal_id":62276,"anilist_id":199448}
 {"mal_id":62277,"anilist_id":197474,"anisearch_id":20836,"animeschedule_id":"gintama-movie-3-yoshiwara-daienjou"}
+{"mal_id":62278,"anilist_id":205906}
 {"mal_id":62279,"anilist_id":198704,"animeschedule_id":"wangu-jian-di"}
 {"mal_id":62289,"anilist_id":199408,"ann_id":37520,"anisearch_id":20839,"animeschedule_id":"buchigire-reijou-wa-houfuku-wo-chikaimashita-madousho-no-chikara-de-sokoku-wo-tatakitsubushimasu"}
 {"mal_id":62290,"kitsu_id":50112,"animeschedule_id":"tokyo-great-bears-opening-movie"}
@@ -23588,7 +23590,7 @@
 {"mal_id":62331,"anilist_id":197754,"ann_id":37594,"anisearch_id":20851,"animeschedule_id":"liar-game"}
 {"mal_id":62335,"anisearch_id":20929}
 {"mal_id":62339,"anilist_id":195360,"anisearch_id":20796}
-{"mal_id":62340,"animeschedule_id":"guangyin-zhi-wai"}
+{"mal_id":62340,"anilist_id":205905,"animeschedule_id":"guangyin-zhi-wai"}
 {"mal_id":62341,"anilist_id":198380,"kitsu_id":50118,"animeschedule_id":"super-ninja-neko"}
 {"mal_id":62342,"anilist_id":197868,"ann_id":37618,"anisearch_id":20859,"animeschedule_id":"maid-san-wa-taberu-dake"}
 {"mal_id":62343,"animeschedule_id":"chibi-maruko-chan-special"}
@@ -23839,3 +23841,5 @@
 {"mal_id":63268,"anilist_id":205619,"animeschedule_id":"koi-shita-hito-wa-imouto-no-kawari-ni-shindekure-to-itta"}
 {"mal_id":63275,"ann_id":38261}
 {"mal_id":63276,"anilist_id":205772,"ann_id":38264}
+{"mal_id":63292,"anilist_id":205896}
+{"mal_id":63293,"anilist_id":205909}
