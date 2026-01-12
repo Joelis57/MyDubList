@@ -39,9 +39,9 @@ If you have an authoritative source to add, please open an issue/PR.
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | English | English | 5301 |
-| Spanish | Español | 3004 |
+| Spanish | Español | 3005 |
 | German | Deutsch | 2930 |
-| French | Français | 2420 |
+| French | Français | 2422 |
 | Italian | Italiano | 2302 |
 | Portuguese | Português | 1730 |
 | Korean | 한국어 | 1379 |
@@ -53,7 +53,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 135 |
 | Hebrew | עברית | 122 |
-| Dutch | Nederlands | 104 |
+| Dutch | Nederlands | 105 |
 | Russian | Русский | 78 |
 | Indonesian | Bahasa Indonesia | 64 |
 | Danish | Dansk | 63 |
