@@ -1345,13 +1345,20 @@ def load_anisearch_source(source_file: str) -> tuple[dict[str, set[int]], dict[i
             mapping[mal_id] = as_id
 
         # dubbed languages: ISO codes like ["ja","en",...]
-        langs = rec.get("dubbed") or []
-        if isinstance(langs, list):
-            for code in langs:
-                key = ann_lang_to_key(str(code))  # handles ISO codes
-                key = sanitize_lang(key)
-                if key:
-                    per_lang[key].add(mal_id)
+        dubbed = rec.get("dubbed") or []
+        planned = rec.get("planned") or []
+
+        langs: list = []
+        if isinstance(dubbed, list):
+            langs.extend(dubbed)
+        if isinstance(planned, list):
+            langs.extend(planned)
+
+        for code in langs:
+            key = ann_lang_to_key(str(code))  # handles ISO codes
+            key = sanitize_lang(key)
+            if key:
+                per_lang[key].add(mal_id)
 
     return per_lang, mapping
 
