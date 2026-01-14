@@ -9756,7 +9756,7 @@
 {"mal_id":28109,"anilist_id":129837,"kitsu_id":9988,"animeschedule_id":"kuzuryuugawa-to-shounen"}
 {"mal_id":28111,"kitsu_id":9984}
 {"mal_id":28113,"kitsu_id":10000,"anisearch_id":1937}
-{"mal_id":28115,"ann_id":6362,"kitsu_id":9998}
+{"mal_id":28115,"anilist_id":206048,"ann_id":6362,"kitsu_id":9998}
 {"mal_id":28117,"kitsu_id":9974}
 {"mal_id":28119,"kitsu_id":9987}
 {"mal_id":28121,"anilist_id":20920,"ann_id":16443,"kitsu_id":9962,"hianime_id":"is-it-wrong-to-try-to-pick-up-girls-in-a-dungeon-1115","anisearch_id":9940,"animeschedule_id":"is-it-wrong-to-try-to-pick-up-girls-in-a-dungeon"}
@@ -17602,7 +17602,7 @@
 {"mal_id":45110,"animeschedule_id":"daylight"}
 {"mal_id":45111,"anilist_id":163696,"animeschedule_id":"dongwu-tegong-ju"}
 {"mal_id":45120,"anilist_id":139726,"animeschedule_id":"shibing-shunliu-bing-wang-zhengfeng"}
-{"mal_id":45121,"kitsu_id":48707}
+{"mal_id":45121,"anilist_id":206074,"kitsu_id":48707}
 {"mal_id":45133,"anilist_id":118638,"animeschedule_id":"jingling-meng-ye-luoli"}
 {"mal_id":45169,"anilist_id":128541,"kitsu_id":43912,"animeschedule_id":"jiu-ye-shen-zhuan"}
 {"mal_id":45177,"anilist_id":129290,"animeschedule_id":"fu-wu-shu-36-ji"}
@@ -22759,7 +22759,7 @@
 {"mal_id":60062,"anilist_id":183383,"kitsu_id":49276,"animeschedule_id":"liella-no-uta-3"}
 {"mal_id":60063,"anisearch_id":19796}
 {"mal_id":60066,"anilist_id":185796,"animeschedule_id":"xian-ji-xun-zong"}
-{"mal_id":60068,"kitsu_id":49384}
+{"mal_id":60068,"anilist_id":206054,"kitsu_id":49384}
 {"mal_id":60070,"anilist_id":184289,"ann_id":32843,"kitsu_id":49843,"anisearch_id":20040,"animeschedule_id":"kaijuu-sekai-seifuku-tv"}
 {"mal_id":60071,"anilist_id":182771,"ann_id":33690,"anisearch_id":20460,"animeschedule_id":"odayaka-kizoku-no-kyuuka-no-susume"}
 {"mal_id":60076,"anilist_id":176317,"ann_id":27628,"kitsu_id":49314,"anisearch_id":19727,"animeschedule_id":"blue-lock-episode-nagi-additional-time"}
@@ -23132,6 +23132,7 @@
 {"mal_id":61073,"ann_id":34811,"anisearch_id":20215,"animeschedule_id":"utahime-dream"}
 {"mal_id":61074,"anilist_id":187429,"animeschedule_id":"ikari-no-daichi"}
 {"mal_id":61077,"anilist_id":186935,"ann_id":34471,"anisearch_id":20151,"animeschedule_id":"dragon-heart-reikai-tanbouki"}
+{"mal_id":61080,"anilist_id":206056}
 {"mal_id":61084,"anilist_id":187062,"ann_id":34843,"anisearch_id":20221,"animeschedule_id":"hikuidori-ushuu-boro-tobi-gumi"}
 {"mal_id":61085,"kitsu_id":49703}
 {"mal_id":61087,"kitsu_id":49594,"animeschedule_id":"kamone"}
