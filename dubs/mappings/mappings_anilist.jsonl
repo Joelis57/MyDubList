@@ -18263,6 +18263,7 @@
 {"mal_id":56666,"anilist_id":178607}
 {"mal_id":56667,"anilist_id":181470}
 {"mal_id":56671,"anilist_id":169362}
+{"mal_id":56674,"anilist_id":206158}
 {"mal_id":56677,"anilist_id":180520}
 {"mal_id":56678,"anilist_id":169490}
 {"mal_id":56679,"anilist_id":169488}
@@ -18578,6 +18579,7 @@
 {"mal_id":57433,"anilist_id":171046}
 {"mal_id":57435,"anilist_id":177098}
 {"mal_id":57436,"anilist_id":204547}
+{"mal_id":57440,"anilist_id":206146}
 {"mal_id":57441,"anilist_id":184369}
 {"mal_id":57442,"anilist_id":174704}
 {"mal_id":57448,"anilist_id":171109}
@@ -18779,6 +18781,7 @@
 {"mal_id":57950,"anilist_id":199795}
 {"mal_id":57953,"anilist_id":174128}
 {"mal_id":57957,"anilist_id":120160}
+{"mal_id":57960,"anilist_id":206159}
 {"mal_id":57961,"anilist_id":157330}
 {"mal_id":57969,"anilist_id":174188}
 {"mal_id":57971,"anilist_id":158620}
@@ -19542,6 +19545,7 @@
 {"mal_id":60279,"anilist_id":185121}
 {"mal_id":60280,"anilist_id":184182}
 {"mal_id":60285,"anilist_id":184237}
+{"mal_id":60289,"anilist_id":206151}
 {"mal_id":60293,"anilist_id":184279}
 {"mal_id":60294,"anilist_id":184280}
 {"mal_id":60295,"anilist_id":184288}
@@ -19660,6 +19664,7 @@
 {"mal_id":60583,"anilist_id":185858}
 {"mal_id":60586,"anilist_id":198695}
 {"mal_id":60587,"anilist_id":199411}
+{"mal_id":60588,"anilist_id":206145}
 {"mal_id":60589,"anilist_id":191978}
 {"mal_id":60591,"anilist_id":203710}
 {"mal_id":60593,"anilist_id":185736}
@@ -19958,6 +19963,7 @@
 {"mal_id":61754,"anilist_id":193676}
 {"mal_id":61756,"anilist_id":194030}
 {"mal_id":61758,"anilist_id":193699}
+{"mal_id":61764,"anilist_id":168632}
 {"mal_id":61765,"anilist_id":193883}
 {"mal_id":61768,"anilist_id":193730}
 {"mal_id":61770,"anilist_id":193923}
@@ -19992,6 +19998,7 @@
 {"mal_id":61903,"anilist_id":194884}
 {"mal_id":61905,"anilist_id":135836}
 {"mal_id":61909,"anilist_id":192452}
+{"mal_id":61910,"anilist_id":193707}
 {"mal_id":61914,"anilist_id":199486}
 {"mal_id":61917,"anilist_id":195153}
 {"mal_id":61921,"anilist_id":198701}
@@ -20043,6 +20050,7 @@
 {"mal_id":62058,"anilist_id":204625}
 {"mal_id":62063,"anilist_id":196224}
 {"mal_id":62066,"anilist_id":196230}
+{"mal_id":62067,"anilist_id":196115}
 {"mal_id":62068,"anilist_id":196144}
 {"mal_id":62072,"anilist_id":200446}
 {"mal_id":62076,"anilist_id":196187}
@@ -20070,8 +20078,10 @@
 {"mal_id":62194,"anilist_id":195486}
 {"mal_id":62207,"anilist_id":200377}
 {"mal_id":62214,"anilist_id":197179}
+{"mal_id":62216,"anilist_id":168087}
 {"mal_id":62221,"anilist_id":199357}
 {"mal_id":62231,"anilist_id":198413}
+{"mal_id":62233,"anilist_id":197178}
 {"mal_id":62236,"anilist_id":199797}
 {"mal_id":62238,"anilist_id":198560}
 {"mal_id":62243,"anilist_id":153455}
@@ -20149,6 +20159,7 @@
 {"mal_id":62522,"anilist_id":198926}
 {"mal_id":62523,"anilist_id":199008}
 {"mal_id":62524,"anilist_id":199007}
+{"mal_id":62526,"anilist_id":206154}
 {"mal_id":62534,"anilist_id":199068}
 {"mal_id":62535,"anilist_id":199066}
 {"mal_id":62537,"anilist_id":198344}
@@ -20207,7 +20218,10 @@
 {"mal_id":62703,"anilist_id":195877}
 {"mal_id":62708,"anilist_id":155311}
 {"mal_id":62728,"anilist_id":205290}
+{"mal_id":62730,"anilist_id":206142}
 {"mal_id":62738,"anilist_id":168195}
+{"mal_id":62744,"anilist_id":199357}
+{"mal_id":62747,"anilist_id":206143}
 {"mal_id":62804,"anilist_id":200556}
 {"mal_id":62808,"anilist_id":200578}
 {"mal_id":62811,"anilist_id":200637}
@@ -20263,6 +20277,7 @@
 {"mal_id":63092,"anilist_id":204629}
 {"mal_id":63096,"anilist_id":189259}
 {"mal_id":63098,"anilist_id":204011}
+{"mal_id":63101,"anilist_id":204654}
 {"mal_id":63106,"anilist_id":203148}
 {"mal_id":63120,"anilist_id":204293}
 {"mal_id":63125,"anilist_id":204269}
@@ -20275,11 +20290,13 @@
 {"mal_id":63142,"anilist_id":204626}
 {"mal_id":63143,"anilist_id":204429}
 {"mal_id":63147,"anilist_id":204436}
+{"mal_id":63148,"anilist_id":206160}
 {"mal_id":63150,"anilist_id":204466}
 {"mal_id":63151,"anilist_id":204656}
 {"mal_id":63153,"anilist_id":204349}
 {"mal_id":63158,"anilist_id":204463}
 {"mal_id":63159,"anilist_id":200930}
+{"mal_id":63164,"anilist_id":168252}
 {"mal_id":63167,"anilist_id":204561}
 {"mal_id":63174,"anilist_id":204579}
 {"mal_id":63177,"anilist_id":204604}
