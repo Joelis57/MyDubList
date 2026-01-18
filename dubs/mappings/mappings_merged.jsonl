@@ -21877,7 +21877,7 @@
 {"mal_id":57881,"anilist_id":173647,"animeschedule_id":"sakuretsu-amabie-hime-season3"}
 {"mal_id":57882,"anilist_id":199478,"kitsu_id":48551,"animeschedule_id":"gasonshi-esper-shoujo-to-ninja-no-abiko-monogatari"}
 {"mal_id":57883,"anilist_id":179873,"anisearch_id":20339,"animeschedule_id":"monster-strike-anime-masamune-shimei-no-akaki-yaiba"}
-{"mal_id":57886,"kitsu_id":48470}
+{"mal_id":57886,"anilist_id":206352,"kitsu_id":48470}
 {"mal_id":57888,"anilist_id":173692,"ann_id":31706,"kitsu_id":48448,"anisearch_id":19023,"animeschedule_id":"chichi-wa-eiyuu-haha-wa-seirei-musume-no-watashi-wa-tenseisha"}
 {"mal_id":57889,"anilist_id":173640,"kitsu_id":48445,"anisearch_id":21075,"animeschedule_id":"aru-hi-no-gogo"}
 {"mal_id":57890,"anilist_id":164675,"kitsu_id":47532,"animeschedule_id":"yume-juuya"}
@@ -22074,6 +22074,7 @@
 {"mal_id":58302,"anilist_id":175533,"ann_id":32321,"kitsu_id":48603,"anisearch_id":19118,"animeschedule_id":"the-idolmaster-shiny-colors-2nd-season"}
 {"mal_id":58304,"anilist_id":178664,"animeschedule_id":"undaraka-udasupon"}
 {"mal_id":58307,"anilist_id":177475,"kitsu_id":48738,"animeschedule_id":"one-piece-kawaisouni-kono-boushi-wo-omae-ni-azukeru"}
+{"mal_id":58308,"anilist_id":206353}
 {"mal_id":58310,"kitsu_id":48592}
 {"mal_id":58311,"anilist_id":189085,"animeschedule_id":"charisma-1-shuukan"}
 {"mal_id":58313,"anilist_id":175691,"animeschedule_id":"haru"}
@@ -23435,7 +23436,7 @@
 {"mal_id":61869,"ann_id":11360}
 {"mal_id":61870,"ann_id":11360}
 {"mal_id":61872,"anilist_id":194724}
-{"mal_id":61876,"kitsu_id":50029}
+{"mal_id":61876,"anilist_id":206349,"kitsu_id":50029}
 {"mal_id":61884,"anilist_id":194742,"ann_id":36660,"anisearch_id":20651,"animeschedule_id":"maou-no-musume-wa-yasashisugiru"}
 {"mal_id":61886,"anilist_id":197731,"ann_id":36663,"anisearch_id":20679,"animeschedule_id":"goumon-baito-kun-no-nichijou"}
 {"mal_id":61890,"kitsu_id":50011}
@@ -23584,6 +23585,7 @@
 {"mal_id":62277,"anilist_id":197474,"anisearch_id":20836,"animeschedule_id":"gintama-movie-3-yoshiwara-daienjou"}
 {"mal_id":62278,"anilist_id":205906}
 {"mal_id":62279,"anilist_id":198704,"animeschedule_id":"wangu-jian-di"}
+{"mal_id":62280,"anilist_id":206358}
 {"mal_id":62289,"anilist_id":199408,"ann_id":37520,"anisearch_id":20839,"animeschedule_id":"buchigire-reijou-wa-houfuku-wo-chikaimashita-madousho-no-chikara-de-sokoku-wo-tatakitsubushimasu"}
 {"mal_id":62290,"kitsu_id":50112,"animeschedule_id":"tokyo-great-bears-opening-movie"}
 {"mal_id":62292,"anilist_id":178402,"animeschedule_id":"mugen-ni-tomaranai"}
@@ -23718,6 +23720,7 @@
 {"mal_id":62648,"anilist_id":199801}
 {"mal_id":62649,"anilist_id":203296,"ann_id":37897,"anisearch_id":21105,"animeschedule_id":"cardfight-vanguard-divinez-genma-seisen-hen"}
 {"mal_id":62650,"anilist_id":199793,"ann_id":37898,"anisearch_id":20982,"animeschedule_id":"witch-watch-2nd-season"}
+{"mal_id":62651,"anilist_id":206270}
 {"mal_id":62653,"anisearch_id":20980}
 {"mal_id":62654,"anilist_id":199603,"animeschedule_id":"princess-catch-tiniping"}
 {"mal_id":62658,"anilist_id":200375,"ann_id":37740,"animeschedule_id":"inpuru-kun-no-sonzai-shinai-oshigoto"}
@@ -23739,6 +23742,8 @@
 {"mal_id":62708,"anilist_id":155311,"animeschedule_id":"shanhai-jing-mima"}
 {"mal_id":62714,"anilist_id":206195}
 {"mal_id":62717,"anilist_id":206215}
+{"mal_id":62718,"anilist_id":206356}
+{"mal_id":62719,"anilist_id":206354}
 {"mal_id":62728,"anilist_id":205290,"animeschedule_id":"jian-lai-2nd-season"}
 {"mal_id":62730,"anilist_id":206142}
 {"mal_id":62738,"anilist_id":168195}
@@ -23886,3 +23891,5 @@
 {"mal_id":63306,"anilist_id":105230}
 {"mal_id":63310,"anilist_id":206166}
 {"mal_id":63316,"anilist_id":184356}
+{"mal_id":63323,"anilist_id":206163}
+{"mal_id":63326,"anilist_id":206298}
