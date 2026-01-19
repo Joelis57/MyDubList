@@ -23662,7 +23662,7 @@
 {"mal_id":62507,"animeschedule_id":"kaiju-decode-aidara-no-yubiwa"}
 {"mal_id":62508,"anilist_id":198368,"ann_id":37818,"animeschedule_id":"doraemon-shin-nobita-no-kaitei-kiganjou"}
 {"mal_id":62512,"anilist_id":198939,"ann_id":37849,"anisearch_id":20893,"animeschedule_id":"jidou-hanbaiki-ni-umarekawatta-ore-wa-meikyuu-wo-samayou-3rd-season"}
-{"mal_id":62513,"anilist_id":198946,"ann_id":37848,"animeschedule_id":"clevatess-ii-majuu-no-ou-to-itsuwari-no-yuusha-denshou"}
+{"mal_id":62513,"anilist_id":198946,"ann_id":37848,"anisearch_id":20894,"animeschedule_id":"clevatess-ii-majuu-no-ou-to-itsuwari-no-yuusha-denshou"}
 {"mal_id":62516,"anilist_id":198966,"ann_id":37850,"anisearch_id":20892,"animeschedule_id":"dandadan-3rd-season"}
 {"mal_id":62518,"anilist_id":204949,"anisearch_id":21094}
 {"mal_id":62520,"ann_id":37847}
@@ -23863,7 +23863,7 @@
 {"mal_id":63164,"anilist_id":168252}
 {"mal_id":63167,"anilist_id":204561,"animeschedule_id":"mahou-no-princess-minky-momo-ova"}
 {"mal_id":63174,"anilist_id":204579,"ann_id":38183,"anisearch_id":21135,"animeschedule_id":"jirai-nan-desu-ka-chihara-san"}
-{"mal_id":63177,"anilist_id":204604,"ann_id":38185,"animeschedule_id":"undead-unluck-2nd-season"}
+{"mal_id":63177,"anilist_id":204604,"ann_id":38185,"anisearch_id":21137,"animeschedule_id":"undead-unluck-2nd-season"}
 {"mal_id":63181,"anilist_id":204650,"ann_id":38194,"animeschedule_id":"tougen-anki-nikko-kegon-no-taki-hen"}
 {"mal_id":63183,"anilist_id":204742}
 {"mal_id":63185,"ann_id":38195,"animeschedule_id":"kingdom-6th-season-zoku-hen"}
@@ -23894,4 +23894,5 @@
 {"mal_id":63316,"anilist_id":184356}
 {"mal_id":63323,"anilist_id":206163,"ann_id":38295}
 {"mal_id":63324,"anisearch_id":21168}
+{"mal_id":63325,"anisearch_id":21162}
 {"mal_id":63326,"anilist_id":206298,"anisearch_id":21169}
