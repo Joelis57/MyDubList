@@ -49,6 +49,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Tagalog | Tagalog | 813 |
 | Arabic | العربية | 316 |
 | Polish | Polski | 278 |
+| Hindi | हिन्दी | 233 |
 | Hungarian | Magyar | 194 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 135 |
@@ -58,7 +59,6 @@ If you have an authoritative source to add, please open an issue/PR.
 | Indonesian | Bahasa Indonesia | 65 |
 | Danish | Dansk | 63 |
 | Thai | ไทย | 53 |
-| Hindi | हिन्दी | 20 |
 | Finnish | Suomi | 16 |
 | Turkish | Türkçe | 10 |
 | Catalan | Català | 3 |
