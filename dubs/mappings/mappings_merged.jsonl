@@ -101,7 +101,7 @@
 {"mal_id":121,"anilist_id":121,"ann_id":2960,"kitsu_id":100,"hianime_id":"fullmetal-alchemist-308","anisearch_id":2519,"animeschedule_id":"fullmetal-alchemist"}
 {"mal_id":122,"anilist_id":122,"ann_id":872,"kitsu_id":101,"anisearch_id":646,"animeschedule_id":"full-moon-wo-sagashite"}
 {"mal_id":123,"anilist_id":123,"ann_id":178,"kitsu_id":102,"hianime_id":"mysterious-play-1153","anisearch_id":1067,"animeschedule_id":"fushigi-yuugi"}
-{"mal_id":124,"anilist_id":124,"ann_id":967,"kitsu_id":103,"anisearch_id":1839,"animeschedule_id":"fushigi-yuugi-eikoden"}
+{"mal_id":124,"anilist_id":124,"ann_id":967,"kitsu_id":103,"hianime_id":"mysterious-play-eikoden-4150","anisearch_id":1839,"animeschedule_id":"fushigi-yuugi-eikoden"}
 {"mal_id":125,"anilist_id":125,"ann_id":4501,"kitsu_id":104,"anisearch_id":957,"animeschedule_id":"futakoi"}
 {"mal_id":126,"anilist_id":126,"ann_id":5062,"kitsu_id":105,"anisearch_id":3224,"animeschedule_id":"futakoi-alternative"}
 {"mal_id":127,"anilist_id":127,"ann_id":245,"kitsu_id":106,"hianime_id":"gate-keepers-3713","anisearch_id":2102,"animeschedule_id":"gate-keepers"}
@@ -23286,7 +23286,7 @@
 {"mal_id":61352,"anilist_id":204517}
 {"mal_id":61353,"anilist_id":185779,"kitsu_id":49772,"anisearch_id":20353}
 {"mal_id":61358,"kitsu_id":49829}
-{"mal_id":61359,"anilist_id":189565,"ann_id":35487,"anisearch_id":20396,"animeschedule_id":"osananajimi-to-wa-love-comedy-ni-naranai"}
+{"mal_id":61359,"anilist_id":189565,"ann_id":35487,"hianime_id":"you-cant-be-in-a-rom-com-with-your-childhood-friends-20257","anisearch_id":20396,"animeschedule_id":"osananajimi-to-wa-love-comedy-ni-naranai"}
 {"mal_id":61361,"kitsu_id":49817,"anisearch_id":20406,"animeschedule_id":"7fates-chakho"}
 {"mal_id":61363,"anilist_id":189602,"anisearch_id":20855,"animeschedule_id":"youtunya-3"}
 {"mal_id":61364,"anisearch_id":20404,"animeschedule_id":"the-star-seekers-hoshi-wo-ou-shounen-tachi"}
