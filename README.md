@@ -10,7 +10,7 @@ The JSON datasets are licensed under **CC BY 4.0** (only requiring attribution) 
 
 ![MyDubList Search](https://raw.githubusercontent.com/Joelis57/MyDubList/main/images/mydublist.com.jpg)
 
-## Browser extension for MyAnimeList
+## Browser extension (works on MyAnimeList, AniList and aniSearch)
 
 ![MyDubList extension showcase](https://raw.githubusercontent.com/Joelis57/MyDubList/main/images/extension-showcase.gif)
 
