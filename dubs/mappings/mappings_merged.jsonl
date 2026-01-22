@@ -16372,6 +16372,7 @@
 {"mal_id":41132,"anilist_id":117913,"ann_id":25437,"kitsu_id":42988,"anisearch_id":15257,"animeschedule_id":"tokyo-autumn-session"}
 {"mal_id":41135,"anilist_id":127506,"animeschedule_id":"dream"}
 {"mal_id":41137,"anilist_id":114943,"ann_id":23557,"kitsu_id":43813,"anisearch_id":15051,"animeschedule_id":"battle-spirits-kakumei-no-galette"}
+{"mal_id":41139,"anilist_id":206519}
 {"mal_id":41140,"anilist_id":129759,"ann_id":23071,"kitsu_id":44680,"anisearch_id":13597,"animeschedule_id":"princess-principal-crown-handler-2"}
 {"mal_id":41141,"anilist_id":137612,"ann_id":23071,"kitsu_id":44962,"anisearch_id":13597,"animeschedule_id":"princess-principal-crown-handler-3"}
 {"mal_id":41146,"anilist_id":114926,"ann_id":23003,"kitsu_id":42986,"anisearch_id":14910,"animeschedule_id":"kandagawa-jet-girls-ova"}
@@ -19220,7 +19221,7 @@
 {"mal_id":51616,"ann_id":184150,"kitsu_id":46075,"anisearch_id":21148}
 {"mal_id":51617,"anilist_id":180770,"ann_id":25820,"kitsu_id":46563,"animeschedule_id":"period-of-the-mouseman"}
 {"mal_id":51618,"kitsu_id":46301}
-{"mal_id":51621,"ann_id":15055,"anisearch_id":13901}
+{"mal_id":51621,"anilist_id":206517,"ann_id":15055,"anisearch_id":13901}
 {"mal_id":51623,"anilist_id":145824,"kitsu_id":46121,"animeschedule_id":"wan-yu-zhi-wang"}
 {"mal_id":51632,"anilist_id":147571,"ann_id":25563,"kitsu_id":46057,"hianime_id":"in-another-world-with-my-smartphone-2-18342","anisearch_id":17298,"animeschedule_id":"isekai-wa-smartphone-to-tomo-ni-2"}
 {"mal_id":51635,"ann_id":25821}
@@ -23065,7 +23066,7 @@
 {"mal_id":60752,"anilist_id":166132,"animeschedule_id":"purple-rain"}
 {"mal_id":60765,"anilist_id":186161,"ann_id":34321,"hianime_id":"with-you-our-love-will-make-it-through-19899","anisearch_id":20099,"animeschedule_id":"kimi-to-koete-koi-ni-naru"}
 {"mal_id":60766,"anilist_id":186836,"animeschedule_id":"tianming-da-zhuzai"}
-{"mal_id":60771,"kitsu_id":49499,"animeschedule_id":"shinitai-himawari"}
+{"mal_id":60771,"anilist_id":204469,"kitsu_id":49499,"animeschedule_id":"shinitai-himawari"}
 {"mal_id":60772,"anilist_id":166438,"animeschedule_id":"xiang-huo-er-sheng"}
 {"mal_id":60773,"anilist_id":183414,"anisearch_id":20088,"animeschedule_id":"kimi-to-idol-precure-movie"}
 {"mal_id":60774,"anilist_id":186169,"ann_id":34335,"kitsu_id":49925,"anisearch_id":20098,"animeschedule_id":"chao"}
@@ -23436,6 +23437,7 @@
 {"mal_id":61869,"ann_id":11360}
 {"mal_id":61870,"ann_id":11360}
 {"mal_id":61872,"anilist_id":194724}
+{"mal_id":61873,"anilist_id":206595}
 {"mal_id":61876,"anilist_id":206349,"kitsu_id":50029}
 {"mal_id":61884,"anilist_id":194742,"ann_id":36660,"anisearch_id":20651,"animeschedule_id":"maou-no-musume-wa-yasashisugiru"}
 {"mal_id":61886,"anilist_id":197731,"ann_id":36663,"anisearch_id":20679,"animeschedule_id":"goumon-baito-kun-no-nichijou"}
@@ -23740,11 +23742,13 @@
 {"mal_id":62702,"anilist_id":205374}
 {"mal_id":62703,"anilist_id":195877,"animeschedule_id":"bai-lian-cheng-shen-3rd-season"}
 {"mal_id":62704,"anilist_id":206287}
+{"mal_id":62706,"anilist_id":206596}
 {"mal_id":62708,"anilist_id":155311,"animeschedule_id":"shanhai-jing-mima"}
 {"mal_id":62714,"anilist_id":206195}
 {"mal_id":62717,"anilist_id":206215}
 {"mal_id":62718,"anilist_id":206356}
 {"mal_id":62719,"anilist_id":206354}
+{"mal_id":62721,"anilist_id":206599}
 {"mal_id":62728,"anilist_id":205290,"animeschedule_id":"jian-lai-2nd-season"}
 {"mal_id":62730,"anilist_id":206142}
 {"mal_id":62738,"anilist_id":168195}
@@ -23899,3 +23903,4 @@
 {"mal_id":63325,"anisearch_id":21162}
 {"mal_id":63326,"anilist_id":206298,"anisearch_id":21169,"animeschedule_id":"medalist-movie"}
 {"mal_id":63337,"anilist_id":206401,"anisearch_id":21172}
+{"mal_id":63347,"anilist_id":206521}
