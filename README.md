@@ -43,14 +43,14 @@ If you have an authoritative source to add, please open an issue/PR.
 | German | Deutsch | 2958 |
 | French | Français | 2431 |
 | Italian | Italiano | 2321 |
-| Portuguese | Português | 1733 |
+| Portuguese | Português | 1735 |
 | Korean | 한국어 | 1381 |
 | Chinese | 中文 | 886 |
-| Tagalog | Tagalog | 813 |
+| Tagalog | Tagalog | 814 |
 | Arabic | العربية | 316 |
-| Polish | Polski | 278 |
+| Polish | Polski | 279 |
 | Hindi | हिन्दी | 233 |
-| Hungarian | Magyar | 194 |
+| Hungarian | Magyar | 195 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 135 |
 | Hebrew | עברית | 122 |
@@ -58,7 +58,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Russian | Русский | 78 |
 | Indonesian | Bahasa Indonesia | 65 |
 | Danish | Dansk | 63 |
-| Thai | ไทย | 53 |
+| Thai | ไทย | 55 |
 | Finnish | Suomi | 16 |
 | Turkish | Türkçe | 10 |
 | Catalan | Català | 3 |
