@@ -41,7 +41,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | English | English | 5324 |
 | Spanish | Español | 3016 |
 | German | Deutsch | 2958 |
-| French | Français | 2433 |
+| French | Français | 2434 |
 | Italian | Italiano | 2321 |
 | Portuguese | Português | 1737 |
 | Korean | 한국어 | 1384 |
@@ -56,9 +56,9 @@ If you have an authoritative source to add, please open an issue/PR.
 | Hebrew | עברית | 122 |
 | Dutch | Nederlands | 105 |
 | Russian | Русский | 78 |
-| Indonesian | Bahasa Indonesia | 65 |
+| Indonesian | Bahasa Indonesia | 66 |
 | Danish | Dansk | 63 |
-| Thai | ไทย | 56 |
+| Thai | ไทย | 57 |
 | Finnish | Suomi | 16 |
 | Turkish | Türkçe | 10 |
 | Catalan | Català | 3 |

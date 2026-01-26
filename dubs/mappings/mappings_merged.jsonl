@@ -7658,7 +7658,7 @@
 {"mal_id":17277,"anilist_id":17277,"kitsu_id":7627,"anisearch_id":8794,"animeschedule_id":"code-geass-soubou-no-oz-picture-drama"}
 {"mal_id":17291,"anilist_id":17291,"ann_id":6867,"kitsu_id":7628,"anisearch_id":3899,"animeschedule_id":"jinzou-konchuu-kabutoborg-vxv"}
 {"mal_id":17293,"anilist_id":17293,"kitsu_id":7629,"animeschedule_id":"love-like-aliens"}
-{"mal_id":17295,"anilist_id":17295,"kitsu_id":7630,"animeschedule_id":"cosmicbreak-sacrifice"}
+{"mal_id":17295,"anilist_id":206843,"kitsu_id":7630,"animeschedule_id":"cosmicbreak-sacrifice"}
 {"mal_id":17307,"anilist_id":17307,"ann_id":23331,"kitsu_id":7635,"anisearch_id":6263,"animeschedule_id":"dr-typhoon"}
 {"mal_id":17313,"anilist_id":17313,"ann_id":7161,"kitsu_id":7636,"anisearch_id":5617,"animeschedule_id":"pro-golfer-saru"}
 {"mal_id":17315,"anilist_id":17315,"kitsu_id":7637,"anisearch_id":3749,"animeschedule_id":"shin-pro-golfer-saru"}
@@ -10075,7 +10075,7 @@
 {"mal_id":29487,"kitsu_id":10299}
 {"mal_id":29489,"kitsu_id":10279}
 {"mal_id":29491,"kitsu_id":10278}
-{"mal_id":29493,"kitsu_id":10287}
+{"mal_id":29493,"anilist_id":206886,"kitsu_id":10287}
 {"mal_id":29495,"anilist_id":103414,"kitsu_id":10292,"animeschedule_id":"nanja-monja-obake"}
 {"mal_id":29497,"kitsu_id":10257}
 {"mal_id":29499,"kitsu_id":10264}
@@ -10679,7 +10679,7 @@
 {"mal_id":30739,"anilist_id":97955,"kitsu_id":10984,"animeschedule_id":"ane-log-moyako-neesan-no-honpen-wo-tobidashite-tomaranai-monologue-specials"}
 {"mal_id":30740,"anilist_id":21187,"ann_id":17057,"kitsu_id":10914,"anisearch_id":10425,"animeschedule_id":"young-black-jack"}
 {"mal_id":30741,"anilist_id":21667,"kitsu_id":10985,"anisearch_id":10424}
-{"mal_id":30743,"kitsu_id":10946,"anisearch_id":12925}
+{"mal_id":30743,"anilist_id":206849,"kitsu_id":10946,"anisearch_id":12925}
 {"mal_id":30745,"kitsu_id":10911}
 {"mal_id":30746,"anilist_id":21156,"ann_id":16973,"kitsu_id":10924,"anisearch_id":10356,"animeschedule_id":"fushigi-na-somera-chan"}
 {"mal_id":30749,"anilist_id":21188,"ann_id":17064,"kitsu_id":10913,"anisearch_id":10435,"animeschedule_id":"saijaku-muhai-no-bahamut"}
@@ -14103,7 +14103,7 @@
 {"mal_id":37141,"anilist_id":100977,"ann_id":20564,"kitsu_id":14212,"hianime_id":"cells-at-work-1079","anisearch_id":13249,"animeschedule_id":"cells-at-work"}
 {"mal_id":37142,"kitsu_id":41736}
 {"mal_id":37143,"kitsu_id":41739,"anisearch_id":15777}
-{"mal_id":37144,"kitsu_id":41735,"anisearch_id":13433}
+{"mal_id":37144,"anilist_id":206846,"kitsu_id":41735,"anisearch_id":13433}
 {"mal_id":37145,"anilist_id":119354,"kitsu_id":41737,"anisearch_id":13307,"animeschedule_id":"morimori-shima-no-mogu-to-perol"}
 {"mal_id":37146,"anilist_id":113136,"ann_id":21757,"kitsu_id":41738,"animeschedule_id":"complex-x-complex"}
 {"mal_id":37147,"anilist_id":103366,"kitsu_id":41038,"animeschedule_id":"nou-nen"}
@@ -17843,6 +17843,7 @@
 {"mal_id":48266,"anilist_id":177122,"kitsu_id":48764,"animeschedule_id":"sinbi-apateu-ghost-ball-double-x"}
 {"mal_id":48268,"kitsu_id":48767}
 {"mal_id":48269,"kitsu_id":48768}
+{"mal_id":48271,"anilist_id":206855}
 {"mal_id":48305,"anilist_id":202420,"anisearch_id":14616,"animeschedule_id":"red-shoes"}
 {"mal_id":48310,"anilist_id":141167,"kitsu_id":47859,"animeschedule_id":"jeombagi-hanbandoui-gongnyong-2-saeroun-nagwon"}
 {"mal_id":48312,"anilist_id":103174,"kitsu_id":41333,"animeschedule_id":"ansoku-no-basho"}
@@ -19036,6 +19037,7 @@
 {"mal_id":51252,"anilist_id":146323,"ann_id":25431,"kitsu_id":45966,"anisearch_id":17204,"animeschedule_id":"spy-kyoushitsu"}
 {"mal_id":51254,"anilist_id":202425,"animeschedule_id":"namida-no-sotsuen-special-arigatou-baba"}
 {"mal_id":51255,"anilist_id":202426,"animeschedule_id":"kakkoii-1-nensei-ni-naru-tame-no-daibouken"}
+{"mal_id":51256,"anilist_id":206860}
 {"mal_id":51261,"anilist_id":149345}
 {"mal_id":51262,"anilist_id":149346,"animeschedule_id":"gon-de-hanta-tata-turan-xiangdao-2"}
 {"mal_id":51263,"anilist_id":146885,"ann_id":24877,"hianime_id":"bakugan-evolutions-18037","anisearch_id":17015,"animeschedule_id":"bakugan-evolutions"}
@@ -20331,7 +20333,16 @@
 {"mal_id":54398,"anilist_id":161441,"ann_id":27095,"kitsu_id":47079,"hianime_id":"resident-evil-death-island-18429","anisearch_id":18204,"animeschedule_id":"biohazard-death-island"}
 {"mal_id":54399,"anilist_id":168584,"animeschedule_id":"noa-no-ichinichi"}
 {"mal_id":54405,"anilist_id":202428,"animeschedule_id":"shimajirou-to-korasho-no-saigo-no-daiundoukai-tsunage-nakayoshi-relay"}
+{"mal_id":54411,"anilist_id":206862}
+{"mal_id":54415,"anilist_id":206851}
+{"mal_id":54416,"anilist_id":206852}
+{"mal_id":54418,"anilist_id":206863}
+{"mal_id":54420,"anilist_id":206866}
+{"mal_id":54421,"anilist_id":206867}
 {"mal_id":54422,"kitsu_id":47911}
+{"mal_id":54424,"anilist_id":206861}
+{"mal_id":54426,"anilist_id":206850}
+{"mal_id":54427,"anilist_id":206864}
 {"mal_id":54428,"kitsu_id":47072}
 {"mal_id":54431,"anilist_id":161364,"ann_id":27118,"kitsu_id":47077,"anisearch_id":18207,"animeschedule_id":"toaru-ossan-no-vrmmo-katsudouki"}
 {"mal_id":54434,"kitsu_id":47477}
@@ -20556,7 +20567,7 @@
 {"mal_id":55042,"ann_id":25406}
 {"mal_id":55043,"animeschedule_id":"no-guns-life-mini"}
 {"mal_id":55044,"anilist_id":127213,"kitsu_id":46983,"animeschedule_id":"tensei-mae-no-ryouma-to-tabuchi"}
-{"mal_id":55047,"kitsu_id":48773}
+{"mal_id":55047,"anilist_id":206853,"kitsu_id":48773}
 {"mal_id":55049,"anilist_id":163753,"kitsu_id":47300,"animeschedule_id":"wonky-monkey"}
 {"mal_id":55051,"anilist_id":175051,"kitsu_id":47348,"animeschedule_id":"my-luxury-night"}
 {"mal_id":55052,"kitsu_id":47478}
@@ -20611,8 +20622,10 @@
 {"mal_id":55183,"anilist_id":164193,"kitsu_id":47337,"animeschedule_id":"kien-romance"}
 {"mal_id":55186,"anilist_id":134099,"kitsu_id":47589,"animeschedule_id":"xixing-moshi-lu-1-jianshi-pian"}
 {"mal_id":55187,"anilist_id":160789,"animeschedule_id":"never-fear"}
+{"mal_id":55188,"anilist_id":206847}
 {"mal_id":55191,"anilist_id":156059,"kitsu_id":47149,"anisearch_id":18719,"animeschedule_id":"hidari-pilot-film"}
 {"mal_id":55192,"anilist_id":166325,"kitsu_id":47926,"animeschedule_id":"jiu-tian-xuan-di-jue-4"}
+{"mal_id":55193,"anilist_id":206848}
 {"mal_id":55194,"anilist_id":164440,"ann_id":28078,"kitsu_id":47427,"hianime_id":"hey-tonbo-19098","anisearch_id":18376,"animeschedule_id":"ooi-tonbo"}
 {"mal_id":55195,"anilist_id":164441,"ann_id":28100,"kitsu_id":47610,"anisearch_id":18484,"animeschedule_id":"mamekichi-mameko-neet-no-nichijou-2"}
 {"mal_id":55196,"anilist_id":159869,"animeschedule_id":"wei-jiang"}
@@ -20841,6 +20854,7 @@
 {"mal_id":55614,"anilist_id":169333,"animeschedule_id":"ojii-chan-te-ii-na"}
 {"mal_id":55616,"anilist_id":168253,"ann_id":26456,"anisearch_id":18414}
 {"mal_id":55617,"kitsu_id":49545}
+{"mal_id":55618,"anilist_id":206845}
 {"mal_id":55619,"anilist_id":169464,"animeschedule_id":"fushigi-na-chikara"}
 {"mal_id":55622,"anilist_id":200641,"animeschedule_id":"haruzora-to-akizora"}
 {"mal_id":55625,"kitsu_id":50000}
@@ -20910,6 +20924,8 @@
 {"mal_id":55774,"anilist_id":166522,"ann_id":28789,"kitsu_id":47656,"anisearch_id":18502,"animeschedule_id":"hime-sama-goumon-no-jikan-desu"}
 {"mal_id":55775,"anilist_id":166523,"ann_id":28790,"kitsu_id":47672,"anisearch_id":18482,"animeschedule_id":"kizuna-no-allele-season-2"}
 {"mal_id":55779,"anilist_id":166527,"ann_id":28792,"kitsu_id":47658,"anisearch_id":18492,"animeschedule_id":"cocoon-aru-natsu-no-shoujo-tachi-yori"}
+{"mal_id":55787,"anilist_id":206841}
+{"mal_id":55788,"anilist_id":206842}
 {"mal_id":55790,"anilist_id":156080,"kitsu_id":47680,"animeschedule_id":"zhen-hun-jie-3"}
 {"mal_id":55791,"anilist_id":166531,"ann_id":28810,"kitsu_id":47659,"hianime_id":"my-star-season-2-19256","anisearch_id":18488,"animeschedule_id":"oshi-no-ko-season-2"}
 {"mal_id":55796,"kitsu_id":47718}
@@ -21470,7 +21486,7 @@
 {"mal_id":57002,"kitsu_id":45790}
 {"mal_id":57003,"anilist_id":170535,"kitsu_id":48195,"anisearch_id":18933,"animeschedule_id":"meitantei-pikachu-kareinaru-morning-routine"}
 {"mal_id":57005,"anilist_id":170822,"ann_id":30497,"anisearch_id":18804,"animeschedule_id":"mukuwarenakatta-murabito-a-kizoku-ni-hirowarete-dekiai-sareru-ue-ni-jitsu-wa-motteita-densetsu-kyuu-no-kami-skill-mo-kakusei-shita"}
-{"mal_id":57006,"kitsu_id":48775}
+{"mal_id":57006,"anilist_id":206854,"kitsu_id":48775}
 {"mal_id":57007,"anilist_id":169458,"animeschedule_id":"futari-de-hanbunko"}
 {"mal_id":57008,"anilist_id":178748,"animeschedule_id":"gachou-no-oba-san"}
 {"mal_id":57009,"anilist_id":179797,"animeschedule_id":"yamadera-no-oshou-san"}
@@ -23312,7 +23328,7 @@
 {"mal_id":61456,"anilist_id":177456,"animeschedule_id":"the-idolm-ster-million-live-the-backstage"}
 {"mal_id":61458,"kitsu_id":49862}
 {"mal_id":61461,"anilist_id":193296,"kitsu_id":49849,"animeschedule_id":"tenkaichi"}
-{"mal_id":61462,"anisearch_id":19926}
+{"mal_id":61462,"anilist_id":206844,"anisearch_id":19926}
 {"mal_id":61469,"anilist_id":190327,"ann_id":35638,"anisearch_id":20466,"animeschedule_id":"jojo-no-kimyou-na-bouken-part-7-steel-ball-run"}
 {"mal_id":61483,"anilist_id":190569,"ann_id":35665,"animeschedule_id":"tenmaku-no-jaadugar"}
 {"mal_id":61485,"anilist_id":191374,"animeschedule_id":"jigu-eui-juin-eun-goyang-ida"}
@@ -23380,7 +23396,7 @@
 {"mal_id":61652,"kitsu_id":49946}
 {"mal_id":61657,"anilist_id":166422,"animeschedule_id":"shuangsheng-wu-hun"}
 {"mal_id":61663,"anilist_id":192507,"ann_id":36048,"hianime_id":"in-the-clear-moonlit-dusk-20365","anisearch_id":20485,"animeschedule_id":"uruwashi-no-yoi-no-tsuki"}
-{"mal_id":61667,"anisearch_id":20213}
+{"mal_id":61667,"anilist_id":199373,"anisearch_id":20213}
 {"mal_id":61671,"anilist_id":191059,"animeschedule_id":"charisma-jamboree"}
 {"mal_id":61672,"anilist_id":192474,"ann_id":36045,"kitsu_id":49993,"anisearch_id":20641,"animeschedule_id":"shinsei-galverse"}
 {"mal_id":61674,"kitsu_id":49911,"anisearch_id":20613}
@@ -23606,7 +23622,7 @@
 {"mal_id":62314,"anilist_id":196540}
 {"mal_id":62315,"anilist_id":196722,"anisearch_id":20829}
 {"mal_id":62316,"anilist_id":194353,"anisearch_id":20922}
-{"mal_id":62320,"ann_id":19852}
+{"mal_id":62320,"anilist_id":206888,"ann_id":19852}
 {"mal_id":62322,"anilist_id":197715,"ann_id":37557,"anisearch_id":20844,"animeschedule_id":"lv999-no-murabito"}
 {"mal_id":62324,"kitsu_id":50114}
 {"mal_id":62328,"anilist_id":196750,"anisearch_id":20918}
@@ -23739,6 +23755,7 @@
 {"mal_id":62685,"anilist_id":205372}
 {"mal_id":62686,"anilist_id":198511}
 {"mal_id":62689,"anilist_id":200228,"anisearch_id":21056}
+{"mal_id":62690,"anilist_id":206857}
 {"mal_id":62696,"anilist_id":200294,"ann_id":37912,"animeschedule_id":"choujun-choujou-senpai"}
 {"mal_id":62702,"anilist_id":205374}
 {"mal_id":62703,"anilist_id":195877,"animeschedule_id":"bai-lian-cheng-shen-3rd-season"}
@@ -23871,6 +23888,7 @@
 {"mal_id":63167,"anilist_id":204561,"animeschedule_id":"mahou-no-princess-minky-momo-ova"}
 {"mal_id":63174,"anilist_id":204579,"ann_id":38183,"anisearch_id":21135,"animeschedule_id":"jirai-nan-desu-ka-chihara-san"}
 {"mal_id":63177,"anilist_id":204604,"ann_id":38185,"anisearch_id":21137,"animeschedule_id":"undead-unluck-2nd-season"}
+{"mal_id":63179,"anilist_id":206727}
 {"mal_id":63181,"anilist_id":204650,"ann_id":38194,"animeschedule_id":"tougen-anki-nikko-kegon-no-taki-hen"}
 {"mal_id":63183,"anilist_id":204742}
 {"mal_id":63185,"ann_id":38195,"animeschedule_id":"kingdom-6th-season-zoku-hen"}
@@ -23905,6 +23923,8 @@
 {"mal_id":63325,"ann_id":38280,"anisearch_id":21162}
 {"mal_id":63326,"anilist_id":206298,"ann_id":38316,"anisearch_id":21169,"animeschedule_id":"medalist-movie"}
 {"mal_id":63337,"anilist_id":206401,"anisearch_id":21172}
+{"mal_id":63345,"anilist_id":206004}
 {"mal_id":63347,"anilist_id":206521,"anisearch_id":21173,"animeschedule_id":"world-is-dancing"}
 {"mal_id":63350,"anilist_id":206798,"animeschedule_id":"doukyo-shiteiru-kensei-no-onna-shishou-ga-kawaisugite-mainichi-shiawase-desu"}
 {"mal_id":63356,"anilist_id":206682}
+{"mal_id":63366,"anilist_id":206819}
