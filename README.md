@@ -83,11 +83,9 @@ dubs/
 
 cache/
   missing_mal_ids.json       # List of MAL IDs returning 404
-
-final/                       # DEPRECATED: legacy per‑language JSONs
 ```
 
-- `<lang>` is a lowercase language key (e.g., `english`, `french`, `spanish`, `german`, `italian`, `japanese`, `korean`, `mandarin`, `hebrew`, `hungarian`, `portuguese_br`, etc.).
+- `<lang>` is a lowercase language key (e.g., `english`, `spanish`, `german`, `french`, `italian`, etc.).
 - `<confidence>` can be `low` (≥1 source), `normal` (≥2 sources), `high` (≥3 sources) or `very-high` (≥4 sources).
 
 ## App integrations
