@@ -55,10 +55,10 @@ If you have an authoritative source to add, please open an issue/PR.
 | Norwegian | Norsk | 135 |
 | Hebrew | עברית | 122 |
 | Dutch | Nederlands | 105 |
+| Thai | ไทย | 84 |
 | Russian | Русский | 78 |
 | Indonesian | Bahasa Indonesia | 66 |
 | Danish | Dansk | 63 |
-| Thai | ไทย | 57 |
 | Finnish | Suomi | 16 |
 | Turkish | Türkçe | 10 |
 | Catalan | Català | 3 |
