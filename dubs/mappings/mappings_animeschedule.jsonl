@@ -8003,6 +8003,7 @@
 {"mal_id":25303,"animeschedule_id":"haikyuu-lev-kenzan"}
 {"mal_id":25305,"animeschedule_id":"isewan-taifuu-monogatari"}
 {"mal_id":25313,"animeschedule_id":"gintama-jump-festa-2014-special"}
+{"mal_id":25329,"animeschedule_id":"sensuikan-ni-koi-wo-shita-kujira-no-hanashi"}
 {"mal_id":25341,"animeschedule_id":"diamond-no-ace-ova"}
 {"mal_id":25363,"animeschedule_id":"gensei-shugoshin-peehyoro-ikka-ova"}
 {"mal_id":25365,"animeschedule_id":"koukoku-no-princess-diancie"}
@@ -8252,6 +8253,7 @@
 {"mal_id":28101,"animeschedule_id":"obatalian"}
 {"mal_id":28105,"animeschedule_id":"shirobako-specials"}
 {"mal_id":28109,"animeschedule_id":"kuzuryuugawa-to-shounen"}
+{"mal_id":28115,"animeschedule_id":"onigara"}
 {"mal_id":28121,"animeschedule_id":"is-it-wrong-to-try-to-pick-up-girls-in-a-dungeon"}
 {"mal_id":28143,"animeschedule_id":"ochou-fujin-no-gensou"}
 {"mal_id":28149,"animeschedule_id":"nihon-animator-mihonichi"}
@@ -8444,6 +8446,7 @@
 {"mal_id":29475,"animeschedule_id":"straw-saurus-neo"}
 {"mal_id":29477,"animeschedule_id":"resukyu-yoyo"}
 {"mal_id":29481,"animeschedule_id":"kakinoki-mokkii"}
+{"mal_id":29493,"animeschedule_id":"kyouryuu-pikora"}
 {"mal_id":29495,"animeschedule_id":"nanja-monja-obake"}
 {"mal_id":29501,"animeschedule_id":"the-night-game-neko-no-sakusen"}
 {"mal_id":29503,"animeschedule_id":"gararin-to-gororin"}
@@ -8631,6 +8634,7 @@
 {"mal_id":30019,"animeschedule_id":"norakuro-ittouhei"}
 {"mal_id":30027,"animeschedule_id":"waku-waku-doki-doki-meisaku-world"}
 {"mal_id":30030,"animeschedule_id":"jewelpet-magical-change"}
+{"mal_id":30034,"animeschedule_id":"dolittle-sensei-monogatari"}
 {"mal_id":30036,"animeschedule_id":"tokai-no-butchy"}
 {"mal_id":30039,"animeschedule_id":"future-card-buddyfight-100"}
 {"mal_id":30042,"animeschedule_id":"geori-ui-mubeopja"}
@@ -8884,6 +8888,7 @@
 {"mal_id":30738,"animeschedule_id":"gamba-gamba-to-nakama-tachi"}
 {"mal_id":30739,"animeschedule_id":"ane-log-moyako-neesan-no-honpen-wo-tobidashite-tomaranai-monologue-specials"}
 {"mal_id":30740,"animeschedule_id":"young-black-jack"}
+{"mal_id":30743,"animeschedule_id":"kanadian-families-episode-zero"}
 {"mal_id":30746,"animeschedule_id":"fushigi-na-somera-chan"}
 {"mal_id":30749,"animeschedule_id":"saijaku-muhai-no-bahamut"}
 {"mal_id":30751,"animeschedule_id":"usavich-zero"}
@@ -8953,6 +8958,7 @@
 {"mal_id":30968,"animeschedule_id":"kokoro-no-catchball"}
 {"mal_id":30971,"animeschedule_id":"tanita-shokudou"}
 {"mal_id":30980,"animeschedule_id":"ojiichan-no-hanabi"}
+{"mal_id":30984,"animeschedule_id":"bero-dashi-chonma"}
 {"mal_id":30985,"animeschedule_id":"yamakoshi-mura-no-mari-to-sanbiki-no-koinu"}
 {"mal_id":30988,"animeschedule_id":"futsuu-no-joshikousei-ga-locodol-yattemita-ova"}
 {"mal_id":30991,"animeschedule_id":"himouto-umaru-chan-ova"}
@@ -9325,6 +9331,7 @@
 {"mal_id":32108,"animeschedule_id":"digimon-adventure-tri-2-ketsui"}
 {"mal_id":32122,"animeschedule_id":"gintama-jump-festa-2015-special"}
 {"mal_id":32133,"animeschedule_id":"kemushi-no-boro"}
+{"mal_id":32136,"animeschedule_id":"narara-superboard"}
 {"mal_id":32139,"animeschedule_id":"dusan"}
 {"mal_id":32150,"animeschedule_id":"ai-to-shi"}
 {"mal_id":32151,"animeschedule_id":"senki-zesshou-symphogear-gx-senki-zesshou-shinai-symphogear"}
@@ -10112,6 +10119,7 @@
 {"mal_id":34238,"animeschedule_id":"osomatsu-san-ouma-de-kobanashi"}
 {"mal_id":34239,"animeschedule_id":"mutsugo-to-ouma-no-monogatari"}
 {"mal_id":34240,"animeschedule_id":"shelter"}
+{"mal_id":34243,"animeschedule_id":"miss-monochrome-music-clips"}
 {"mal_id":34244,"animeschedule_id":"crayon-shin-chan-shuurai-uchuujin-shiriri"}
 {"mal_id":34248,"animeschedule_id":"wu-kong-da-zhan-er-lang-shen"}
 {"mal_id":34249,"animeschedule_id":"aqua-kids"}
@@ -10417,9 +10425,12 @@
 {"mal_id":35008,"animeschedule_id":"midori-no-kuni-no-otomodachi-koeda-chan"}
 {"mal_id":35011,"animeschedule_id":"yankee-hamster"}
 {"mal_id":35015,"animeschedule_id":"ani-ni-tsukeru-kusuri-wa-nai"}
+{"mal_id":35025,"animeschedule_id":"eikou-naki-tensai-tachi-kara-no-monogatari"}
 {"mal_id":35032,"animeschedule_id":"kitty-to-mimmy-no-atarashii-kasa"}
 {"mal_id":35033,"animeschedule_id":"sam-to-chip-no-hachamecha-dai-race"}
 {"mal_id":35038,"animeschedule_id":"eigo-de-utatte-asobou"}
+{"mal_id":35041,"animeschedule_id":"uchuu-bouei-tai-taabou-no-shinkirou-sei-wo-sukue"}
+{"mal_id":35042,"animeschedule_id":"uchuu-bouei-tai-taabou-no-toki-no-tomatta-hoshi"}
 {"mal_id":35044,"animeschedule_id":"tu-bian-yingxiong-leaf"}
 {"mal_id":35047,"animeschedule_id":"mirai-e-no-tegami-kono-michi-no-tochuu-kara"}
 {"mal_id":35048,"animeschedule_id":"anime-tengu-no-kakuresato"}
@@ -11278,6 +11289,7 @@
 {"mal_id":37139,"animeschedule_id":"koyomi-history"}
 {"mal_id":37140,"animeschedule_id":"gegege-no-kitarou-2018"}
 {"mal_id":37141,"animeschedule_id":"cells-at-work"}
+{"mal_id":37144,"animeschedule_id":"nikuiyo-galbi-kun-kemuri-ga-me-ni-shimiru"}
 {"mal_id":37145,"animeschedule_id":"morimori-shima-no-mogu-to-perol"}
 {"mal_id":37146,"animeschedule_id":"complex-x-complex"}
 {"mal_id":37147,"animeschedule_id":"nou-nen"}
@@ -12965,6 +12977,7 @@
 {"mal_id":41132,"animeschedule_id":"tokyo-autumn-session"}
 {"mal_id":41135,"animeschedule_id":"dream"}
 {"mal_id":41137,"animeschedule_id":"battle-spirits-kakumei-no-galette"}
+{"mal_id":41139,"animeschedule_id":"neppuu-kairiku-bushi-road-kibou-e-no-michi"}
 {"mal_id":41140,"animeschedule_id":"princess-principal-crown-handler-2"}
 {"mal_id":41141,"animeschedule_id":"princess-principal-crown-handler-3"}
 {"mal_id":41146,"animeschedule_id":"kandagawa-jet-girls-ova"}
@@ -13569,6 +13582,7 @@
 {"mal_id":43224,"animeschedule_id":"jizhi-de-shanyang"}
 {"mal_id":43227,"animeschedule_id":"pang-sao-hui-niangjia"}
 {"mal_id":43229,"animeschedule_id":"godzilla-singular-point"}
+{"mal_id":43241,"animeschedule_id":"huoyanshan"}
 {"mal_id":43242,"animeschedule_id":"zhao-xiao-gege"}
 {"mal_id":43244,"animeschedule_id":"zhu-bajie-chi-xigua"}
 {"mal_id":43250,"animeschedule_id":"dalie-ji"}
@@ -13579,6 +13593,7 @@
 {"mal_id":43293,"animeschedule_id":"kaitai-shita-inu-no-blues"}
 {"mal_id":43297,"animeschedule_id":"dazhentan-fuermosi-taoyu-dazhuibu"}
 {"mal_id":43299,"animeschedule_id":"wonder-egg-priority"}
+{"mal_id":43303,"animeschedule_id":"lei-su-deng-yi-fei-chong-tian"}
 {"mal_id":43318,"animeschedule_id":"because"}
 {"mal_id":43323,"animeschedule_id":"timeless-tree"}
 {"mal_id":43325,"animeschedule_id":"yuukoku-no-moriarty-2"}
@@ -13619,6 +13634,7 @@
 {"mal_id":43444,"animeschedule_id":"bouken-tai-mori-no-yuusha"}
 {"mal_id":43446,"animeschedule_id":"shiroi-spitz"}
 {"mal_id":43457,"animeschedule_id":"magic"}
+{"mal_id":43458,"animeschedule_id":"dingding-zhan-houwang"}
 {"mal_id":43470,"animeschedule_id":"rikei-ga-koi-ni-ochita-no-de-shoumei-shitemita-2"}
 {"mal_id":43483,"animeschedule_id":"toaru-kagaku-no-railgun-t-motto-marutto-railgun"}
 {"mal_id":43485,"animeschedule_id":"kita-no-kaze-to-taiyou-to"}
@@ -13640,6 +13656,7 @@
 {"mal_id":43523,"animeschedule_id":"tsuki-ga-michibiku-isekai-douchuu"}
 {"mal_id":43531,"animeschedule_id":"anata-ga-mieru"}
 {"mal_id":43532,"animeschedule_id":"mushi-no-tsubuyaki"}
+{"mal_id":43533,"animeschedule_id":"xiao-bajie"}
 {"mal_id":43534,"animeschedule_id":"songshu-lifashi"}
 {"mal_id":43544,"animeschedule_id":"sanshiliu-ge-zi"}
 {"mal_id":43550,"animeschedule_id":"yume-miteru-wake-ja-nai-yo"}
@@ -13662,6 +13679,7 @@
 {"mal_id":43609,"animeschedule_id":"kaguya-sama-wa-kokurasetai-tensai-tachi-no-renai-zunousen-ova"}
 {"mal_id":43611,"animeschedule_id":"xin-hulu-xiongdi"}
 {"mal_id":43612,"animeschedule_id":"hulu-xiongdi-movie"}
+{"mal_id":43613,"animeschedule_id":"lata-dawang-qiyu-ji"}
 {"mal_id":43621,"animeschedule_id":"koushin"}
 {"mal_id":43626,"animeschedule_id":"jueshi-wu-hun"}
 {"mal_id":43627,"animeschedule_id":"houkiboshi-2012"}
@@ -13917,6 +13935,7 @@
 {"mal_id":44698,"animeschedule_id":"tao-hua-yuan-ji"}
 {"mal_id":44700,"animeschedule_id":"taoqi-bao-ma-xiao-tiao-2008"}
 {"mal_id":44702,"animeschedule_id":"kintamani-dog"}
+{"mal_id":44708,"animeschedule_id":"hei-lian-da-baogong"}
 {"mal_id":44752,"animeschedule_id":"chinzei-hachirou-tametomo"}
 {"mal_id":44775,"animeschedule_id":"i-wanna-be-your-friend"}
 {"mal_id":44776,"animeschedule_id":"i-think-you-re-a-little-confused"}
@@ -13962,6 +13981,7 @@
 {"mal_id":45110,"animeschedule_id":"daylight"}
 {"mal_id":45111,"animeschedule_id":"dongwu-tegong-ju"}
 {"mal_id":45120,"animeschedule_id":"shibing-shunliu-bing-wang-zhengfeng"}
+{"mal_id":45121,"animeschedule_id":"hua-qian-gu-hua-hun-zhi-lu"}
 {"mal_id":45133,"animeschedule_id":"jingling-meng-ye-luoli"}
 {"mal_id":45169,"animeschedule_id":"jiu-ye-shen-zhuan"}
 {"mal_id":45177,"animeschedule_id":"fu-wu-shu-36-ji"}
@@ -15142,6 +15162,7 @@
 {"mal_id":51252,"animeschedule_id":"spy-kyoushitsu"}
 {"mal_id":51254,"animeschedule_id":"namida-no-sotsuen-special-arigatou-baba"}
 {"mal_id":51255,"animeschedule_id":"kakkoii-1-nensei-ni-naru-tame-no-daibouken"}
+{"mal_id":51256,"animeschedule_id":"challenge-1-nensei-koutsuu-anzen"}
 {"mal_id":51262,"animeschedule_id":"gon-de-hanta-tata-turan-xiangdao-2"}
 {"mal_id":51263,"animeschedule_id":"bakugan-evolutions"}
 {"mal_id":51265,"animeschedule_id":"inu-ni-nattara-suki-na-hito-ni-hirowareta"}
@@ -15278,6 +15299,7 @@
 {"mal_id":51561,"animeschedule_id":"dilemma"}
 {"mal_id":51562,"animeschedule_id":"yuusha-yamemasu-kenshuu-ryokou-wa-mokuteki-wo-miushinau-na"}
 {"mal_id":51564,"animeschedule_id":"tenshi-no-agape"}
+{"mal_id":51577,"animeschedule_id":"pastel-tea-time"}
 {"mal_id":51585,"animeschedule_id":"city-hunter-movie"}
 {"mal_id":51586,"animeschedule_id":"d4dj-all-mix"}
 {"mal_id":51587,"animeschedule_id":"mirror-tune"}
@@ -15286,6 +15308,7 @@
 {"mal_id":51605,"animeschedule_id":"mado-wo-akete"}
 {"mal_id":51614,"animeschedule_id":"ao-no-orchestra"}
 {"mal_id":51617,"animeschedule_id":"period-of-the-mouseman"}
+{"mal_id":51621,"animeschedule_id":"heroes-battle-disk-densetsu"}
 {"mal_id":51623,"animeschedule_id":"wan-yu-zhi-wang"}
 {"mal_id":51632,"animeschedule_id":"isekai-wa-smartphone-to-tomo-ni-2"}
 {"mal_id":51636,"animeschedule_id":"kenda-master-ken"}
@@ -15293,6 +15316,8 @@
 {"mal_id":51646,"animeschedule_id":"jarinko-chie-kotetsu-jr-no-himerareta-kako"}
 {"mal_id":51648,"animeschedule_id":"nozomanu-fushi-no-boukensha"}
 {"mal_id":51653,"animeschedule_id":"ultraman-final"}
+{"mal_id":51655,"animeschedule_id":"jiu-cang-miao-wo"}
+{"mal_id":51656,"animeschedule_id":"jiu-cang-miao-wo-2"}
 {"mal_id":51673,"animeschedule_id":"shaman-king-zoku-hen"}
 {"mal_id":51678,"animeschedule_id":"onii-chan-wa-oshimai"}
 {"mal_id":51680,"animeschedule_id":"cool-doji-danshi"}
@@ -15526,6 +15551,7 @@
 {"mal_id":52513,"animeschedule_id":"zetsubou-san"}
 {"mal_id":52522,"animeschedule_id":"xian-wu-chuan"}
 {"mal_id":52523,"animeschedule_id":"fei-ren-zai-6"}
+{"mal_id":52545,"animeschedule_id":"my-crossroad"}
 {"mal_id":52551,"animeschedule_id":"futsal-boys-short-anime"}
 {"mal_id":52562,"animeschedule_id":"kanojo-okarishimasu-petit-2"}
 {"mal_id":52571,"animeschedule_id":"banzai-digital-trippers"}
@@ -16011,6 +16037,7 @@
 {"mal_id":54269,"animeschedule_id":"shimajirou-to-kirakira-oukoku-no-ouji-sama"}
 {"mal_id":54275,"animeschedule_id":"temple"}
 {"mal_id":54278,"animeschedule_id":"watashi-no-hashtag-ga-haenakute"}
+{"mal_id":54281,"animeschedule_id":"oboete-ite"}
 {"mal_id":54282,"animeschedule_id":"datte-kyou-made-koiwazurai"}
 {"mal_id":54284,"animeschedule_id":"vtuber-nandaga-haishin-kiri-wasuretara-densetsu-ni-natteta"}
 {"mal_id":54285,"animeschedule_id":"yao-shen-ji-7"}
@@ -16039,6 +16066,16 @@
 {"mal_id":54398,"animeschedule_id":"biohazard-death-island"}
 {"mal_id":54399,"animeschedule_id":"noa-no-ichinichi"}
 {"mal_id":54405,"animeschedule_id":"shimajirou-to-korasho-no-saigo-no-daiundoukai-tsunage-nakayoshi-relay"}
+{"mal_id":54411,"animeschedule_id":"kakkoii-1-nensei-yuki-no-bouken"}
+{"mal_id":54415,"animeschedule_id":"shougakkou-daibouken-karikari-ouji-no-himitsu"}
+{"mal_id":54416,"animeschedule_id":"shougakkou-daibouken-tobe-shouta-no-kamihikouki"}
+{"mal_id":54418,"animeschedule_id":"nyuugaku-junbi-dvd-ren-no-yume-to-suteki-na-christmas-present"}
+{"mal_id":54419,"animeschedule_id":"sayonara-koinu-no-marvin-nyuugaku-chokuzen-special"}
+{"mal_id":54420,"animeschedule_id":"mezase-kakkoii-1-nensei-champion-ni-chousen"}
+{"mal_id":54421,"animeschedule_id":"wakuwaku-hakubutsukan-adventure"}
+{"mal_id":54424,"animeschedule_id":"kakkoii-1-nensei-ni-naru-made-no-3-tsu-no-yakusoku"}
+{"mal_id":54426,"animeschedule_id":"tottemo-tanoshii-christmas-minna-de-chikara-wo-awaseyou"}
+{"mal_id":54427,"animeschedule_id":"1-nensei-daikatsuyaku-dvd-mirai-no-shougakkou-tanken"}
 {"mal_id":54431,"animeschedule_id":"toaru-ossan-no-vrmmo-katsudouki"}
 {"mal_id":54437,"animeschedule_id":"lian-qi-shi-wan-nian"}
 {"mal_id":54440,"animeschedule_id":"lycoris-recoil-shinsaku-animation"}
@@ -16204,6 +16241,7 @@
 {"mal_id":55033,"animeschedule_id":"tsugu-tsugumomo-mini-anime-specials"}
 {"mal_id":55043,"animeschedule_id":"no-guns-life-mini"}
 {"mal_id":55044,"animeschedule_id":"tensei-mae-no-ryouma-to-tabuchi"}
+{"mal_id":55047,"animeschedule_id":"sinbi-apartment-ghost-ball-zero"}
 {"mal_id":55049,"animeschedule_id":"wonky-monkey"}
 {"mal_id":55051,"animeschedule_id":"my-luxury-night"}
 {"mal_id":55054,"animeschedule_id":"kurenai-hotel"}
@@ -16234,8 +16272,10 @@
 {"mal_id":55183,"animeschedule_id":"kien-romance"}
 {"mal_id":55186,"animeschedule_id":"xixing-moshi-lu-1-jianshi-pian"}
 {"mal_id":55187,"animeschedule_id":"never-fear"}
+{"mal_id":55188,"animeschedule_id":"eraser-wars"}
 {"mal_id":55191,"animeschedule_id":"hidari-pilot-film"}
 {"mal_id":55192,"animeschedule_id":"jiu-tian-xuan-di-jue-4"}
+{"mal_id":55193,"animeschedule_id":"midnight-eraser-wars-spin-off"}
 {"mal_id":55194,"animeschedule_id":"ooi-tonbo"}
 {"mal_id":55195,"animeschedule_id":"mamekichi-mameko-neet-no-nichijou-2"}
 {"mal_id":55196,"animeschedule_id":"wei-jiang"}
@@ -16300,6 +16340,7 @@
 {"mal_id":55393,"animeschedule_id":"the-idolm-ster-cinderella-girls-starlight-stage-cms"}
 {"mal_id":55394,"animeschedule_id":"jongtama-pv"}
 {"mal_id":55397,"animeschedule_id":"pon-no-michi"}
+{"mal_id":55400,"animeschedule_id":"afuregu-aufregendes-leben"}
 {"mal_id":55404,"animeschedule_id":"slash"}
 {"mal_id":55412,"animeschedule_id":"touitten"}
 {"mal_id":55414,"animeschedule_id":"montage"}
@@ -16400,6 +16441,7 @@
 {"mal_id":55602,"animeschedule_id":"ohiru-no-shocker-san-the-movie"}
 {"mal_id":55613,"animeschedule_id":"kodomo-dake-no-natsu"}
 {"mal_id":55614,"animeschedule_id":"ojii-chan-te-ii-na"}
+{"mal_id":55618,"animeschedule_id":"milk-no-kevin-the-movie"}
 {"mal_id":55619,"animeschedule_id":"fushigi-na-chikara"}
 {"mal_id":55622,"animeschedule_id":"haruzora-to-akizora"}
 {"mal_id":55629,"animeschedule_id":"iya-na-kao-sare-nagara-opantsu-misete-moraitai-ver-3-0"}
@@ -16456,6 +16498,8 @@
 {"mal_id":55774,"animeschedule_id":"hime-sama-goumon-no-jikan-desu"}
 {"mal_id":55775,"animeschedule_id":"kizuna-no-allele-season-2"}
 {"mal_id":55779,"animeschedule_id":"cocoon-aru-natsu-no-shoujo-tachi-yori"}
+{"mal_id":55787,"animeschedule_id":"koutarou-in-space-wonderland"}
+{"mal_id":55788,"animeschedule_id":"koutarou-in-space-wonderland-2016"}
 {"mal_id":55790,"animeschedule_id":"zhen-hun-jie-3"}
 {"mal_id":55791,"animeschedule_id":"oshi-no-ko-season-2"}
 {"mal_id":55802,"animeschedule_id":"the-idolm-ster-cinderella-girls-u149-ova"}
@@ -16514,6 +16558,7 @@
 {"mal_id":55950,"animeschedule_id":"picnic"}
 {"mal_id":55952,"animeschedule_id":"omoide-ni-hanashikakete-mita"}
 {"mal_id":55953,"animeschedule_id":"umauma-ramen"}
+{"mal_id":55954,"animeschedule_id":"overd"}
 {"mal_id":55957,"animeschedule_id":"higeki-no-genkyou-to-naru-saikyou-gedou-last-boss-joou-wa-tami-no-tame-ni-tsukushimasu-mini"}
 {"mal_id":55973,"animeschedule_id":"30-sai-made-doutei-dato-mahou-tsukai-ni-nareru-rashii"}
 {"mal_id":55978,"animeschedule_id":"beywarriors-cyborg"}
@@ -16710,6 +16755,7 @@
 {"mal_id":56666,"animeschedule_id":"shiawase-no-kaban"}
 {"mal_id":56667,"animeschedule_id":"poplar-no-dengon"}
 {"mal_id":56671,"animeschedule_id":"burn-the-witch-0-8"}
+{"mal_id":56674,"animeschedule_id":"balala-xiao-mo-xian-xing-yuan-die-qi-1"}
 {"mal_id":56677,"animeschedule_id":"saekomdalkom-catch-tiniping"}
 {"mal_id":56678,"animeschedule_id":"gokurou-san"}
 {"mal_id":56679,"animeschedule_id":"uma-no-shippo-buta-no-shippo"}
@@ -16858,6 +16904,7 @@
 {"mal_id":57000,"animeschedule_id":"zero-talking"}
 {"mal_id":57003,"animeschedule_id":"meitantei-pikachu-kareinaru-morning-routine"}
 {"mal_id":57005,"animeschedule_id":"mukuwarenakatta-murabito-a-kizoku-ni-hirowarete-dekiai-sareru-ue-ni-jitsu-wa-motteita-densetsu-kyuu-no-kami-skill-mo-kakusei-shita"}
+{"mal_id":57006,"animeschedule_id":"sinbi-apartment-ghost-ball-zero-du-beonjjae-iyagi"}
 {"mal_id":57007,"animeschedule_id":"futari-de-hanbunko"}
 {"mal_id":57008,"animeschedule_id":"gachou-no-oba-san"}
 {"mal_id":57009,"animeschedule_id":"yamadera-no-oshou-san"}
@@ -16932,6 +16979,8 @@
 {"mal_id":57181,"animeschedule_id":"ao-no-hako"}
 {"mal_id":57183,"animeschedule_id":"wu-dong-qian-kun-4"}
 {"mal_id":57184,"animeschedule_id":"great-pretender-razbliuto"}
+{"mal_id":57185,"animeschedule_id":"heart-cocktail-colorful-haru-hen"}
+{"mal_id":57186,"animeschedule_id":"heart-cocktail-colorful-natsu-hen"}
 {"mal_id":57189,"animeschedule_id":"debu-to-love-to-ayamachi-to"}
 {"mal_id":57192,"animeschedule_id":"yeosingangnim"}
 {"mal_id":57193,"animeschedule_id":"mori-no-chiisana-restaurant"}
@@ -16941,6 +16990,7 @@
 {"mal_id":57202,"animeschedule_id":"boku-wa-jinkou-eisei"}
 {"mal_id":57203,"animeschedule_id":"dare-mo-inai-umi"}
 {"mal_id":57204,"animeschedule_id":"yuki-wa-non-non-kumakko-tachi-no-komori-uta"}
+{"mal_id":57205,"animeschedule_id":"mijime-na-kiseki"}
 {"mal_id":57214,"animeschedule_id":"haru-no-kaze"}
 {"mal_id":57215,"animeschedule_id":"chikyuu-wo-nana-kai-han-maware"}
 {"mal_id":57216,"animeschedule_id":"buta-thunder"}
@@ -16991,12 +17041,15 @@
 {"mal_id":57405,"animeschedule_id":"tooi-koi-no-monogatari"}
 {"mal_id":57406,"animeschedule_id":"oira-kabuki-no-nurarinhyon"}
 {"mal_id":57417,"animeschedule_id":"dayu"}
+{"mal_id":57418,"animeschedule_id":"jiangtun-feng-shi-wu"}
 {"mal_id":57422,"animeschedule_id":"cong-hong-yue-kaishi"}
 {"mal_id":57428,"animeschedule_id":"yuuhi-ga-ochite"}
 {"mal_id":57429,"animeschedule_id":"yukiusagi"}
 {"mal_id":57430,"animeschedule_id":"kimi-no-hoppe"}
 {"mal_id":57433,"animeschedule_id":"seishun-buta-yarou-daigakusei-hen"}
 {"mal_id":57435,"animeschedule_id":"street-fighter-6-spy-family-code-white"}
+{"mal_id":57436,"animeschedule_id":"heart-cocktail-colorful-fuyu-hen"}
+{"mal_id":57440,"animeschedule_id":"zhongguo-jingqi-xiansheng-2023"}
 {"mal_id":57441,"animeschedule_id":"meitantei-conan-vs-kaitou-kid"}
 {"mal_id":57442,"animeschedule_id":"shixiong-a-shixiong-2nd-season"}
 {"mal_id":57448,"animeschedule_id":"fureru"}
@@ -17163,6 +17216,7 @@
 {"mal_id":57881,"animeschedule_id":"sakuretsu-amabie-hime-season3"}
 {"mal_id":57882,"animeschedule_id":"gasonshi-esper-shoujo-to-ninja-no-abiko-monogatari"}
 {"mal_id":57883,"animeschedule_id":"monster-strike-anime-masamune-shimei-no-akaki-yaiba"}
+{"mal_id":57886,"animeschedule_id":"until-i-die"}
 {"mal_id":57888,"animeschedule_id":"chichi-wa-eiyuu-haha-wa-seirei-musume-no-watashi-wa-tenseisha"}
 {"mal_id":57889,"animeschedule_id":"aru-hi-no-gogo"}
 {"mal_id":57890,"animeschedule_id":"yume-juuya"}
@@ -17186,6 +17240,7 @@
 {"mal_id":57950,"animeschedule_id":"enjou-bokumetsu-mahou-shoujo-aiko"}
 {"mal_id":57953,"animeschedule_id":"chikomaru"}
 {"mal_id":57957,"animeschedule_id":"sacrifice"}
+{"mal_id":57960,"animeschedule_id":"balala-xiao-mo-xian-xing-yuan-die-qi-2"}
 {"mal_id":57961,"animeschedule_id":"rakuen-tsuihou-kokoro-no-resonance"}
 {"mal_id":57969,"animeschedule_id":"nukitashi-the-animation"}
 {"mal_id":57971,"animeschedule_id":"ran"}
@@ -17309,6 +17364,7 @@
 {"mal_id":58302,"animeschedule_id":"the-idolmaster-shiny-colors-2nd-season"}
 {"mal_id":58304,"animeschedule_id":"undaraka-udasupon"}
 {"mal_id":58307,"animeschedule_id":"one-piece-kawaisouni-kono-boushi-wo-omae-ni-azukeru"}
+{"mal_id":58308,"animeschedule_id":"hakofugu-to-minamata-no-umi"}
 {"mal_id":58311,"animeschedule_id":"charisma-1-shuukan"}
 {"mal_id":58313,"animeschedule_id":"haru"}
 {"mal_id":58318,"animeschedule_id":"pop-pop-city"}
@@ -17431,6 +17487,7 @@
 {"mal_id":58746,"animeschedule_id":"wan-wan-train-doko-e-iku"}
 {"mal_id":58749,"animeschedule_id":"arknights-enshin-shomei"}
 {"mal_id":58751,"animeschedule_id":"arknights-2024-tebie-jinian-donghua"}
+{"mal_id":58752,"animeschedule_id":"motuoche-de-gushi"}
 {"mal_id":58753,"animeschedule_id":"gotchard-short-anime-gotchanime-furasu-koukou-nanafushigi-wo-gotcha-seyo"}
 {"mal_id":58754,"animeschedule_id":"xiao-bing-chuanqi"}
 {"mal_id":58755,"animeschedule_id":"go-toubun-no-hanayome-star"}
@@ -17445,6 +17502,7 @@
 {"mal_id":58788,"animeschedule_id":"ikoku-nikki"}
 {"mal_id":58789,"animeschedule_id":"iii"}
 {"mal_id":58790,"animeschedule_id":"flatwoods-no-monster-mitai-ni"}
+{"mal_id":58791,"animeschedule_id":"hi-club"}
 {"mal_id":58792,"animeschedule_id":"kawaranai-mono"}
 {"mal_id":58797,"animeschedule_id":"wanmei-shijie-juchang-ban"}
 {"mal_id":58805,"animeschedule_id":"luka-to-taiyou-no-hana"}
@@ -17523,6 +17581,7 @@
 {"mal_id":59053,"animeschedule_id":"yume-wo-nusumu-gang-tachi"}
 {"mal_id":59055,"animeschedule_id":"hana-wa-saku-shura-no-gotoku"}
 {"mal_id":59057,"animeschedule_id":"emerald"}
+{"mal_id":59059,"animeschedule_id":"reverse"}
 {"mal_id":59062,"animeschedule_id":"gachiakuta"}
 {"mal_id":59063,"animeschedule_id":"tianting-banzhuan-xia"}
 {"mal_id":59066,"animeschedule_id":"sanjo-osagari-bushi"}
@@ -17743,6 +17802,7 @@
 {"mal_id":59623,"animeschedule_id":"wondance"}
 {"mal_id":59624,"animeschedule_id":"xi-xing-ji-da-yuan-hun-tebie-pian"}
 {"mal_id":59632,"animeschedule_id":"mattaku-saikin-no-tantei-to-kitara"}
+{"mal_id":59634,"animeschedule_id":"zhanshen-lianmeng"}
 {"mal_id":59636,"animeschedule_id":"uma-musume-cinderella-gray"}
 {"mal_id":59640,"animeschedule_id":"hoshi-x-kara-no-rakko"}
 {"mal_id":59641,"animeschedule_id":"bun-nuketa"}
@@ -17818,6 +17878,7 @@
 {"mal_id":59915,"animeschedule_id":"shendao-dizun"}
 {"mal_id":59916,"animeschedule_id":"da-dao-chao-tian"}
 {"mal_id":59925,"animeschedule_id":"kaguya-hime-1972"}
+{"mal_id":59927,"animeschedule_id":"wan-yu-feng-shen-2"}
 {"mal_id":59928,"animeschedule_id":"ookami-to-koushinryou-merchant-meets-the-wise-wolf-2nd-season"}
 {"mal_id":59930,"animeschedule_id":"kaguya-hime-1942"}
 {"mal_id":59935,"animeschedule_id":"gorilla-no-kami-kara-kago-sareta-reijou-wa-ouritsu-kishidan-de-kawaigarareru"}
@@ -17839,14 +17900,17 @@
 {"mal_id":59983,"animeschedule_id":"tsue-to-tsurugi-no-wistoria-2nd-season"}
 {"mal_id":59985,"animeschedule_id":"boku-no-kokoro-no-yabai-yatsu-movie"}
 {"mal_id":59986,"animeschedule_id":"grand-blue-2nd-season"}
+{"mal_id":59987,"animeschedule_id":"ai-no-shoumi-kigen"}
 {"mal_id":59988,"animeschedule_id":"neppuu"}
 {"mal_id":59996,"animeschedule_id":"donut-hole-2024"}
 {"mal_id":60009,"animeschedule_id":"chuuzenji-sensei-mononoke-kougiroku-sensei-ga-nazo-wo-hodoite-shimau-kara"}
 {"mal_id":60012,"animeschedule_id":"re-zero-kara-hajimeru-break-time-3rd-season"}
 {"mal_id":60018,"animeschedule_id":"slime-boukenki"}
+{"mal_id":60019,"animeschedule_id":"slime-boukenki-wolf-kun-ganbaru-no-maki"}
 {"mal_id":60020,"animeschedule_id":"yeonui-pyeonji"}
 {"mal_id":60021,"animeschedule_id":"good-morning-2024"}
 {"mal_id":60022,"animeschedule_id":"one-piece-fan-letter"}
+{"mal_id":60024,"animeschedule_id":"monotone"}
 {"mal_id":60028,"animeschedule_id":"himekishi-wa-barbaroi-no-yome"}
 {"mal_id":60029,"animeschedule_id":"5-oku-nen-button-part-2"}
 {"mal_id":60032,"animeschedule_id":"fei-ren-zai-2-part-3"}
@@ -17862,6 +17926,7 @@
 {"mal_id":60059,"animeschedule_id":"nige-jouzu-no-wakagimi-2nd-season"}
 {"mal_id":60062,"animeschedule_id":"liella-no-uta-3"}
 {"mal_id":60066,"animeschedule_id":"xian-ji-xun-zong"}
+{"mal_id":60068,"animeschedule_id":"aporia"}
 {"mal_id":60070,"animeschedule_id":"kaijuu-sekai-seifuku-tv"}
 {"mal_id":60071,"animeschedule_id":"odayaka-kizoku-no-kyuuka-no-susume"}
 {"mal_id":60076,"animeschedule_id":"blue-lock-episode-nagi-additional-time"}
@@ -17878,6 +17943,7 @@
 {"mal_id":60128,"animeschedule_id":"compu-movie"}
 {"mal_id":60130,"animeschedule_id":"muchuu-sa-kimi-ni"}
 {"mal_id":60131,"animeschedule_id":"karaoke-iko"}
+{"mal_id":60133,"animeschedule_id":"himitsu-no-moumaku"}
 {"mal_id":60137,"animeschedule_id":"tudi-ge-ge-shi-da-lao"}
 {"mal_id":60139,"animeschedule_id":"neverland"}
 {"mal_id":60140,"animeschedule_id":"kanchigai-no-atelier-meister-eiyuu-party-no-moto-zatsuyougakari-ga-jitsu-wa-sentou-igai-ga-sss-rank-datta-to-iu-yoku-aru-hanashi"}
@@ -17927,6 +17993,7 @@
 {"mal_id":60279,"animeschedule_id":"xian-ni-shenlin-zhi-zhan"}
 {"mal_id":60280,"animeschedule_id":"zenryoku-usagi-2025"}
 {"mal_id":60285,"animeschedule_id":"sakamoto-days-part-2"}
+{"mal_id":60289,"animeschedule_id":"shan-shantian-tianjian"}
 {"mal_id":60293,"animeschedule_id":"ballpark-de-tsukamaete"}
 {"mal_id":60294,"animeschedule_id":"tensui-no-sakuna-hime-zoku-hen"}
 {"mal_id":60295,"animeschedule_id":"nihon-e-youkoso-elf-san-mini-anime"}
@@ -18027,8 +18094,10 @@
 {"mal_id":60564,"animeschedule_id":"ranma-2024-2nd-season"}
 {"mal_id":60565,"animeschedule_id":"junzi-wu-ji"}
 {"mal_id":60567,"animeschedule_id":"chang-ge-xing"}
+{"mal_id":60569,"animeschedule_id":"zhongguo-qitan-2"}
 {"mal_id":60570,"animeschedule_id":"ling-long-2"}
 {"mal_id":60572,"animeschedule_id":"kun-tun-tianxia-zhi-zhang-men-guilai"}
+{"mal_id":60574,"animeschedule_id":"shen-kong-bian"}
 {"mal_id":60575,"animeschedule_id":"gag-mensou"}
 {"mal_id":60577,"animeschedule_id":"tong-ling-fei-2nd-season"}
 {"mal_id":60579,"animeschedule_id":"jian-wang-3-shen-jianxin-de-365-tian"}
@@ -18065,6 +18134,7 @@
 {"mal_id":60662,"animeschedule_id":"neko-ni-naritai-tamagawa-kun"}
 {"mal_id":60665,"animeschedule_id":"futari-solo-camp"}
 {"mal_id":60666,"animeschedule_id":"aldnoah-zero-re"}
+{"mal_id":60670,"animeschedule_id":"stargazer"}
 {"mal_id":60672,"animeschedule_id":"hikkyou"}
 {"mal_id":60674,"animeschedule_id":"9-tsu-no-bouken"}
 {"mal_id":60677,"animeschedule_id":"minimini-minini"}
@@ -18100,9 +18170,11 @@
 {"mal_id":60782,"animeschedule_id":"itsuka-no-watashi-yori"}
 {"mal_id":60787,"animeschedule_id":"xingchen-bian-6"}
 {"mal_id":60790,"animeschedule_id":"one-piece-original-episode-luffy-law"}
+{"mal_id":60794,"animeschedule_id":"wo-xiu-xianjie-de-gongdi"}
 {"mal_id":60797,"animeschedule_id":"douzhan-tianxia"}
 {"mal_id":60805,"animeschedule_id":"amedama"}
 {"mal_id":60810,"animeschedule_id":"majutsushi-kunon-wa-mieteiru"}
+{"mal_id":60816,"animeschedule_id":"vision"}
 {"mal_id":60818,"animeschedule_id":"fengwu-yao-chu"}
 {"mal_id":60821,"animeschedule_id":"shiye-mowang"}
 {"mal_id":60828,"animeschedule_id":"hua-jianghu-buliang-ren-7"}
@@ -18151,6 +18223,7 @@
 {"mal_id":61073,"animeschedule_id":"utahime-dream"}
 {"mal_id":61074,"animeschedule_id":"ikari-no-daichi"}
 {"mal_id":61077,"animeschedule_id":"dragon-heart-reikai-tanbouki"}
+{"mal_id":61080,"animeschedule_id":"hebi"}
 {"mal_id":61084,"animeschedule_id":"hikuidori-ushuu-boro-tobi-gumi"}
 {"mal_id":61087,"animeschedule_id":"kamone"}
 {"mal_id":61090,"animeschedule_id":"zui-qiang-shengji"}
@@ -18182,9 +18255,11 @@
 {"mal_id":61156,"animeschedule_id":"the-idolmaster-million-live-ova"}
 {"mal_id":61159,"animeschedule_id":"toujima-tanzaburou-wa-kamen-rider-ni-naritai"}
 {"mal_id":61160,"animeschedule_id":"imprisoned-xii"}
+{"mal_id":61162,"animeschedule_id":"chinpui-eri-sama-no-good-luck"}
 {"mal_id":61169,"animeschedule_id":"black-torch"}
 {"mal_id":61174,"animeschedule_id":"souzai-saishuka-no-isekai-ryokouki"}
 {"mal_id":61179,"animeschedule_id":"kimetsu-no-yaiba-x-mlb-tokyo-series-presented-by-guggenheim"}
+{"mal_id":61183,"animeschedule_id":"futsuu-no-seikatsu"}
 {"mal_id":61184,"animeschedule_id":"nohara-hiroshi-hiru-meshi-no-ryuugi"}
 {"mal_id":61186,"animeschedule_id":"kamiina-botan-yoeru-sugata-wa-yuri-no-hana"}
 {"mal_id":61192,"animeschedule_id":"all-you-need-is-kill"}
@@ -18269,6 +18344,7 @@
 {"mal_id":61443,"animeschedule_id":"shunkashuutou-daikousha-haru-no-mai"}
 {"mal_id":61456,"animeschedule_id":"the-idolm-ster-million-live-the-backstage"}
 {"mal_id":61461,"animeschedule_id":"tenkaichi"}
+{"mal_id":61462,"animeschedule_id":"pan-no-akachan"}
 {"mal_id":61469,"animeschedule_id":"jojo-no-kimyou-na-bouken-part-7-steel-ball-run"}
 {"mal_id":61483,"animeschedule_id":"tenmaku-no-jaadugar"}
 {"mal_id":61485,"animeschedule_id":"jigu-eui-juin-eun-goyang-ida"}
@@ -18278,6 +18354,7 @@
 {"mal_id":61496,"animeschedule_id":"xiao-xian-zhi-yao"}
 {"mal_id":61501,"animeschedule_id":"kanan-sama-wa-akumade-choroi"}
 {"mal_id":61508,"animeschedule_id":"shen-yin-wangzuo-movie-yi-lai-ke-si-chuanqi"}
+{"mal_id":61512,"animeschedule_id":"365-nichi-no-ashita"}
 {"mal_id":61517,"animeschedule_id":"kingdom-6th-season"}
 {"mal_id":61549,"animeschedule_id":"okiraku-ryoushu-no-tanoshii-ryouchi-bouei-seisankei-majutsu-de-na-mo-naki-mura-wo-saikyou-no-jousai-toshi-ni"}
 {"mal_id":61550,"animeschedule_id":"hitotte-tada-no-tsutsujanai-desu-ka"}
@@ -18286,6 +18363,7 @@
 {"mal_id":61558,"animeschedule_id":"aikatsu-x-pripara-the-movie-deai-no-kiseki"}
 {"mal_id":61559,"animeschedule_id":"seimei-ouka"}
 {"mal_id":61561,"animeschedule_id":"cang-lan-jue-2"}
+{"mal_id":61562,"animeschedule_id":"ze-tian-ji-2026"}
 {"mal_id":61564,"animeschedule_id":"shenguo-zhi-shang"}
 {"mal_id":61565,"animeschedule_id":"aoshi-dan-shen"}
 {"mal_id":61566,"animeschedule_id":"mo-tian-ji"}
@@ -18304,11 +18382,13 @@
 {"mal_id":61618,"animeschedule_id":"wo-wei-dao-zong"}
 {"mal_id":61621,"animeschedule_id":"yun-shen-buzhi-meng"}
 {"mal_id":61622,"animeschedule_id":"yujin-xingzhe"}
+{"mal_id":61629,"animeschedule_id":"monster-2025"}
 {"mal_id":61637,"animeschedule_id":"29-sai-dokushin-chuuken-boukensha-no-nichijou"}
 {"mal_id":61639,"animeschedule_id":"da-tang-chengfeng-lu"}
 {"mal_id":61640,"animeschedule_id":"zi-jin-yu-miao-fang"}
 {"mal_id":61657,"animeschedule_id":"shuangsheng-wu-hun"}
 {"mal_id":61663,"animeschedule_id":"uruwashi-no-yoi-no-tsuki"}
+{"mal_id":61666,"animeschedule_id":"kaseijin"}
 {"mal_id":61671,"animeschedule_id":"charisma-jamboree"}
 {"mal_id":61672,"animeschedule_id":"shinsei-galverse"}
 {"mal_id":61677,"animeschedule_id":"charisma-in-da-house"}
@@ -18324,6 +18404,7 @@
 {"mal_id":61737,"animeschedule_id":"feel-like"}
 {"mal_id":61745,"animeschedule_id":"ai-scream"}
 {"mal_id":61748,"animeschedule_id":"douluo-dalu-jiandao-chen-xin"}
+{"mal_id":61751,"animeschedule_id":"liaozhai-lanre-si"}
 {"mal_id":61752,"animeschedule_id":"xi-xing-ji-da-yuan-hun"}
 {"mal_id":61753,"animeschedule_id":"shixiong-a-shixiong-nian-fan-2"}
 {"mal_id":61754,"animeschedule_id":"s-rank-party-kara-kaiko-sareta-jugushi"}
@@ -18344,10 +18425,13 @@
 {"mal_id":61831,"animeschedule_id":"saikyou-no-ousama-nidome-no-jinsei-wa-nani-wo-suru-2nd-season"}
 {"mal_id":61834,"animeschedule_id":"golden-kamuy-inazuma-goutou-to-mamushi-no-ogin-shimaenaga"}
 {"mal_id":61839,"animeschedule_id":"aishiteru-game-wo-owarasetai"}
+{"mal_id":61840,"animeschedule_id":"yuanshen-chen-jian-xing-lu"}
 {"mal_id":61841,"animeschedule_id":"katachi"}
 {"mal_id":61846,"animeschedule_id":"shuukan-ranobe-anime"}
 {"mal_id":61847,"animeschedule_id":"pyramid-game"}
 {"mal_id":61851,"animeschedule_id":"isekai-quartet-3rd-season"}
+{"mal_id":61873,"animeschedule_id":"guruguru-live"}
+{"mal_id":61877,"animeschedule_id":"bazubi-bazab"}
 {"mal_id":61884,"animeschedule_id":"maou-no-musume-wa-yasashisugiru"}
 {"mal_id":61886,"animeschedule_id":"goumon-baito-kun-no-nichijou"}
 {"mal_id":61891,"animeschedule_id":"onimomomomo"}
@@ -18396,8 +18480,11 @@
 {"mal_id":62038,"animeschedule_id":"ootsuchi-kai-monogatari"}
 {"mal_id":62041,"animeschedule_id":"hihifoo"}
 {"mal_id":62046,"animeschedule_id":"tomica-heroes-jobraver-tokusou-gattai-robo-tv"}
+{"mal_id":62048,"animeschedule_id":"mao"}
 {"mal_id":62050,"animeschedule_id":"kami-no-niwatsuki-kusunoki-tei"}
 {"mal_id":62051,"animeschedule_id":"grow-up-show-himawari-no-circus-dan"}
+{"mal_id":62055,"animeschedule_id":"jiu-cang-miao-wo-season-2-5"}
+{"mal_id":62058,"animeschedule_id":"miao-miao-xiao-juchang"}
 {"mal_id":62063,"animeschedule_id":"tomoshibi"}
 {"mal_id":62066,"animeschedule_id":"monster-strike-deadverse-reloaded"}
 {"mal_id":62067,"animeschedule_id":"golden-kamuy-sapporo-beer-koujou-hen"}
@@ -18421,8 +18508,10 @@
 {"mal_id":62146,"animeschedule_id":"isekai-nonbiri-nouka-2"}
 {"mal_id":62149,"animeschedule_id":"fate-grand-order-fujimaru-ritsuka-wa-wakaranai-season-3"}
 {"mal_id":62155,"animeschedule_id":"iya-na-kao-sare-nagara-opantsu-misete-moraitai-returns"}
+{"mal_id":62157,"animeschedule_id":"gwangjang"}
 {"mal_id":62164,"animeschedule_id":"akane-banashi"}
 {"mal_id":62165,"animeschedule_id":"wan-jian-wangzuo"}
+{"mal_id":62166,"animeschedule_id":"xiangzhe-xingchen-de-changzheng"}
 {"mal_id":62167,"animeschedule_id":"piaomiao-jian-xian-chuan"}
 {"mal_id":62171,"animeschedule_id":"kuroneko-to-majo-no-kyoushitsu"}
 {"mal_id":62188,"animeschedule_id":"kaketa-tsuki-no-mercedes-kyuuketsuki-no-kizoku-ni-tensei-shita-kedo-suteraresou-nanode-dungeon-wo-seiha-suru"}
@@ -18443,6 +18532,7 @@
 {"mal_id":62270,"animeschedule_id":"bang-dream-ave-mujica-prima-aurora"}
 {"mal_id":62277,"animeschedule_id":"gintama-movie-3-yoshiwara-daienjou"}
 {"mal_id":62279,"animeschedule_id":"wangu-jian-di"}
+{"mal_id":62286,"animeschedule_id":"guimi-zhi-zhu-caidan"}
 {"mal_id":62289,"animeschedule_id":"buchigire-reijou-wa-houfuku-wo-chikaimashita-madousho-no-chikara-de-sokoku-wo-tatakitsubushimasu"}
 {"mal_id":62290,"animeschedule_id":"tokyo-great-bears-opening-movie"}
 {"mal_id":62292,"animeschedule_id":"mugen-ni-tomaranai"}
@@ -18451,6 +18541,7 @@
 {"mal_id":62298,"animeschedule_id":"dr-ratio-no-keiji-jougaku-teki-nyuuyoku-riron"}
 {"mal_id":62301,"animeschedule_id":"champagne-night-fever"}
 {"mal_id":62304,"animeschedule_id":"koiboshi-perico"}
+{"mal_id":62320,"animeschedule_id":"musashino-bonus"}
 {"mal_id":62322,"animeschedule_id":"lv999-no-murabito"}
 {"mal_id":62331,"animeschedule_id":"liar-game"}
 {"mal_id":62340,"animeschedule_id":"guangyin-zhi-wai"}
@@ -18503,9 +18594,17 @@
 {"mal_id":62544,"animeschedule_id":"shen-zai-jiong-tu"}
 {"mal_id":62546,"animeschedule_id":"kimetsu-no-yaiba-movie-2-mugenjou-hen"}
 {"mal_id":62547,"animeschedule_id":"kimetsu-no-yaiba-movie-3-mugenjou-hen"}
+{"mal_id":62548,"animeschedule_id":"oshi-ga-buka-ni-narimashita"}
 {"mal_id":62549,"animeschedule_id":"death-stranding-mosquito"}
 {"mal_id":62550,"animeschedule_id":"girls-band-cry-movie"}
+{"mal_id":62556,"animeschedule_id":"koikeya-sdgs-gekijou-suss-to-tina"}
+{"mal_id":62557,"animeschedule_id":"koikeya-sdgs-gekijou-suss-to-tina-season-2"}
+{"mal_id":62558,"animeschedule_id":"koikeya-sdgs-gekijou-suss-to-tina-season-3"}
+{"mal_id":62559,"animeschedule_id":"koikeya-sdgs-gekijou-suss-to-tina-season-4"}
+{"mal_id":62560,"animeschedule_id":"koikeya-sdgs-gekijou-suss-to-tina-season-5"}
+{"mal_id":62561,"animeschedule_id":"koikeya-sdgs-gekijou-suss-to-tina-season-6"}
 {"mal_id":62564,"animeschedule_id":"tate-no-yuusha-no-nariagari-5"}
+{"mal_id":62567,"animeschedule_id":"re-monster-2nd-season"}
 {"mal_id":62568,"animeschedule_id":"dr-stone-science-future-part-3"}
 {"mal_id":62579,"animeschedule_id":"wadachi-wo-koete-yuke"}
 {"mal_id":62580,"animeschedule_id":"shin-samurai-den-yaiba-kaguya-hen"}
@@ -18533,6 +18632,7 @@
 {"mal_id":62658,"animeschedule_id":"inpuru-kun-no-sonzai-shinai-oshigoto"}
 {"mal_id":62659,"animeschedule_id":"wuhun-dalu"}
 {"mal_id":62662,"animeschedule_id":"dokodemo-makibao-world-tour"}
+{"mal_id":62663,"animeschedule_id":"saishinwa"}
 {"mal_id":62674,"animeschedule_id":"kikaijikake-no-marie-mini-anime"}
 {"mal_id":62676,"animeschedule_id":"petitcure-precure-fairies-2nd-season"}
 {"mal_id":62677,"animeschedule_id":"so-bad"}
@@ -18542,6 +18642,7 @@
 {"mal_id":62703,"animeschedule_id":"bai-lian-cheng-shen-3rd-season"}
 {"mal_id":62708,"animeschedule_id":"shanhai-jing-mima"}
 {"mal_id":62728,"animeschedule_id":"jian-lai-2nd-season"}
+{"mal_id":62738,"animeschedule_id":"kaiju-jiu-you-wang-zhe-zhanghao"}
 {"mal_id":62804,"animeschedule_id":"high-school-kimengumi-2026"}
 {"mal_id":62808,"animeschedule_id":"isshiki-san-wa-koi-wo-shiritai"}
 {"mal_id":62810,"animeschedule_id":"kasukana-yuuhi"}
@@ -18582,10 +18683,12 @@
 {"mal_id":62987,"animeschedule_id":"hokuto-no-ken-kenougun-zako-tachi-no-banka"}
 {"mal_id":62989,"animeschedule_id":"kakunaru-ue-wa"}
 {"mal_id":63000,"animeschedule_id":"san-xian-lun-hui"}
+{"mal_id":63006,"animeschedule_id":"long-hun"}
 {"mal_id":63011,"animeschedule_id":"chiikawa-ningyo-no-shima-no-himitsu"}
 {"mal_id":63014,"animeschedule_id":"tadaima-ojamasaremasu"}
 {"mal_id":63016,"animeschedule_id":"girl-crush"}
 {"mal_id":63019,"animeschedule_id":"prism-rondo"}
+{"mal_id":63020,"animeschedule_id":"quanneng-gaoshou"}
 {"mal_id":63021,"animeschedule_id":"akutou-ikka-no-manamusume-tensei-saki-mo-otome-game-no-gokudou-reijou-deshita-saijoukyuu-rank-no-akuyaku-sama-sono-dekiai-wa-fuyou-desu"}
 {"mal_id":63033,"animeschedule_id":"himitsu-no-aipri-movie-mankai-buzzlume-live"}
 {"mal_id":63035,"animeschedule_id":"everyday-host-zoku-hen"}
@@ -18602,6 +18705,7 @@
 {"mal_id":63087,"animeschedule_id":"yami-shibai-16"}
 {"mal_id":63098,"animeschedule_id":"psyren"}
 {"mal_id":63100,"animeschedule_id":"tetsunabe-no-jan"}
+{"mal_id":63101,"animeschedule_id":"hachigatsu-bou-tsukiakari"}
 {"mal_id":63106,"animeschedule_id":"hoppe-chan-sun-oukoku-to-kuro-hoppe-dan-no-himitsu"}
 {"mal_id":63120,"animeschedule_id":"akatsuki-no-yona-zoku-hen"}
 {"mal_id":63121,"animeschedule_id":"taiyou-yori-mo-mabushii-hoshi-2nd-season"}
@@ -18614,6 +18718,7 @@
 {"mal_id":63138,"animeschedule_id":"kaijuu-8-gou-narumi-no-heijitsu"}
 {"mal_id":63139,"animeschedule_id":"sakamoto-days-2nd-season"}
 {"mal_id":63140,"animeschedule_id":"yasei-no-last-boss-ga-arawareta-2nd-season"}
+{"mal_id":63142,"animeschedule_id":"metal-cardbot-w"}
 {"mal_id":63143,"animeschedule_id":"chainsaw-man-shikaku-hen"}
 {"mal_id":63147,"animeschedule_id":"gachiakuta-2nd-season"}
 {"mal_id":63150,"animeschedule_id":"otome-kaijuu-caramelise"}
@@ -18621,26 +18726,53 @@
 {"mal_id":63167,"animeschedule_id":"mahou-no-princess-minky-momo-ova"}
 {"mal_id":63174,"animeschedule_id":"jirai-nan-desu-ka-chihara-san"}
 {"mal_id":63177,"animeschedule_id":"undead-unluck-2nd-season"}
+{"mal_id":63179,"animeschedule_id":"re-member"}
 {"mal_id":63181,"animeschedule_id":"tougen-anki-nikko-kegon-no-taki-hen"}
+{"mal_id":63183,"animeschedule_id":"tomo-ni-kagayaku-ashita-no-tame-ni"}
 {"mal_id":63185,"animeschedule_id":"kingdom-6th-season-zoku-hen"}
 {"mal_id":63188,"animeschedule_id":"ruri-dragon"}
 {"mal_id":63193,"animeschedule_id":"one-punch-man-3-part-2"}
+{"mal_id":63200,"animeschedule_id":"himitsu-kessha-taka-no-tsume-xx"}
 {"mal_id":63212,"animeschedule_id":"kaguya-sama-wa-kokurasetai-kanketsu-hen"}
 {"mal_id":63215,"animeschedule_id":"historie"}
+{"mal_id":63216,"animeschedule_id":"gelpiyo"}
+{"mal_id":63222,"animeschedule_id":"noto-hantou-fukkou-ouen-kikaku"}
+{"mal_id":63245,"animeschedule_id":"shirube"}
 {"mal_id":63253,"animeschedule_id":"the-journey-of-elaina-movie"}
 {"mal_id":63254,"animeschedule_id":"isshun-de-chiryou-shiteita-noni-yakutatazu-to-tsuihou-sareta-tensai-chiyushi-yami-healer-toshite-tanoshiku-ikiru-2nd-season"}
 {"mal_id":63256,"animeschedule_id":"boukensha-license-wo-hakudatsu-sareta-ossan-dakedo-manamusume-ga-dekita-no-de-nonbiri-jinsei-wo-ouka-suru"}
 {"mal_id":63268,"animeschedule_id":"koi-shita-hito-wa-imouto-no-kawari-ni-shindekure-to-itta"}
+{"mal_id":63275,"animeschedule_id":"black-jack-yanen"}
 {"mal_id":63292,"animeschedule_id":"shinja-zero-no-megami-sama-to-hajimeru-isekai-kouryaku"}
 {"mal_id":63293,"animeschedule_id":"hotaru-no-yomeiri"}
 {"mal_id":63295,"animeschedule_id":"starlight-project-itsuka-dareka-ni-todoku"}
 {"mal_id":63304,"animeschedule_id":"mamonogurai-no-boukensha-ore-dake-mamono-wo-kuratte-tsuyoku-naru"}
 {"mal_id":63310,"animeschedule_id":"ingoku-danchi"}
 {"mal_id":63316,"animeschedule_id":"dogul-wang"}
+{"mal_id":63317,"animeschedule_id":"sinbi-apartment-10-junyeon-geugjangpan-han-beon-deo-sohwan"}
+{"mal_id":63319,"animeschedule_id":"ittai-itsukara"}
 {"mal_id":63323,"animeschedule_id":"soukou-kihei-votoms-haiiro-no-hexe"}
 {"mal_id":63324,"animeschedule_id":"iwamoto-senpai-no-suisen"}
 {"mal_id":63326,"animeschedule_id":"medalist-movie"}
 {"mal_id":63347,"animeschedule_id":"world-is-dancing"}
 {"mal_id":63350,"animeschedule_id":"doukyo-shiteiru-kensei-no-onna-shishou-ga-kawaisugite-mainichi-shiawase-desu"}
+{"mal_id":63360,"animeschedule_id":"shishang-zui-qiang-lian-ti-lao-zu"}
 {"mal_id":63366,"animeschedule_id":"kimi-to-hanabi-to-yakusoku-to"}
 {"mal_id":63375,"animeschedule_id":"nippon-sangoku"}
+{"mal_id":63376,"animeschedule_id":"megami-isekai-tensei-nani-ni-naritai-desu-ka-ore-yuusha-no-rokkotsu-de"}
+{"mal_id":63382,"animeschedule_id":"kyouran-reijou-nia-liston-byoujaku-reijou-ni-tensei-shita-kamigoroshi-no-bujin-no-karei-naru-musouroku"}
+{"mal_id":63396,"animeschedule_id":"oneechan-gokko"}
+{"mal_id":63403,"animeschedule_id":"yani-neko"}
+{"mal_id":63409,"animeschedule_id":"doumo-suki-na-hito-ni-horegusuri-wo-irai-sareta-majo-desu"}
+{"mal_id":63418,"animeschedule_id":"thunder-3"}
+{"mal_id":63419,"animeschedule_id":"mairimashita-iruma-kun-if-episode-of-mafia"}
+{"mal_id":63423,"animeschedule_id":"doko-yori-mo-tooi-basho-ni-iru-kimi-e"}
+{"mal_id":63424,"animeschedule_id":"yuukyuu-no-gusha-asley-no-kenja-no-susume"}
+{"mal_id":63431,"animeschedule_id":"tsuihou-sareta-cheat-fuyo-majutsushi-wa-kimama-na-second-life-wo-ouka-suru-ore-wa-buki-dake-ja-naku-arayuru-mono-ni-kyouka-point-wo-fuyo-dekiru-shi-ore-no-ishi-de-itsudemo-kouka-wo-kaijo-dekiru-kedo-nokotta-hitotachi-daijoubu"}
+{"mal_id":63433,"animeschedule_id":"daikenja-riddle-no-jikan-gyakkou"}
+{"mal_id":63442,"animeschedule_id":"is-it-wrong-to-try-to-pick-up-girls-in-a-dungeon-vi"}
+{"mal_id":63468,"animeschedule_id":"ushiro-no-shoumen-kamui-san"}
+{"mal_id":63469,"animeschedule_id":"hyakki-yakoushou"}
+{"mal_id":63472,"animeschedule_id":"namidaame-to-serenade"}
+{"mal_id":63476,"animeschedule_id":"odebu-akujo-ni-tensei-shitara-nazeka-last-boss-oujisama-ni-shuuchaku-sareteimasu"}
+{"mal_id":63489,"animeschedule_id":"sora-wa-akai-kawa-no-hotori"}
