@@ -3885,7 +3885,7 @@
 {"mal_id":4910,"anilist_id":4910,"ann_id":8374,"kitsu_id":3846,"anisearch_id":5740,"animeschedule_id":"pikachu-no-wanpaku-island"}
 {"mal_id":4917,"anilist_id":4917,"ann_id":3321,"kitsu_id":3847,"anisearch_id":4584,"animeschedule_id":"galaxy-investigation-2100-border-planet"}
 {"mal_id":4918,"anilist_id":4918,"ann_id":10583,"kitsu_id":3848,"anisearch_id":5122,"animeschedule_id":"xxxholic-shunmuki"}
-{"mal_id":4921,"anilist_id":4921,"ann_id":7792,"kitsu_id":3849,"anisearch_id":4713,"animeschedule_id":"ramayana-rama-ouji-densetsu"}
+{"mal_id":4921,"anilist_id":4921,"ann_id":7792,"kitsu_id":3849,"hianime_id":"ramayana-the-legend-of-prince-rama-581","anisearch_id":4713,"animeschedule_id":"ramayana-rama-ouji-densetsu"}
 {"mal_id":4923,"anilist_id":4923,"ann_id":509,"kitsu_id":3850,"anisearch_id":2586,"animeschedule_id":"akai-hayate"}
 {"mal_id":4926,"anilist_id":4926,"ann_id":5991,"kitsu_id":3851,"anisearch_id":1475,"animeschedule_id":"marco-haha-wo-tazunete-sanzenri"}
 {"mal_id":4927,"anilist_id":4927,"ann_id":7199,"kitsu_id":3852,"anisearch_id":5623,"animeschedule_id":"tomoe-ga-yuku"}
@@ -5620,7 +5620,7 @@
 {"mal_id":9002,"anilist_id":9002,"kitsu_id":5569,"animeschedule_id":"true-tears-raigomaru-to-jibeta-no-monogatari"}
 {"mal_id":9005,"anilist_id":9005,"ann_id":11661,"kitsu_id":5570,"anisearch_id":6489,"animeschedule_id":"toheart2-adnext"}
 {"mal_id":9006,"anilist_id":9006,"ann_id":11611,"kitsu_id":5571,"anisearch_id":6254}
-{"mal_id":9007,"anilist_id":9007,"ann_id":11577,"kitsu_id":5572,"anisearch_id":6222,"animeschedule_id":"sore-ike-anpanman-black-nose-to-mahou-no-uta"}
+{"mal_id":9007,"anilist_id":9007,"ann_id":11577,"kitsu_id":5572,"hianime_id":"anpanman-blacknose-and-the-magical-song-11728","anisearch_id":6222,"animeschedule_id":"sore-ike-anpanman-black-nose-to-mahou-no-uta"}
 {"mal_id":9008,"anilist_id":9008,"ann_id":11647,"kitsu_id":5573,"anisearch_id":6259}
 {"mal_id":9009,"anilist_id":9009,"ann_id":11610,"kitsu_id":5574,"anisearch_id":6275}
 {"mal_id":9013,"anilist_id":9013,"ann_id":10914,"kitsu_id":5575,"anisearch_id":5449,"animeschedule_id":"kuruneko-season-2"}
@@ -22697,7 +22697,7 @@
 {"mal_id":59837,"ann_id":33541}
 {"mal_id":59840,"anilist_id":172218,"kitsu_id":49561,"anisearch_id":19995}
 {"mal_id":59841,"anilist_id":184694,"kitsu_id":49220,"anisearch_id":19604,"animeschedule_id":"ore-dake-level-up-na-ken-reawakening"}
-{"mal_id":59843,"anilist_id":181440,"anisearch_id":19755,"animeschedule_id":"aldnoah-zero-ame-no-danshou-the-penultimate-truth"}
+{"mal_id":59843,"anilist_id":181440,"hianime_id":"aldnoahzero-ame-no-danshou-the-penultimate-truth-19672","anisearch_id":19755,"animeschedule_id":"aldnoah-zero-ame-no-danshou-the-penultimate-truth"}
 {"mal_id":59845,"anilist_id":181444,"ann_id":33549,"kitsu_id":49205,"hianime_id":"the-fragrant-flower-blooms-with-dignity-19789","anisearch_id":19599,"animeschedule_id":"kaoru-hana-wa-rin-to-saku"}
 {"mal_id":59846,"anilist_id":181447,"ann_id":33552,"hianime_id":"may-i-ask-for-one-final-thing-19927","anisearch_id":19601,"animeschedule_id":"saigo-ni-hitotsu-dake-onegai-shitemo-yoroshii-deshou-ka"}
 {"mal_id":59848,"anilist_id":181449,"ann_id":33553,"anisearch_id":19597,"animeschedule_id":"virgin-punk"}
@@ -22746,7 +22746,7 @@
 {"mal_id":59971,"anilist_id":182206,"kitsu_id":49236,"anisearch_id":19634,"animeschedule_id":"tensei-shitara-slime-datta-ken-movie-2"}
 {"mal_id":59974,"animeschedule_id":"kitto-zutto"}
 {"mal_id":59977,"anilist_id":141917,"animeschedule_id":"hu-x-he-yao-shi-lu"}
-{"mal_id":59978,"anilist_id":182255,"ann_id":33628,"kitsu_id":49240,"anisearch_id":19635,"animeschedule_id":"sousou-no-frieren-2nd-season"}
+{"mal_id":59978,"anilist_id":182255,"ann_id":33628,"kitsu_id":49240,"hianime_id":"frieren-beyond-journeys-end-season-2-20409","anisearch_id":19635,"animeschedule_id":"sousou-no-frieren-2nd-season"}
 {"mal_id":59980,"anilist_id":182333,"anisearch_id":19754,"animeschedule_id":"doraemon-nobita-no-e-sekai-monogatari"}
 {"mal_id":59983,"anilist_id":182300,"ann_id":33629,"kitsu_id":49241,"anisearch_id":19638,"animeschedule_id":"tsue-to-tsurugi-no-wistoria-2nd-season"}
 {"mal_id":59985,"anilist_id":182317,"ann_id":33630,"kitsu_id":49249,"anisearch_id":19636,"animeschedule_id":"boku-no-kokoro-no-yabai-yatsu-movie"}
