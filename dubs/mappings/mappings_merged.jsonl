@@ -4125,7 +4125,7 @@
 {"mal_id":5399,"anilist_id":5399,"ann_id":5781,"kitsu_id":4086}
 {"mal_id":5400,"anilist_id":5400,"ann_id":9339,"kitsu_id":4087,"anisearch_id":2948}
 {"mal_id":5401,"anilist_id":5401,"ann_id":7456,"kitsu_id":4088,"anisearch_id":3661}
-{"mal_id":5402,"anilist_id":5402,"ann_id":7043,"kitsu_id":4089}
+{"mal_id":5402,"anilist_id":5402,"ann_id":7043,"kitsu_id":4089,"anisearch_id":1254}
 {"mal_id":5403,"anilist_id":5403,"ann_id":9959,"kitsu_id":4090,"anisearch_id":5310}
 {"mal_id":5408,"anilist_id":5408,"ann_id":6943,"kitsu_id":4091,"anisearch_id":1169}
 {"mal_id":5411,"anilist_id":5411,"ann_id":4502,"kitsu_id":4092,"anisearch_id":9745}
@@ -6502,7 +6502,7 @@
 {"mal_id":11083,"ann_id":12357,"kitsu_id":6010,"anisearch_id":14305}
 {"mal_id":11087,"anilist_id":11087,"kitsu_id":6455,"animeschedule_id":"awake"}
 {"mal_id":11093,"anilist_id":11093,"ann_id":7342,"kitsu_id":6456,"anisearch_id":9197,"animeschedule_id":"ziggy-soreyuke-randr-band"}
-{"mal_id":11095,"anilist_id":11095,"ann_id":3199,"kitsu_id":6457,"animeschedule_id":"zouressha-ga-yatte-kita"}
+{"mal_id":11095,"anilist_id":11095,"ann_id":3199,"kitsu_id":6457,"anisearch_id":1124,"animeschedule_id":"zouressha-ga-yatte-kita"}
 {"mal_id":11097,"anilist_id":11097,"ann_id":13357,"kitsu_id":6458,"anisearch_id":3786,"animeschedule_id":"zou-no-inai-doubutsuen"}
 {"mal_id":11099,"anilist_id":11099,"kitsu_id":6459,"hianime_id":"tiger-bunny-pilot-7238","animeschedule_id":"tiger-and-bunny-pilot"}
 {"mal_id":11101,"anilist_id":11101,"kitsu_id":6460,"animeschedule_id":"honoo-no-alpen-rose"}
@@ -23778,7 +23778,7 @@
 {"mal_id":62685,"anilist_id":205372}
 {"mal_id":62686,"anilist_id":198511}
 {"mal_id":62689,"anilist_id":200228,"anisearch_id":21056}
-{"mal_id":62690,"anilist_id":206857}
+{"mal_id":62690,"anilist_id":206857,"anisearch_id":21261}
 {"mal_id":62696,"anilist_id":200294,"ann_id":37912,"animeschedule_id":"choujun-choujou-senpai"}
 {"mal_id":62702,"anilist_id":205374}
 {"mal_id":62703,"anilist_id":195877,"animeschedule_id":"bai-lian-cheng-shen-3rd-season"}
