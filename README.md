@@ -54,15 +54,28 @@ If you have an authoritative source to add, please open an issue/PR.
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 135 |
 | Hebrew | עברית | 122 |
+| Hi-In | Hi-In | 106 |
 | Dutch | Nederlands | 105 |
 | Thai | ไทย | 91 |
 | Russian | Русский | 78 |
 | Indonesian | Bahasa Indonesia | 67 |
 | Danish | Dansk | 63 |
+| Ta-In | Ta-In | 57 |
+| Te-In | Te-In | 55 |
+| Spanish Spain | Spanish Spain | 42 |
+| Zh-Cn | Zh-Cn | 30 |
 | Finnish | Suomi | 16 |
 | Turkish | Türkçe | 10 |
+| En-In | En-In | 4 |
 | Catalan | Català | 3 |
+| Ko-Kr | Ko-Kr | 3 |
+| Th-Th | Th-Th | 3 |
+| Ca-Es | Ca-Es | 2 |
+| Id-Id | Id-Id | 2 |
+| Pl-Pl | Pl-Pl | 1 |
+| Pt-Pt | Pt-Pt | 1 |
 | Vietnamese | Tiếng Việt | 1 |
+| Zh-Tw | Zh-Tw | 1 |
 | Lithuanian | Lietuvių | 0 |
 <!-- LANG-STATS:END -->
 

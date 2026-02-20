@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import argparse
 import json
 import os
@@ -46,10 +45,13 @@ MERGED_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_merged.jsonl")
 HIANIME_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_hianime.jsonl")
 ANISEARCH_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_anisearch.jsonl")
 ANIMESCHEDULE_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_animeschedule.jsonl")
+CRUNCHYROLL_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_crunchyroll.jsonl")
 
 MISSING_CACHE_PATH = "cache/missing_mal_ids.json"
 # Used to detect end-of-range for MAL scanning
-LARGEST_KNOWN_MAL_FILE = os.path.join(SOURCES_DIR, "automatic_mal", "dubbed_japanese.json")
+LARGEST_KNOWN_MAL_FILE = os.path.join(
+    SOURCES_DIR, "automatic_mal", "dubbed_japanese.json"
+)
 
 # ======================
 
@@ -89,7 +91,9 @@ kitsu_last_call = 0.0
 kitsu_auth_header = None
 
 missing_mal_ids = set()
-largest_known_mal_id = 0  # determined from dubs/sources/automatic_mal/dubbed_japanese.json
+largest_known_mal_id = (
+    0  # determined from dubs/sources/automatic_mal/dubbed_japanese.json
+)
 
 # Per-API mappings accumulated this run
 anilist_mapping: dict[int, int] = {}
@@ -98,6 +102,7 @@ kitsu_mapping: dict[int, int] = {}
 hianime_mapping: dict[int, str] = {}
 anisearch_mapping: dict[int, int] = {}
 animeschedule_mapping: dict[int, str] = {}
+crunchyroll_mapping: dict[int, str] = {}
 
 
 def log(message: str):
@@ -109,6 +114,7 @@ def log(message: str):
 # FS helpers
 # ----------------------
 
+
 def _ensure_dir_for(path: str):
     d = os.path.dirname(path)
     if d and not os.path.exists(d):
@@ -118,6 +124,7 @@ def _ensure_dir_for(path: str):
 # ----------------------
 # Language normalization
 # ----------------------
+
 
 def sanitize_lang(lang: str) -> str:
     if not lang:
@@ -156,6 +163,7 @@ def filename_for_lang(lang_key: str) -> str:
 
 
 # ANN code/name → our normalized keys
+
 
 def ann_lang_to_key(raw: str) -> str:
     if not raw:
@@ -225,6 +233,7 @@ def ann_lang_to_key(raw: str) -> str:
 # Missing MAL IDs cache helpers
 # ----------------------
 
+
 def load_missing_cache() -> set[int]:
     """Load cached anime 404 MAL IDs from disk."""
     if not os.path.exists(MISSING_CACHE_PATH):
@@ -234,7 +243,11 @@ def load_missing_cache() -> set[int]:
             data = json.load(f)
         # accept either {"missing":[...]} or a bare list for robustness
         ids = data.get("missing", data if isinstance(data, list) else [])
-        out = set(int(x) for x in ids if isinstance(x, int) or (isinstance(x, str) and x.isdigit()))
+        out = set(
+            int(x)
+            for x in ids
+            if isinstance(x, int) or (isinstance(x, str) and x.isdigit())
+        )
         log(f"[cache] Loaded {len(out)} missing MAL IDs from {MISSING_CACHE_PATH}")
         return out
     except Exception as e:
@@ -249,7 +262,9 @@ def save_missing_cache():
         payload = {"missing": sorted(missing_mal_ids)}
         with open(MISSING_CACHE_PATH, "w", encoding="utf-8") as f:
             json.dump(payload, f, ensure_ascii=False, indent=2)
-        log(f"[cache] Saved {len(missing_mal_ids)} missing MAL IDs to {MISSING_CACHE_PATH}")
+        log(
+            f"[cache] Saved {len(missing_mal_ids)} missing MAL IDs to {MISSING_CACHE_PATH}"
+        )
     except Exception as e:
         print(f"[cache] Failed to save {MISSING_CACHE_PATH}: {e}")
 
@@ -281,6 +296,7 @@ def get_largest_known_mal_id() -> int:
 # Mapping JSONL helpers
 # ----------------------
 
+
 def load_simple_jsonl_map(path: str, value_key: str) -> dict[int, object]:
     if not os.path.exists(path):
         return {}
@@ -307,14 +323,18 @@ def load_simple_jsonl_map(path: str, value_key: str) -> dict[int, object]:
                     # else: leave non-numeric strings untouched
                 except Exception:
                     pass
-                if isinstance(mid, int) and (isinstance(val, int) or isinstance(val, str)):
+                if isinstance(mid, int) and (
+                    isinstance(val, int) or isinstance(val, str)
+                ):
                     result[mid] = val
     except Exception as e:
         print(f"[map] Failed to load {path}: {e}")
     return result
 
 
-def save_simple_jsonl_map(path: str, mapping: dict[int, int | str | None], value_key: str):
+def save_simple_jsonl_map(
+    path: str, mapping: dict[int, int | str | None], value_key: str
+):
     _ensure_dir_for(path)
     try:
         existing = load_simple_jsonl_map(path, value_key)
@@ -335,7 +355,9 @@ def save_simple_jsonl_map(path: str, mapping: dict[int, int | str | None], value
             for mid in sorted(existing.keys(), key=int):
                 val = existing[mid]
                 rec = {"mal_id": int(mid), value_key: val}
-                f.write(json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n")
+                f.write(
+                    json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n"
+                )
         log(f"[map] Wrote {len(existing)} lines to {path}")
     except Exception as e:
         print(f"[map] Failed to save {path}: {e}")
@@ -348,7 +370,9 @@ def save_simple_jsonl_map_overwrite(path: str, mapping: dict[int, int], value_ke
         with open(path, "w", encoding="utf-8") as f:
             for mid in sorted(mapping.keys(), key=int):
                 rec = {"mal_id": int(mid), value_key: int(mapping[mid])}
-                f.write(json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n")
+                f.write(
+                    json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n"
+                )
         log(f"[map] Overwrote {path} with {len(mapping)} mappings")
     except Exception as e:
         print(f"[map] Failed to overwrite {path}: {e}")
@@ -393,7 +417,10 @@ def save_jsonl_map(path: str, mapping: dict[int, dict]):
             for mid in sorted(mapping.keys(), key=int):
                 rec = mapping[mid] if isinstance(mapping[mid], dict) else {}
                 out_line = {"mal_id": int(mid), **rec}
-                f.write(json.dumps(out_line, ensure_ascii=False, separators=(",", ":")) + "\n")
+                f.write(
+                    json.dumps(out_line, ensure_ascii=False, separators=(",", ":"))
+                    + "\n"
+                )
         log(f"[jsonl] Wrote {len(mapping)} lines to {path}")
     except Exception as e:
         print(f"[jsonl] Failed to save JSONL '{path}': {e}")
@@ -433,13 +460,20 @@ def merge_all_mappings():
     for mid, asid in asched_map.items():
         master.setdefault(mid, {})["animeschedule_id"] = asid
 
+    # Crunchyroll
+    cr_map = load_simple_jsonl_map(CRUNCHYROLL_MAPPING_JSONL, "crunchyroll_title")
+    for mid, title in cr_map.items():
+        master.setdefault(mid, {})["crunchyroll_title"] = title
+
     # Write merged
     _ensure_dir_for(MERGED_MAPPING_JSONL)
     try:
         with open(MERGED_MAPPING_JSONL, "w", encoding="utf-8") as f:
             for mid in sorted(master.keys(), key=int):
                 line = {"mal_id": int(mid), **master[mid]}
-                f.write(json.dumps(line, ensure_ascii=False, separators=(",", ":")) + "\n")
+                f.write(
+                    json.dumps(line, ensure_ascii=False, separators=(",", ":")) + "\n"
+                )
         log(f"[merge] Wrote merged mappings: {len(master)} to {MERGED_MAPPING_JSONL}")
     except Exception as e:
         print(f"[merge] Failed to write merged mappings: {e}")
@@ -449,16 +483,24 @@ def merge_all_mappings():
 # MAL + Jikan helpers
 # ----------------------
 
+
 class TransientJikanError(Exception):
     pass
+
 
 @lru_cache(maxsize=MAX_IN_MEMORY_CACHE)
 def get_anime_roles_for_va_cached(person_id):
     data = jikan_get(f"/people/{person_id}/voices")
     if data is None:
         return None
-    if not isinstance(data, dict) or "data" not in data or not isinstance(data["data"], list):
-        raise TransientJikanError(f"Malformed VA payload for person {person_id}")  # don't cache
+    if (
+        not isinstance(data, dict)
+        or "data" not in data
+        or not isinstance(data["data"], list)
+    ):
+        raise TransientJikanError(
+            f"Malformed VA payload for person {person_id}"
+        )  # don't cache
     return data
 
 
@@ -485,9 +527,13 @@ def mal_get(url, client_id):
             if resp.status_code == 429:
                 ra = resp.headers.get("Retry-After")
                 try:
-                    delay = int(ra) if ra is not None else RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                    delay = (
+                        int(ra)
+                        if ra is not None
+                        else RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)]
+                    )
                 except Exception:
-                    delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                    delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)]
                 print(f"  MAL 429. Retrying in {delay} seconds...", flush=True)
                 time.sleep(delay)
                 continue
@@ -505,7 +551,9 @@ def mal_get(url, client_id):
             print(f"  Attempt {attempt + 1} failed: {e}", flush=True)
             if attempt < CALL_RETRIES - 1:
                 delay = RETRY_DELAYS[attempt]
-                print(f"  MAL API call failed. Retrying in {delay} seconds...", flush=True)
+                print(
+                    f"  MAL API call failed. Retrying in {delay} seconds...", flush=True
+                )
                 time.sleep(delay)
 
     print(f"  All {CALL_RETRIES} attempts failed for {url}", flush=True)
@@ -532,10 +580,17 @@ def jikan_get(url):
             if resp.status_code == 429:
                 ra = resp.headers.get("Retry-After")
                 try:
-                    delay = int(ra) if ra is not None else RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                    delay = (
+                        int(ra)
+                        if ra is not None
+                        else RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)]
+                    )
                 except Exception:
-                    delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
-                print(f"    429 Too Many Requests. Retrying in {delay} seconds...", flush=True)
+                    delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)]
+                print(
+                    f"    429 Too Many Requests. Retrying in {delay} seconds...",
+                    flush=True,
+                )
                 time.sleep(delay)
                 continue
 
@@ -552,7 +607,10 @@ def jikan_get(url):
             print(f"    Attempt {attempt + 1} failed: {e}", flush=True)
             if attempt < CALL_RETRIES - 1:
                 delay = RETRY_DELAYS[attempt]
-                print(f"    Jikan API call failed. Retrying in {delay} seconds...", flush=True)
+                print(
+                    f"    Jikan API call failed. Retrying in {delay} seconds...",
+                    flush=True,
+                )
                 time.sleep(delay)
 
     print(f"    All {CALL_RETRIES} attempts failed for {url}", flush=True)
@@ -580,7 +638,7 @@ def process_anime_mal(mal_id: int, client_id: str) -> bool | None:
     characters = get_characters(mal_id, client_id)
 
     # If the MAL characters call 404'd, short-circuit as a permanent miss
-    if 'last_mal_404' in globals() and last_mal_404:
+    if "last_mal_404" in globals() and last_mal_404:
         return True  # was_404
 
     # If we got a valid response but no characters, treat as processed (not transient)
@@ -599,7 +657,11 @@ def process_anime_mal(mal_id: int, client_id: str) -> bool | None:
         return None
 
     # Treat missing/invalid VA payload as transient to avoid false negatives
-    if voice_actors is None or "data" not in voice_actors or not isinstance(voice_actors["data"], list):
+    if (
+        voice_actors is None
+        or "data" not in voice_actors
+        or not isinstance(voice_actors["data"], list)
+    ):
         return None
 
     had_transient = False
@@ -615,7 +677,9 @@ def process_anime_mal(mal_id: int, client_id: str) -> bool | None:
         if not person_id:
             continue
 
-        log(f"  Processing voice actor: {person.get('name', 'Unknown')} ({raw_lang} -> {lang_key})")
+        log(
+            f"  Processing voice actor: {person.get('name', 'Unknown')} ({raw_lang} -> {lang_key})"
+        )
 
         # Look up this VA's anime roles (cached), but DO NOT cache malformed/empty results
         try:
@@ -629,7 +693,11 @@ def process_anime_mal(mal_id: int, client_id: str) -> bool | None:
             had_transient = True
             continue
 
-        if not va_roles or "data" not in va_roles or not isinstance(va_roles["data"], list):
+        if (
+            not va_roles
+            or "data" not in va_roles
+            or not isinstance(va_roles["data"], list)
+        ):
             # Either 404 (None) or empty list: nothing to add; not transient here
             continue
 
@@ -684,7 +752,11 @@ def anilist_post(query, variables):
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
     for attempt in range(CALL_RETRIES):
         try:
-            r = requests.post(ANILIST_BASE, json={"query": query, "variables": variables}, headers=headers)
+            r = requests.post(
+                ANILIST_BASE,
+                json={"query": query, "variables": variables},
+                headers=headers,
+            )
             if r.status_code >= 400:
                 print(f"  AniList HTTP {r.status_code}: {r.text[:500]}")
                 r.raise_for_status()
@@ -775,7 +847,9 @@ def process_anilist_page(page: int) -> tuple[bool, int, set[int]]:
         if not langs:
             page_without_langs += 1
             if debug_log:
-                log(f"  MAL {mal_id}: {va_count} VAs across {len(edges)} chars, langs=[]")
+                log(
+                    f"  MAL {mal_id}: {va_count} VAs across {len(edges)} chars, langs=[]"
+                )
         else:
             page_with_langs += 1
             if debug_log:
@@ -807,6 +881,7 @@ def process_anilist_page(page: int) -> tuple[bool, int, set[int]]:
 # Finalize (dubbed_* sources + mappings) with safe removals for checked IDs
 # ----------------------
 
+
 def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     """
     Write/merge dubbed lists under dubs/sources/automatic_<api>/.
@@ -817,7 +892,9 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     os.makedirs(output_dir, exist_ok=True)
 
     # Build per-language found sets from this run
-    found_per_lang: dict[str, set[int]] = {k: {int(x) for x in v} for k, v in json_data.items()}
+    found_per_lang: dict[str, set[int]] = {
+        k: {int(x) for x in v} for k, v in json_data.items()
+    }
 
     # Collect all languages to consider (existing files + new keys)
     languages: set[str] = set(found_per_lang.keys())
@@ -825,7 +902,7 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
         for fname in os.listdir(output_dir):
             if not fname.startswith("dubbed_") or not fname.endswith(".json"):
                 continue
-            lang_key = fname[len("dubbed_"):-len(".json")].replace("_", " ")
+            lang_key = fname[len("dubbed_") : -len(".json")].replace("_", " ")
             languages.add(lang_key)
     except FileNotFoundError:
         pass
@@ -854,7 +931,9 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
         updated_ids = (existing_ids - removal_candidates) | found_ids
 
         if removal_candidates and debug_log:
-            log(f"  [{api_mode}] {lang_key}: removing {len(removal_candidates)} ids; keeping {len(updated_ids)}")
+            log(
+                f"  [{api_mode}] {lang_key}: removing {len(removal_candidates)} ids; keeping {len(updated_ids)}"
+            )
 
         # Write file
         obj = {
@@ -877,8 +956,10 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     if api_mode == "hianime" and hianime_mapping:
         save_simple_jsonl_map(HIANIME_MAPPING_JSONL, hianime_mapping, "hianime_id")
     if api_mode == "animeschedule" and animeschedule_mapping:
-        save_simple_jsonl_map(ANIMESCHEDULE_MAPPING_JSONL, animeschedule_mapping, "animeschedule_id")
-                              
+        save_simple_jsonl_map(
+            ANIMESCHEDULE_MAPPING_JSONL, animeschedule_mapping, "animeschedule_id"
+        )
+
     # Always refresh merged mappings after a finalize
     merge_all_mappings()
 
@@ -893,13 +974,17 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
     # Remove obsolete files
     existing = []
     try:
-        existing = [fn for fn in os.listdir(output_dir) if fn.startswith("dubbed_") and fn.endswith(".json")]
+        existing = [
+            fn
+            for fn in os.listdir(output_dir)
+            if fn.startswith("dubbed_") and fn.endswith(".json")
+        ]
     except FileNotFoundError:
         pass
 
     new_langs = set(per_lang_ids.keys())
     for fn in existing:
-        lang_key = fn[len("dubbed_"):-len(".json")].replace("_", " ")
+        lang_key = fn[len("dubbed_") : -len(".json")].replace("_", " ")
         if lang_key not in new_langs:
             try:
                 os.remove(os.path.join(output_dir, fn))
@@ -911,7 +996,9 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
     for lang_key in sorted(new_langs):
         fname_lang = filename_for_lang(lang_key)
         filename = os.path.join(output_dir, f"dubbed_{fname_lang}.json")
-        ids_sorted = sorted((int(x) for x in per_lang_ids.get(lang_key, set())), key=int)
+        ids_sorted = sorted(
+            (int(x) for x in per_lang_ids.get(lang_key, set())), key=int
+        )
         obj = {
             "_license": "CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/",
             "_attribution": "MyDubList - https://mydublist.com - (CC BY 4.0)",
@@ -926,6 +1013,7 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
 # ----------------------
 # ANN helpers
 # ----------------------
+
 
 def ann_get(url):
     """Throttled GET for ANN (XML)."""
@@ -974,6 +1062,7 @@ def extract_ann_id_from_url(url: str) -> int | None:
         return None
     return None
 
+
 def extract_mal_id_from_string(val: object) -> int | None:
     if val is None:
         return None
@@ -1013,6 +1102,7 @@ def extract_mal_id_from_string(val: object) -> int | None:
         return None
 
     return None
+
 
 def jikan_ann_id_for_mal(mal_id: int) -> int | None:
     """Use Jikan external links to find ANN id for a MAL anime id."""
@@ -1106,13 +1196,15 @@ def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]) -> set[int
 # HiAnime helpers
 # ----------------------
 
+
 def _slug_from_url(url: str) -> str:
     try:
         parsed = urlparse(url)
-        parts = [seg for seg in parsed.path.split('/') if seg]
+        parts = [seg for seg in parsed.path.split("/") if seg]
         return parts[-1] if parts else ""
     except Exception:
         return ""
+
 
 def build_hianime_slug_to_mal_map(source_file: str) -> dict[str, int]:
     if not source_file or not os.path.exists(source_file):
@@ -1157,8 +1249,11 @@ def build_hianime_slug_to_mal_map(source_file: str) -> dict[str, int]:
             if slug:
                 slug_to_mal[slug] = mal_id
 
-    log(f"[HiAnime] Built slug→MAL map for {len(slug_to_mal)} entries from source file.")
+    log(
+        f"[HiAnime] Built slug→MAL map for {len(slug_to_mal)} entries from source file."
+    )
     return slug_to_mal
+
 
 def hianime_get_page(api_host: str, page: int) -> dict | None:
     """
@@ -1195,6 +1290,7 @@ def hianime_get_page(api_host: str, page: int) -> dict | None:
 # ----------------------
 # Kitsu helpers
 # ----------------------
+
 
 def kitsu_login(email: str, password: str) -> str | None:
     payload = {
@@ -1236,7 +1332,7 @@ def kitsu_get(url: str) -> dict | None:
                 log(f"[Kitsu] {resp.status_code} for {url} (skipping)")
                 return None
             if resp.status_code == 429:
-                delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)]
                 print(f"  Kitsu 429. Retrying in {delay} seconds...", flush=True)
                 time.sleep(delay)
                 continue
@@ -1255,15 +1351,19 @@ def kitsu_get(url: str) -> dict | None:
 
 def kitsu_find_kitsu_id_by_mal(mal_id: int) -> int | None:
     """Use /mappings to find the Kitsu anime id by MAL id."""
-    url = (f"{KITSU_BASE}/mappings?"
-           f"filter[externalSite]=myanimelist/anime&filter[externalId]={int(mal_id)}&include=item")
+    url = (
+        f"{KITSU_BASE}/mappings?"
+        f"filter[externalSite]=myanimelist/anime&filter[externalId]={int(mal_id)}&include=item"
+    )
     data = kitsu_get(url)
     if not data or "data" not in data:
         return None
     incl = {x.get("id"): x for x in data.get("included", []) if isinstance(x, dict)}
     for m in data.get("data") or []:
         attrs = m.get("attributes") or {}
-        if attrs.get("externalSite") == "myanimelist/anime" and str(attrs.get("externalId")) == str(mal_id):
+        if attrs.get("externalSite") == "myanimelist/anime" and str(
+            attrs.get("externalId")
+        ) == str(mal_id):
             rel = m.get("relationships", {}).get("item", {}).get("data") or {}
             kid = rel.get("id")
             try:
@@ -1298,11 +1398,15 @@ def kitsu_list_languages(kitsu_anime_id: int) -> set[str]:
                 langs.add(key)
     return langs
 
+
 # ----------------------
 # aniSearch helpers
 # ----------------------
 
-def load_anisearch_source(source_file: str) -> tuple[dict[str, set[int]], dict[int, int]]:
+
+def load_anisearch_source(
+    source_file: str,
+) -> tuple[dict[str, set[int]], dict[int, int]]:
     """Load a JSON mapping of MAL → { 'anisearch-id': str/int, 'dubbed': ["en", ...] }.
     Returns (per_language_ids, anisearch_mapping).
     """
@@ -1367,6 +1471,7 @@ def load_anisearch_source(source_file: str) -> tuple[dict[str, set[int]], dict[i
 # AnimeSchedule helpers
 # ----------------------
 
+
 def animeschedule_get_page(token: str, page: int) -> dict | None:
     global animeschedule_last_call
 
@@ -1415,7 +1520,10 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                 if delay is None:
                     delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)]
 
-                print(f"  AnimeSchedule 429. Retrying in {int(delay)} seconds...", flush=True)
+                print(
+                    f"  AnimeSchedule 429. Retrying in {int(delay)} seconds...",
+                    flush=True,
+                )
                 time.sleep(delay)
                 continue
 
@@ -1432,7 +1540,9 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                 limit_val = None
 
             try:
-                remaining_val = int(remaining_header) if remaining_header is not None else None
+                remaining_val = (
+                    int(remaining_header) if remaining_header is not None else None
+                )
             except Exception:
                 remaining_val = None
 
@@ -1451,9 +1561,11 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                 delay = reset_ts - time.time() + 0.1  # small safety margin
                 if delay > 0:
                     if debug_log:
-                        log(f"[AnimeSchedule] Rate limit nearly exhausted "
+                        log(
+                            f"[AnimeSchedule] Rate limit nearly exhausted "
                             f"(limit={limit_val}, remaining={remaining_val}). "
-                            f"Sleeping {delay:.1f}s until reset.")
+                            f"Sleeping {delay:.1f}s until reset."
+                        )
                     time.sleep(delay)
 
             data = resp.json()
@@ -1463,13 +1575,22 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
 
         except Exception as e:
             last_exception = e
-            print(f"  AnimeSchedule attempt {attempt + 1} failed for page {page}: {e}", flush=True)
+            print(
+                f"  AnimeSchedule attempt {attempt + 1} failed for page {page}: {e}",
+                flush=True,
+            )
             if attempt < CALL_RETRIES - 1:
                 delay = RETRY_DELAYS[attempt]
-                print(f"  AnimeSchedule call failed. Retrying in {delay} seconds...", flush=True)
+                print(
+                    f"  AnimeSchedule call failed. Retrying in {delay} seconds...",
+                    flush=True,
+                )
                 time.sleep(delay)
 
-    print(f"  All {CALL_RETRIES} AnimeSchedule attempts failed for page {page}", flush=True)
+    print(
+        f"  All {CALL_RETRIES} AnimeSchedule attempts failed for page {page}",
+        flush=True,
+    )
     if last_exception:
         raise last_exception
     return None
@@ -1478,6 +1599,7 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
 # ----------------------
 # Runners
 # ----------------------
+
 
 def run_ann(mal_start: int, mal_end: int):
     existing_map = load_simple_jsonl_map(ANN_MAPPING_JSONL, "ann_id")
@@ -1491,7 +1613,9 @@ def run_ann(mal_start: int, mal_end: int):
             try:
                 found = jikan_ann_id_for_mal(mal_id)
             except Exception as e:
-                log(f"[ANN] Transient Jikan failure for MAL {mal_id}: {e} (keeping existing mapping, skipping)")
+                log(
+                    f"[ANN] Transient Jikan failure for MAL {mal_id}: {e} (keeping existing mapping, skipping)"
+                )
                 continue
 
             if found is not None:
@@ -1510,13 +1634,17 @@ def run_ann(mal_start: int, mal_end: int):
             else:
                 # Successful Jikan call but no ANN link => mapping removal
                 if mal_id in existing_map:
-                    log(f"[ANN] Mapping removed for MAL {mal_id} (was {existing_map[mal_id]}), will delete")
+                    log(
+                        f"[ANN] Mapping removed for MAL {mal_id} (was {existing_map[mal_id]}), will delete"
+                    )
                 ann_mapping[int(mal_id)] = None
                 checked_ok_ids.add(int(mal_id))
 
             if len(pending) >= ANN_BATCH_SIZE:
                 if debug_log:
-                    log(f"ANN batch {processed // ANN_BATCH_SIZE + 1}: ids={pending[:3]}... (+{len(pending)-3} more)")
+                    log(
+                        f"ANN batch {processed // ANN_BATCH_SIZE + 1}: ids={pending[:3]}... (+{len(pending) - 3} more)"
+                    )
                 newly_checked = process_ann_batch(pending, ann_to_mal)
                 checked_ok_ids.update(newly_checked)
                 processed += len(pending)
@@ -1535,6 +1663,7 @@ def run_ann(mal_start: int, mal_end: int):
     except Exception as e:
         print(f"\nUnexpected error (ANN): {e}")
         import traceback
+
         traceback.print_exc()
     finally:
         finalize_jsons("ann", checked_ok_ids)
@@ -1558,7 +1687,11 @@ def run_mal(client_id: str, start_id: int, end_id: int):
         for idx, mal_id in enumerate(range(start_id, end_id + 1), 1):
             # If we've previously cached that this ID 404s (and it's <= largest known),
             # skip calling the API. Do NOT mark as checked this run.
-            if largest_known_mal_id and mal_id <= largest_known_mal_id and mal_id in missing_mal_ids:
+            if (
+                largest_known_mal_id
+                and mal_id <= largest_known_mal_id
+                and mal_id in missing_mal_ids
+            ):
                 if debug_log:
                     log(f"  Skipping MAL ID {mal_id} (cached 404)")
                 was_404 = True
@@ -1586,8 +1719,10 @@ def run_mal(client_id: str, start_id: int, end_id: int):
                 if debug_log:
                     log(f"  Consecutive MAL 404s: {consecutive_404}")
                 if consecutive_404 >= MAX_CONSECUTIVE_404:
-                    print(f"[MAL] Hit {MAX_CONSECUTIVE_404} consecutive 404s at MAL ID {mal_id}. "
-                          f"Assuming end-of-range and stopping early.")
+                    print(
+                        f"[MAL] Hit {MAX_CONSECUTIVE_404} consecutive 404s at MAL ID {mal_id}. "
+                        f"Assuming end-of-range and stopping early."
+                    )
                     break
             else:
                 consecutive_404 = 0
@@ -1602,6 +1737,7 @@ def run_mal(client_id: str, start_id: int, end_id: int):
     except Exception as e:
         print(f"\nUnexpected error: {e}")
         import traceback
+
         traceback.print_exc()
     finally:
         finalize_jsons("mal", checked_ok_ids)
@@ -1637,19 +1773,26 @@ def run_anilist(start_page: int | None, end_page: int | None):
     except Exception as e:
         print(f"\nUnexpected error (AniList): {e}")
         import traceback
+
         traceback.print_exc()
     finally:
         finalize_jsons("anilist", checked_ok_ids)
         print(f"Done (AniList). Processed ~{total_processed} media items.")
 
-    log(f"AniList totals: pages={anilist_stats['pages']}, media={anilist_stats['media_total']}, "
+    log(
+        f"AniList totals: pages={anilist_stats['pages']}, media={anilist_stats['media_total']}, "
         f"with_mal={anilist_stats['media_with_mal']}, no_mal={anilist_stats['media_without_mal']}, "
-        f"with_langs={anilist_stats['media_with_langs']}, no_langs={anilist_stats['media_without_langs']}")
+        f"with_langs={anilist_stats['media_with_langs']}, no_langs={anilist_stats['media_without_langs']}"
+    )
 
 
-def run_hianime(api_host: str, start_page: int | None, end_page: int | None, source_file: str | None):
+def run_hianime(
+    api_host: str, start_page: int | None, end_page: int | None, source_file: str | None
+):
     if not source_file:
-        print("For --api hianime you must provide --source-file pointing to a JSON/JSONL mapping file.")
+        print(
+            "For --api hianime you must provide --source-file pointing to a JSON/JSONL mapping file."
+        )
         sys.exit(1)
 
     slug_to_mal = build_hianime_slug_to_mal_map(source_file)
@@ -1673,7 +1816,6 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
             for item in animes:
                 hi_id = item.get("id")
                 eps = item.get("episodes") or {}
-                sub_count = int(eps.get("sub", 0) or 0)
                 dub_count = int(eps.get("dub", 0) or 0)
 
                 if not hi_id:
@@ -1700,7 +1842,6 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
                 break
 
             page += 1
-            now = time.time()
             to_wait = HIANIME_MIN_INTERVAL - (time.time() - hianime_last_call)
             if to_wait > 0:
                 time.sleep(to_wait)
@@ -1710,6 +1851,7 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
     except Exception as e:
         print(f"\nUnexpected error (HiAnime): {e}")
         import traceback
+
         traceback.print_exc()
     finally:
         finalize_jsons("hianime", checked_ok_ids)
@@ -1776,12 +1918,61 @@ def run_kitsu(mal_start: int, mal_end: int):
     except Exception as e:
         print(f"\nUnexpected error (Kitsu): {e}")
         import traceback
+
         traceback.print_exc()
     finally:
         finalize_jsons("kitsu", checked_ok_ids)
-        log(f"[Kitsu] Summary: processed={processed}, with_langs={with_langs}, "
-            f"without_langs={without_langs}, missing_map={missing_map}")
+        log(
+            f"[Kitsu] Summary: processed={processed}, with_langs={with_langs}, "
+            f"without_langs={without_langs}, missing_map={missing_map}"
+        )
         print("Done (Kitsu).")
+
+
+def run_crunchyroll(source_file: str):
+    """
+    Processes the JSON output from the Crunchyroll scraper.
+    Expected format: list of objects with "mal_id", "title", "audio" (list of languages).
+    """
+    if not source_file or not os.path.exists(source_file):
+        print(f"[Crunchyroll] Source file not found: {source_file}")
+        sys.exit(1)
+
+    try:
+        with open(source_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"[Crunchyroll] Failed to parse source file '{source_file}': {e}")
+        return
+
+    per_lang: dict[str, set[int]] = defaultdict(set)
+    mapping: dict[int, str] = {}
+
+    for entry in data:
+        mal_id = entry.get("mal_id")
+        if not mal_id:
+            continue
+
+        try:
+            mid_int = int(mal_id)
+        except:
+            continue
+
+        mapping[mid_int] = entry.get("title", f"MAL {mid_int}")
+
+        langs = entry.get("audio", [])
+        for lang in langs:
+            key = sanitize_lang(lang)
+            if key:
+                per_lang[key].add(mid_int)
+
+    write_dubbed_files_overwrite("crunchyroll", per_lang)
+    save_simple_jsonl_map(CRUNCHYROLL_MAPPING_JSONL, mapping, "crunchyroll_title")
+    merge_all_mappings()
+    total_ids = len({i for s in per_lang.values() for i in s})
+    print(
+        f"Done (Crunchyroll). Languages={len(per_lang)} unique MAL IDs={total_ids} mappings={len(mapping)}."
+    )
 
 
 def run_anisearch(source_file: str):
@@ -1800,12 +1991,16 @@ def run_anisearch(source_file: str):
     merge_all_mappings()
 
     total_ids = len({i for s in per_lang.values() for i in s})
-    print(f"Done (aniSearch). Languages={len(per_lang)} unique MAL IDs={total_ids} mappings={len(mapping)}.")
+    print(
+        f"Done (aniSearch). Languages={len(per_lang)} unique MAL IDs={total_ids} mappings={len(mapping)}."
+    )
 
 
 def run_animeschedule(token: str, start_page: int | None, end_page: int | None):
     if not token:
-        print("For --api animeschedule you must provide --token with your AnimeSchedule application or OAuth token.")
+        print(
+            "For --api animeschedule you must provide --token with your AnimeSchedule application or OAuth token."
+        )
         sys.exit(1)
 
     page = start_page or 1
@@ -1912,6 +2107,7 @@ def run_animeschedule(token: str, start_page: int | None, end_page: int | None):
     except Exception as e:
         print(f"\nUnexpected error (AnimeSchedule): {e}")
         import traceback
+
         traceback.print_exc()
     finally:
         finalize_jsons("animeschedule", checked_ok_ids)
@@ -1922,6 +2118,7 @@ def run_animeschedule(token: str, start_page: int | None, end_page: int | None):
 # Main
 # ----------------------
 
+
 def main():
     global debug_log, kitsu_auth_header
 
@@ -1931,33 +2128,71 @@ def main():
             "(only for IDs checked this run). Also writes per-API mappings and a merged mapping JSONL."
         )
     )
-    parser.add_argument("--api", choices=["mal", "anilist", "ann", "hianime", "kitsu", "anisearch", "animeschedule"], default="mal", help="Which source to use.")
-    parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
+    parser.add_argument(
+        "--api",
+        choices=[
+            "mal",
+            "anilist",
+            "ann",
+            "hianime",
+            "crunchyroll",
+            "kitsu",
+            "anisearch",
+            "animeschedule",
+        ],
+        default="mal",
+        help="Which source to use.",
+    )
+    parser.add_argument(
+        "--debug", default="false", help="Enable verbose logging (true/false)."
+    )
 
     # MAL-specific
-    parser.add_argument("--client-id", help="MyAnimeList API Client ID (required for --api mal).")
+    parser.add_argument(
+        "--client-id", help="MyAnimeList API Client ID (required for --api mal)."
+    )
 
-    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann/kitsu.")
-    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann/kitsu.")
+    parser.add_argument(
+        "--mal-start",
+        type=int,
+        help="Start MAL ID (inclusive) for --api mal/ann/kitsu.",
+    )
+    parser.add_argument(
+        "--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann/kitsu."
+    )
 
     # Generic paging
-    parser.add_argument("--start-page", type=int, help="Start page number (1-based) for AniList/HiAnime.")
-    parser.add_argument("--end-page", type=int, help="End page number (inclusive) for AniList/HiAnime.")
+    parser.add_argument(
+        "--start-page",
+        type=int,
+        help="Start page number (1-based) for AniList/HiAnime.",
+    )
+    parser.add_argument(
+        "--end-page", type=int, help="End page number (inclusive) for AniList/HiAnime."
+    )
 
     # AniList-specific
-    parser.add_argument("--anilist-check-pages", default="false",
-                        help="AniList: if true, prints total pages (perPage=50) and exits.")
+    parser.add_argument(
+        "--anilist-check-pages",
+        default="false",
+        help="AniList: if true, prints total pages (perPage=50) and exits.",
+    )
 
     # API host
-    parser.add_argument("--api-host", default="http://localhost:6969",
-                        help="Base host for the aniwatch API (e.g., http://localhost:6969).")
+    parser.add_argument(
+        "--api-host",
+        default="http://localhost:6969",
+        help="Base host for the aniwatch API (e.g., http://localhost:6969).",
+    )
     # Source file
     parser.add_argument("--source-file", help="Path to a JSON/JSONL mapping file.")
 
     # Authentication
     parser.add_argument("--email", help="Account email for OAuth (optional).")
     parser.add_argument("--password", help="Account password for OAuth (optional).")
-    parser.add_argument("--token", help="Bearer token (optional, overrides email/password).")
+    parser.add_argument(
+        "--token", help="Bearer token (optional, overrides email/password)."
+    )
 
     args = parser.parse_args()
     debug_log = str(args.debug).lower() == "true"
@@ -1981,7 +2216,9 @@ def main():
 
     if args.api == "mal":
         if not args.client_id or args.mal_start is None or args.mal_end is None:
-            print("For --api mal you must provide --client-id, --mal-start, and --mal-end.")
+            print(
+                "For --api mal you must provide --client-id, --mal-start, and --mal-end."
+            )
             sys.exit(1)
         run_mal(args.client_id, args.mal_start, args.mal_end)
 
@@ -2005,9 +2242,14 @@ def main():
     elif args.api == "hianime":
         run_hianime(args.api_host, args.start_page, args.end_page, args.source_file)
 
+    elif args.api == "crunchyroll":
+        run_crunchyroll(args.source_file)
+
     elif args.api == "anisearch":
         if not args.source_file:
-            print("For --api anisearch you must provide --source-file pointing to the aniSearch JSON file.")
+            print(
+                "For --api anisearch you must provide --source-file pointing to the aniSearch JSON file."
+            )
             sys.exit(1)
         run_anisearch(args.source_file)
 
@@ -2016,16 +2258,19 @@ def main():
             print("For --api kitsu you must provide --mal-start and --mal-end.")
             sys.exit(1)
         run_kitsu(args.mal_start, args.mal_end)
-    
+
     elif args.api == "animeschedule":
         if not args.token:
-            print("For --api animeschedule you must provide --token with your AnimeSchedule application or OAuth token.")
+            print(
+                "For --api animeschedule you must provide --token with your AnimeSchedule application or OAuth token."
+            )
             sys.exit(1)
         run_animeschedule(args.token, args.start_page, args.end_page)
 
     else:
         print(f"Unknown API: {args.api}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

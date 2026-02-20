@@ -1,6 +1,4 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 import os
 import json
 import re
@@ -11,30 +9,30 @@ from typing import Dict, Set
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Input roots
-DUBS_SOURCES_DIR            = os.path.join(ROOT, "dubs", "sources")
-MANUAL_DIR                  = os.path.join(DUBS_SOURCES_DIR, "manual")
-AUTOMATIC_MAL_DIR           = os.path.join(DUBS_SOURCES_DIR, "automatic_mal")
-AUTOMATIC_ANILIST_DIR       = os.path.join(DUBS_SOURCES_DIR, "automatic_anilist")
-AUTOMATIC_ANN_DIR           = os.path.join(DUBS_SOURCES_DIR, "automatic_ann")
-AUTOMATIC_ANISEARCH_DIR     = os.path.join(DUBS_SOURCES_DIR, "automatic_anisearch")
-AUTOMATIC_KITSU_DIR         = os.path.join(DUBS_SOURCES_DIR, "automatic_kitsu")
-AUTOMATIC_HIANIME_DIR       = os.path.join(DUBS_SOURCES_DIR, "automatic_hianime")
-AUTOMATIC_NSFW_DIR          = os.path.join(DUBS_SOURCES_DIR, "automatic_nsfw")
-AUTOMATIC_KENNY_DIR         = os.path.join(DUBS_SOURCES_DIR, "automatic_kenny")
+DUBS_SOURCES_DIR = os.path.join(ROOT, "dubs", "sources")
+MANUAL_DIR = os.path.join(DUBS_SOURCES_DIR, "manual")
+AUTOMATIC_MAL_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_mal")
+AUTOMATIC_ANILIST_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_anilist")
+AUTOMATIC_ANN_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_ann")
+AUTOMATIC_ANISEARCH_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_anisearch")
+AUTOMATIC_KITSU_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_kitsu")
+AUTOMATIC_HIANIME_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_hianime")
+AUTOMATIC_NSFW_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_nsfw")
+AUTOMATIC_KENNY_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_kenny")
 AUTOMATIC_ANIMESCHEDULE_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_animeschedule")
 
 # Output roots
-CONFIDENCE_DIR         = os.path.join(ROOT, "dubs", "confidence")
-CONFIDENCE_LEVELS      = {
+CONFIDENCE_DIR = os.path.join(ROOT, "dubs", "confidence")
+CONFIDENCE_LEVELS = {
     "low": 1,
     "normal": 2,
     "high": 3,
     "very-high": 4,
 }
-COUNTS_DIR             = os.path.join(ROOT, "dubs", "counts")
+COUNTS_DIR = os.path.join(ROOT, "dubs", "counts")
 
-README_DIR             = os.path.join(ROOT, "README.md")
-DUBS_LOW_DIR           = os.path.join(ROOT, "dubs", "confidence", "low")
+README_DIR = os.path.join(ROOT, "README.md")
+DUBS_LOW_DIR = os.path.join(ROOT, "dubs", "confidence", "low")
 
 # Optional native names (fallback to Title Case English if missing)
 NATIVE_NAMES = {
@@ -70,9 +68,11 @@ NATIVE_NAMES = {
 
 DEBUG = False
 
+
 def log(msg: str):
     if DEBUG:
         print(msg)
+
 
 def load_json(path: str):
     if os.path.exists(path):
@@ -84,16 +84,19 @@ def load_json(path: str):
                 return {}
     return {}
 
+
 def save_json(path: str, data):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+
 def infer_language_from_filename(filename: str) -> str:
     name = os.path.splitext(filename)[0]
     if name.startswith("dubbed_"):
-        return name[len("dubbed_"):]
+        return name[len("dubbed_") :]
     return name
+
 
 def int_set(iterable) -> Set[int]:
     s: Set[int] = set()
@@ -104,6 +107,7 @@ def int_set(iterable) -> Set[int]:
             continue
     return s
 
+
 def list_language_files(*dirs: str) -> Set[str]:
     files: Set[str] = set()
     for d in dirs:
@@ -113,6 +117,7 @@ def list_language_files(*dirs: str) -> Set[str]:
             if fname.startswith("dubbed_") and fname.endswith(".json"):
                 files.add(fname)
     return files
+
 
 def build_language_index():
     index = []
@@ -127,24 +132,27 @@ def build_language_index():
         english_name = key.replace("_", " ").title()
         native_name = NATIVE_NAMES.get(key, english_name)
         dubbed_count = len(data.get("dubbed", []) or [])
-        index.append({
-            "key": key,
-            "english_name": english_name,
-            "native_name": native_name,
-            "dubbed_count": dubbed_count,
-        })
+        index.append(
+            {
+                "key": key,
+                "english_name": english_name,
+                "native_name": native_name,
+                "dubbed_count": dubbed_count,
+            }
+        )
     index.sort(key=lambda x: x["dubbed_count"], reverse=True)
     return index
+
 
 def render_lang_table(index):
     header = "| Language | Native name | Dubbed |\n|---|---:|---:|"
     lines = [header]
     for row in index:
         lines.append(
-            f'| {row["english_name"]} | {row["native_name"]} | '
-            f'{row["dubbed_count"]} |'
+            f"| {row['english_name']} | {row['native_name']} | {row['dubbed_count']} |"
         )
     return "\n".join(lines)
+
 
 def update_readme_language_stats():
     index = build_language_index()
@@ -177,47 +185,51 @@ def update_readme_language_stats():
     print("README language stats already up to date.")
     return False
 
+
 def load_language_sources(filename: str):
     """Load per-language sets from manual and each automatic source."""
-    manual_path             = os.path.join(MANUAL_DIR, filename)
-    auto_mal_path           = os.path.join(AUTOMATIC_MAL_DIR, filename)
-    auto_anilist_path       = os.path.join(AUTOMATIC_ANILIST_DIR, filename)
-    auto_ann_path           = os.path.join(AUTOMATIC_ANN_DIR, filename)
-    auto_anisearch_path     = os.path.join(AUTOMATIC_ANISEARCH_DIR, filename)
-    auto_kitsu_path         = os.path.join(AUTOMATIC_KITSU_DIR, filename)
-    auto_hianime_path       = os.path.join(AUTOMATIC_HIANIME_DIR, filename)
-    auto_nsfw_path          = os.path.join(AUTOMATIC_NSFW_DIR, filename)
-    auto_kenny_path         = os.path.join(AUTOMATIC_KENNY_DIR, filename)
+    manual_path = os.path.join(MANUAL_DIR, filename)
+    auto_mal_path = os.path.join(AUTOMATIC_MAL_DIR, filename)
+    auto_anilist_path = os.path.join(AUTOMATIC_ANILIST_DIR, filename)
+    auto_ann_path = os.path.join(AUTOMATIC_ANN_DIR, filename)
+    auto_anisearch_path = os.path.join(AUTOMATIC_ANISEARCH_DIR, filename)
+    auto_kitsu_path = os.path.join(AUTOMATIC_KITSU_DIR, filename)
+    auto_hianime_path = os.path.join(AUTOMATIC_HIANIME_DIR, filename)
+    auto_nsfw_path = os.path.join(AUTOMATIC_NSFW_DIR, filename)
+    auto_kenny_path = os.path.join(AUTOMATIC_KENNY_DIR, filename)
     auto_animeschedule_path = os.path.join(AUTOMATIC_ANIMESCHEDULE_DIR, filename)
 
-    manual             = load_json(manual_path)
-    auto_mal           = load_json(auto_mal_path)
-    auto_anilist       = load_json(auto_anilist_path)
-    auto_ann           = load_json(auto_ann_path)
-    auto_anisearch     = load_json(auto_anisearch_path)
-    auto_kitsu         = load_json(auto_kitsu_path)
-    auto_hianime       = load_json(auto_hianime_path)
-    auto_nsfw          = load_json(auto_nsfw_path)
-    auto_kenny         = load_json(auto_kenny_path)
+    manual = load_json(manual_path)
+    auto_mal = load_json(auto_mal_path)
+    auto_anilist = load_json(auto_anilist_path)
+    auto_ann = load_json(auto_ann_path)
+    auto_anisearch = load_json(auto_anisearch_path)
+    auto_kitsu = load_json(auto_kitsu_path)
+    auto_hianime = load_json(auto_hianime_path)
+    auto_nsfw = load_json(auto_nsfw_path)
+    auto_kenny = load_json(auto_kenny_path)
     auto_animeschedule = load_json(auto_animeschedule_path)
 
     # Manual lists
-    manual_dubbed     = int_set(manual.get("dubbed"))
+    manual_dubbed = int_set(manual.get("dubbed"))
     manual_not_dubbed = int_set(manual.get("not_dubbed"))
-    manual_partial    = int_set(manual.get("partial"))
+    manual_partial = int_set(manual.get("partial"))
 
     # Automatic lists
-    auto_mal_dubbed           = int_set(auto_mal.get("dubbed"))
-    auto_anilist_dubbed       = int_set(auto_anilist.get("dubbed"))
-    auto_ann_dubbed           = int_set(auto_ann.get("dubbed"))
-    auto_anisearch_dubbed     = int_set(auto_anisearch.get("dubbed"))
-    auto_kitsu_dubbed         = int_set(auto_kitsu.get("dubbed"))
-    auto_hianime_dubbed       = int_set(auto_hianime.get("dubbed"))
-    auto_nsfw_dubbed          = int_set(auto_nsfw.get("dubbed"))
-    auto_kenny_dubbed         = int_set(auto_kenny.get("dubbed"))
+    auto_mal_dubbed = int_set(auto_mal.get("dubbed"))
+    auto_anilist_dubbed = int_set(auto_anilist.get("dubbed"))
+    auto_ann_dubbed = int_set(auto_ann.get("dubbed"))
+    auto_anisearch_dubbed = int_set(auto_anisearch.get("dubbed"))
+    auto_kitsu_dubbed = int_set(auto_kitsu.get("dubbed"))
+    auto_hianime_dubbed = int_set(auto_hianime.get("dubbed"))
+    auto_nsfw_dubbed = int_set(auto_nsfw.get("dubbed"))
+    auto_kenny_dubbed = int_set(auto_kenny.get("dubbed"))
     auto_animeschedule_dubbed = int_set(auto_animeschedule.get("dubbed"))
 
-    language_value = manual.get("language") or infer_language_from_filename(filename).replace("_", " ").title()
+    language_value = (
+        manual.get("language")
+        or infer_language_from_filename(filename).replace("_", " ").title()
+    )
 
     return {
         "manual_dubbed": manual_dubbed,
@@ -237,6 +249,7 @@ def load_language_sources(filename: str):
         "language_value": language_value,
     }
 
+
 def compute_counts(sources: Dict[str, Set[int]]) -> Dict[int, int]:
     """Count in how many sources each MAL id appears."""
     counts: Dict[int, int] = {}
@@ -245,14 +258,15 @@ def compute_counts(sources: Dict[str, Set[int]]) -> Dict[int, int]:
             counts[mid] = counts.get(mid, 0) + 1
     return counts
 
+
 def build_confidence_outputs(filename: str):
     info = load_language_sources(filename)
 
-    manual_dubbed     = info["manual_dubbed"]
+    manual_dubbed = info["manual_dubbed"]
     manual_not_dubbed = info["manual_not_dubbed"]
-    manual_partial    = info["manual_partial"]
-    auto_sources      = info["auto_sources"]
-    language_value    = info["language_value"]
+    manual_partial = info["manual_partial"]
+    auto_sources = info["auto_sources"]
+    language_value = info["language_value"]
 
     sources_for_counts = dict(auto_sources)
     sources_for_counts["manual"] = manual_dubbed
@@ -287,7 +301,10 @@ def build_confidence_outputs(filename: str):
         }
 
         save_json(os.path.join(CONFIDENCE_DIR, level, filename), result)
-        log(f"[{filename}] level={level} → dubbed={len(result['dubbed'])}, partial={len(result['partial'])}")
+        log(
+            f"[{filename}] level={level} → dubbed={len(result['dubbed'])}, partial={len(result['partial'])}"
+        )
+
 
 def main():
     # Discover languages across manual and all automatic sources
@@ -318,6 +335,7 @@ def main():
 
     update_readme_language_stats()
     print("Done. Updated dub counts and confidences.")
+
 
 if __name__ == "__main__":
     main()
