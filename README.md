@@ -38,26 +38,26 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5330 |
-| Spanish | Español | 3023 |
-| German | Deutsch | 2966 |
-| French | Français | 2441 |
-| Italian | Italiano | 2334 |
-| Portuguese | Português | 1745 |
+| English | English | 5345 |
+| Spanish | Español | 3028 |
+| German | Deutsch | 2967 |
+| French | Français | 2444 |
+| Italian | Italiano | 2337 |
+| Portuguese | Português | 1750 |
 | Korean | 한국어 | 1391 |
 | Chinese | 中文 | 934 |
 | Tagalog | Tagalog | 814 |
-| Arabic | العربية | 316 |
+| Arabic | العربية | 325 |
 | Polish | Polski | 279 |
 | Hindi | हिन्दी | 233 |
 | Hungarian | Magyar | 195 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 135 |
 | Hebrew | עברית | 122 |
+| Russian | Русский | 116 |
 | Hi-In | Hi-In | 106 |
 | Dutch | Nederlands | 105 |
 | Thai | ไทย | 91 |
-| Russian | Русский | 78 |
 | Indonesian | Bahasa Indonesia | 67 |
 | Danish | Dansk | 63 |
 | Ta-In | Ta-In | 57 |

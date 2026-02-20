@@ -20,6 +20,7 @@ AUTOMATIC_HIANIME_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_hianime")
 AUTOMATIC_NSFW_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_nsfw")
 AUTOMATIC_KENNY_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_kenny")
 AUTOMATIC_ANIMESCHEDULE_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_animeschedule")
+AUTOMATIC_CRUNCHYROLL_DIR = os.path.join(DUBS_SOURCES_DIR, "automatic_crunchyroll")
 
 # Output roots
 CONFIDENCE_DIR = os.path.join(ROOT, "dubs", "confidence")
@@ -198,6 +199,7 @@ def load_language_sources(filename: str):
     auto_nsfw_path = os.path.join(AUTOMATIC_NSFW_DIR, filename)
     auto_kenny_path = os.path.join(AUTOMATIC_KENNY_DIR, filename)
     auto_animeschedule_path = os.path.join(AUTOMATIC_ANIMESCHEDULE_DIR, filename)
+    auto_crunchyroll_path = os.path.join(AUTOMATIC_CRUNCHYROLL_DIR, filename)
 
     manual = load_json(manual_path)
     auto_mal = load_json(auto_mal_path)
@@ -209,6 +211,7 @@ def load_language_sources(filename: str):
     auto_nsfw = load_json(auto_nsfw_path)
     auto_kenny = load_json(auto_kenny_path)
     auto_animeschedule = load_json(auto_animeschedule_path)
+    auto_crunchyroll = load_json(auto_crunchyroll_path)
 
     # Manual lists
     manual_dubbed = int_set(manual.get("dubbed"))
@@ -225,6 +228,7 @@ def load_language_sources(filename: str):
     auto_nsfw_dubbed = int_set(auto_nsfw.get("dubbed"))
     auto_kenny_dubbed = int_set(auto_kenny.get("dubbed"))
     auto_animeschedule_dubbed = int_set(auto_animeschedule.get("dubbed"))
+    auto_crunchyroll_dubbed = int_set(auto_crunchyroll.get("dubbed"))
 
     language_value = (
         manual.get("language")
@@ -245,6 +249,7 @@ def load_language_sources(filename: str):
             "nsfw": auto_nsfw_dubbed,
             "kenny": auto_kenny_dubbed,
             "animeschedule": auto_animeschedule_dubbed,
+            "crunchyroll": auto_crunchyroll_dubbed,
         },
         "language_value": language_value,
     }
@@ -319,6 +324,7 @@ def main():
         AUTOMATIC_NSFW_DIR,
         AUTOMATIC_KENNY_DIR,
         AUTOMATIC_ANIMESCHEDULE_DIR,
+        AUTOMATIC_CRUNCHYROLL_DIR,
     )
 
     if not all_lang_files:
