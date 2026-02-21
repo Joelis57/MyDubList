@@ -22035,6 +22035,7 @@
 {"mal_id":58178,"anilist_id":143542,"animeschedule_id":"krasue"}
 {"mal_id":58179,"anilist_id":153769,"animeschedule_id":"tokimeki-ni-shinda-koibito-yo"}
 {"mal_id":58180,"anilist_id":175068,"kitsu_id":48561,"animeschedule_id":"soliloquy"}
+{"mal_id":58181,"anilist_id":208054}
 {"mal_id":58182,"anilist_id":153771,"animeschedule_id":"brunetto-sensei-koko-ni-oide-deshita-ka"}
 {"mal_id":58183,"anilist_id":153770,"animeschedule_id":"yuuyake"}
 {"mal_id":58184,"anilist_id":154038,"animeschedule_id":"kasabuta"}
@@ -23766,7 +23767,7 @@
 {"mal_id":62653,"anisearch_id":20980}
 {"mal_id":62654,"anilist_id":199603,"animeschedule_id":"princess-catch-tiniping"}
 {"mal_id":62658,"anilist_id":200375,"ann_id":37740,"animeschedule_id":"inpuru-kun-no-sonzai-shinai-oshigoto"}
-{"mal_id":62659,"animeschedule_id":"wuhun-dalu"}
+{"mal_id":62659,"anilist_id":199417,"animeschedule_id":"wuhun-dalu"}
 {"mal_id":62662,"anilist_id":199931,"ann_id":37907,"animeschedule_id":"dokodemo-makibao-world-tour"}
 {"mal_id":62663,"anilist_id":204732,"animeschedule_id":"saishinwa"}
 {"mal_id":62674,"anilist_id":200374,"animeschedule_id":"kikaijikake-no-marie-mini-anime"}
@@ -23973,11 +23974,13 @@
 {"mal_id":63409,"anilist_id":207191,"animeschedule_id":"doumo-suki-na-hito-ni-horegusuri-wo-irai-sareta-majo-desu"}
 {"mal_id":63411,"anilist_id":206889}
 {"mal_id":63413,"anilist_id":207037}
+{"mal_id":63415,"anilist_id":208065}
 {"mal_id":63416,"anilist_id":155331}
 {"mal_id":63418,"anisearch_id":21226,"animeschedule_id":"thunder-3"}
 {"mal_id":63419,"anilist_id":207251,"anisearch_id":21222,"animeschedule_id":"mairimashita-iruma-kun-if-episode-of-mafia"}
 {"mal_id":63423,"anilist_id":207327,"animeschedule_id":"doko-yori-mo-tooi-basho-ni-iru-kimi-e"}
 {"mal_id":63424,"animeschedule_id":"yuukyuu-no-gusha-asley-no-kenja-no-susume"}
+{"mal_id":63427,"anilist_id":208064}
 {"mal_id":63428,"anilist_id":207363}
 {"mal_id":63431,"anilist_id":207329,"animeschedule_id":"tsuihou-sareta-cheat-fuyo-majutsushi-wa-kimama-na-second-life-wo-ouka-suru-ore-wa-buki-dake-ja-naku-arayuru-mono-ni-kyouka-point-wo-fuyo-dekiru-shi-ore-no-ishi-de-itsudemo-kouka-wo-kaijo-dekiru-kedo-nokotta-hitotachi-daijoubu"}
 {"mal_id":63433,"animeschedule_id":"daikenja-riddle-no-jikan-gyakkou"}
@@ -23992,3 +23995,5 @@
 {"mal_id":63493,"anilist_id":207853,"anisearch_id":21267}
 {"mal_id":63500,"anilist_id":186751}
 {"mal_id":63504,"anilist_id":203127}
+{"mal_id":63508,"anilist_id":208044}
+{"mal_id":63509,"anilist_id":208025}
