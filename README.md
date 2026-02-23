@@ -43,7 +43,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | German | Deutsch | 2966 |
 | French | Français | 2442 |
 | Italian | Italiano | 2335 |
-| Portuguese | Português | 1746 |
+| Portuguese | Português | 1747 |
 | Korean | 한국어 | 1392 |
 | Chinese | 中文 | 950 |
 | Tagalog | Tagalog | 814 |
@@ -57,7 +57,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Dutch | Nederlands | 105 |
 | Thai | ไทย | 91 |
 | Russian | Русский | 78 |
-| Indonesian | Bahasa Indonesia | 67 |
+| Indonesian | Bahasa Indonesia | 68 |
 | Danish | Dansk | 63 |
 | Finnish | Suomi | 16 |
 | Turkish | Türkçe | 10 |
