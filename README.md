@@ -55,7 +55,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Norwegian | Norsk | 135 |
 | Hebrew | עברית | 122 |
 | Dutch | Nederlands | 105 |
-| Thai | ไทย | 91 |
+| Thai | ไทย | 93 |
 | Russian | Русский | 78 |
 | Indonesian | Bahasa Indonesia | 68 |
 | Danish | Dansk | 63 |
