@@ -39,10 +39,10 @@ If you have an authoritative source to add, please open an issue/PR.
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | English | English | 5339 |
-| Spanish | Español | 3025 |
-| German | Deutsch | 2970 |
-| French | Français | 2443 |
-| Italian | Italiano | 2336 |
+| Spanish | Español | 3026 |
+| German | Deutsch | 2973 |
+| French | Français | 2444 |
+| Italian | Italiano | 2337 |
 | Portuguese | Português | 1747 |
 | Korean | 한국어 | 1393 |
 | Chinese | 中文 | 967 |
