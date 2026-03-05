@@ -4370,7 +4370,7 @@
 {"mal_id":5908,"anilist_id":5908,"ann_id":1259,"kitsu_id":4331,"anisearch_id":3639,"animeschedule_id":"chinpui"}
 {"mal_id":5909,"anilist_id":5909,"ann_id":10587,"kitsu_id":4332,"anisearch_id":5242,"animeschedule_id":"seitokai-no-ichizon"}
 {"mal_id":5914,"anilist_id":5914,"ann_id":10644,"kitsu_id":4333,"anisearch_id":5360,"animeschedule_id":"kanamemo"}
-{"mal_id":5916,"anilist_id":5916,"ann_id":8756,"kitsu_id":4334,"animeschedule_id":"donguri-no-ie"}
+{"mal_id":5916,"anilist_id":5916,"ann_id":8756,"kitsu_id":4334,"anisearch_id":4082,"animeschedule_id":"donguri-no-ie"}
 {"mal_id":5917,"anilist_id":5917,"ann_id":8999,"kitsu_id":4335,"hianime_id":"on-a-paper-crane-tomokos-adventure-6659","anisearch_id":1597,"animeschedule_id":"tsuru-ni-notte-tomoko-no-bouken"}
 {"mal_id":5918,"anilist_id":5918,"ann_id":3327,"kitsu_id":4336,"anisearch_id":621,"animeschedule_id":"deimos-no-hanayome-ran-no-kumikyoku"}
 {"mal_id":5920,"anilist_id":5920,"ann_id":3356,"kitsu_id":4337,"anisearch_id":1759,"animeschedule_id":"xanadu-dragonslayer-densetsu"}
@@ -23902,7 +23902,7 @@
 {"mal_id":63134,"anilist_id":204361,"ann_id":38148,"animeschedule_id":"shin-kochira-katsushikaku-kameari-kouenmae-hashutsujo"}
 {"mal_id":63135,"ann_id":38149,"animeschedule_id":"mr-clice"}
 {"mal_id":63136,"anilist_id":204362,"ann_id":38150,"anisearch_id":21115,"animeschedule_id":"kaijuu-8-gou-kanketsu-hen"}
-{"mal_id":63138,"anilist_id":204431,"animeschedule_id":"kaijuu-8-gou-narumi-no-heijitsu"}
+{"mal_id":63138,"anilist_id":204431,"anisearch_id":21114,"animeschedule_id":"kaijuu-8-gou-narumi-no-heijitsu"}
 {"mal_id":63139,"anilist_id":204363,"ann_id":38152,"animeschedule_id":"sakamoto-days-2nd-season"}
 {"mal_id":63140,"anilist_id":204389,"ann_id":38154,"animeschedule_id":"yasei-no-last-boss-ga-arawareta-2nd-season"}
 {"mal_id":63142,"anilist_id":204626,"animeschedule_id":"metal-cardbot-w"}
@@ -23964,7 +23964,7 @@
 {"mal_id":63347,"anilist_id":206521,"anisearch_id":21173,"animeschedule_id":"world-is-dancing"}
 {"mal_id":63349,"anilist_id":207324}
 {"mal_id":63350,"anilist_id":206798,"animeschedule_id":"doukyo-shiteiru-kensei-no-onna-shishou-ga-kawaisugite-mainichi-shiawase-desu"}
-{"mal_id":63352,"ann_id":38338}
+{"mal_id":63352,"ann_id":38338,"anisearch_id":21193}
 {"mal_id":63356,"anilist_id":206682,"anisearch_id":21215}
 {"mal_id":63360,"anilist_id":206895,"animeschedule_id":"shishang-zui-qiang-lian-ti-lao-zu"}
 {"mal_id":63366,"anilist_id":206819,"ann_id":38362,"animeschedule_id":"kimi-to-hanabi-to-yakusoku-to"}
