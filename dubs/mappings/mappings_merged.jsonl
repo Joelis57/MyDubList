@@ -9601,7 +9601,7 @@
 {"mal_id":27373,"kitsu_id":9624,"anisearch_id":6365}
 {"mal_id":27375,"anilist_id":166056,"kitsu_id":9324,"animeschedule_id":"hitoribocchi"}
 {"mal_id":27377,"anilist_id":179748,"kitsu_id":9659,"animeschedule_id":"tanuki-san-ooatari"}
-{"mal_id":27379,"kitsu_id":9572}
+{"mal_id":27379,"anilist_id":208836,"kitsu_id":9572}
 {"mal_id":27387,"anilist_id":21002,"ann_id":18675,"kitsu_id":9098,"anisearch_id":9857,"animeschedule_id":"under-the-dog"}
 {"mal_id":27389,"kitsu_id":9517,"anisearch_id":9156}
 {"mal_id":27393,"anilist_id":180849,"ann_id":365,"kitsu_id":9420,"anisearch_id":3791,"animeschedule_id":"kyuumei-senshi-nanosaver"}
@@ -20817,6 +20817,7 @@
 {"mal_id":55526,"anilist_id":165444,"kitsu_id":47933,"anisearch_id":18430}
 {"mal_id":55527,"anilist_id":186540}
 {"mal_id":55528,"anilist_id":165598,"ann_id":28414,"kitsu_id":47583,"anisearch_id":18431,"animeschedule_id":"yuuki-bakuhatsu-bang-bravern"}
+{"mal_id":55529,"anilist_id":208834}
 {"mal_id":55530,"anilist_id":129544,"animeschedule_id":"toutiao-dou-shi-ta"}
 {"mal_id":55531,"anilist_id":129571,"animeschedule_id":"bingxue-zhi-yue"}
 {"mal_id":55532,"anilist_id":115141,"kitsu_id":45009,"animeschedule_id":"anata-ga-miemashita"}
@@ -23092,6 +23093,7 @@
 {"mal_id":60746,"kitsu_id":50044}
 {"mal_id":60749,"anilist_id":186148,"kitsu_id":49494,"anisearch_id":20083,"animeschedule_id":"maomao-no-hitorigoto-2nd-season"}
 {"mal_id":60752,"anilist_id":166132,"animeschedule_id":"purple-rain"}
+{"mal_id":60756,"anilist_id":208831}
 {"mal_id":60765,"anilist_id":186161,"ann_id":34321,"hianime_id":"with-you-our-love-will-make-it-through-19899","anisearch_id":20099,"animeschedule_id":"kimi-to-koete-koi-ni-naru"}
 {"mal_id":60766,"anilist_id":186836,"animeschedule_id":"tianming-da-zhuzai"}
 {"mal_id":60771,"anilist_id":204469,"kitsu_id":49499,"animeschedule_id":"shinitai-himawari"}
@@ -23926,6 +23928,9 @@
 {"mal_id":63188,"anilist_id":204738,"ann_id":38197,"animeschedule_id":"ruri-dragon"}
 {"mal_id":63193,"anilist_id":204747,"ann_id":38200,"anisearch_id":21144,"animeschedule_id":"one-punch-man-3-part-2"}
 {"mal_id":63200,"anilist_id":203472,"ann_id":38112,"anisearch_id":21116,"animeschedule_id":"himitsu-kessha-taka-no-tsume-xx"}
+{"mal_id":63207,"anilist_id":208827}
+{"mal_id":63208,"anilist_id":208826}
+{"mal_id":63209,"anilist_id":208825}
 {"mal_id":63212,"anilist_id":205081,"animeschedule_id":"kaguya-sama-wa-kokurasetai-kanketsu-hen"}
 {"mal_id":63215,"anilist_id":205130,"ann_id":38235,"anisearch_id":21160,"animeschedule_id":"historie"}
 {"mal_id":63216,"anilist_id":204698,"ann_id":38179,"anisearch_id":21140,"animeschedule_id":"gelpiyo"}
@@ -23975,7 +23980,7 @@
 {"mal_id":63381,"anilist_id":206774,"ann_id":38360}
 {"mal_id":63382,"anilist_id":206949,"ann_id":38387,"anisearch_id":21199,"animeschedule_id":"kyouran-reijou-nia-liston-byoujaku-reijou-ni-tensei-shita-kamigoroshi-no-bujin-no-karei-naru-musouroku"}
 {"mal_id":63383,"anilist_id":206950}
-{"mal_id":63392,"anisearch_id":21210}
+{"mal_id":63392,"anilist_id":204270,"anisearch_id":21210}
 {"mal_id":63394,"anilist_id":206003}
 {"mal_id":63396,"anilist_id":207084,"animeschedule_id":"oneechan-gokko"}
 {"mal_id":63403,"anilist_id":207141,"ann_id":38401,"anisearch_id":21218,"animeschedule_id":"yani-neko"}
@@ -23999,12 +24004,14 @@
 {"mal_id":63472,"anilist_id":207692,"ann_id":38467,"animeschedule_id":"namidaame-to-serenade"}
 {"mal_id":63476,"anilist_id":207782,"ann_id":38469,"animeschedule_id":"odebu-akujo-ni-tensei-shitara-nazeka-last-boss-oujisama-ni-shuuchaku-sareteimasu"}
 {"mal_id":63485,"anilist_id":155304}
+{"mal_id":63488,"anilist_id":208835}
 {"mal_id":63489,"ann_id":38471,"animeschedule_id":"sora-wa-akai-kawa-no-hotori"}
 {"mal_id":63493,"anilist_id":207853,"anisearch_id":21267}
 {"mal_id":63500,"anilist_id":186751}
 {"mal_id":63504,"anilist_id":203127}
 {"mal_id":63508,"anilist_id":208044,"anisearch_id":21287,"animeschedule_id":"rakudai-kenja-no-gakuin-musou-nidome-no-tensei-s-rank-cheat-majutsushi-boukenroku"}
 {"mal_id":63509,"anilist_id":208025,"animeschedule_id":"dark-summoner-to-dekiteiru"}
+{"mal_id":63512,"anilist_id":208829}
 {"mal_id":63514,"animeschedule_id":"perfect-addiction"}
 {"mal_id":63520,"anilist_id":206840}
 {"mal_id":63521,"anilist_id":194945}
