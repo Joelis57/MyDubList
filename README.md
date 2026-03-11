@@ -52,7 +52,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Hindi | हिन्दी | 233 |
 | Hungarian | Magyar | 195 |
 | Swedish | Svenska | 142 |
-| Norwegian | Norsk | 135 |
+| Norwegian | Norsk | 136 |
 | Hebrew | עברית | 122 |
 | Dutch | Nederlands | 105 |
 | Thai | ไทย | 93 |
