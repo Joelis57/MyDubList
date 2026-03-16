@@ -39,13 +39,13 @@ If you have an authoritative source to add, please open an issue/PR.
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | English | English | 5344 |
-| Spanish | Español | 3031 |
+| Spanish | Español | 3032 |
 | German | Deutsch | 2974 |
 | French | Français | 2446 |
-| Italian | Italiano | 2339 |
-| Portuguese | Português | 1751 |
+| Italian | Italiano | 2340 |
+| Portuguese | Português | 1752 |
 | Korean | 한국어 | 1394 |
-| Chinese | 中文 | 971 |
+| Chinese | 中文 | 972 |
 | Tagalog | Tagalog | 815 |
 | Arabic | العربية | 317 |
 | Polish | Polski | 281 |
