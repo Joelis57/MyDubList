@@ -18259,7 +18259,7 @@
 {"mal_id":49414,"kitsu_id":47403}
 {"mal_id":49418,"anilist_id":136569,"kitsu_id":44887,"animeschedule_id":"caesura-of-despair"}
 {"mal_id":49420,"anilist_id":136310,"animeschedule_id":"sangenshoku"}
-{"mal_id":49422,"anilist_id":111943,"animeschedule_id":"tenma-no-torayan"}
+{"mal_id":49422,"anilist_id":111943,"anisearch_id":10427,"animeschedule_id":"tenma-no-torayan"}
 {"mal_id":49423,"anilist_id":140765,"ann_id":24517,"kitsu_id":45390,"anisearch_id":16826,"animeschedule_id":"kaitou-queen-wa-circus-ga-osuki"}
 {"mal_id":49426,"anilist_id":135864,"ann_id":24528,"anisearch_id":16655,"animeschedule_id":"tropical-rouge-precure-yuki-no-princess-to-kiseki-no-yubiwa"}
 {"mal_id":49429,"anilist_id":140315,"kitsu_id":46590,"animeschedule_id":"nageki-no-ice-candy"}
@@ -23284,7 +23284,7 @@
 {"mal_id":61278,"anilist_id":188522,"ann_id":36740,"kitsu_id":49731,"anisearch_id":20698,"animeschedule_id":"sumikko-gurashi-movie-4"}
 {"mal_id":61279,"anilist_id":188661,"kitsu_id":49705,"anisearch_id":20455,"animeschedule_id":"go-go-vehicle-zoo-norimono-star-hen"}
 {"mal_id":61280,"anilist_id":188525,"ann_id":35280,"anisearch_id":20331,"animeschedule_id":"kore-kaite-shine"}
-{"mal_id":61282,"anilist_id":188546,"ann_id":35281,"animeschedule_id":"ore-to-yuu-nii"}
+{"mal_id":61282,"anilist_id":188546,"ann_id":35281,"anisearch_id":20332,"animeschedule_id":"ore-to-yuu-nii"}
 {"mal_id":61286,"anilist_id":204482,"kitsu_id":49997,"anisearch_id":20329}
 {"mal_id":61289,"anisearch_id":20159}
 {"mal_id":61290,"anilist_id":188653,"ann_id":35282,"kitsu_id":49736,"anisearch_id":20610,"animeschedule_id":"punirunes-puni-3"}
@@ -23439,7 +23439,7 @@
 {"mal_id":61753,"kitsu_id":49977,"animeschedule_id":"shixiong-a-shixiong-nian-fan-2"}
 {"mal_id":61754,"anilist_id":193676,"ann_id":36317,"animeschedule_id":"s-rank-party-kara-kaiko-sareta-jugushi"}
 {"mal_id":61756,"anilist_id":194030,"ann_id":36321}
-{"mal_id":61758,"anilist_id":193699,"ann_id":36324,"animeschedule_id":"akuyaku-reijou-no-naka-no-hito"}
+{"mal_id":61758,"anilist_id":193699,"ann_id":36324,"anisearch_id":20677,"animeschedule_id":"akuyaku-reijou-no-naka-no-hito"}
 {"mal_id":61764,"anilist_id":168632,"animeschedule_id":"wiheomhan-pyeonuijeom"}
 {"mal_id":61765,"anilist_id":193883,"ann_id":36347,"kitsu_id":49962,"anisearch_id":20642,"animeschedule_id":"chibi-godzilla-no-gyakushuu-3"}
 {"mal_id":61766,"anisearch_id":21223}
@@ -24034,7 +24034,7 @@
 {"mal_id":63632,"animeschedule_id":"guimi-zhi-zhu-wu-mian-ren"}
 {"mal_id":63640,"anilist_id":208766,"ann_id":38625,"animeschedule_id":"bless"}
 {"mal_id":63641,"anilist_id":208824,"ann_id":38630}
-{"mal_id":63657,"anilist_id":208361}
+{"mal_id":63657,"anilist_id":208361,"anisearch_id":21297}
 {"mal_id":63667,"anilist_id":209032}
 {"mal_id":63696,"anilist_id":206919}
 {"mal_id":63697,"ann_id":38647,"animeschedule_id":"jm"}
