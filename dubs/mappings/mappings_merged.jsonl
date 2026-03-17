@@ -14912,7 +14912,7 @@
 {"mal_id":38425,"anilist_id":105391,"ann_id":22179,"kitsu_id":42005,"hianime_id":"ikkitousen-western-wolves-6436","anisearch_id":13916,"animeschedule_id":"ikkitousen-western-wolves"}
 {"mal_id":38426,"kitsu_id":42618,"anisearch_id":14765}
 {"mal_id":38429,"ann_id":14334,"kitsu_id":42385,"anisearch_id":18679}
-{"mal_id":38431,"anilist_id":106896,"kitsu_id":41972,"anisearch_id":14139,"animeschedule_id":"persona-5-the-animation-dark-sun"}
+{"mal_id":38431,"anilist_id":106896,"kitsu_id":41972,"anisearch_id":14139,"animeschedule_id":"persona-5-the-animation-stars-and-ours"}
 {"mal_id":38433,"anilist_id":126888,"kitsu_id":42854,"anisearch_id":18818,"animeschedule_id":"god-eater-reso-nantoka-gekijou-episode-ex"}
 {"mal_id":38435,"anilist_id":104959,"kitsu_id":42048,"animeschedule_id":"yao-shen-ji-ying-yao-pian"}
 {"mal_id":38436,"anilist_id":104922,"kitsu_id":42663,"animeschedule_id":"dou-po-cangqiong-3"}
@@ -22697,7 +22697,7 @@
 {"mal_id":59804,"anilist_id":180832,"kitsu_id":49613,"anisearch_id":19592}
 {"mal_id":59806,"kitsu_id":49245}
 {"mal_id":59807,"anilist_id":180947,"kitsu_id":49199,"animeschedule_id":"transformers-40th-shuunen-kinen-special-movie"}
-{"mal_id":59817,"anilist_id":186714,"ann_id":33520,"kitsu_id":49204,"anisearch_id":20614,"animeschedule_id":"girls-band-cry-naa-mirai"}
+{"mal_id":59817,"anilist_id":186714,"ann_id":33520,"kitsu_id":49204,"anisearch_id":20614,"animeschedule_id":"girls-band-cry-seishun-kyousoukyouku"}
 {"mal_id":59819,"anilist_id":181078,"ann_id":33522,"kitsu_id":49198,"hianime_id":"bye-bye-earth-season-2-19564","anisearch_id":19590,"animeschedule_id":"bye-bye-earth-2nd-season"}
 {"mal_id":59820,"anilist_id":179126,"ann_id":31557,"anisearch_id":19655,"animeschedule_id":"elf-san-wa-yaserarenai-specials"}
 {"mal_id":59825,"anilist_id":183478,"kitsu_id":49213,"animeschedule_id":"undead"}
@@ -23015,7 +23015,7 @@
 {"mal_id":60578,"anilist_id":199431}
 {"mal_id":60579,"anilist_id":199439,"animeschedule_id":"jian-wang-3-shen-jianxin-de-365-tian"}
 {"mal_id":60580,"anilist_id":199414,"animeschedule_id":"xuan-jie-zhi-men"}
-{"mal_id":60581,"anilist_id":156104,"kitsu_id":50038}
+{"mal_id":60581,"anilist_id":156104,"kitsu_id":50038,"animeschedule_id":"xin-yichang-shengwu-jianwen-lu-xu"}
 {"mal_id":60582,"anilist_id":199430,"animeschedule_id":"cengjing-you-yongshi"}
 {"mal_id":60583,"anilist_id":185858,"animeschedule_id":"xian-di-guilai"}
 {"mal_id":60586,"anilist_id":198695,"animeschedule_id":"kaiju-ditan-mai-dali"}
@@ -23644,7 +23644,7 @@
 {"mal_id":62301,"anilist_id":195187,"animeschedule_id":"champagne-night-fever"}
 {"mal_id":62304,"animeschedule_id":"koiboshi-perico"}
 {"mal_id":62311,"anilist_id":197619,"ann_id":37525}
-{"mal_id":62312,"anilist_id":197620,"ann_id":37526,"anisearch_id":20850}
+{"mal_id":62312,"anilist_id":197620,"ann_id":37526,"anisearch_id":20850,"animeschedule_id":"sekiro-no-defeat"}
 {"mal_id":62314,"anilist_id":196540}
 {"mal_id":62315,"anilist_id":196722,"anisearch_id":20829}
 {"mal_id":62316,"anilist_id":194353,"anisearch_id":20922}
@@ -23768,7 +23768,7 @@
 {"mal_id":62648,"anilist_id":199801}
 {"mal_id":62649,"anilist_id":203296,"ann_id":37897,"anisearch_id":21105,"animeschedule_id":"cardfight-vanguard-divinez-genma-seisen-hen"}
 {"mal_id":62650,"anilist_id":199793,"ann_id":37898,"anisearch_id":20982,"animeschedule_id":"witch-watch-2nd-season"}
-{"mal_id":62651,"anilist_id":206270}
+{"mal_id":62651,"anilist_id":206270,"animeschedule_id":"cang-yuan-tu-3"}
 {"mal_id":62653,"anisearch_id":20980}
 {"mal_id":62654,"anilist_id":199603,"animeschedule_id":"princess-catch-tiniping"}
 {"mal_id":62658,"anilist_id":200375,"ann_id":37740,"animeschedule_id":"inpuru-kun-no-sonzai-shinai-oshigoto"}
@@ -24027,6 +24027,7 @@
 {"mal_id":63573,"anilist_id":208369,"ann_id":38579,"anisearch_id":21291,"animeschedule_id":"zeikin-de-katta-hon"}
 {"mal_id":63577,"animeschedule_id":"chatter-chatter"}
 {"mal_id":63582,"anilist_id":208314}
+{"mal_id":63595,"animeschedule_id":"cang-yuan-tu-qianzhuan-dongning-fu-de-xiatian"}
 {"mal_id":63599,"animeschedule_id":"chidori"}
 {"mal_id":63600,"anilist_id":208610,"animeschedule_id":"kin-to-tetsu"}
 {"mal_id":63601,"anilist_id":208609,"ann_id":38610,"animeschedule_id":"hone-dragon-no-mana-musume"}
