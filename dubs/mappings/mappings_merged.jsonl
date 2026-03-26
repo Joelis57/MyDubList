@@ -23347,7 +23347,7 @@
 {"mal_id":61461,"anilist_id":193296,"kitsu_id":49849,"animeschedule_id":"tenkaichi"}
 {"mal_id":61462,"anilist_id":206844,"anisearch_id":19926,"animeschedule_id":"pan-no-akachan"}
 {"mal_id":61469,"anilist_id":190327,"ann_id":35638,"anisearch_id":20466,"animeschedule_id":"jojo-no-kimyou-na-bouken-part-7-steel-ball-run"}
-{"mal_id":61483,"anilist_id":190569,"ann_id":35665,"animeschedule_id":"tenmaku-no-jaadugar"}
+{"mal_id":61483,"anilist_id":190569,"ann_id":35665,"anisearch_id":21044,"animeschedule_id":"tenmaku-no-jaadugar"}
 {"mal_id":61485,"anilist_id":191374,"animeschedule_id":"jigu-eui-juin-eun-goyang-ida"}
 {"mal_id":61491,"anilist_id":193242,"anisearch_id":20553,"animeschedule_id":"chibizenji-sensei-inokori-kougiroku"}
 {"mal_id":61492,"anilist_id":190668,"ann_id":35668,"anisearch_id":20625,"animeschedule_id":"entotsu-machi-no-poupelle-yakusoku-no-tokei-dai"}
@@ -23740,7 +23740,7 @@
 {"mal_id":62561,"anilist_id":204621,"animeschedule_id":"koikeya-sdgs-gekijou-suss-to-tina-season-6"}
 {"mal_id":62564,"anilist_id":199185,"ann_id":37869,"anisearch_id":20923,"animeschedule_id":"tate-no-yuusha-no-nariagari-5"}
 {"mal_id":62567,"anilist_id":199217,"ann_id":37872,"anisearch_id":20913,"animeschedule_id":"re-monster-2nd-season"}
-{"mal_id":62568,"anilist_id":199221,"ann_id":37873,"animeschedule_id":"dr-stone-science-future-part-3"}
+{"mal_id":62568,"anilist_id":199221,"ann_id":37873,"anisearch_id":20917,"animeschedule_id":"dr-stone-science-future-part-3"}
 {"mal_id":62577,"anilist_id":199164}
 {"mal_id":62578,"anilist_id":199162}
 {"mal_id":62579,"anilist_id":200642,"ann_id":37524,"animeschedule_id":"wadachi-wo-koete-yuke"}
@@ -23882,9 +23882,9 @@
 {"mal_id":63035,"anilist_id":203141,"ann_id":38082,"anisearch_id":21050,"animeschedule_id":"everyday-host-zoku-hen"}
 {"mal_id":63038,"ann_id":38081,"anisearch_id":21052,"animeschedule_id":"charisma"}
 {"mal_id":63042,"anilist_id":202957,"ann_id":38058,"anisearch_id":21033,"animeschedule_id":"meitantei-precure"}
-{"mal_id":63045,"ann_id":38097,"animeschedule_id":"demons-crest"}
+{"mal_id":63045,"ann_id":38097,"anisearch_id":21051,"animeschedule_id":"demons-crest"}
 {"mal_id":63046,"anilist_id":194712,"anisearch_id":21063,"animeschedule_id":"nukitashi-the-animation-specials"}
-{"mal_id":63047,"anilist_id":209800}
+{"mal_id":63047,"anilist_id":209800,"anisearch_id":21164}
 {"mal_id":63048,"anilist_id":203448,"animeschedule_id":"world-trigger-reboot"}
 {"mal_id":63053,"anilist_id":203473,"ann_id":38113,"animeschedule_id":"kyoufu-collector"}
 {"mal_id":63061,"anilist_id":203490,"ann_id":38115,"anisearch_id":21096,"animeschedule_id":"uchi-no-otouto-domo-ga-sumimasen"}
@@ -23955,9 +23955,9 @@
 {"mal_id":63256,"anilist_id":205430,"ann_id":38250,"animeschedule_id":"boukensha-license-wo-hakudatsu-sareta-ossan-dakedo-manamusume-ga-dekita-no-de-nonbiri-jinsei-wo-ouka-suru"}
 {"mal_id":63268,"anilist_id":205619,"ann_id":38259,"animeschedule_id":"koi-shita-hito-wa-imouto-no-kawari-ni-shindekure-to-itta"}
 {"mal_id":63275,"anilist_id":205676,"ann_id":38261,"animeschedule_id":"black-jack-yanen"}
-{"mal_id":63276,"anilist_id":205772,"ann_id":38264,"animeschedule_id":"candy-caries-tv"}
+{"mal_id":63276,"anilist_id":205772,"ann_id":38264,"anisearch_id":21208,"animeschedule_id":"candy-caries-tv"}
 {"mal_id":63292,"anilist_id":205896,"ann_id":38274,"animeschedule_id":"shinja-zero-no-megami-sama-to-hajimeru-isekai-kouryaku"}
-{"mal_id":63293,"anilist_id":205909,"ann_id":38275,"animeschedule_id":"hotaru-no-yomeiri"}
+{"mal_id":63293,"anilist_id":205909,"ann_id":38275,"anisearch_id":21161,"animeschedule_id":"hotaru-no-yomeiri"}
 {"mal_id":63295,"anilist_id":205962,"animeschedule_id":"starlight-project-itsuka-dareka-ni-todoku"}
 {"mal_id":63300,"anilist_id":207474,"animeschedule_id":"ai-ai-ai-ai-ai-love-you"}
 {"mal_id":63304,"ann_id":38287,"anisearch_id":21200,"animeschedule_id":"mamonogurai-no-boukensha-ore-dake-mamono-wo-kuratte-tsuyoku-naru"}
@@ -24055,6 +24055,7 @@
 {"mal_id":63696,"anilist_id":206919,"animeschedule_id":"mao-he-lao-shu-xing-pan-qi-yuan"}
 {"mal_id":63697,"ann_id":38647,"animeschedule_id":"jm"}
 {"mal_id":63706,"anilist_id":209224,"ann_id":38660,"animeschedule_id":"game-sekai-tensei-dankatsu-gamer-wa-dungeon-shuukatsu-no-susume-wo-hajime-kara-play-suru"}
+{"mal_id":63709,"anisearch_id":19743}
 {"mal_id":63712,"ann_id":38661,"anisearch_id":21308,"animeschedule_id":"tensei-goblin-dakedo-shitsumon-aru"}
 {"mal_id":63713,"anilist_id":209132,"ann_id":38667,"anisearch_id":21307,"animeschedule_id":"junket-bank"}
 {"mal_id":63730,"anilist_id":209221,"ann_id":38677,"anisearch_id":21316,"animeschedule_id":"isekai-tensei-soudouki"}
@@ -24074,4 +24075,4 @@
 {"mal_id":63780,"anilist_id":209669,"animeschedule_id":"hanazakari-no-kimitachi-e-2nd-season"}
 {"mal_id":63781,"anilist_id":209662}
 {"mal_id":63789,"animeschedule_id":"mayonaka-heart-tune-2nd-season"}
-{"mal_id":63794,"anilist_id":209827}
+{"mal_id":63794,"anilist_id":209827,"anisearch_id":21322}
