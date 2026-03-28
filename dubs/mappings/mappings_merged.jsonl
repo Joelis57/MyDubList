@@ -23698,7 +23698,7 @@
 {"mal_id":62476,"anilist_id":198709,"ann_id":37834,"anisearch_id":20881,"animeschedule_id":"tefuda-ga-oome-no-victoria"}
 {"mal_id":62479,"anilist_id":200644,"animeschedule_id":"doraemon-1979-specials"}
 {"mal_id":62480,"anilist_id":199405,"animeschedule_id":"huanggu-en-chou-lu-po-feng-pian"}
-{"mal_id":62483,"ann_id":37839,"anisearch_id":20887,"animeschedule_id":"kaze-wo-tsugumono"}
+{"mal_id":62483,"anilist_id":198728,"ann_id":37839,"anisearch_id":20887,"animeschedule_id":"kaze-wo-tsugumono"}
 {"mal_id":62484,"anilist_id":198727}
 {"mal_id":62485,"anilist_id":199029,"ann_id":37856,"anisearch_id":20904,"animeschedule_id":"kanojo-okarishimasu-5"}
 {"mal_id":62486,"animeschedule_id":"hour-time-yellow"}
@@ -23760,7 +23760,7 @@
 {"mal_id":62608,"anilist_id":199800,"animeschedule_id":"kakurenbo-no-tatsujin"}
 {"mal_id":62610,"animeschedule_id":"mafiosa"}
 {"mal_id":62613,"anilist_id":199597,"ann_id":37889,"anisearch_id":20960,"animeschedule_id":"youchien-wars"}
-{"mal_id":62615,"ann_id":37888,"anisearch_id":20961,"animeschedule_id":"tetsuryou-meet-with-tetsudou-musume"}
+{"mal_id":62615,"anilist_id":199594,"ann_id":37888,"anisearch_id":20961,"animeschedule_id":"tetsuryou-meet-with-tetsudou-musume"}
 {"mal_id":62617,"anilist_id":199748,"ann_id":37890,"anisearch_id":20962,"animeschedule_id":"koko-wa-ore-ni-makasete-saki-ni-ike-to-itte-kara-10-nen-ga-tattara-densetsu-ni-natteita"}
 {"mal_id":62618,"anilist_id":155303,"animeschedule_id":"tian-xiang"}
 {"mal_id":62630,"anilist_id":199636,"animeschedule_id":"lollipop"}
@@ -24055,8 +24055,8 @@
 {"mal_id":63696,"anilist_id":206919,"animeschedule_id":"mao-he-lao-shu-xing-pan-qi-yuan"}
 {"mal_id":63697,"ann_id":38647,"animeschedule_id":"jm"}
 {"mal_id":63706,"anilist_id":209224,"ann_id":38660,"animeschedule_id":"game-sekai-tensei-dankatsu-gamer-wa-dungeon-shuukatsu-no-susume-wo-hajime-kara-play-suru"}
-{"mal_id":63709,"anisearch_id":19743,"animeschedule_id":"komekami-girls"}
-{"mal_id":63712,"ann_id":38661,"anisearch_id":21308,"animeschedule_id":"tensei-goblin-dakedo-shitsumon-aru"}
+{"mal_id":63709,"anilist_id":209940,"anisearch_id":19743,"animeschedule_id":"komekami-girls"}
+{"mal_id":63712,"anilist_id":209219,"ann_id":38661,"anisearch_id":21308,"animeschedule_id":"tensei-goblin-dakedo-shitsumon-aru"}
 {"mal_id":63713,"anilist_id":209132,"ann_id":38667,"anisearch_id":21307,"animeschedule_id":"junket-bank"}
 {"mal_id":63730,"anilist_id":209221,"ann_id":38677,"anisearch_id":21316,"animeschedule_id":"isekai-tensei-soudouki"}
 {"mal_id":63735,"anilist_id":209247,"ann_id":38683,"animeschedule_id":"boku-no-kokoro-no-yabai-yatsu-3rd-season"}
@@ -24079,3 +24079,5 @@
 {"mal_id":63801,"anilist_id":209872,"anisearch_id":21332,"animeschedule_id":"ranma-2024-3rd-season"}
 {"mal_id":63802,"anilist_id":108992}
 {"mal_id":63807,"anilist_id":209876}
+{"mal_id":63810,"anilist_id":209982}
+{"mal_id":63816,"anilist_id":209939}
