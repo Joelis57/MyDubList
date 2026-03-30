@@ -446,6 +446,106 @@ def merge_all_mappings():
 
 
 # ----------------------
+# MAL source-file helpers
+# ----------------------
+
+def load_mal_source_jsonl(source_file: str) -> tuple[dict[str, set[int]], set[int], dict[str, int]]:
+    """
+    Load JSONL entries of the form:
+      {"malId": 123, "languages": ["Japanese", "English"]}
+      {"malId": 124, "languages": []}
+      {"malId": 125}
+
+    Only entries with a "languages" array are treated as successful and are returned in checked_ok_ids.
+    Entries without a "languages" array are treated as failed/incomplete and are ignored for updates.
+    """
+    per_lang: dict[str, set[int]] = defaultdict(set)
+    checked_ok_ids: set[int] = set()
+    stats = {
+        "lines": 0,
+        "successful": 0,
+        "failed": 0,
+    }
+
+    if not source_file or not os.path.exists(source_file):
+        raise FileNotFoundError(f"MAL source file not found: {source_file}")
+
+    with open(source_file, "r", encoding="utf-8") as f:
+        for lineno, line in enumerate(f, 1):
+            line = line.strip()
+            if not line:
+                continue
+
+            stats["lines"] += 1
+
+            try:
+                obj = json.loads(line)
+            except Exception as e:
+                stats["failed"] += 1
+                log(f"[MAL source] Line {lineno}: invalid JSON ({e})")
+                continue
+
+            if not isinstance(obj, dict):
+                stats["failed"] += 1
+                log(f"[MAL source] Line {lineno}: expected object")
+                continue
+
+            mal_id = obj.get("malId", obj.get("mal_id"))
+            try:
+                if isinstance(mal_id, str) and mal_id.isdigit():
+                    mal_id = int(mal_id)
+            except Exception:
+                pass
+
+            if not isinstance(mal_id, int):
+                stats["failed"] += 1
+                log(f"[MAL source] Line {lineno}: missing/invalid malId")
+                continue
+
+            languages = obj.get("languages")
+            if not isinstance(languages, list):
+                stats["failed"] += 1
+                log(f"[MAL source] MAL {mal_id}: no languages array (skipping update)")
+                continue
+
+            checked_ok_ids.add(int(mal_id))
+            stats["successful"] += 1
+
+            for raw_lang in languages:
+                key = sanitize_lang(str(raw_lang))
+                if key:
+                    per_lang[key].add(int(mal_id))
+
+    return per_lang, checked_ok_ids, stats
+
+
+def run_mal_from_source(source_file: str):
+    checked_ok_ids: set[int] = set()
+    try:
+        per_lang, checked_ok_ids, stats = load_mal_source_jsonl(source_file)
+
+        json_data.clear()
+        for lang_key, ids in per_lang.items():
+            json_data[lang_key].update(int(x) for x in ids)
+
+        finalize_jsons("mal", checked_ok_ids)
+
+        print(
+            f"Done (MAL source). Successful entries={stats['successful']} "
+            f"failed entries={stats['failed']} total lines={stats['lines']}."
+        )
+    except KeyboardInterrupt:
+        print("\nInterrupted. Finalizing data...")
+        finalize_jsons("mal", checked_ok_ids)
+        print("Done (MAL source).")
+    except Exception as e:
+        print(f"\nUnexpected error (MAL source): {e}")
+        import traceback
+        traceback.print_exc()
+        raise
+
+
+# ----------------------
 # MAL + Jikan helpers
 # ----------------------
 
@@ -1541,7 +1641,7 @@ def run_ann(mal_start: int, mal_end: int):
         print("Done (ANN).")
 
 
-def run_mal(client_id: str, start_id: int, end_id: int):
+def run_jikan(client_id: str, start_id: int, end_id: int):
     global missing_mal_ids, largest_known_mal_id
 
     # Load cache + largest known MAL ID once per run
@@ -1606,7 +1706,7 @@ def run_mal(client_id: str, start_id: int, end_id: int):
     finally:
         finalize_jsons("mal", checked_ok_ids)
         save_missing_cache()
-        print("Done (MAL).")
+        print("Done (Jikan).")
 
 
 def run_anilist(start_page: int | None, end_page: int | None):
@@ -1931,14 +2031,14 @@ def main():
             "(only for IDs checked this run). Also writes per-API mappings and a merged mapping JSONL."
         )
     )
-    parser.add_argument("--api", choices=["mal", "anilist", "ann", "hianime", "kitsu", "anisearch", "animeschedule"], default="mal", help="Which source to use.")
+    parser.add_argument("--api", choices=["mal", "jikan", "anilist", "ann", "hianime", "kitsu", "anisearch", "animeschedule"], default="mal", help="Which source to use.")
     parser.add_argument("--debug", default="false", help="Enable verbose logging (true/false).")
 
-    # MAL-specific
-    parser.add_argument("--client-id", help="MyAnimeList API Client ID (required for --api mal).")
+    # MAL/Jikan-specific
+    parser.add_argument("--client-id", help="MyAnimeList API Client ID (required for --api jikan).")
 
-    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api mal/ann/kitsu.")
-    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api mal/ann/kitsu.")
+    parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api jikan/ann/kitsu.")
+    parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api jikan/ann/kitsu.")
 
     # Generic paging
     parser.add_argument("--start-page", type=int, help="Start page number (1-based) for AniList/HiAnime.")
@@ -1952,7 +2052,7 @@ def main():
     parser.add_argument("--api-host", default="http://localhost:6969",
                         help="Base host for the aniwatch API (e.g., http://localhost:6969).")
     # Source file
-    parser.add_argument("--source-file", help="Path to a JSON/JSONL mapping file.")
+    parser.add_argument("--source-file", help="Path to a JSON/JSONL source file (required for --api mal, anisearch, and hianime).")
 
     # Authentication
     parser.add_argument("--email", help="Account email for OAuth (optional).")
@@ -1980,10 +2080,16 @@ def main():
                 print("[Kitsu] Warning: proceeding without auth (NSFW may be hidden)")
 
     if args.api == "mal":
-        if not args.client_id or args.mal_start is None or args.mal_end is None:
-            print("For --api mal you must provide --client-id, --mal-start, and --mal-end.")
+        if not args.source_file:
+            print("For --api mal you must provide --source-file pointing to the MAL JSONL scrape output.")
             sys.exit(1)
-        run_mal(args.client_id, args.mal_start, args.mal_end)
+        run_mal_from_source(args.source_file)
+
+    elif args.api == "jikan":
+        if not args.client_id or args.mal_start is None or args.mal_end is None:
+            print("For --api jikan you must provide --client-id, --mal-start, and --mal-end.")
+            sys.exit(1)
+        run_jikan(args.client_id, args.mal_start, args.mal_end)
 
     elif args.api == "anilist":
         if str(args.anilist_check_pages).lower() == "true":
