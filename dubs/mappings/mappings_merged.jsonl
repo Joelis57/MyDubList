@@ -22448,7 +22448,7 @@
 {"mal_id":59199,"anilist_id":178825,"ann_id":32861,"kitsu_id":49060,"anisearch_id":19449,"animeschedule_id":"classic-stars"}
 {"mal_id":59200,"anilist_id":170056,"anisearch_id":19483,"animeschedule_id":"etopirika-omoi-wo-tsumugu-tori"}
 {"mal_id":59201,"anilist_id":179915,"animeschedule_id":"hoshi-to-yume-no-samba"}
-{"mal_id":59204,"anilist_id":178868,"animeschedule_id":"magic-knight-rayearth-shin-anime"}
+{"mal_id":59204,"anilist_id":178868,"anisearch_id":19448,"animeschedule_id":"magic-knight-rayearth-shin-anime"}
 {"mal_id":59205,"anilist_id":178869,"ann_id":32863,"kitsu_id":49061,"hianime_id":"clevatess-19760","anisearch_id":19447,"animeschedule_id":"clevatess-majuu-no-ou-to-akago-to-shikabane-no-yuusha"}
 {"mal_id":59206,"anilist_id":179910,"animeschedule_id":"yes-you"}
 {"mal_id":59207,"anilist_id":178886,"ann_id":32864,"kitsu_id":49012,"hianime_id":"dealing-with-mikadono-sisters-is-a-breeze-19765","anisearch_id":19456,"animeschedule_id":"mikadono-sanshimai-wa-angai-choroi"}
@@ -23931,7 +23931,7 @@
 {"mal_id":63174,"anilist_id":204579,"ann_id":38183,"anisearch_id":21135,"animeschedule_id":"jirai-nan-desu-ka-chihara-san"}
 {"mal_id":63177,"anilist_id":204604,"ann_id":38185,"anisearch_id":21137,"animeschedule_id":"undead-unluck-2nd-season"}
 {"mal_id":63179,"anilist_id":206727,"animeschedule_id":"re-member"}
-{"mal_id":63181,"anilist_id":204650,"ann_id":38194,"animeschedule_id":"tougen-anki-nikko-kegon-no-taki-hen"}
+{"mal_id":63181,"anilist_id":204650,"ann_id":38194,"anisearch_id":21138,"animeschedule_id":"tougen-anki-nikko-kegon-no-taki-hen"}
 {"mal_id":63183,"anilist_id":204742,"animeschedule_id":"tomo-ni-kagayaku-ashita-no-tame-ni"}
 {"mal_id":63185,"ann_id":38195,"animeschedule_id":"kingdom-6th-season-zoku-hen"}
 {"mal_id":63188,"anilist_id":204738,"ann_id":38197,"animeschedule_id":"ruri-dragon"}
@@ -23993,7 +23993,7 @@
 {"mal_id":63392,"anilist_id":204270,"anisearch_id":21210,"animeschedule_id":"evangelion-housou-30-shuunen-kinen-tokubetsu-kougyou"}
 {"mal_id":63394,"anilist_id":206003}
 {"mal_id":63396,"anilist_id":207084,"animeschedule_id":"oneechan-gokko"}
-{"mal_id":63398,"animeschedule_id":"ray-chou-kaguya-hime-version"}
+{"mal_id":63398,"anisearch_id":21344,"animeschedule_id":"ray-chou-kaguya-hime-version"}
 {"mal_id":63403,"anilist_id":207141,"ann_id":38401,"anisearch_id":21218,"animeschedule_id":"yani-neko"}
 {"mal_id":63404,"animeschedule_id":"kaiba-seichoutsuu-mass-destruction-reload-mashup"}
 {"mal_id":63409,"anilist_id":207191,"ann_id":38410,"animeschedule_id":"doumo-suki-na-hito-ni-horegusuri-wo-irai-sareta-majo-desu"}
@@ -24030,7 +24030,7 @@
 {"mal_id":63527,"animeschedule_id":"yoidore"}
 {"mal_id":63534,"anilist_id":208192,"animeschedule_id":"shin-seiki-evangelion-shinsaku-series"}
 {"mal_id":63536,"ann_id":38530,"animeschedule_id":"mahoutsukai-rose-no-sado-life"}
-{"mal_id":63537,"ann_id":38533,"animeschedule_id":"kimi-wo-aisuru-ki-wa-nai-to-itta-jiki-koushaku-sama-ga-nazeka-dekiai-shitekimasu"}
+{"mal_id":63537,"ann_id":38533,"anisearch_id":21336,"animeschedule_id":"kimi-wo-aisuru-ki-wa-nai-to-itta-jiki-koushaku-sama-ga-nazeka-dekiai-shitekimasu"}
 {"mal_id":63542,"animeschedule_id":"zig-zag"}
 {"mal_id":63547,"animeschedule_id":"tententengoku-jigokugoku"}
 {"mal_id":63555,"animeschedule_id":"chou-charisma-bon-odori"}
@@ -24049,7 +24049,7 @@
 {"mal_id":63629,"animeschedule_id":"yomosugara"}
 {"mal_id":63632,"animeschedule_id":"guimi-zhi-zhu-wu-mian-ren"}
 {"mal_id":63640,"anilist_id":208766,"ann_id":38625,"animeschedule_id":"bless"}
-{"mal_id":63641,"anilist_id":208824,"ann_id":38630}
+{"mal_id":63641,"anilist_id":208824,"ann_id":38630,"anisearch_id":21310}
 {"mal_id":63657,"anilist_id":208361,"anisearch_id":21297}
 {"mal_id":63667,"anilist_id":209032}
 {"mal_id":63693,"animeschedule_id":"one-last-wish"}
