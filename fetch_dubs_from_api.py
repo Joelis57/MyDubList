@@ -68,7 +68,7 @@ anilist_stats = {
 
 # MAL throttling + 404 tracking
 mal_last_call = 0
-MAL_MIN_INTERVAL = 2.0  # seconds -> max 0.5 req/sec
+MAL_MIN_INTERVAL = 0.5  # seconds
 last_mal_404 = False
 
 # ANN throttle
