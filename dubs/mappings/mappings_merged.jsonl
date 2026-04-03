@@ -23851,6 +23851,7 @@
 {"mal_id":62932,"ann_id":37999,"anisearch_id":21014,"animeschedule_id":"kyoukai-no-melody"}
 {"mal_id":62933,"anisearch_id":21037,"animeschedule_id":"shou-3-ashibe-qq-goma-chan"}
 {"mal_id":62936,"anilist_id":202269,"ann_id":38002,"anisearch_id":21018,"animeschedule_id":"toumei-na-yoru-ni-kakeru-kimi-to-me-ni-mienai-koi-wo-shita"}
+{"mal_id":62941,"anilist_id":210071}
 {"mal_id":62942,"animeschedule_id":"loca"}
 {"mal_id":62945,"anilist_id":206283}
 {"mal_id":62946,"anilist_id":206212}
@@ -23911,7 +23912,7 @@
 {"mal_id":63129,"ann_id":33626}
 {"mal_id":63130,"anilist_id":204356,"animeschedule_id":"boku-no-hero-academia-more"}
 {"mal_id":63134,"anilist_id":204361,"ann_id":38148,"animeschedule_id":"shin-kochira-katsushikaku-kameari-kouenmae-hashutsujo"}
-{"mal_id":63135,"ann_id":38149,"animeschedule_id":"mr-clice"}
+{"mal_id":63135,"anilist_id":204357,"ann_id":38149,"animeschedule_id":"mr-clice"}
 {"mal_id":63136,"anilist_id":204362,"ann_id":38150,"anisearch_id":21115,"animeschedule_id":"kaijuu-8-gou-kanketsu-hen"}
 {"mal_id":63138,"anilist_id":204431,"anisearch_id":21114,"animeschedule_id":"kaijuu-8-gou-narumi-no-heijitsu"}
 {"mal_id":63139,"anilist_id":204363,"ann_id":38152,"animeschedule_id":"sakamoto-days-2nd-season"}
@@ -23961,7 +23962,7 @@
 {"mal_id":63293,"anilist_id":205909,"ann_id":38275,"anisearch_id":21161,"animeschedule_id":"hotaru-no-yomeiri"}
 {"mal_id":63295,"anilist_id":205962,"animeschedule_id":"starlight-project-itsuka-dareka-ni-todoku"}
 {"mal_id":63300,"anilist_id":207474,"animeschedule_id":"ai-ai-ai-ai-ai-love-you"}
-{"mal_id":63304,"ann_id":38287,"anisearch_id":21200,"animeschedule_id":"mamonogurai-no-boukensha-ore-dake-mamono-wo-kuratte-tsuyoku-naru"}
+{"mal_id":63304,"anilist_id":210234,"ann_id":38287,"anisearch_id":21200,"animeschedule_id":"mamonogurai-no-boukensha-ore-dake-mamono-wo-kuratte-tsuyoku-naru"}
 {"mal_id":63306,"anilist_id":105230,"ann_id":3684}
 {"mal_id":63310,"anilist_id":206166,"ann_id":38301,"anisearch_id":21170,"animeschedule_id":"ingoku-danchi"}
 {"mal_id":63316,"anilist_id":184356,"ann_id":38311,"anisearch_id":21171,"animeschedule_id":"dogul-wang"}
@@ -24087,7 +24088,15 @@
 {"mal_id":63819,"anilist_id":209961,"animeschedule_id":"shibou-yuugi-de-meshi-wo-kuu-44-cloudy-beach"}
 {"mal_id":63820,"anilist_id":209963,"animeschedule_id":"yuusha-kei-ni-shosu-choubatsu-yuusha-9004-tai-keimu-kiroku-2nd-season"}
 {"mal_id":63822,"anilist_id":209980,"animeschedule_id":"isekai-de-cheat-skill-wo-te-ni-shita-ore-wa-genjitsu-sekai-wo-mo-musou-suru-level-up-wa-jinsei-wo-kaeta-2nd-season"}
+{"mal_id":63826,"anilist_id":210072}
 {"mal_id":63832,"anilist_id":210031,"animeschedule_id":"seihantai-na-kimi-to-boku-2nd-season"}
 {"mal_id":63833,"anilist_id":210032,"animeschedule_id":"baki-dou-part-2"}
 {"mal_id":63834,"animeschedule_id":"douwa-revenger-petit"}
+{"mal_id":63835,"anilist_id":176922}
 {"mal_id":63836,"anilist_id":148829}
+{"mal_id":63846,"anilist_id":209981}
+{"mal_id":63851,"anilist_id":210157}
+{"mal_id":63858,"anilist_id":187596}
+{"mal_id":63859,"anilist_id":209962}
+{"mal_id":63877,"anilist_id":176275}
+{"mal_id":63885,"anilist_id":210199}
