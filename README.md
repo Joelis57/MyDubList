@@ -38,11 +38,11 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5378 |
-| Spanish | Español | 3055 |
-| German | Deutsch | 2997 |
-| French | Français | 2475 |
-| Italian | Italiano | 2351 |
+| English | English | 5379 |
+| Spanish | Español | 3064 |
+| German | Deutsch | 3001 |
+| French | Français | 2476 |
+| Italian | Italiano | 2355 |
 | Portuguese | Português | 1763 |
 | Korean | 한국어 | 1423 |
 | Chinese | 中文 | 1091 |
