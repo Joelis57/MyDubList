@@ -9529,7 +9529,7 @@
 {"mal_id":26225,"kitsu_id":9382}
 {"mal_id":26227,"kitsu_id":9340,"anisearch_id":9169}
 {"mal_id":26229,"kitsu_id":9372}
-{"mal_id":26231,"kitsu_id":9389}
+{"mal_id":26231,"kitsu_id":9389,"anisearch_id":21458}
 {"mal_id":26233,"kitsu_id":9390}
 {"mal_id":26235,"kitsu_id":9240}
 {"mal_id":26237,"kitsu_id":9225}
@@ -9557,7 +9557,7 @@
 {"mal_id":26283,"kitsu_id":8987,"anisearch_id":19806}
 {"mal_id":26285,"anilist_id":140034,"kitsu_id":9196,"anisearch_id":10828,"animeschedule_id":"ao-no-doumon"}
 {"mal_id":26287,"kitsu_id":9679,"anisearch_id":21099}
-{"mal_id":26289,"kitsu_id":9293}
+{"mal_id":26289,"kitsu_id":9293,"anisearch_id":21466}
 {"mal_id":26291,"kitsu_id":9216,"anisearch_id":21057}
 {"mal_id":26293,"kitsu_id":9399,"anisearch_id":19778}
 {"mal_id":26295,"kitsu_id":9294,"anisearch_id":20042}
@@ -9848,7 +9848,7 @@
 {"mal_id":28567,"kitsu_id":10096}
 {"mal_id":28569,"kitsu_id":10119,"anisearch_id":16295}
 {"mal_id":28571,"kitsu_id":10116,"anisearch_id":20199}
-{"mal_id":28573,"kitsu_id":10136}
+{"mal_id":28573,"kitsu_id":10136,"anisearch_id":21438}
 {"mal_id":28575,"kitsu_id":10106}
 {"mal_id":28577,"kitsu_id":10125}
 {"mal_id":28579,"kitsu_id":10120}
@@ -10573,7 +10573,7 @@
 {"mal_id":30417,"anilist_id":21724,"kitsu_id":10964,"anisearch_id":12033,"animeschedule_id":"panpaka-pants-o-new"}
 {"mal_id":30418,"anilist_id":104182,"kitsu_id":10832,"animeschedule_id":"petit-manga"}
 {"mal_id":30419,"anilist_id":21107,"ann_id":17367,"kitsu_id":10845,"anisearch_id":10091,"animeschedule_id":"wake-up-girls-beyond-the-bottom"}
-{"mal_id":30420,"anilist_id":139062,"kitsu_id":10965,"animeschedule_id":"dr-slump-arale-chan-no-koutsuu-anzen"}
+{"mal_id":30420,"anilist_id":139062,"kitsu_id":10965,"anisearch_id":21432,"animeschedule_id":"dr-slump-arale-chan-no-koutsuu-anzen"}
 {"mal_id":30424,"anilist_id":102386,"kitsu_id":10814,"animeschedule_id":"instant-music"}
 {"mal_id":30425,"anilist_id":118568,"kitsu_id":10799,"animeschedule_id":"wake-up-dodo"}
 {"mal_id":30427,"anilist_id":120871,"kitsu_id":10827,"animeschedule_id":"mr-empty"}
@@ -10775,7 +10775,7 @@
 {"mal_id":30935,"kitsu_id":11043}
 {"mal_id":30938,"kitsu_id":11044,"anisearch_id":17560}
 {"mal_id":30939,"kitsu_id":11045,"anisearch_id":9259}
-{"mal_id":30940,"kitsu_id":11046}
+{"mal_id":30940,"kitsu_id":11046,"anisearch_id":21460}
 {"mal_id":30941,"kitsu_id":11047}
 {"mal_id":30942,"anilist_id":200646,"kitsu_id":11048,"animeschedule_id":"ojarumaru-chitchai-mono-no-ookina-chikara"}
 {"mal_id":30943,"kitsu_id":11049}
@@ -10799,7 +10799,7 @@
 {"mal_id":30971,"anilist_id":103411,"kitsu_id":11062,"animeschedule_id":"tanita-shokudou"}
 {"mal_id":30973,"kitsu_id":11063}
 {"mal_id":30974,"kitsu_id":11064,"anisearch_id":9140}
-{"mal_id":30975,"kitsu_id":11065}
+{"mal_id":30975,"kitsu_id":11065,"anisearch_id":21461}
 {"mal_id":30976,"kitsu_id":11066}
 {"mal_id":30977,"kitsu_id":11067}
 {"mal_id":30978,"kitsu_id":11068,"anisearch_id":9174}
@@ -10807,7 +10807,7 @@
 {"mal_id":30980,"anilist_id":130776,"kitsu_id":11070,"anisearch_id":20118,"animeschedule_id":"ojiichan-no-hanabi"}
 {"mal_id":30981,"kitsu_id":11071}
 {"mal_id":30982,"kitsu_id":11072}
-{"mal_id":30983,"kitsu_id":11073}
+{"mal_id":30983,"kitsu_id":11073,"anisearch_id":21456}
 {"mal_id":30984,"anilist_id":205747,"kitsu_id":11074,"animeschedule_id":"bero-dashi-chonma"}
 {"mal_id":30985,"anilist_id":103468,"ann_id":23288,"kitsu_id":11075,"animeschedule_id":"yamakoshi-mura-no-mari-to-sanbiki-no-koinu"}
 {"mal_id":30988,"anilist_id":21442,"ann_id":17362,"kitsu_id":11077,"anisearch_id":10481,"animeschedule_id":"futsuu-no-joshikousei-ga-locodol-yattemita-ova"}
@@ -10815,12 +10815,12 @@
 {"mal_id":30991,"anilist_id":21327,"kitsu_id":11079,"anisearch_id":10476,"animeschedule_id":"himouto-umaru-chan-ova"}
 {"mal_id":30997,"kitsu_id":11081}
 {"mal_id":30998,"kitsu_id":11082,"anisearch_id":20760}
-{"mal_id":30999,"anilist_id":121880,"kitsu_id":11083,"animeschedule_id":"ningen-no-uta"}
-{"mal_id":31000,"anilist_id":121881,"kitsu_id":11084,"animeschedule_id":"ningen-no-uta-part-2"}
+{"mal_id":30999,"anilist_id":121880,"kitsu_id":11083,"anisearch_id":21448,"animeschedule_id":"ningen-no-uta"}
+{"mal_id":31000,"anilist_id":121881,"kitsu_id":11084,"anisearch_id":21446,"animeschedule_id":"ningen-no-uta-part-2"}
 {"mal_id":31001,"anilist_id":121882,"kitsu_id":11085,"animeschedule_id":"mirai-kara-no-message"}
 {"mal_id":31002,"kitsu_id":11086,"anisearch_id":9124}
-{"mal_id":31003,"kitsu_id":11087}
-{"mal_id":31004,"kitsu_id":11088}
+{"mal_id":31003,"kitsu_id":11087,"anisearch_id":21447}
+{"mal_id":31004,"kitsu_id":11088,"anisearch_id":21445}
 {"mal_id":31005,"kitsu_id":11089}
 {"mal_id":31007,"anilist_id":129818,"kitsu_id":11090,"anisearch_id":9120,"animeschedule_id":"kumori-nochi-hare"}
 {"mal_id":31008,"kitsu_id":11091}
@@ -12992,10 +12992,10 @@
 {"mal_id":35275,"kitsu_id":40732}
 {"mal_id":35276,"kitsu_id":40733}
 {"mal_id":35277,"anilist_id":103549,"kitsu_id":13813,"animeschedule_id":"nanumu-no-ie"}
-{"mal_id":35278,"kitsu_id":40734}
+{"mal_id":35278,"kitsu_id":40734,"anisearch_id":21459}
 {"mal_id":35279,"kitsu_id":40735,"anisearch_id":20124}
 {"mal_id":35280,"kitsu_id":40736}
-{"mal_id":35281,"kitsu_id":40737}
+{"mal_id":35281,"kitsu_id":40737,"anisearch_id":21443}
 {"mal_id":35283,"kitsu_id":13328}
 {"mal_id":35284,"anilist_id":186631,"kitsu_id":14123,"animeschedule_id":"kodoku-no-gourmet"}
 {"mal_id":35285,"anilist_id":98897,"ann_id":19411,"kitsu_id":13301,"anisearch_id":12574,"animeschedule_id":"a-channel-nabe-wo-tabeyou"}
@@ -13558,7 +13558,7 @@
 {"mal_id":36269,"kitsu_id":13791,"anisearch_id":18666}
 {"mal_id":36270,"kitsu_id":40876}
 {"mal_id":36271,"kitsu_id":40877}
-{"mal_id":36272,"kitsu_id":40878}
+{"mal_id":36272,"kitsu_id":40878,"anisearch_id":21442}
 {"mal_id":36273,"kitsu_id":40879,"anisearch_id":20335}
 {"mal_id":36274,"kitsu_id":40880,"anisearch_id":20621}
 {"mal_id":36275,"anilist_id":100283,"kitsu_id":13757,"hianime_id":"natsume-yuujinchou-roku-specials-146","anisearch_id":12785,"animeschedule_id":"natsume-yuujinchou-roku-specials"}
@@ -15313,6 +15313,7 @@
 {"mal_id":39127,"anilist_id":121935,"animeschedule_id":"hong-mao-lan-tu-shuimo-donghua"}
 {"mal_id":39130,"anilist_id":124449,"animeschedule_id":"hong-mao-lan-tu-a-muxing"}
 {"mal_id":39141,"anilist_id":108988,"kitsu_id":43751,"animeschedule_id":"hua-jianghu-buliang-ren-3"}
+{"mal_id":39144,"anisearch_id":21457}
 {"mal_id":39150,"animeschedule_id":"outsider"}
 {"mal_id":39152,"anilist_id":169753,"animeschedule_id":"wanwan-kaji-da-wan"}
 {"mal_id":39153,"ann_id":1659,"kitsu_id":44752,"anisearch_id":18225}
@@ -15456,7 +15457,7 @@
 {"mal_id":39368,"ann_id":972}
 {"mal_id":39369,"ann_id":1318}
 {"mal_id":39370,"ann_id":4313}
-{"mal_id":39371,"ann_id":3465}
+{"mal_id":39371,"ann_id":3465,"anisearch_id":21436}
 {"mal_id":39372,"ann_id":3465}
 {"mal_id":39373,"ann_id":1442}
 {"mal_id":39374,"ann_id":455,"kitsu_id":46710}
@@ -16774,7 +16775,7 @@
 {"mal_id":42203,"anilist_id":119661,"ann_id":23779,"kitsu_id":43247,"hianime_id":"rezero-starting-life-in-another-world-2nd-season-part-2-15526","anisearch_id":15319,"animeschedule_id":"re-zero-kara-hajimeru-isekai-seikatsu-2-part-2"}
 {"mal_id":42205,"anilist_id":119675,"ann_id":23413,"kitsu_id":43222,"hianime_id":"shaman-king-2021-15541","anisearch_id":15320,"animeschedule_id":"shaman-king-2021"}
 {"mal_id":42206,"anilist_id":119696,"ann_id":24474,"kitsu_id":43364,"animeschedule_id":"valkyrie-no-shokutaku-ii"}
-{"mal_id":42208,"kitsu_id":44484}
+{"mal_id":42208,"kitsu_id":44484,"anisearch_id":21429}
 {"mal_id":42209,"anilist_id":121856,"kitsu_id":44089,"animeschedule_id":"xixing-ji-zaijian-wu-kong"}
 {"mal_id":42211,"anilist_id":120266,"kitsu_id":44309,"anisearch_id":20210,"animeschedule_id":"original-eigakan-manner-eizou"}
 {"mal_id":42214,"kitsu_id":43340}
@@ -21365,6 +21366,7 @@
 {"mal_id":56755,"anilist_id":148826,"animeschedule_id":"object"}
 {"mal_id":56757,"kitsu_id":48013}
 {"mal_id":56758,"anilist_id":169749,"anisearch_id":18721,"animeschedule_id":"boushoku-no-berserk-mini"}
+{"mal_id":56763,"anisearch_id":21430}
 {"mal_id":56764,"anilist_id":156075,"kitsu_id":48132,"animeschedule_id":"aoshi-jiuchong-tian"}
 {"mal_id":56765,"anilist_id":156113,"kitsu_id":48267,"animeschedule_id":"zhengjing-shao-zhu-de-xingfu-shenghuo"}
 {"mal_id":56766,"anilist_id":156081,"kitsu_id":48262,"animeschedule_id":"qi-hou-bilu"}
@@ -22682,6 +22684,7 @@
 {"mal_id":59747,"anilist_id":178699,"animeschedule_id":"yuuyake-hoshi"}
 {"mal_id":59748,"anilist_id":180814,"kitsu_id":49293,"animeschedule_id":"violet"}
 {"mal_id":59750,"anilist_id":180817,"kitsu_id":49186,"animeschedule_id":"go-getters"}
+{"mal_id":59752,"anisearch_id":21425}
 {"mal_id":59753,"anilist_id":137718}
 {"mal_id":59754,"anilist_id":180847,"animeschedule_id":"pihotek-hokkyoku-wo-kaze-to-aruku"}
 {"mal_id":59762,"anilist_id":153472,"animeschedule_id":"tian-ying"}
@@ -24067,6 +24070,7 @@
 {"mal_id":63713,"anilist_id":209132,"ann_id":38667,"anisearch_id":21307,"animeschedule_id":"junket-bank"}
 {"mal_id":63730,"anilist_id":209221,"ann_id":38677,"anisearch_id":21316,"animeschedule_id":"isekai-tensei-soudouki"}
 {"mal_id":63735,"anilist_id":209247,"ann_id":38683,"animeschedule_id":"boku-no-kokoro-no-yabai-yatsu-3rd-season"}
+{"mal_id":63736,"anisearch_id":21370}
 {"mal_id":63739,"ann_id":38391,"anisearch_id":21315}
 {"mal_id":63751,"anilist_id":209499,"ann_id":38726,"animeschedule_id":"tank-chair"}
 {"mal_id":63752,"anilist_id":209504,"ann_id":38732,"anisearch_id":21317,"animeschedule_id":"suterare-seijo-no-isekai-gohan-tabi-kakure-skill-de-camping-car-wo-shoukan-shimashita"}
