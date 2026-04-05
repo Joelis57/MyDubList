@@ -38,22 +38,22 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5379 |
-| Spanish | Español | 3064 |
-| German | Deutsch | 3001 |
+| English | English | 5390 |
+| Spanish | Español | 3069 |
+| German | Deutsch | 3003 |
 | French | Français | 2476 |
 | Italian | Italiano | 2355 |
 | Portuguese | Português | 1763 |
-| Korean | 한국어 | 1423 |
-| Chinese | 中文 | 1091 |
+| Korean | 한국어 | 1458 |
+| Chinese | 中文 | 1187 |
 | Tagalog | Tagalog | 816 |
 | Arabic | العربية | 317 |
 | Polish | Polski | 282 |
 | Hindi | हिन्दी | 234 |
-| Hungarian | Magyar | 198 |
+| Hungarian | Magyar | 202 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 136 |
-| Hebrew | עברית | 125 |
+| Hebrew | עברית | 129 |
 | Dutch | Nederlands | 105 |
 | Thai | ไทย | 93 |
 | Russian | Русский | 78 |
