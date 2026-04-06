@@ -38,14 +38,14 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5391 |
-| Spanish | Español | 3071 |
+| English | English | 5394 |
+| Spanish | Español | 3073 |
 | German | Deutsch | 3003 |
 | French | Français | 2476 |
 | Italian | Italiano | 2355 |
 | Portuguese | Português | 1766 |
-| Korean | 한국어 | 1458 |
-| Chinese | 中文 | 1189 |
+| Korean | 한국어 | 1467 |
+| Chinese | 中文 | 1232 |
 | Tagalog | Tagalog | 817 |
 | Arabic | العربية | 317 |
 | Polish | Polski | 282 |
