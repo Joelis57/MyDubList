@@ -23802,7 +23802,7 @@
 {"mal_id":62706,"anilist_id":206596}
 {"mal_id":62708,"anilist_id":155311,"animeschedule_id":"shanhai-jing-mima"}
 {"mal_id":62714,"anilist_id":206195}
-{"mal_id":62715,"animeschedule_id":"sheng-xu"}
+{"mal_id":62715,"anilist_id":210465,"animeschedule_id":"sheng-xu"}
 {"mal_id":62717,"anilist_id":206215}
 {"mal_id":62718,"anilist_id":206356}
 {"mal_id":62719,"anilist_id":206354}
@@ -24001,7 +24001,7 @@
 {"mal_id":63392,"anilist_id":204270,"anisearch_id":21210,"animeschedule_id":"evangelion-housou-30-shuunen-kinen-tokubetsu-kougyou"}
 {"mal_id":63394,"anilist_id":206003}
 {"mal_id":63396,"anilist_id":207084,"animeschedule_id":"oneechan-gokko"}
-{"mal_id":63398,"anisearch_id":21344,"animeschedule_id":"ray-chou-kaguya-hime-version"}
+{"mal_id":63398,"anilist_id":207083,"anisearch_id":21344,"animeschedule_id":"ray-chou-kaguya-hime-version"}
 {"mal_id":63403,"anilist_id":207141,"ann_id":38401,"anisearch_id":21218,"animeschedule_id":"yani-neko"}
 {"mal_id":63404,"animeschedule_id":"kaiba-seichoutsuu-mass-destruction-reload-mashup"}
 {"mal_id":63409,"anilist_id":207191,"ann_id":38410,"animeschedule_id":"doumo-suki-na-hito-ni-horegusuri-wo-irai-sareta-majo-desu"}
@@ -24113,3 +24113,4 @@
 {"mal_id":63877,"anilist_id":176275,"ann_id":32693}
 {"mal_id":63878,"ann_id":38871,"animeschedule_id":"migawari-reijou-wo-sukutta-no-wa-reikoku-mujihi-na-koori-no-ouji-no-ai-deshita"}
 {"mal_id":63885,"anilist_id":210199,"anisearch_id":21420,"animeschedule_id":"the-fable-2nd-season"}
+{"mal_id":63903,"anilist_id":198654}
