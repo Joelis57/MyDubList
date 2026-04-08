@@ -39,18 +39,18 @@ If you have an authoritative source to add, please open an issue/PR.
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | English | English | 5395 |
-| Spanish | Español | 3073 |
-| German | Deutsch | 3003 |
-| French | Français | 2477 |
-| Italian | Italiano | 2355 |
-| Portuguese | Português | 1766 |
-| Korean | 한국어 | 1467 |
-| Chinese | 中文 | 1232 |
+| Spanish | Español | 3082 |
+| German | Deutsch | 3004 |
+| French | Français | 2482 |
+| Italian | Italiano | 2356 |
+| Portuguese | Português | 1772 |
+| Korean | 한국어 | 1495 |
+| Chinese | 中文 | 1310 |
 | Tagalog | Tagalog | 817 |
 | Arabic | العربية | 317 |
 | Polish | Polski | 282 |
 | Hindi | हिन्दी | 234 |
-| Hungarian | Magyar | 202 |
+| Hungarian | Magyar | 204 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 136 |
 | Hebrew | עברית | 129 |
