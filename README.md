@@ -38,14 +38,14 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5395 |
-| Spanish | Español | 3083 |
-| German | Deutsch | 3004 |
-| French | Français | 2482 |
+| English | English | 5399 |
+| Spanish | Español | 3091 |
+| German | Deutsch | 3008 |
+| French | Français | 2484 |
 | Italian | Italiano | 2357 |
-| Portuguese | Português | 1772 |
-| Korean | 한국어 | 1495 |
-| Chinese | 中文 | 1312 |
+| Portuguese | Português | 1773 |
+| Korean | 한국어 | 1514 |
+| Chinese | 中文 | 1339 |
 | Tagalog | Tagalog | 817 |
 | Arabic | العربية | 317 |
 | Polish | Polski | 282 |
@@ -53,7 +53,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Hungarian | Magyar | 204 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 136 |
-| Hebrew | עברית | 129 |
+| Hebrew | עברית | 130 |
 | Dutch | Nederlands | 105 |
 | Thai | ไทย | 93 |
 | Russian | Русский | 78 |
