@@ -14912,7 +14912,7 @@
 {"mal_id":38425,"anilist_id":105391,"ann_id":22179,"kitsu_id":42005,"hianime_id":"ikkitousen-western-wolves-6436","anisearch_id":13916,"animeschedule_id":"ikkitousen-western-wolves"}
 {"mal_id":38426,"kitsu_id":42618,"anisearch_id":14765}
 {"mal_id":38429,"ann_id":14334,"kitsu_id":42385,"anisearch_id":18679}
-{"mal_id":38431,"anilist_id":106896,"kitsu_id":41972,"anisearch_id":14139,"animeschedule_id":"persona-5-the-animation-dark-sun"}
+{"mal_id":38431,"anilist_id":106896,"kitsu_id":41972,"anisearch_id":14139,"animeschedule_id":"persona-5-the-animation-stars-and-ours"}
 {"mal_id":38433,"anilist_id":126888,"kitsu_id":42854,"anisearch_id":18818,"animeschedule_id":"god-eater-reso-nantoka-gekijou-episode-ex"}
 {"mal_id":38435,"anilist_id":104959,"kitsu_id":42048,"animeschedule_id":"yao-shen-ji-ying-yao-pian"}
 {"mal_id":38436,"anilist_id":104922,"kitsu_id":42663,"animeschedule_id":"dou-po-cangqiong-3"}
@@ -17031,6 +17031,7 @@
 {"mal_id":42807,"kitsu_id":43661}
 {"mal_id":42808,"anilist_id":123752,"ann_id":23966,"kitsu_id":43530,"hianime_id":"shenmue-the-animation-17968","anisearch_id":15519,"animeschedule_id":"shenmue-the-animation"}
 {"mal_id":42811,"kitsu_id":44465}
+{"mal_id":42812,"animeschedule_id":"black-channel"}
 {"mal_id":42815,"anilist_id":123198,"animeschedule_id":"xin-yu-gong-yu-shan"}
 {"mal_id":42820,"anilist_id":126171,"animeschedule_id":"mug"}
 {"mal_id":42822,"anilist_id":123779,"ann_id":23788,"kitsu_id":43818,"anisearch_id":15520,"animeschedule_id":"kai-byoui-ramune"}
@@ -23293,7 +23294,7 @@
 {"mal_id":61278,"anilist_id":188522,"ann_id":36740,"kitsu_id":49731,"anisearch_id":20698,"animeschedule_id":"sumikko-gurashi-movie-4"}
 {"mal_id":61279,"anilist_id":188661,"kitsu_id":49705,"anisearch_id":20455,"animeschedule_id":"go-go-vehicle-zoo-norimono-star-hen"}
 {"mal_id":61280,"anilist_id":188525,"ann_id":35280,"anisearch_id":20331,"animeschedule_id":"kore-kaite-shine"}
-{"mal_id":61282,"anilist_id":188546,"ann_id":35281,"anisearch_id":20332,"animeschedule_id":"ore-to-yuu-nii"}
+{"mal_id":61282,"anilist_id":188546,"ann_id":35281,"anisearch_id":20332,"animeschedule_id":"shota-oni"}
 {"mal_id":61286,"anilist_id":204482,"kitsu_id":49997,"anisearch_id":20329}
 {"mal_id":61289,"anisearch_id":20159}
 {"mal_id":61290,"anilist_id":188653,"ann_id":35282,"kitsu_id":49736,"anisearch_id":20610,"animeschedule_id":"punirunes-puni-3"}
@@ -23375,7 +23376,7 @@
 {"mal_id":61550,"anilist_id":191308,"animeschedule_id":"hitotte-tada-no-tsutsujanai-desu-ka"}
 {"mal_id":61555,"kitsu_id":49874,"anisearch_id":20740,"animeschedule_id":"holoearth-anime-pv-saa-anata-no-mou-hitotsu-no-sekai-e"}
 {"mal_id":61556,"anilist_id":198706,"kitsu_id":49944,"animeschedule_id":"da-zhu-zai-2023-2nd-season"}
-{"mal_id":61557,"kitsu_id":49945}
+{"mal_id":61557,"kitsu_id":49945,"animeschedule_id":"nitian-xie-shen-nian-fan"}
 {"mal_id":61558,"anilist_id":191403,"ann_id":35818,"anisearch_id":20482,"animeschedule_id":"aikatsu-x-pripara-the-movie-deai-no-kiseki"}
 {"mal_id":61559,"kitsu_id":47460,"animeschedule_id":"seimei-ouka"}
 {"mal_id":61561,"anilist_id":191976,"kitsu_id":49943,"animeschedule_id":"cang-lan-jue-2"}
@@ -23870,7 +23871,7 @@
 {"mal_id":62965,"animeschedule_id":"blue-gale-xabungle-side-r"}
 {"mal_id":62967,"anilist_id":202385,"ann_id":38020,"animeschedule_id":"daikaijuu-gaea-tima"}
 {"mal_id":62969,"anisearch_id":21035}
-{"mal_id":62973,"ann_id":38021}
+{"mal_id":62973,"ann_id":38021,"animeschedule_id":"wareware-wa-uchuujin"}
 {"mal_id":62978,"anilist_id":202503,"ann_id":38027,"animeschedule_id":"majutsu-wo-kiwamete-tabi-ni-deta-tensei-elf-moteamashita-jumyou-de-ikeru-densetsu-to-naru"}
 {"mal_id":62981,"anilist_id":202508,"ann_id":38028,"anisearch_id":21023,"animeschedule_id":"kami-no-shizuku"}
 {"mal_id":62983,"anilist_id":202523,"ann_id":38030,"anisearch_id":21024,"animeschedule_id":"marika-chan-no-koukando-wa-bukkowareteiru"}
@@ -24118,8 +24119,9 @@
 {"mal_id":63885,"anilist_id":210199,"ann_id":38879,"anisearch_id":21420,"animeschedule_id":"the-fable-2nd-season"}
 {"mal_id":63903,"anilist_id":198654,"ann_id":38940,"animeschedule_id":"meitantei-precure-movie"}
 {"mal_id":63912,"anilist_id":210483,"ann_id":38953,"anisearch_id":21478,"animeschedule_id":"isekai-maou-to-shoukan-shoujo-no-dorei-majutsu-ult"}
-{"mal_id":63934,"anilist_id":190244}
+{"mal_id":63934,"anilist_id":190244,"animeschedule_id":"date-a-live-f-last-date"}
+{"mal_id":63938,"animeschedule_id":"cardfight-vanguard-divinez-unmei-seisen-hen"}
 {"mal_id":63939,"anisearch_id":21482}
 {"mal_id":63947,"anisearch_id":18663}
 {"mal_id":63957,"anilist_id":210932}
-{"mal_id":63958,"anilist_id":210945,"anisearch_id":21485}
+{"mal_id":63958,"anilist_id":210945,"anisearch_id":21485,"animeschedule_id":"majo-to-youhei"}
