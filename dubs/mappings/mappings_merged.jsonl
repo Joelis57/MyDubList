@@ -13412,7 +13412,7 @@
 {"mal_id":36030,"anilist_id":105892,"kitsu_id":41952,"anisearch_id":12967,"animeschedule_id":"yoiko-no-rekishi-anime-ookina-kabu-kabu"}
 {"mal_id":36032,"ann_id":2480,"kitsu_id":13814,"anisearch_id":13250}
 {"mal_id":36033,"anilist_id":99911,"kitsu_id":14026,"anisearch_id":12683}
-{"mal_id":36036,"kitsu_id":41606}
+{"mal_id":36036,"kitsu_id":41606,"anisearch_id":14860}
 {"mal_id":36037,"anilist_id":102822,"ann_id":21370,"kitsu_id":13690,"hianime_id":"senran-kagura-shinovi-master-6674","anisearch_id":12682,"animeschedule_id":"senran-kagura-shinovi-master-tokyo-youma-hen"}
 {"mal_id":36038,"anilist_id":99726,"ann_id":19980,"kitsu_id":13703,"hianime_id":"recovery-of-an-mmo-junkie-1098","anisearch_id":12694,"animeschedule_id":"net-juu-no-susume"}
 {"mal_id":36039,"anilist_id":99725,"ann_id":19989,"kitsu_id":13696,"hianime_id":"aico-incarnation-5004","anisearch_id":12697,"animeschedule_id":"a-i-c-o-incarnation"}
@@ -24119,5 +24119,7 @@
 {"mal_id":63903,"anilist_id":198654,"ann_id":38940,"animeschedule_id":"meitantei-precure-movie"}
 {"mal_id":63912,"anilist_id":210483,"ann_id":38953,"anisearch_id":21478,"animeschedule_id":"isekai-maou-to-shoukan-shoujo-no-dorei-majutsu-ult"}
 {"mal_id":63934,"anilist_id":190244}
+{"mal_id":63939,"anisearch_id":21482}
+{"mal_id":63947,"anisearch_id":18663}
 {"mal_id":63957,"anilist_id":210932}
-{"mal_id":63958,"anilist_id":210945}
+{"mal_id":63958,"anilist_id":210945,"anisearch_id":21485}
