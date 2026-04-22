@@ -23378,7 +23378,7 @@
 {"mal_id":61550,"anilist_id":191308,"animeschedule_id":"hitotte-tada-no-tsutsujanai-desu-ka"}
 {"mal_id":61555,"kitsu_id":49874,"anisearch_id":20740,"animeschedule_id":"holoearth-anime-pv-saa-anata-no-mou-hitotsu-no-sekai-e"}
 {"mal_id":61556,"anilist_id":198706,"kitsu_id":49944,"animeschedule_id":"da-zhu-zai-2023-2nd-season"}
-{"mal_id":61557,"kitsu_id":49945,"animeschedule_id":"nitian-xie-shen-nian-fan"}
+{"mal_id":61557,"anilist_id":184872,"kitsu_id":49945,"animeschedule_id":"nitian-xie-shen-nian-fan"}
 {"mal_id":61558,"anilist_id":191403,"ann_id":35818,"anisearch_id":20482,"animeschedule_id":"aikatsu-x-pripara-the-movie-deai-no-kiseki"}
 {"mal_id":61559,"kitsu_id":47460,"animeschedule_id":"seimei-ouka"}
 {"mal_id":61561,"anilist_id":191976,"kitsu_id":49943,"animeschedule_id":"cang-lan-jue-2"}
@@ -23563,7 +23563,7 @@
 {"mal_id":62047,"ann_id":36579}
 {"mal_id":62048,"anilist_id":196012,"ann_id":37025,"anisearch_id":20789,"animeschedule_id":"mao"}
 {"mal_id":62050,"anilist_id":196029,"ann_id":37026,"anisearch_id":20878,"animeschedule_id":"kami-no-niwatsuki-kusunoki-tei"}
-{"mal_id":62051,"ann_id":37027,"anisearch_id":20792,"animeschedule_id":"grow-up-show-himawari-no-circus-dan"}
+{"mal_id":62051,"anilist_id":196017,"ann_id":37027,"anisearch_id":20792,"animeschedule_id":"grow-up-show-himawari-no-circus-dan"}
 {"mal_id":62053,"anilist_id":178151}
 {"mal_id":62055,"anilist_id":204624,"anisearch_id":20756,"animeschedule_id":"jiu-cang-miao-wo-season-2-5"}
 {"mal_id":62058,"anilist_id":204625,"animeschedule_id":"miao-miao-xiao-juchang"}
@@ -23833,6 +23833,7 @@
 {"mal_id":62820,"anilist_id":202422,"animeschedule_id":"monster-strike-elle-daten-no-kakusei"}
 {"mal_id":62825,"anilist_id":200769,"ann_id":37926,"anisearch_id":20987,"animeschedule_id":"saikyou-no-shokugyou-wa-yuusha-demo-kenja-demo-naku-kanteishi-kari-rashii-desu-yo"}
 {"mal_id":62830,"anilist_id":202418,"animeschedule_id":"harukanaru-toki-no-naka-de-3-owarinaki-unmei-character-endings"}
+{"mal_id":62831,"anilist_id":211271}
 {"mal_id":62841,"anisearch_id":20989,"animeschedule_id":"kusuriya-no-hitorigoto-3rd-season-part-2"}
 {"mal_id":62843,"anilist_id":207886,"anisearch_id":21184,"animeschedule_id":"run-run-lantern"}
 {"mal_id":62844,"anilist_id":200929,"ann_id":37933,"anisearch_id":20990,"animeschedule_id":"kusuriya-no-hitorigoto-movie"}
@@ -23873,7 +23874,7 @@
 {"mal_id":62965,"animeschedule_id":"blue-gale-xabungle-side-r"}
 {"mal_id":62967,"anilist_id":202385,"ann_id":38020,"animeschedule_id":"daikaijuu-gaea-tima"}
 {"mal_id":62969,"anisearch_id":21035}
-{"mal_id":62973,"ann_id":38021,"animeschedule_id":"wareware-wa-uchuujin"}
+{"mal_id":62973,"anilist_id":202429,"ann_id":38021,"animeschedule_id":"wareware-wa-uchuujin"}
 {"mal_id":62978,"anilist_id":202503,"ann_id":38027,"animeschedule_id":"majutsu-wo-kiwamete-tabi-ni-deta-tensei-elf-moteamashita-jumyou-de-ikeru-densetsu-to-naru"}
 {"mal_id":62981,"anilist_id":202508,"ann_id":38028,"anisearch_id":21023,"animeschedule_id":"kami-no-shizuku"}
 {"mal_id":62983,"anilist_id":202523,"ann_id":38030,"anisearch_id":21024,"animeschedule_id":"marika-chan-no-koukando-wa-bukkowareteiru"}
@@ -24082,6 +24083,7 @@
 {"mal_id":63752,"anilist_id":209504,"ann_id":38732,"anisearch_id":21317,"animeschedule_id":"suterare-seijo-no-isekai-gohan-tabi-kakure-skill-de-camping-car-wo-shoukan-shimashita"}
 {"mal_id":63753,"ann_id":38727,"animeschedule_id":"kanata-kara"}
 {"mal_id":63754,"anilist_id":209502,"ann_id":38733,"anisearch_id":21312,"animeschedule_id":"shiotaiou-no-satou-san-ga-ore-ni-dake-amai"}
+{"mal_id":63758,"anilist_id":210347}
 {"mal_id":63762,"ann_id":38743}
 {"mal_id":63763,"anisearch_id":21320,"animeschedule_id":"zatsuyou-fuyo-jutsushi-ga-jibun-no-saikyou-ni-kizuku-made"}
 {"mal_id":63764,"animeschedule_id":"vertex-force"}
@@ -24091,6 +24093,7 @@
 {"mal_id":63778,"anilist_id":209670,"ann_id":38788,"animeschedule_id":"yuusha-party-wo-oidasareta-kiyoubinbou-2nd-season"}
 {"mal_id":63780,"anilist_id":209669,"ann_id":38789,"animeschedule_id":"hanazakari-no-kimitachi-e-2nd-season"}
 {"mal_id":63781,"anilist_id":209662,"animeschedule_id":"primadonna"}
+{"mal_id":63788,"anilist_id":211270}
 {"mal_id":63789,"ann_id":38803,"animeschedule_id":"mayonaka-heart-tune-2nd-season"}
 {"mal_id":63794,"anilist_id":209827,"ann_id":38810,"anisearch_id":21322,"animeschedule_id":"oshi-no-ko-4th-season"}
 {"mal_id":63801,"anilist_id":209872,"ann_id":38815,"anisearch_id":21332,"animeschedule_id":"ranma-2024-3rd-season"}
@@ -24119,6 +24122,7 @@
 {"mal_id":63877,"anilist_id":176275,"ann_id":32693}
 {"mal_id":63878,"ann_id":38871,"animeschedule_id":"migawari-reijou-wo-sukutta-no-wa-reikoku-mujihi-na-koori-no-ouji-no-ai-deshita"}
 {"mal_id":63885,"anilist_id":210199,"ann_id":38879,"anisearch_id":21420,"animeschedule_id":"the-fable-2nd-season"}
+{"mal_id":63901,"anilist_id":209709}
 {"mal_id":63903,"anilist_id":198654,"ann_id":38940,"animeschedule_id":"meitantei-precure-movie"}
 {"mal_id":63912,"anilist_id":210483,"ann_id":38953,"anisearch_id":21478,"animeschedule_id":"isekai-maou-to-shoukan-shoujo-no-dorei-majutsu-ult"}
 {"mal_id":63934,"anilist_id":190244,"animeschedule_id":"date-a-live-f-last-date"}
@@ -24128,3 +24132,9 @@
 {"mal_id":63957,"anilist_id":210932}
 {"mal_id":63958,"anilist_id":210945,"anisearch_id":21485,"animeschedule_id":"majo-to-youhei"}
 {"mal_id":63964,"anilist_id":163793}
+{"mal_id":63967,"anilist_id":153466}
+{"mal_id":63970,"anilist_id":211070}
+{"mal_id":63984,"anilist_id":211219}
+{"mal_id":63985,"anilist_id":211217}
+{"mal_id":63987,"anilist_id":211220}
+{"mal_id":63997,"anilist_id":98476}
