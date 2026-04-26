@@ -45,7 +45,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Italian | Italiano | 2363 |
 | Portuguese | Português | 1786 |
 | Korean | 한국어 | 1574 |
-| Chinese | 中文 | 1457 |
+| Chinese | 中文 | 1458 |
 | Tagalog | Tagalog | 817 |
 | Arabic | العربية | 317 |
 | Polish | Polski | 283 |
