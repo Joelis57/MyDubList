@@ -39,12 +39,12 @@ If you have an authoritative source to add, please open an issue/PR.
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | English | English | 5420 |
-| Spanish | Español | 3113 |
+| Spanish | Español | 3114 |
 | German | Deutsch | 3014 |
-| French | Français | 2490 |
-| Italian | Italiano | 2364 |
-| Portuguese | Português | 1786 |
-| Korean | 한국어 | 1575 |
+| French | Français | 2491 |
+| Italian | Italiano | 2365 |
+| Portuguese | Português | 1787 |
+| Korean | 한국어 | 1576 |
 | Chinese | 中文 | 1462 |
 | Tagalog | Tagalog | 818 |
 | Arabic | العربية | 317 |
@@ -53,7 +53,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Hungarian | Magyar | 210 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 136 |
-| Hebrew | עברית | 131 |
+| Hebrew | עברית | 132 |
 | Dutch | Nederlands | 105 |
 | Thai | ไทย | 93 |
 | Russian | Русский | 78 |
