@@ -4474,7 +4474,7 @@
 {"mal_id":6119,"anilist_id":6119,"ann_id":10656,"kitsu_id":4434,"anisearch_id":5354,"animeschedule_id":"cookin-idol-ai-mai-main"}
 {"mal_id":6120,"anilist_id":6120,"ann_id":11460,"kitsu_id":4435,"anisearch_id":5215}
 {"mal_id":6122,"anilist_id":6122,"ann_id":11287,"kitsu_id":4436,"anisearch_id":5251}
-{"mal_id":6124,"anilist_id":6124,"ann_id":6848,"kitsu_id":4437,"anisearch_id":20026,"animeschedule_id":"toshishun"}
+{"mal_id":6124,"anilist_id":6124,"ann_id":6848,"kitsu_id":4437,"anisearch_id":6196,"animeschedule_id":"toshishun"}
 {"mal_id":6127,"anilist_id":6127,"kitsu_id":4438,"anisearch_id":7135,"animeschedule_id":"toradora-sos"}
 {"mal_id":6129,"anilist_id":6129,"ann_id":10658,"kitsu_id":4439,"anisearch_id":5281,"animeschedule_id":"umi-monogatari-anata-ga-ite-kureta-koto"}
 {"mal_id":6130,"anilist_id":6130,"ann_id":10688,"kitsu_id":4440,"anisearch_id":5292,"animeschedule_id":"marie-and-gali"}
@@ -24110,7 +24110,7 @@
 {"mal_id":63822,"anilist_id":209980,"ann_id":38844,"animeschedule_id":"isekai-de-cheat-skill-wo-te-ni-shita-ore-wa-genjitsu-sekai-wo-mo-musou-suru-level-up-wa-jinsei-wo-kaeta-2nd-season"}
 {"mal_id":63823,"ann_id":38843}
 {"mal_id":63826,"anilist_id":210072}
-{"mal_id":63830,"anilist_id":210687}
+{"mal_id":63830,"anilist_id":210687,"anisearch_id":21503}
 {"mal_id":63832,"anilist_id":210031,"ann_id":38846,"anisearch_id":21357,"animeschedule_id":"seihantai-na-kimi-to-boku-2nd-season"}
 {"mal_id":63833,"anilist_id":210032,"anisearch_id":21361,"animeschedule_id":"baki-dou-part-2"}
 {"mal_id":63834,"animeschedule_id":"douwa-revenger-petit"}
@@ -24149,3 +24149,4 @@
 {"mal_id":64028,"ann_id":38826}
 {"mal_id":64058,"anisearch_id":21498,"animeschedule_id":"kagurabachi"}
 {"mal_id":64059,"animeschedule_id":"boushoku-no-berserk-2nd-season"}
+{"mal_id":64063,"anisearch_id":20026}
