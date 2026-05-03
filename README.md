@@ -40,9 +40,9 @@ If you have an authoritative source to add, please open an issue/PR.
 |---|---:|---:|
 | English | English | 5428 |
 | Spanish | Español | 3117 |
-| German | Deutsch | 3016 |
-| French | Français | 2491 |
-| Italian | Italiano | 2370 |
+| German | Deutsch | 3018 |
+| French | Français | 2492 |
+| Italian | Italiano | 2371 |
 | Portuguese | Português | 1787 |
 | Korean | 한국어 | 1577 |
 | Chinese | 中文 | 1463 |
