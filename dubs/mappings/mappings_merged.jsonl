@@ -14912,7 +14912,7 @@
 {"mal_id":38425,"anilist_id":105391,"ann_id":22179,"kitsu_id":42005,"hianime_id":"ikkitousen-western-wolves-6436","anisearch_id":13916,"animeschedule_id":"ikkitousen-western-wolves"}
 {"mal_id":38426,"kitsu_id":42618,"anisearch_id":14765}
 {"mal_id":38429,"ann_id":14334,"kitsu_id":42385,"anisearch_id":18679}
-{"mal_id":38431,"anilist_id":106896,"kitsu_id":41972,"anisearch_id":14139,"animeschedule_id":"persona-5-the-animation-dark-sun"}
+{"mal_id":38431,"anilist_id":106896,"kitsu_id":41972,"anisearch_id":14139,"animeschedule_id":"persona-5-the-animation-stars-and-ours"}
 {"mal_id":38433,"anilist_id":126888,"kitsu_id":42854,"anisearch_id":18818,"animeschedule_id":"god-eater-reso-nantoka-gekijou-episode-ex"}
 {"mal_id":38435,"anilist_id":104959,"kitsu_id":42048,"animeschedule_id":"yao-shen-ji-ying-yao-pian"}
 {"mal_id":38436,"anilist_id":104922,"kitsu_id":42663,"animeschedule_id":"dou-po-cangqiong-3"}
@@ -23025,7 +23025,7 @@
 {"mal_id":60570,"anilist_id":135580,"kitsu_id":48310,"animeschedule_id":"ling-long-2"}
 {"mal_id":60571,"anilist_id":186833}
 {"mal_id":60572,"anilist_id":191974,"kitsu_id":49892,"anisearch_id":20496,"animeschedule_id":"kun-tun-tianxia-zhi-zhang-men-guilai"}
-{"mal_id":60574,"anilist_id":199436,"animeschedule_id":"shen-kong-bian"}
+{"mal_id":60574,"anilist_id":199436,"animeschedule_id":"shenkong-bi-an"}
 {"mal_id":60575,"anilist_id":185671,"animeschedule_id":"gag-mensou"}
 {"mal_id":60577,"anilist_id":175645,"kitsu_id":49521,"animeschedule_id":"tong-ling-fei-2nd-season"}
 {"mal_id":60578,"anilist_id":199431}
@@ -24041,7 +24041,7 @@
 {"mal_id":63489,"anilist_id":207809,"ann_id":38471,"anisearch_id":21263,"animeschedule_id":"sora-wa-akai-kawa-no-hotori"}
 {"mal_id":63493,"anilist_id":207853,"anisearch_id":21267,"animeschedule_id":"dou-da-doing"}
 {"mal_id":63500,"anilist_id":186751}
-{"mal_id":63503,"anisearch_id":21359}
+{"mal_id":63503,"anisearch_id":21359,"animeschedule_id":"isekai-no-sata-wa-shachiku-shidai-omoi-wo-hasemashita"}
 {"mal_id":63504,"anilist_id":203127,"animeschedule_id":"princess-principal-crown-handler-chapter-4-fabulous-platypus"}
 {"mal_id":63508,"anilist_id":208044,"ann_id":38501,"anisearch_id":21287,"animeschedule_id":"rakudai-kenja-no-gakuin-musou-nidome-no-tensei-s-rank-cheat-majutsushi-boukenroku"}
 {"mal_id":63509,"anilist_id":208025,"ann_id":38505,"animeschedule_id":"dark-summoner-to-dekiteiru"}
@@ -24142,6 +24142,7 @@
 {"mal_id":63964,"anilist_id":163793}
 {"mal_id":63967,"anilist_id":153466,"animeschedule_id":"pan-long"}
 {"mal_id":63970,"anilist_id":211070,"ann_id":39070,"animeschedule_id":"pen-to-wappa-to-jijitsukon"}
+{"mal_id":63973,"animeschedule_id":"shiranuhi"}
 {"mal_id":63984,"anilist_id":211219}
 {"mal_id":63985,"anilist_id":211217}
 {"mal_id":63987,"anilist_id":211220}
@@ -24156,3 +24157,6 @@
 {"mal_id":64058,"anisearch_id":21498,"animeschedule_id":"kagurabachi"}
 {"mal_id":64059,"animeschedule_id":"boushoku-no-berserk-2nd-season"}
 {"mal_id":64063,"anisearch_id":20026}
+{"mal_id":64064,"animeschedule_id":"hokuhokusei-ni-kumo-to-ike"}
+{"mal_id":64084,"animeschedule_id":"sekai-saikyou-no-majo-hajimemashita"}
+{"mal_id":64091,"animeschedule_id":"aisanai-to-iwaremashitemo-moto-maou-no-hakushaku-reijou-wa-kimajime-gunjin-ni-ezuke-wo-sarete-shiawase-ni-naru"}
