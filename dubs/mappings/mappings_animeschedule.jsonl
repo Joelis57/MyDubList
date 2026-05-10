@@ -11899,7 +11899,7 @@
 {"mal_id":38422,"animeschedule_id":"high-score-girl-extra-stage"}
 {"mal_id":38424,"animeschedule_id":"controller-of-controller"}
 {"mal_id":38425,"animeschedule_id":"ikkitousen-western-wolves"}
-{"mal_id":38431,"animeschedule_id":"persona-5-the-animation-stars-and-ours"}
+{"mal_id":38431,"animeschedule_id":"persona-5-the-animation-dark-sun"}
 {"mal_id":38433,"animeschedule_id":"god-eater-reso-nantoka-gekijou-episode-ex"}
 {"mal_id":38435,"animeschedule_id":"yao-shen-ji-ying-yao-pian"}
 {"mal_id":38436,"animeschedule_id":"dou-po-cangqiong-3"}
@@ -18121,6 +18121,7 @@
 {"mal_id":60568,"animeschedule_id":"jiyi-guanli-ju-2"}
 {"mal_id":60569,"animeschedule_id":"zhongguo-qitan-2"}
 {"mal_id":60570,"animeschedule_id":"ling-long-2"}
+{"mal_id":60571,"animeschedule_id":"jiang-ye"}
 {"mal_id":60572,"animeschedule_id":"kun-tun-tianxia-zhi-zhang-men-guilai"}
 {"mal_id":60574,"animeschedule_id":"shenkong-bi-an"}
 {"mal_id":60575,"animeschedule_id":"gag-mensou"}
@@ -18132,6 +18133,7 @@
 {"mal_id":60583,"animeschedule_id":"xian-di-guilai"}
 {"mal_id":60586,"animeschedule_id":"kaiju-ditan-mai-dali"}
 {"mal_id":60587,"animeschedule_id":"yu-ling-shi"}
+{"mal_id":60588,"animeschedule_id":"kai-pai-la-guaishou-da-dianying"}
 {"mal_id":60589,"animeschedule_id":"da-xia-qing-shang-gong"}
 {"mal_id":60591,"animeschedule_id":"wei-miao-rensheng"}
 {"mal_id":60593,"animeschedule_id":"vigilante-boku-no-hero-academia-illegals"}
@@ -18686,6 +18688,7 @@
 {"mal_id":62703,"animeschedule_id":"bai-lian-cheng-shen-3rd-season"}
 {"mal_id":62708,"animeschedule_id":"shanhai-jing-mima"}
 {"mal_id":62715,"animeschedule_id":"sheng-xu"}
+{"mal_id":62718,"animeschedule_id":"xingchen-bian-7th-season"}
 {"mal_id":62728,"animeschedule_id":"jian-lai-2nd-season"}
 {"mal_id":62738,"animeschedule_id":"kaiju-jiu-you-wang-zhe-zhanghao"}
 {"mal_id":62747,"animeschedule_id":"tiancai-julebu"}
@@ -18937,3 +18940,6 @@
 {"mal_id":64064,"animeschedule_id":"hokuhokusei-ni-kumo-to-ike"}
 {"mal_id":64084,"animeschedule_id":"sekai-saikyou-no-majo-hajimemashita"}
 {"mal_id":64091,"animeschedule_id":"aisanai-to-iwaremashitemo-moto-maou-no-hakushaku-reijou-wa-kimajime-gunjin-ni-ezuke-wo-sarete-shiawase-ni-naru"}
+{"mal_id":64104,"animeschedule_id":"go-toubun-no-hanayome-shunkashuutou"}
+{"mal_id":64107,"animeschedule_id":"boku-no-hero-academia-i-am-a-hero-too"}
+{"mal_id":64131,"animeschedule_id":"kanojo-no-tomodachi"}

@@ -14913,7 +14913,7 @@
 {"mal_id":38425,"anilist_id":105391,"ann_id":22179,"kitsu_id":42005,"hianime_id":"ikkitousen-western-wolves-6436","anisearch_id":13916,"animeschedule_id":"ikkitousen-western-wolves"}
 {"mal_id":38426,"kitsu_id":42618,"anisearch_id":14765}
 {"mal_id":38429,"ann_id":14334,"kitsu_id":42385,"anisearch_id":18679}
-{"mal_id":38431,"anilist_id":106896,"kitsu_id":41972,"anisearch_id":14139,"animeschedule_id":"persona-5-the-animation-stars-and-ours"}
+{"mal_id":38431,"anilist_id":106896,"kitsu_id":41972,"anisearch_id":14139,"animeschedule_id":"persona-5-the-animation-dark-sun"}
 {"mal_id":38433,"anilist_id":126888,"kitsu_id":42854,"anisearch_id":18818,"animeschedule_id":"god-eater-reso-nantoka-gekijou-episode-ex"}
 {"mal_id":38435,"anilist_id":104959,"kitsu_id":42048,"animeschedule_id":"yao-shen-ji-ying-yao-pian"}
 {"mal_id":38436,"anilist_id":104922,"kitsu_id":42663,"animeschedule_id":"dou-po-cangqiong-3"}
@@ -23024,7 +23024,7 @@
 {"mal_id":60568,"anilist_id":141953,"kitsu_id":49803,"animeschedule_id":"jiyi-guanli-ju-2"}
 {"mal_id":60569,"anilist_id":199366,"animeschedule_id":"zhongguo-qitan-2"}
 {"mal_id":60570,"anilist_id":135580,"kitsu_id":48310,"animeschedule_id":"ling-long-2"}
-{"mal_id":60571,"anilist_id":186833}
+{"mal_id":60571,"anilist_id":186833,"animeschedule_id":"jiang-ye"}
 {"mal_id":60572,"anilist_id":191974,"kitsu_id":49892,"anisearch_id":20496,"animeschedule_id":"kun-tun-tianxia-zhi-zhang-men-guilai"}
 {"mal_id":60574,"anilist_id":199436,"animeschedule_id":"shenkong-bi-an"}
 {"mal_id":60575,"anilist_id":185671,"animeschedule_id":"gag-mensou"}
@@ -23037,7 +23037,7 @@
 {"mal_id":60583,"anilist_id":185858,"animeschedule_id":"xian-di-guilai"}
 {"mal_id":60586,"anilist_id":198695,"animeschedule_id":"kaiju-ditan-mai-dali"}
 {"mal_id":60587,"anilist_id":199411,"animeschedule_id":"yu-ling-shi"}
-{"mal_id":60588,"anilist_id":206145}
+{"mal_id":60588,"anilist_id":206145,"animeschedule_id":"kai-pai-la-guaishou-da-dianying"}
 {"mal_id":60589,"anilist_id":191978,"animeschedule_id":"da-xia-qing-shang-gong"}
 {"mal_id":60591,"anilist_id":203710,"animeschedule_id":"wei-miao-rensheng"}
 {"mal_id":60592,"anilist_id":156090}
@@ -23816,7 +23816,7 @@
 {"mal_id":62714,"anilist_id":206195}
 {"mal_id":62715,"anilist_id":210465,"animeschedule_id":"sheng-xu"}
 {"mal_id":62717,"anilist_id":206215}
-{"mal_id":62718,"anilist_id":206356}
+{"mal_id":62718,"anilist_id":206356,"animeschedule_id":"xingchen-bian-7th-season"}
 {"mal_id":62719,"anilist_id":206354}
 {"mal_id":62721,"anilist_id":206599}
 {"mal_id":62728,"anilist_id":205290,"animeschedule_id":"jian-lai-2nd-season"}
@@ -24161,3 +24161,6 @@
 {"mal_id":64064,"animeschedule_id":"hokuhokusei-ni-kumo-to-ike"}
 {"mal_id":64084,"anisearch_id":21543,"animeschedule_id":"sekai-saikyou-no-majo-hajimemashita"}
 {"mal_id":64091,"ann_id":39356,"animeschedule_id":"aisanai-to-iwaremashitemo-moto-maou-no-hakushaku-reijou-wa-kimajime-gunjin-ni-ezuke-wo-sarete-shiawase-ni-naru"}
+{"mal_id":64104,"animeschedule_id":"go-toubun-no-hanayome-shunkashuutou"}
+{"mal_id":64107,"animeschedule_id":"boku-no-hero-academia-i-am-a-hero-too"}
+{"mal_id":64131,"animeschedule_id":"kanojo-no-tomodachi"}
