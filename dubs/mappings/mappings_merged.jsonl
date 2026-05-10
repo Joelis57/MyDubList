@@ -8242,6 +8242,7 @@
 {"mal_id":20027,"anilist_id":20027,"ann_id":1069,"kitsu_id":9488,"anisearch_id":4100,"animeschedule_id":"nihon-meisaku-douwa-series-akai-tori-no-kokoro"}
 {"mal_id":20031,"anilist_id":20031,"ann_id":15705,"kitsu_id":8001,"hianime_id":"d-frag-1268","anisearch_id":9112,"animeschedule_id":"d-frag"}
 {"mal_id":20033,"anilist_id":20033,"ann_id":15556,"kitsu_id":7911,"anisearch_id":8962,"animeschedule_id":"miss-monochrome-the-animation"}
+{"mal_id":20034,"anisearch_id":21541}
 {"mal_id":20035,"anilist_id":20035,"kitsu_id":8120,"anisearch_id":8943,"animeschedule_id":"toaru-majutsu-no-index-endymion-no-kiseki-special"}
 {"mal_id":20039,"anilist_id":20039,"ann_id":15554,"kitsu_id":7900,"anisearch_id":8915,"animeschedule_id":"kill-me-baby-ova"}
 {"mal_id":20045,"anilist_id":20045,"ann_id":15606,"kitsu_id":7909,"hianime_id":"is-infinite-stratos-2-long-vacation-edition-the-memories-of-one-summer-3798","anisearch_id":9070,"animeschedule_id":"is-infinite-stratos-2-hitonatsu-no-omoide"}
@@ -24067,7 +24068,7 @@
 {"mal_id":63599,"animeschedule_id":"chidori"}
 {"mal_id":63600,"anilist_id":208610,"animeschedule_id":"kin-to-tetsu"}
 {"mal_id":63601,"anilist_id":208609,"ann_id":38610,"animeschedule_id":"hone-dragon-no-mana-musume"}
-{"mal_id":63619,"anilist_id":208685,"ann_id":38613}
+{"mal_id":63619,"anilist_id":208685,"ann_id":38613,"anisearch_id":21548}
 {"mal_id":63628,"animeschedule_id":"fashion-beat"}
 {"mal_id":63629,"animeschedule_id":"yomosugara"}
 {"mal_id":63632,"animeschedule_id":"guimi-zhi-zhu-wu-mian-ren"}
@@ -24158,5 +24159,5 @@
 {"mal_id":64059,"ann_id":39290,"animeschedule_id":"boushoku-no-berserk-2nd-season"}
 {"mal_id":64063,"ann_id":6848,"anisearch_id":20026}
 {"mal_id":64064,"animeschedule_id":"hokuhokusei-ni-kumo-to-ike"}
-{"mal_id":64084,"animeschedule_id":"sekai-saikyou-no-majo-hajimemashita"}
+{"mal_id":64084,"anisearch_id":21543,"animeschedule_id":"sekai-saikyou-no-majo-hajimemashita"}
 {"mal_id":64091,"ann_id":39356,"animeschedule_id":"aisanai-to-iwaremashitemo-moto-maou-no-hakushaku-reijou-wa-kimajime-gunjin-ni-ezuke-wo-sarete-shiawase-ni-naru"}
