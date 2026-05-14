@@ -39,14 +39,14 @@ If you have an authoritative source to add, please open an issue/PR.
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | English | English | 5429 |
-| Spanish | Español | 3119 |
+| Spanish | Español | 3120 |
 | German | Deutsch | 3018 |
 | French | Français | 2493 |
 | Italian | Italiano | 2371 |
 | Portuguese | Português | 1795 |
 | Korean | 한국어 | 1577 |
 | Chinese | 中文 | 1469 |
-| Tagalog | Tagalog | 818 |
+| Tagalog | Tagalog | 819 |
 | Arabic | العربية | 317 |
 | Polish | Polski | 283 |
 | Hindi | हिन्दी | 235 |
