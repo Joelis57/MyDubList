@@ -45,12 +45,12 @@ If you have an authoritative source to add, please open an issue/PR.
 | Italian | Italiano | 2371 |
 | Portuguese | Português | 1795 |
 | Korean | 한국어 | 1577 |
-| Chinese | 中文 | 1469 |
+| Chinese | 中文 | 1471 |
 | Tagalog | Tagalog | 819 |
 | Arabic | العربية | 317 |
 | Polish | Polski | 283 |
 | Hindi | हिन्दी | 235 |
-| Hungarian | Magyar | 210 |
+| Hungarian | Magyar | 209 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 136 |
 | Hebrew | עברית | 132 |
