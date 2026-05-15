@@ -42,7 +42,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Spanish | Español | 3121 |
 | German | Deutsch | 3019 |
 | French | Français | 2493 |
-| Italian | Italiano | 2371 |
+| Italian | Italiano | 2372 |
 | Portuguese | Português | 1795 |
 | Korean | 한국어 | 1577 |
 | Chinese | 中文 | 1471 |
