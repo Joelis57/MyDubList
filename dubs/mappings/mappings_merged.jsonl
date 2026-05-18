@@ -4674,7 +4674,7 @@
 {"mal_id":6609,"anilist_id":6609,"kitsu_id":4633,"hianime_id":"pucca-5616","anisearch_id":9875,"animeschedule_id":"pucca"}
 {"mal_id":6610,"anilist_id":6610,"ann_id":10915,"kitsu_id":4634,"hianime_id":"king-of-thorn-3523","anisearch_id":5518,"animeschedule_id":"ibara-no-ou"}
 {"mal_id":6616,"anilist_id":6616,"kitsu_id":4635}
-{"mal_id":6622,"anilist_id":6622,"ann_id":7521,"kitsu_id":4636}
+{"mal_id":6622,"anilist_id":6622,"ann_id":7521,"kitsu_id":4636,"anisearch_id":2648}
 {"mal_id":6624,"anilist_id":6624,"ann_id":23796,"kitsu_id":4637,"anisearch_id":5542,"animeschedule_id":"kara-no-kyoukai-remix-gate-of-seventh-heaven"}
 {"mal_id":6625,"anilist_id":6625,"ann_id":1854,"kitsu_id":4638,"anisearch_id":3097,"animeschedule_id":"nono-chan"}
 {"mal_id":6628,"anilist_id":6628,"kitsu_id":4639,"anisearch_id":5540,"animeschedule_id":"dengeki-bunko-2007-movie-festival-special"}
@@ -7768,7 +7768,7 @@
 {"mal_id":17741,"anilist_id":17741,"ann_id":15195,"kitsu_id":7672,"anisearch_id":8461,"animeschedule_id":"kimi-no-iru-machi"}
 {"mal_id":17743,"ann_id":14425,"kitsu_id":7828,"anisearch_id":8602}
 {"mal_id":17745,"anilist_id":17745,"ann_id":15675,"kitsu_id":7967,"anisearch_id":8426}
-{"mal_id":17747,"anilist_id":17747,"kitsu_id":7812}
+{"mal_id":17747,"anilist_id":17747,"kitsu_id":7812,"anisearch_id":8414}
 {"mal_id":17749,"anilist_id":17749,"kitsu_id":9411,"animeschedule_id":"kuruneko-kurunekobin"}
 {"mal_id":17753,"anilist_id":17753,"kitsu_id":9412,"animeschedule_id":"kuruneko-nyaalock-holmes-no-bouken"}
 {"mal_id":17777,"anilist_id":17777,"ann_id":14947,"kitsu_id":8060,"anisearch_id":8261,"animeschedule_id":"saikin-imouto-no-yousu-ga-chotto-okashiinda-ga"}
@@ -16611,7 +16611,7 @@
 {"mal_id":41660,"anilist_id":117496,"kitsu_id":43175,"anisearch_id":14937,"animeschedule_id":"yesterday-wo-utatte-extras"}
 {"mal_id":41663,"anilist_id":120345,"kitsu_id":42937,"animeschedule_id":"natsuyasumi-no-osakana"}
 {"mal_id":41664,"anilist_id":117963,"animeschedule_id":"papa-to-rusuban"}
-{"mal_id":41667,"anilist_id":154246,"animeschedule_id":"monkateu"}
+{"mal_id":41667,"anilist_id":154246,"anisearch_id":14688,"animeschedule_id":"monkateu"}
 {"mal_id":41673,"anilist_id":178602,"animeschedule_id":"oshiri-no-yama-wa-everest"}
 {"mal_id":41674,"anilist_id":117556,"ann_id":24066,"kitsu_id":43481,"anisearch_id":15177,"animeschedule_id":"aria-the-crepuscolo"}
 {"mal_id":41684,"anilist_id":148127,"kitsu_id":43196,"animeschedule_id":"oka-shika-chika-ika-saka"}
@@ -18837,7 +18837,7 @@
 {"mal_id":50663,"anilist_id":143086,"ann_id":25092,"kitsu_id":45651,"hianime_id":"pop-team-epic-2nd-season-18169","animeschedule_id":"pop-team-epic-2"}
 {"mal_id":50664,"anilist_id":143085,"ann_id":25093,"kitsu_id":45657,"hianime_id":"the-faraway-paladin-the-lord-of-rust-mountains-18576","anisearch_id":16958,"animeschedule_id":"saihate-no-paladin-2"}
 {"mal_id":50667,"anilist_id":137738,"kitsu_id":46180,"animeschedule_id":"xingchen-bian-po-tian-mi-ju"}
-{"mal_id":50668,"anilist_id":143103,"ann_id":25095,"kitsu_id":45666,"animeschedule_id":"mahoutsukai-no-yoru"}
+{"mal_id":50668,"anilist_id":143103,"ann_id":25095,"kitsu_id":45666,"anisearch_id":16972,"animeschedule_id":"mahoutsukai-no-yoru"}
 {"mal_id":50669,"kitsu_id":45663}
 {"mal_id":50672,"anilist_id":143082,"ann_id":25083,"kitsu_id":45655,"anisearch_id":16954,"animeschedule_id":"sasaki-to-miyano-koi-ni-kizuku-mae-no-chotto-shita-hanashi"}
 {"mal_id":50673,"anilist_id":142794,"ann_id":25094,"kitsu_id":45599,"anisearch_id":17047,"animeschedule_id":"pokemon-2019-kami-to-yobareshi-arceus"}
@@ -19111,7 +19111,7 @@
 {"mal_id":51404,"anilist_id":140173,"ann_id":24845,"anisearch_id":16645}
 {"mal_id":51405,"anilist_id":140955,"kitsu_id":48428,"animeschedule_id":"shi-wang-zhe-a"}
 {"mal_id":51407,"anilist_id":146497,"animeschedule_id":"brand-new-pastel-road"}
-{"mal_id":51412,"anilist_id":155910,"ann_id":25244,"kitsu_id":48407,"animeschedule_id":"tenjin"}
+{"mal_id":51412,"anilist_id":155910,"ann_id":25244,"kitsu_id":48407,"anisearch_id":16789,"animeschedule_id":"tenjin"}
 {"mal_id":51413,"anilist_id":155913,"ann_id":25245,"kitsu_id":48408,"animeschedule_id":"rock-n-oyone"}
 {"mal_id":51414,"anilist_id":155736,"ann_id":25246,"kitsu_id":46451,"animeschedule_id":"uchuu-camper-chichi"}
 {"mal_id":51415,"anilist_id":146678,"ann_id":25473,"kitsu_id":46004,"anisearch_id":17245,"animeschedule_id":"opus-colors"}
@@ -23315,7 +23315,7 @@
 {"mal_id":61300,"anilist_id":188884,"ann_id":35315,"anisearch_id":20402,"animeschedule_id":"sumikko-gurashi-koko-ga-ochitsukun-desu"}
 {"mal_id":61301,"anilist_id":188889,"ann_id":35318,"animeschedule_id":"ma-no-mono-tachi-wa-kuwadateru"}
 {"mal_id":61302,"kitsu_id":49787}
-{"mal_id":61304,"anilist_id":188892,"ann_id":35335,"animeschedule_id":"kuroiwa-medaka-ni-watashi-no-kawaii-ga-tsuujinai-2nd-season"}
+{"mal_id":61304,"anilist_id":188892,"ann_id":35335,"anisearch_id":20348,"animeschedule_id":"kuroiwa-medaka-ni-watashi-no-kawaii-ga-tsuujinai-2nd-season"}
 {"mal_id":61310,"anilist_id":189736,"kitsu_id":49770,"animeschedule_id":"go-go-vehicle-zoo-ona"}
 {"mal_id":61313,"ann_id":25059}
 {"mal_id":61314,"ann_id":31080}
@@ -24022,6 +24022,7 @@
 {"mal_id":63409,"anilist_id":207191,"ann_id":38410,"animeschedule_id":"doumo-suki-na-hito-ni-horegusuri-wo-irai-sareta-majo-desu"}
 {"mal_id":63411,"anilist_id":206889,"ann_id":38377,"animeschedule_id":"fukufuku-no-chizu"}
 {"mal_id":63413,"anilist_id":207037,"animeschedule_id":"ginga-tetsudou-999-jikuu-wo-koeta-energy-no-tabi-season-2"}
+{"mal_id":63414,"anisearch_id":21565}
 {"mal_id":63415,"anilist_id":208065,"animeschedule_id":"lele-bianlidian"}
 {"mal_id":63416,"anilist_id":155331}
 {"mal_id":63418,"anisearch_id":21226,"animeschedule_id":"thunder-3"}
@@ -24106,7 +24107,7 @@
 {"mal_id":63789,"ann_id":38803,"animeschedule_id":"mayonaka-heart-tune-2nd-season"}
 {"mal_id":63794,"anilist_id":209827,"ann_id":38810,"anisearch_id":21322,"animeschedule_id":"oshi-no-ko-4th-season"}
 {"mal_id":63801,"anilist_id":209872,"ann_id":38815,"anisearch_id":21332,"animeschedule_id":"ranma-2024-3rd-season"}
-{"mal_id":63802,"anilist_id":108992,"ann_id":38816}
+{"mal_id":63802,"anilist_id":108992,"ann_id":38816,"anisearch_id":15978}
 {"mal_id":63807,"anilist_id":209876,"ann_id":38821,"animeschedule_id":"mf-ghost-final-season"}
 {"mal_id":63810,"anilist_id":209982}
 {"mal_id":63813,"ann_id":38825,"animeschedule_id":"danzai-sareta-akuyaku-reijou-wa-gyakkou-shite-kanpeki-na-akujo-wo-mezasu"}
@@ -24129,7 +24130,7 @@
 {"mal_id":63858,"anilist_id":187596}
 {"mal_id":63859,"anilist_id":209962}
 {"mal_id":63877,"anilist_id":176275,"ann_id":32693}
-{"mal_id":63878,"ann_id":38871,"animeschedule_id":"migawari-reijou-wo-sukutta-no-wa-reikoku-mujihi-na-koori-no-ouji-no-ai-deshita"}
+{"mal_id":63878,"ann_id":38871,"anisearch_id":21421,"animeschedule_id":"migawari-reijou-wo-sukutta-no-wa-reikoku-mujihi-na-koori-no-ouji-no-ai-deshita"}
 {"mal_id":63885,"anilist_id":210199,"ann_id":38879,"anisearch_id":21420,"animeschedule_id":"the-fable-2nd-season"}
 {"mal_id":63901,"anilist_id":209709}
 {"mal_id":63903,"anilist_id":198654,"ann_id":38940,"animeschedule_id":"meitantei-precure-movie"}
@@ -24167,3 +24168,4 @@
 {"mal_id":64107,"animeschedule_id":"boku-no-hero-academia-i-am-a-hero-too"}
 {"mal_id":64131,"animeschedule_id":"kanojo-no-tomodachi"}
 {"mal_id":64154,"ann_id":39467,"animeschedule_id":"umi-ga-hashiru-end-roll"}
+{"mal_id":64180,"anisearch_id":21564}
