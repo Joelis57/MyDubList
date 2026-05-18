@@ -42,11 +42,11 @@ If you have an authoritative source to add, please open an issue/PR.
 | Spanish | Español | 3121 |
 | German | Deutsch | 3019 |
 | French | Français | 2493 |
-| Italian | Italiano | 2372 |
+| Italian | Italiano | 2373 |
 | Portuguese | Português | 1795 |
 | Korean | 한국어 | 1577 |
 | Chinese | 中文 | 1471 |
-| Tagalog | Tagalog | 819 |
+| Tagalog | Tagalog | 820 |
 | Arabic | العربية | 317 |
 | Polish | Polski | 283 |
 | Hindi | हिन्दी | 235 |
