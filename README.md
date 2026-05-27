@@ -41,11 +41,11 @@ If you have an authoritative source to add, please open an issue/PR.
 | English | English | 5434 |
 | Spanish | Español | 3124 |
 | German | Deutsch | 3022 |
-| French | Français | 2498 |
+| French | Français | 2499 |
 | Italian | Italiano | 2377 |
 | Portuguese | Português | 1795 |
 | Korean | 한국어 | 1579 |
-| Chinese | 中文 | 1472 |
+| Chinese | 中文 | 1474 |
 | Tagalog | Tagalog | 821 |
 | Arabic | العربية | 317 |
 | Polish | Polski | 283 |
