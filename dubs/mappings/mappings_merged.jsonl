@@ -13366,7 +13366,7 @@
 {"mal_id":35949,"anilist_id":99547,"ann_id":19893,"kitsu_id":14213,"hianime_id":"mobile-suit-gundam-thunderbolt-bandit-flower-2501","anisearch_id":12661,"animeschedule_id":"kidou-senshi-gundam-thunderbolt-bandit-flower"}
 {"mal_id":35952,"kitsu_id":13907,"anisearch_id":15406}
 {"mal_id":35956,"anilist_id":102696,"kitsu_id":13829,"animeschedule_id":"lu-lin-da-maoxian-zhi-tangguo-shijie"}
-{"mal_id":35957,"anilist_id":115191,"kitsu_id":14178,"animeschedule_id":"yura-yura-suizokukan"}
+{"mal_id":35957,"anilist_id":115191,"kitsu_id":14178,"anisearch_id":12707,"animeschedule_id":"yura-yura-suizokukan"}
 {"mal_id":35958,"anilist_id":103984,"kitsu_id":14198,"animeschedule_id":"tori-vs-buta-buttobi-pizza-battle"}
 {"mal_id":35960,"anilist_id":104749,"ann_id":23859,"kitsu_id":13889,"anisearch_id":12176,"animeschedule_id":"kud-wafter"}
 {"mal_id":35962,"kitsu_id":40850}
@@ -24065,7 +24065,7 @@
 {"mal_id":63572,"anilist_id":208352,"ann_id":38567,"anisearch_id":21293,"animeschedule_id":"dandelion"}
 {"mal_id":63573,"anilist_id":208369,"ann_id":38579,"anisearch_id":21291,"animeschedule_id":"zeikin-de-katta-hon"}
 {"mal_id":63577,"animeschedule_id":"chatter-chatter"}
-{"mal_id":63582,"anilist_id":208314}
+{"mal_id":63582,"anilist_id":208314,"anisearch_id":21547}
 {"mal_id":63595,"animeschedule_id":"cang-yuan-tu-qianzhuan-dongning-fu-de-xiatian"}
 {"mal_id":63599,"animeschedule_id":"chidori"}
 {"mal_id":63600,"anilist_id":208610,"animeschedule_id":"kin-to-tetsu"}
@@ -24089,7 +24089,7 @@
 {"mal_id":63735,"anilist_id":209247,"ann_id":38683,"animeschedule_id":"boku-no-kokoro-no-yabai-yatsu-3rd-season"}
 {"mal_id":63736,"anisearch_id":21370}
 {"mal_id":63739,"ann_id":38391,"anisearch_id":21315}
-{"mal_id":63751,"anilist_id":209499,"ann_id":38726,"animeschedule_id":"tank-chair"}
+{"mal_id":63751,"anilist_id":209499,"ann_id":38726,"anisearch_id":21314,"animeschedule_id":"tank-chair"}
 {"mal_id":63752,"anilist_id":209504,"ann_id":38732,"anisearch_id":21317,"animeschedule_id":"suterare-seijo-no-isekai-gohan-tabi-kakure-skill-de-camping-car-wo-shoukan-shimashita"}
 {"mal_id":63753,"ann_id":38727,"animeschedule_id":"kanata-kara"}
 {"mal_id":63754,"anilist_id":209502,"ann_id":38733,"anisearch_id":21312,"animeschedule_id":"shiotaiou-no-satou-san-ga-ore-ni-dake-amai"}
@@ -24171,5 +24171,7 @@
 {"mal_id":64180,"anisearch_id":21564,"animeschedule_id":"kizu-darake-seijo-yori-houfuku-wo-komete-2"}
 {"mal_id":64213,"animeschedule_id":"gigant"}
 {"mal_id":64235,"animeschedule_id":"omae-tanuki-ni-naranee-ka"}
+{"mal_id":64238,"anisearch_id":20275}
 {"mal_id":64253,"anisearch_id":21574,"animeschedule_id":"gekkakoku-kiiden"}
 {"mal_id":64254,"anisearch_id":21575,"animeschedule_id":"hyouken-no-majutsushi-ga-sekai-wo-suberu-ii"}
+{"mal_id":64268,"anisearch_id":21451}
