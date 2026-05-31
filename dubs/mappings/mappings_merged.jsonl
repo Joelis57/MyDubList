@@ -23646,7 +23646,7 @@
 {"mal_id":62269,"anisearch_id":20914}
 {"mal_id":62270,"anilist_id":197543,"anisearch_id":21196,"animeschedule_id":"bang-dream-ave-mujica-prima-aurora"}
 {"mal_id":62273,"kitsu_id":50100}
-{"mal_id":62276,"anilist_id":199448}
+{"mal_id":62276,"anilist_id":199448,"animeschedule_id":"guimi-zhi-zhu-tebie-pian-liewu"}
 {"mal_id":62277,"anilist_id":197474,"ann_id":37501,"anisearch_id":20836,"animeschedule_id":"gintama-movie-3-yoshiwara-daienjou"}
 {"mal_id":62278,"anilist_id":205906}
 {"mal_id":62279,"anilist_id":198704,"animeschedule_id":"wangu-jian-di"}
@@ -23826,7 +23826,7 @@
 {"mal_id":62744,"anilist_id":199357}
 {"mal_id":62747,"anilist_id":206143,"animeschedule_id":"tiancai-julebu"}
 {"mal_id":62751,"anilist_id":168245}
-{"mal_id":62753,"anisearch_id":20986}
+{"mal_id":62753,"anisearch_id":20986,"animeschedule_id":"yowaki-max-reijou-nano-ni-ratsuwan-konyakusha-sama-no-kake-ni-notte-shimatta"}
 {"mal_id":62781,"anilist_id":155306}
 {"mal_id":62786,"anilist_id":206193}
 {"mal_id":62789,"anilist_id":206273}
@@ -24174,4 +24174,7 @@
 {"mal_id":64238,"anisearch_id":20275}
 {"mal_id":64253,"anisearch_id":21574,"animeschedule_id":"gekkakoku-kiiden"}
 {"mal_id":64254,"anisearch_id":21575,"animeschedule_id":"hyouken-no-majutsushi-ga-sekai-wo-suberu-ii"}
+{"mal_id":64266,"animeschedule_id":"takopii-no-genzai-arigatou-mata-ashita"}
 {"mal_id":64268,"anisearch_id":21451}
+{"mal_id":64290,"animeschedule_id":"dorohedoro-season-3"}
+{"mal_id":64298,"animeschedule_id":"hitozukiai-ga-nigate-na-miboujin-no-yukionna-san-to-noroi-no-yubiwa"}
