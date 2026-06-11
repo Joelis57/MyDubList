@@ -14913,7 +14913,7 @@
 {"mal_id":38425,"anilist_id":105391,"ann_id":22179,"kitsu_id":42005,"hianime_id":"ikkitousen-western-wolves-6436","anisearch_id":13916,"animeschedule_id":"ikkitousen-western-wolves"}
 {"mal_id":38426,"kitsu_id":42618,"anisearch_id":14765}
 {"mal_id":38429,"ann_id":14334,"kitsu_id":42385,"anisearch_id":18679}
-{"mal_id":38431,"anilist_id":106896,"kitsu_id":41972,"anisearch_id":14139,"animeschedule_id":"persona-5-the-animation-dark-sun"}
+{"mal_id":38431,"anilist_id":106896,"kitsu_id":41972,"anisearch_id":14139,"animeschedule_id":"persona-5-the-animation-stars-and-ours"}
 {"mal_id":38433,"anilist_id":126888,"kitsu_id":42854,"anisearch_id":18818,"animeschedule_id":"god-eater-reso-nantoka-gekijou-episode-ex"}
 {"mal_id":38435,"anilist_id":104959,"kitsu_id":42048,"animeschedule_id":"yao-shen-ji-ying-yao-pian"}
 {"mal_id":38436,"anilist_id":104922,"kitsu_id":42663,"animeschedule_id":"dou-po-cangqiong-3"}
@@ -24174,6 +24174,7 @@
 {"mal_id":64180,"anisearch_id":21564,"animeschedule_id":"kizu-darake-seijo-yori-houfuku-wo-komete-2"}
 {"mal_id":64213,"ann_id":39571,"animeschedule_id":"gigant"}
 {"mal_id":64216,"ann_id":23339}
+{"mal_id":64217,"animeschedule_id":"nikke-nichi-non-non-zenshou-kichi"}
 {"mal_id":64230,"ann_id":39236}
 {"mal_id":64235,"ann_id":39616,"animeschedule_id":"omae-tanuki-ni-naranee-ka"}
 {"mal_id":64238,"anisearch_id":20275}
@@ -24193,3 +24194,4 @@
 {"mal_id":64350,"animeschedule_id":"mahouka-koukou-no-rettousei-part-2"}
 {"mal_id":64354,"ann_id":39844}
 {"mal_id":64357,"ann_id":39856}
+{"mal_id":64374,"animeschedule_id":"dengeki-daisy"}
