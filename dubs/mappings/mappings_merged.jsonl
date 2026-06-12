@@ -7275,7 +7275,7 @@
 {"mal_id":15323,"anilist_id":15323,"ann_id":14669,"kitsu_id":7240,"anisearch_id":8028,"animeschedule_id":"one-piece-episode-of-nami-koukaishi-no-namida-to-nakama-no-kizuna"}
 {"mal_id":15325,"kitsu_id":6761,"anisearch_id":8098}
 {"mal_id":15335,"anilist_id":15335,"ann_id":14996,"kitsu_id":7241,"anisearch_id":8019,"animeschedule_id":"gintama-kanketsu-hen-yorozuya-yo-eien-nare"}
-{"mal_id":15347,"anilist_id":15347,"ann_id":11776,"kitsu_id":7242,"animeschedule_id":"meitantei-holmes-aoi-ruby-no-maki-kaitei-no-zaihou-no-maki"}
+{"mal_id":15347,"anilist_id":15347,"ann_id":11776,"kitsu_id":7242,"anisearch_id":10002,"animeschedule_id":"meitantei-holmes-aoi-ruby-no-maki-kaitei-no-zaihou-no-maki"}
 {"mal_id":15359,"anilist_id":15359,"ann_id":14964,"kitsu_id":7243,"anisearch_id":8021,"animeschedule_id":"kyousougiga-2012"}
 {"mal_id":15377,"anilist_id":15377,"ann_id":14997,"kitsu_id":7244,"hianime_id":"samurai-bride-4449","anisearch_id":8029,"animeschedule_id":"hyakka-ryouran-samurai-bride"}
 {"mal_id":15379,"anilist_id":15379,"ann_id":14722,"kitsu_id":7245,"anisearch_id":8024,"animeschedule_id":"kotoura-san"}
@@ -24168,7 +24168,7 @@
 {"mal_id":64091,"ann_id":39356,"animeschedule_id":"aisanai-to-iwaremashitemo-moto-maou-no-hakushaku-reijou-wa-kimajime-gunjin-ni-ezuke-wo-sarete-shiawase-ni-naru"}
 {"mal_id":64104,"animeschedule_id":"go-toubun-no-hanayome-shunkashuutou"}
 {"mal_id":64107,"animeschedule_id":"boku-no-hero-academia-i-am-a-hero-too"}
-{"mal_id":64131,"animeschedule_id":"kanojo-no-tomodachi"}
+{"mal_id":64131,"anisearch_id":21562,"animeschedule_id":"kanojo-no-tomodachi"}
 {"mal_id":64154,"ann_id":39467,"animeschedule_id":"umi-ga-hashiru-end-roll"}
 {"mal_id":64175,"ann_id":6290}
 {"mal_id":64180,"anisearch_id":21564,"animeschedule_id":"kizu-darake-seijo-yori-houfuku-wo-komete-2"}
