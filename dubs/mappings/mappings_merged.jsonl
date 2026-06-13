@@ -16715,7 +16715,7 @@
 {"mal_id":42044,"anilist_id":120771,"kitsu_id":44975,"anisearch_id":19846,"animeschedule_id":"minegishi-san-wa-ootsu-kun-ni-tabesasetai"}
 {"mal_id":42047,"kitsu_id":44445}
 {"mal_id":42048,"anilist_id":118860,"kitsu_id":43583,"anisearch_id":15278}
-{"mal_id":42054,"anilist_id":119402,"kitsu_id":43574}
+{"mal_id":42054,"anilist_id":119402,"kitsu_id":43574,"anisearch_id":15568}
 {"mal_id":42055,"anilist_id":119403,"kitsu_id":43575,"animeschedule_id":"chou-futsuu-toshi-kashiwa-densetsu-z"}
 {"mal_id":42057,"anilist_id":121684,"ann_id":23300,"kitsu_id":43719,"anisearch_id":15275,"animeschedule_id":"kyoshin-to-hyouka-no-shiro"}
 {"mal_id":42061,"kitsu_id":44446}
@@ -23664,7 +23664,7 @@
 {"mal_id":62299,"anilist_id":192609}
 {"mal_id":62301,"anilist_id":195187,"animeschedule_id":"champagne-night-fever"}
 {"mal_id":62304,"animeschedule_id":"koiboshi-perico"}
-{"mal_id":62311,"anilist_id":197619,"ann_id":37525}
+{"mal_id":62311,"anilist_id":197619,"ann_id":37525,"anisearch_id":20841}
 {"mal_id":62312,"anilist_id":197620,"ann_id":37526,"anisearch_id":20850,"animeschedule_id":"sekiro-no-defeat"}
 {"mal_id":62314,"anilist_id":196540}
 {"mal_id":62315,"anilist_id":196722,"anisearch_id":20829}
@@ -24029,7 +24029,7 @@
 {"mal_id":63416,"anilist_id":155331}
 {"mal_id":63418,"anisearch_id":21226,"animeschedule_id":"thunder-3"}
 {"mal_id":63419,"anilist_id":207251,"anisearch_id":21222,"animeschedule_id":"mairimashita-iruma-kun-if-episode-of-mafia"}
-{"mal_id":63423,"anilist_id":207327,"ann_id":38432,"animeschedule_id":"doko-yori-mo-tooi-basho-ni-iru-kimi-e"}
+{"mal_id":63423,"anilist_id":207327,"ann_id":38432,"anisearch_id":21228,"animeschedule_id":"doko-yori-mo-tooi-basho-ni-iru-kimi-e"}
 {"mal_id":63424,"ann_id":38428,"animeschedule_id":"yuukyuu-no-gusha-asley-no-kenja-no-susume"}
 {"mal_id":63427,"anilist_id":208064,"animeschedule_id":"tang-zhi-zhi-yi"}
 {"mal_id":63428,"anilist_id":207363,"animeschedule_id":"xi-yangyang-yu-hui-tailang-gu-guguai-jie-you-guguai"}
@@ -24049,7 +24049,7 @@
 {"mal_id":63503,"anisearch_id":21359,"animeschedule_id":"isekai-no-sata-wa-shachiku-shidai-omoi-wo-hasemashita"}
 {"mal_id":63504,"anilist_id":203127,"animeschedule_id":"princess-principal-crown-handler-chapter-4-fabulous-platypus"}
 {"mal_id":63508,"anilist_id":208044,"ann_id":38501,"anisearch_id":21287,"animeschedule_id":"rakudai-kenja-no-gakuin-musou-nidome-no-tensei-s-rank-cheat-majutsushi-boukenroku"}
-{"mal_id":63509,"anilist_id":208025,"ann_id":38505,"animeschedule_id":"dark-summoner-to-dekiteiru"}
+{"mal_id":63509,"anilist_id":208025,"ann_id":38505,"anisearch_id":21286,"animeschedule_id":"dark-summoner-to-dekiteiru"}
 {"mal_id":63512,"anilist_id":208829,"animeschedule_id":"crayon-shin-chan-kikikaikai-ora-no-youkai-bake-shon"}
 {"mal_id":63514,"ann_id":38513,"anisearch_id":21285,"animeschedule_id":"perfect-addiction"}
 {"mal_id":63520,"anilist_id":206840}
@@ -24197,4 +24197,4 @@
 {"mal_id":64374,"animeschedule_id":"dengeki-daisy"}
 {"mal_id":64378,"animeschedule_id":"hokuto-no-ken-kenougun-zako-tachi-no-banka-part-2"}
 {"mal_id":64379,"animeschedule_id":"saikyou-mahoushi-no-inton-keikaku"}
-{"mal_id":64380,"animeschedule_id":"koiseyo-mayakashi-tenshi-domo"}
+{"mal_id":64380,"anisearch_id":21731,"animeschedule_id":"koiseyo-mayakashi-tenshi-domo"}
