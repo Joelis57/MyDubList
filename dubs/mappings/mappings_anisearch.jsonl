@@ -9560,6 +9560,7 @@
 {"mal_id":35385,"anisearch_id":12425}
 {"mal_id":35413,"anisearch_id":12406}
 {"mal_id":35416,"anisearch_id":12712}
+{"mal_id":35417,"anisearch_id":12477}
 {"mal_id":35418,"anisearch_id":12508}
 {"mal_id":35424,"anisearch_id":12302}
 {"mal_id":35425,"anisearch_id":12302}
@@ -10483,11 +10484,11 @@
 {"mal_id":38331,"anisearch_id":13895}
 {"mal_id":38333,"anisearch_id":13898}
 {"mal_id":38337,"anisearch_id":13899}
-{"mal_id":38347,"anisearch_id":19517}
 {"mal_id":38348,"anisearch_id":13905}
 {"mal_id":38349,"anisearch_id":13922}
 {"mal_id":38357,"anisearch_id":13921}
 {"mal_id":38360,"anisearch_id":12148}
+{"mal_id":38365,"anisearch_id":13919}
 {"mal_id":38367,"anisearch_id":19839}
 {"mal_id":38373,"anisearch_id":14304}
 {"mal_id":38378,"anisearch_id":12336}
@@ -13347,6 +13348,7 @@
 {"mal_id":58275,"anisearch_id":19112}
 {"mal_id":58278,"anisearch_id":19150}
 {"mal_id":58302,"anisearch_id":19118}
+{"mal_id":58318,"anisearch_id":19185}
 {"mal_id":58319,"anisearch_id":19116}
 {"mal_id":58320,"anisearch_id":19186}
 {"mal_id":58321,"anisearch_id":19205}
@@ -14286,4 +14288,6 @@
 {"mal_id":64268,"anisearch_id":21451}
 {"mal_id":64292,"anisearch_id":21583}
 {"mal_id":64340,"anisearch_id":21586}
+{"mal_id":64378,"anisearch_id":21736}
+{"mal_id":64379,"anisearch_id":21735}
 {"mal_id":64380,"anisearch_id":21731}

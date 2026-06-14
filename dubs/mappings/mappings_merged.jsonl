@@ -13079,7 +13079,7 @@
 {"mal_id":35411,"kitsu_id":40755}
 {"mal_id":35413,"anilist_id":98596,"ann_id":19592,"kitsu_id":11207,"hianime_id":"a-sisters-all-you-need-1887","anisearch_id":12406,"animeschedule_id":"imouto-sae-ireba-ii"}
 {"mal_id":35416,"anilist_id":98851,"ann_id":18691,"kitsu_id":40756,"anisearch_id":12712,"animeschedule_id":"kabukibu-oogiri-chiyokoreito-kassen"}
-{"mal_id":35417,"anilist_id":98622,"kitsu_id":13435,"animeschedule_id":"sin-nanatsu-no-taizai-zange-roku"}
+{"mal_id":35417,"anilist_id":98622,"kitsu_id":13435,"anisearch_id":12477,"animeschedule_id":"sin-nanatsu-no-taizai-zange-roku"}
 {"mal_id":35418,"anilist_id":98621,"kitsu_id":13436,"anisearch_id":12508,"animeschedule_id":"sin-nanatsu-no-taizai-zange-roku-specials"}
 {"mal_id":35419,"anilist_id":126256,"kitsu_id":40757,"animeschedule_id":"jitensha-ni-notte"}
 {"mal_id":35423,"anilist_id":104086,"kitsu_id":13751,"animeschedule_id":"ribbon"}
@@ -14866,7 +14866,7 @@
 {"mal_id":38339,"anilist_id":145435,"kitsu_id":47082}
 {"mal_id":38341,"anilist_id":109006,"kitsu_id":44851,"animeschedule_id":"bai-niao"}
 {"mal_id":38346,"anilist_id":105899,"animeschedule_id":"an-tu-an-tu"}
-{"mal_id":38347,"anilist_id":143572,"kitsu_id":42544,"anisearch_id":19517,"animeschedule_id":"kiskis-wo-de-nanyou-shi-bohe-tang"}
+{"mal_id":38347,"anilist_id":143572,"kitsu_id":42544,"animeschedule_id":"kiskis-wo-de-nanyou-shi-bohe-tang"}
 {"mal_id":38348,"anilist_id":126322,"kitsu_id":44838,"anisearch_id":13905,"animeschedule_id":"gift"}
 {"mal_id":38349,"anilist_id":104217,"ann_id":24089,"kitsu_id":42051,"anisearch_id":13922,"animeschedule_id":"wotaku-ni-koi-wa-muzukashii-ova"}
 {"mal_id":38352,"kitsu_id":42792}
@@ -14876,7 +14876,7 @@
 {"mal_id":38360,"ann_id":23664,"kitsu_id":43449,"anisearch_id":12148}
 {"mal_id":38361,"kitsu_id":43677}
 {"mal_id":38363,"anilist_id":121717,"animeschedule_id":"ohayou-hakushon-daimaou"}
-{"mal_id":38365,"anilist_id":104289,"ann_id":21433,"animeschedule_id":"aigan-kaijuu"}
+{"mal_id":38365,"anilist_id":104289,"ann_id":21433,"anisearch_id":13919,"animeschedule_id":"aigan-kaijuu"}
 {"mal_id":38367,"kitsu_id":42755,"anisearch_id":19839}
 {"mal_id":38368,"anilist_id":150846,"ann_id":1483,"animeschedule_id":"youkai-ningen-bem-part-ii"}
 {"mal_id":38372,"anilist_id":155739,"kitsu_id":42958,"animeschedule_id":"magic-knight-rayearth-pilot"}
@@ -22117,7 +22117,7 @@
 {"mal_id":58311,"anilist_id":189085,"animeschedule_id":"charisma-1-shuukan"}
 {"mal_id":58313,"anilist_id":175691,"animeschedule_id":"haru"}
 {"mal_id":58317,"kitsu_id":48717}
-{"mal_id":58318,"anilist_id":185889,"kitsu_id":49141,"animeschedule_id":"pop-pop-city"}
+{"mal_id":58318,"anilist_id":185889,"kitsu_id":49141,"anisearch_id":19185,"animeschedule_id":"pop-pop-city"}
 {"mal_id":58319,"anilist_id":185890,"kitsu_id":49139,"anisearch_id":19116,"animeschedule_id":"bridge-my-little-friends"}
 {"mal_id":58320,"anilist_id":185888,"kitsu_id":49140,"anisearch_id":19186,"animeschedule_id":"kicks-and-punk"}
 {"mal_id":58321,"anilist_id":184373,"kitsu_id":49138,"anisearch_id":19205,"animeschedule_id":"ephemere"}
@@ -24195,6 +24195,6 @@
 {"mal_id":64354,"ann_id":39844}
 {"mal_id":64357,"ann_id":39856}
 {"mal_id":64374,"animeschedule_id":"dengeki-daisy"}
-{"mal_id":64378,"animeschedule_id":"hokuto-no-ken-kenougun-zako-tachi-no-banka-part-2"}
-{"mal_id":64379,"animeschedule_id":"saikyou-mahoushi-no-inton-keikaku"}
+{"mal_id":64378,"anisearch_id":21736,"animeschedule_id":"hokuto-no-ken-kenougun-zako-tachi-no-banka-part-2"}
+{"mal_id":64379,"anisearch_id":21735,"animeschedule_id":"saikyou-mahoushi-no-inton-keikaku"}
 {"mal_id":64380,"anisearch_id":21731,"animeschedule_id":"koiseyo-mayakashi-tenshi-domo"}
