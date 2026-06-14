@@ -40,12 +40,12 @@ If you have an authoritative source to add, please open an issue/PR.
 |---|---:|---:|
 | English | English | 5441 |
 | Spanish | Español | 3130 |
-| German | Deutsch | 3027 |
+| German | Deutsch | 3028 |
 | French | Français | 2500 |
 | Italian | Italiano | 2382 |
-| Portuguese | Português | 1799 |
-| Korean | 한국어 | 1584 |
-| Chinese | 中文 | 1481 |
+| Portuguese | Português | 1800 |
+| Korean | 한국어 | 1586 |
+| Chinese | 中文 | 1489 |
 | Tagalog | Tagalog | 823 |
 | Arabic | العربية | 317 |
 | Polish | Polski | 283 |
