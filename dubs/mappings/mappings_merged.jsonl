@@ -22197,7 +22197,7 @@
 {"mal_id":58515,"anilist_id":176298,"ann_id":32556,"kitsu_id":48648,"hianime_id":"tales-of-wedding-rings-season-2-19921","anisearch_id":19133,"animeschedule_id":"kekkon-yubiwa-monogatari-2nd-season"}
 {"mal_id":58516,"anilist_id":176311,"ann_id":32565,"kitsu_id":48650,"hianime_id":"blue-exorcist-beyond-the-snow-saga-19327","anisearch_id":19134,"animeschedule_id":"ao-no-exorcist-yuki-no-hate-hen"}
 {"mal_id":58517,"anilist_id":176299,"ann_id":32558,"kitsu_id":49720,"anisearch_id":19313,"animeschedule_id":"uma-musume-pretty-derby-road-to-the-top-movie"}
-{"mal_id":58518,"anilist_id":176314,"ann_id":32566,"kitsu_id":48651,"animeschedule_id":"sasaki-to-pii-chan-2nd-season"}
+{"mal_id":58518,"anilist_id":176314,"ann_id":32566,"kitsu_id":48651,"anisearch_id":19129,"animeschedule_id":"sasaki-to-pii-chan-2nd-season"}
 {"mal_id":58522,"anilist_id":176319,"ann_id":32573,"kitsu_id":48664,"anisearch_id":19149,"animeschedule_id":"stpri-hajimari-no-monogatari-strawberry-school-festival"}
 {"mal_id":58523,"anilist_id":178758,"kitsu_id":48659,"animeschedule_id":"huan-chong-shi"}
 {"mal_id":58524,"anilist_id":176370,"ann_id":32594,"kitsu_id":48667,"anisearch_id":19135,"animeschedule_id":"himesama-goumon-no-jikan-desu-2nd-season"}
@@ -23727,7 +23727,7 @@
 {"mal_id":62501,"anilist_id":186790,"animeschedule_id":"chiisana-jam-to-goblin-no-opp"}
 {"mal_id":62503,"anilist_id":199006,"ann_id":37844}
 {"mal_id":62504,"anilist_id":198921,"anisearch_id":20975,"animeschedule_id":"sylvanian-families-freya-no-wonder-days"}
-{"mal_id":62507,"animeschedule_id":"kaiju-decode-aidara-no-yubiwa"}
+{"mal_id":62507,"anisearch_id":21740,"animeschedule_id":"kaiju-decode-aidara-no-yubiwa"}
 {"mal_id":62508,"anilist_id":198368,"ann_id":37818,"anisearch_id":21203,"animeschedule_id":"doraemon-shin-nobita-no-kaitei-kiganjou"}
 {"mal_id":62512,"anilist_id":198939,"ann_id":37849,"anisearch_id":20893,"animeschedule_id":"jidou-hanbaiki-ni-umarekawatta-ore-wa-meikyuu-wo-samayou-3rd-season"}
 {"mal_id":62513,"anilist_id":198946,"ann_id":37848,"anisearch_id":20894,"animeschedule_id":"clevatess-ii-majuu-no-ou-to-itsuwari-no-yuusha-denshou"}
@@ -23866,7 +23866,7 @@
 {"mal_id":62913,"anilist_id":202102,"ann_id":37986,"anisearch_id":21013,"animeschedule_id":"needy-girl-overdose"}
 {"mal_id":62915,"anisearch_id":21205}
 {"mal_id":62921,"anisearch_id":21081}
-{"mal_id":62922,"ann_id":37992,"animeschedule_id":"kashita-maryoku-wa-revo-barai-de-kyousei-choushuu"}
+{"mal_id":62922,"ann_id":37992,"anisearch_id":21005,"animeschedule_id":"kashita-maryoku-wa-revo-barai-de-kyousei-choushuu"}
 {"mal_id":62924,"anilist_id":202251,"ann_id":37993,"animeschedule_id":"kanchigai-no-atelier-meister-eiyuu-party-no-moto-zatsuyougakari-ga-jitsu-wa-sentou-igai-ga-sss-rank-datta-to-iu-yoku-aru-hanashi-2nd-season"}
 {"mal_id":62927,"anilist_id":137662,"animeschedule_id":"fangkai-nage-nuwu"}
 {"mal_id":62931,"anilist_id":202253,"animeschedule_id":"death-stranding-isolations"}
@@ -24202,3 +24202,4 @@
 {"mal_id":64380,"anisearch_id":21731,"animeschedule_id":"koiseyo-mayakashi-tenshi-domo"}
 {"mal_id":64384,"animeschedule_id":"zhangmen-didiao-dian"}
 {"mal_id":64388,"animeschedule_id":"jueshi-zhan-hun-2nd-season"}
+{"mal_id":64419,"anisearch_id":21741}
