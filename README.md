@@ -39,12 +39,12 @@ If you have an authoritative source to add, please open an issue/PR.
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | English | English | 5445 |
-| Spanish | Español | 3132 |
+| Spanish | Español | 3133 |
 | German | Deutsch | 3028 |
 | French | Français | 2501 |
 | Italian | Italiano | 2382 |
 | Portuguese | Português | 1800 |
-| Korean | 한국어 | 1593 |
+| Korean | 한국어 | 1595 |
 | Chinese | 中文 | 1492 |
 | Tagalog | Tagalog | 827 |
 | Arabic | العربية | 317 |
