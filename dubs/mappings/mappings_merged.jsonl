@@ -23374,7 +23374,7 @@
 {"mal_id":61496,"anilist_id":195880,"animeschedule_id":"xiao-xian-zhi-yao"}
 {"mal_id":61501,"anilist_id":190704,"ann_id":35674,"anisearch_id":20461,"animeschedule_id":"kanan-sama-wa-akumade-choroi"}
 {"mal_id":61508,"anilist_id":195879,"kitsu_id":49870,"animeschedule_id":"shen-yin-wangzuo-movie-yi-lai-ke-si-chuanqi"}
-{"mal_id":61511,"anilist_id":207594}
+{"mal_id":61511,"anilist_id":207594,"animeschedule_id":"given-hiiragi-mix-specials"}
 {"mal_id":61512,"anilist_id":204741,"kitsu_id":49858,"animeschedule_id":"365-nichi-no-ashita"}
 {"mal_id":61517,"anilist_id":190840,"ann_id":35719,"kitsu_id":49861,"anisearch_id":20459,"animeschedule_id":"kingdom-6th-season"}
 {"mal_id":61535,"anilist_id":191013}
@@ -23411,7 +23411,7 @@
 {"mal_id":61599,"anilist_id":178445,"kitsu_id":50010,"anisearch_id":20160}
 {"mal_id":61601,"anilist_id":191734,"animeschedule_id":"a-horny-money-world-densetsu-no-yoru"}
 {"mal_id":61603,"anilist_id":191788,"ann_id":35916,"kitsu_id":49883,"anisearch_id":20477,"animeschedule_id":"ao-ashi-2nd-season"}
-{"mal_id":61607,"anilist_id":191832,"kitsu_id":49889}
+{"mal_id":61607,"anilist_id":191832,"kitsu_id":49889,"animeschedule_id":"shi-guang-dai-li-ren-3"}
 {"mal_id":61608,"anilist_id":191967,"ann_id":35934,"anisearch_id":20664,"animeschedule_id":"jigoku-sensei-nube-2025-part-2"}
 {"mal_id":61609,"anilist_id":155333,"animeschedule_id":"ke-jin-wanjia"}
 {"mal_id":61610,"anilist_id":198707}
@@ -24073,7 +24073,7 @@
 {"mal_id":63599,"animeschedule_id":"chidori"}
 {"mal_id":63600,"anilist_id":208610,"animeschedule_id":"kin-to-tetsu"}
 {"mal_id":63601,"anilist_id":208609,"ann_id":38610,"animeschedule_id":"hone-dragon-no-mana-musume"}
-{"mal_id":63619,"anilist_id":208685,"ann_id":38613,"anisearch_id":21548}
+{"mal_id":63619,"anilist_id":208685,"ann_id":38613,"anisearch_id":21548,"animeschedule_id":"onaji-semi-no-someya-san-ga-sexy-joyuu-datta-hanashi"}
 {"mal_id":63628,"animeschedule_id":"fashion-beat"}
 {"mal_id":63629,"animeschedule_id":"yomosugara"}
 {"mal_id":63632,"animeschedule_id":"guimi-zhi-zhu-wu-mian-ren"}
@@ -24121,6 +24121,7 @@
 {"mal_id":63820,"anilist_id":209963,"ann_id":38840,"animeschedule_id":"yuusha-kei-ni-shosu-choubatsu-yuusha-9004-tai-keimu-kiroku-2nd-season"}
 {"mal_id":63822,"anilist_id":209980,"ann_id":38844,"animeschedule_id":"isekai-de-cheat-skill-wo-te-ni-shita-ore-wa-genjitsu-sekai-wo-mo-musou-suru-level-up-wa-jinsei-wo-kaeta-2nd-season"}
 {"mal_id":63823,"ann_id":38843}
+{"mal_id":63824,"animeschedule_id":"jujutsu-kaisen-shimetsu-kaiyuu-kouhen"}
 {"mal_id":63826,"anilist_id":210072}
 {"mal_id":63830,"anilist_id":210687,"anisearch_id":21503}
 {"mal_id":63832,"anilist_id":210031,"ann_id":38846,"anisearch_id":21357,"animeschedule_id":"seihantai-na-kimi-to-boku-2nd-season"}
@@ -24203,4 +24204,6 @@
 {"mal_id":64380,"anisearch_id":21731,"animeschedule_id":"koiseyo-mayakashi-tenshi-domo"}
 {"mal_id":64384,"animeschedule_id":"zhangmen-didiao-dian"}
 {"mal_id":64388,"animeschedule_id":"jueshi-zhan-hun-2nd-season"}
-{"mal_id":64419,"anisearch_id":21741}
+{"mal_id":64419,"anisearch_id":21741,"animeschedule_id":"nisemono-no-renkinjutsushi"}
+{"mal_id":64427,"animeschedule_id":"beat-and-motion"}
+{"mal_id":64428,"animeschedule_id":"jimoto-saikou"}
