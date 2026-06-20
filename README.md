@@ -38,13 +38,13 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5448 |
+| English | English | 5449 |
 | Spanish | Español | 3135 |
 | German | Deutsch | 3032 |
 | French | Français | 2504 |
 | Italian | Italiano | 2383 |
 | Portuguese | Português | 1800 |
-| Korean | 한국어 | 1595 |
+| Korean | 한국어 | 1598 |
 | Chinese | 中文 | 1492 |
 | Tagalog | Tagalog | 827 |
 | Arabic | العربية | 317 |
