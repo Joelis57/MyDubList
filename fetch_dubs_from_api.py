@@ -16,7 +16,7 @@ from urllib.parse import urlparse, parse_qs
 # CONFIG
 # ======================
 MAL_BASE = "https://api.myanimelist.net/v2"
-JIKAN_BASE = "https://api.jikan.moe/v4"
+JIKAN_BASE = (os.getenv("JIKAN_BASE_URL") or "https://api.jikan.moe/v4").rstrip("/")
 ANILIST_BASE = "https://graphql.anilist.co"
 ANN_API = "https://cdn.animenewsnetwork.com/encyclopedia/api.xml"
 KITSU_BASE = "https://kitsu.io/api/edge"
@@ -32,9 +32,13 @@ FINALIZE_EVERY_N = 100
 ANILIST_PER_PAGE = 50
 ANILIST_CHAR_PER_PAGE = 50
 ANILIST_PAGE_SLEEP = 2  # seconds
+ANILIST_PAGE_WINDOW_LIMIT = 100
+ANILIST_MAL_BATCH_SIZE = 50
 
 # ANN batching
 ANN_BATCH_SIZE = 40
+ANN_JIKAN_RETRIES = 2
+ANN_JIKAN_MAX_CONSECUTIVE_FAILURES = 25
 
 # Output locations
 SOURCES_DIR = "dubs/sources"
@@ -46,6 +50,7 @@ MERGED_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_merged.jsonl")
 HIANIME_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_hianime.jsonl")
 ANISEARCH_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_anisearch.jsonl")
 ANIMESCHEDULE_MAPPING_JSONL = os.path.join(MAPPINGS_DIR, "mappings_animeschedule.jsonl")
+ANN_MAPPING_SOURCE_JSONL = os.getenv("ANN_MAPPING_SOURCE_JSONL") or ANISEARCH_MAPPING_JSONL
 
 MISSING_CACHE_PATH = "cache/missing_mal_ids.json"
 # Used to detect end-of-range for MAL scanning
@@ -93,7 +98,7 @@ largest_known_mal_id = 0  # determined from dubs/sources/automatic_mal/dubbed_ja
 
 # Per-API mappings accumulated this run
 anilist_mapping: dict[int, int] = {}
-ann_mapping: dict[int, int] = {}
+ann_mapping: dict[int, int | None] = {}
 kitsu_mapping: dict[int, int] = {}
 hianime_mapping: dict[int, str] = {}
 anisearch_mapping: dict[int, int] = {}
@@ -612,7 +617,7 @@ def mal_get(url, client_id):
     raise last_exception
 
 
-def jikan_get(url):
+def jikan_get(url, retries: int | None = None, retry_delays: list[int] | None = None):
     global jikan_last_call
     now = time.time()
     to_wait = 1.0 - (now - jikan_last_call)
@@ -620,8 +625,10 @@ def jikan_get(url):
         time.sleep(to_wait)
     jikan_last_call = time.time()
 
+    max_retries = retries if retries is not None else CALL_RETRIES
+    delays = retry_delays if retry_delays is not None else RETRY_DELAYS
     last_exception = None
-    for attempt in range(CALL_RETRIES):
+    for attempt in range(max_retries):
         try:
             resp = requests.get(JIKAN_BASE + url, timeout=20)
 
@@ -632,9 +639,9 @@ def jikan_get(url):
             if resp.status_code == 429:
                 ra = resp.headers.get("Retry-After")
                 try:
-                    delay = int(ra) if ra is not None else RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                    delay = int(ra) if ra is not None else delays[min(attempt, len(delays)-1)]
                 except Exception:
-                    delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                    delay = delays[min(attempt, len(delays)-1)]
                 print(f"    429 Too Many Requests. Retrying in {delay} seconds...", flush=True)
                 time.sleep(delay)
                 continue
@@ -650,12 +657,12 @@ def jikan_get(url):
         except (requests.RequestException, ValueError, TransientJikanError) as e:
             last_exception = e
             print(f"    Attempt {attempt + 1} failed: {e}", flush=True)
-            if attempt < CALL_RETRIES - 1:
-                delay = RETRY_DELAYS[attempt]
+            if attempt < max_retries - 1:
+                delay = delays[min(attempt, len(delays)-1)]
                 print(f"    Jikan API call failed. Retrying in {delay} seconds...", flush=True)
                 time.sleep(delay)
 
-    print(f"    All {CALL_RETRIES} attempts failed for {url}", flush=True)
+    print(f"    All {max_retries} attempts failed for {url}", flush=True)
     raise last_exception
 
 
@@ -748,10 +755,10 @@ def process_anime_mal(mal_id: int, client_id: str) -> bool | None:
 # AniList helpers
 # ----------------------
 ANILIST_QUERY = """
-query ($page: Int, $perPage: Int, $charPerPage: Int) {
+query ($page: Int, $perPage: Int, $charPerPage: Int, $idMalIn: [Int]) {
   Page(page: $page, perPage: $perPage) {
     pageInfo { currentPage hasNextPage total }
-    media(type: ANIME, sort: ID) {
+    media(type: ANIME, sort: ID, idMal_in: $idMalIn) {
       id
       idMal
       characters(perPage: $charPerPage) {
@@ -784,7 +791,7 @@ def anilist_post(query, variables):
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
     for attempt in range(CALL_RETRIES):
         try:
-            r = requests.post(ANILIST_BASE, json={"query": query, "variables": variables}, headers=headers)
+            r = requests.post(ANILIST_BASE, json={"query": query, "variables": variables}, headers=headers, timeout=30)
             if r.status_code >= 400:
                 print(f"  AniList HTTP {r.status_code}: {r.text[:500]}")
                 r.raise_for_status()
@@ -812,11 +819,12 @@ def anilist_total_pages(per_page=ANILIST_PER_PAGE) -> int:
     return ceil(total / per_page) if total else 0
 
 
-def process_anilist_page(page: int) -> tuple[bool, int, set[int]]:
+def process_anilist_page(page: int, id_mal_in: list[int] | None = None) -> tuple[bool, int, set[int]]:
     variables = {
         "page": page,
         "perPage": ANILIST_PER_PAGE,
         "charPerPage": ANILIST_CHAR_PER_PAGE,
+        "idMalIn": id_mal_in,
     }
     data = anilist_post(ANILIST_QUERY, variables)
     if not data:
@@ -1114,9 +1122,9 @@ def extract_mal_id_from_string(val: object) -> int | None:
 
     return None
 
-def jikan_ann_id_for_mal(mal_id: int) -> int | None:
+def jikan_ann_id_for_mal(mal_id: int, retries: int | None = None) -> int | None:
     """Use Jikan external links to find ANN id for a MAL anime id."""
-    data = jikan_get(f"/anime/{mal_id}/external")
+    data = jikan_get(f"/anime/{mal_id}/external", retries=retries)
     if not data or "data" not in data:
         return None
     for entry in data["data"]:
@@ -1166,7 +1174,7 @@ def parse_ann_batch_xml(xml_text: str) -> tuple[dict[int, set[str]], set[int]]:
     return result, present_ids
 
 
-def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]) -> set[int]:
+def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int], update_mapping: bool = True) -> set[int]:
     """
     Fetch a batch of ANN IDs and add MAL IDs to json_data by language.
     Also updates ann_mapping (mal_id -> ann_id) and returns MAL IDs present in ANN response.
@@ -1194,8 +1202,8 @@ def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]) -> set[int
         mal_id = ann_to_mal.get(ann_id)
         if not mal_id:
             continue
-        # Record mapping
-        ann_mapping[int(mal_id)] = int(ann_id)
+        if update_mapping:
+            ann_mapping[int(mal_id)] = int(ann_id)
         for key in langs:
             json_data[key].add(int(mal_id))
 
@@ -1579,20 +1587,105 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
 # Runners
 # ----------------------
 
-def run_ann(mal_start: int, mal_end: int):
+def load_mal_ids_from_jsonl(path: str) -> set[int]:
+    if not path or not os.path.exists(path):
+        print(f"[map] MAL ID source not found: {path}")
+        return set()
+
+    ids: set[int] = set()
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    obj = json.loads(line)
+                except Exception:
+                    continue
+                mid = obj.get("mal_id")
+                try:
+                    if isinstance(mid, str) and mid.isdigit():
+                        mid = int(mid)
+                except Exception:
+                    pass
+                if isinstance(mid, int) and mid > 0:
+                    ids.add(mid)
+    except Exception as e:
+        print(f"[map] Failed to load MAL ID source {path}: {e}")
+    return ids
+
+
+def select_ann_mapping_refresh_ids(
+    source_file: str,
+    mal_start: int | None,
+    mal_end: int | None,
+    refresh_day: int | None,
+    refresh_days: int | None,
+    limit: int | None,
+) -> list[int]:
+    ids = load_mal_ids_from_jsonl(source_file)
+    ids.update(int(mid) for mid in load_simple_jsonl_map(ANN_MAPPING_JSONL, "ann_id").keys())
+
+    selected = sorted(mid for mid in ids if (mal_start is None or mid >= mal_start) and (mal_end is None or mid <= mal_end))
+
+    if refresh_day is not None or refresh_days is not None:
+        if not refresh_day or not refresh_days or refresh_day < 1 or refresh_days < 1 or refresh_day > refresh_days:
+            raise ValueError("--ann-refresh-day must be between 1 and --ann-refresh-days")
+        bucket = refresh_day - 1
+        selected = [mid for idx, mid in enumerate(selected) if idx % refresh_days == bucket]
+
+    if limit is not None and limit > 0:
+        selected = selected[:limit]
+
+    return selected
+
+
+def save_ann_mapping_updates():
+    if ann_mapping:
+        save_simple_jsonl_map(ANN_MAPPING_JSONL, ann_mapping, "ann_id")
+        ann_mapping.clear()
+    merge_all_mappings()
+
+
+def run_ann_mapping_refresh(
+    source_file: str,
+    mal_start: int | None,
+    mal_end: int | None,
+    refresh_day: int | None,
+    refresh_days: int | None,
+    limit: int | None,
+):
+    ids = select_ann_mapping_refresh_ids(source_file, mal_start, mal_end, refresh_day, refresh_days, limit)
+    if not ids:
+        print("[ANN] No MAL IDs selected for mapping refresh.")
+        return
+
     existing_map = load_simple_jsonl_map(ANN_MAPPING_JSONL, "ann_id")
-    pending: list[int] = []
-    ann_to_mal: dict[int, int] = {}
-    processed = 0
-    checked_ok_ids: set[int] = set()
+    checked = 0
+    updated = 0
+    removed = 0
+    unchanged = 0
+    failed = 0
+    consecutive_failures = 0
+
+    print(f"[ANN] Refreshing {len(ids)} Jikan mappings from {source_file}")
 
     try:
-        for mal_id in range(mal_start, mal_end + 1):
+        for idx, mal_id in enumerate(ids, 1):
             try:
-                found = jikan_ann_id_for_mal(mal_id)
+                found = jikan_ann_id_for_mal(mal_id, retries=ANN_JIKAN_RETRIES)
             except Exception as e:
-                log(f"[ANN] Transient Jikan failure for MAL {mal_id}: {e} (keeping existing mapping, skipping)")
+                failed += 1
+                consecutive_failures += 1
+                print(f"[ANN] Jikan failure for MAL {mal_id}: {e} (keeping existing mapping)", flush=True)
+                if consecutive_failures >= ANN_JIKAN_MAX_CONSECUTIVE_FAILURES:
+                    print(f"[ANN] Stopping after {consecutive_failures} consecutive Jikan failures.", flush=True)
+                    break
                 continue
+
+            consecutive_failures = 0
+            checked += 1
 
             if found is not None:
                 try:
@@ -1600,45 +1693,93 @@ def run_ann(mal_start: int, mal_end: int):
                 except Exception:
                     found = None
 
+            prev = existing_map.get(mal_id)
             if found:
-                prev = existing_map.get(mal_id)
                 if prev != found:
-                    log(f"[ANN] Mapping update MAL {mal_id}: {prev} -> {found}")
+                    print(f"[ANN] Mapping update MAL {mal_id}: {prev} -> {found}", flush=True)
+                    updated += 1
+                else:
+                    unchanged += 1
                 ann_mapping[int(mal_id)] = int(found)
-                ann_to_mal[int(found)] = int(mal_id)
-                pending.append(int(found))
+                existing_map[int(mal_id)] = int(found)
             else:
-                # Successful Jikan call but no ANN link => mapping removal
                 if mal_id in existing_map:
-                    log(f"[ANN] Mapping removed for MAL {mal_id} (was {existing_map[mal_id]}), will delete")
+                    print(f"[ANN] Mapping removed for MAL {mal_id} (was {existing_map[mal_id]})", flush=True)
+                    removed += 1
+                    existing_map.pop(mal_id, None)
+                else:
+                    unchanged += 1
                 ann_mapping[int(mal_id)] = None
+
+            if idx % FINALIZE_EVERY_N == 0:
+                save_ann_mapping_updates()
+
+    except KeyboardInterrupt:
+        print("\nInterrupted. Saving ANN mappings...")
+    finally:
+        save_ann_mapping_updates()
+        print(
+            f"Done (ANN mapping). selected={len(ids)} checked={checked} "
+            f"updated={updated} removed={removed} unchanged={unchanged} failed={failed}"
+        )
+
+
+def run_ann_dubs(mal_start: int | None, mal_end: int | None):
+    existing_map = load_simple_jsonl_map(ANN_MAPPING_JSONL, "ann_id")
+    if not existing_map:
+        print(f"[ANN] No mappings loaded from {ANN_MAPPING_JSONL}; refusing to update dubs.")
+        sys.exit(1)
+
+    if mal_start is not None and mal_end is not None:
+        mal_ids = list(range(mal_start, mal_end + 1))
+    else:
+        mal_ids = sorted(int(mid) for mid in existing_map.keys())
+
+    pending: list[int] = []
+    ann_to_mal: dict[int, int] = {}
+    processed = 0
+    checked_ok_ids: set[int] = set()
+
+    try:
+        for mal_id in mal_ids:
+            ann_id = existing_map.get(mal_id)
+            if not ann_id:
                 checked_ok_ids.add(int(mal_id))
+                continue
+
+            try:
+                ann_id = int(ann_id)
+            except Exception:
+                checked_ok_ids.add(int(mal_id))
+                continue
+
+            ann_to_mal[ann_id] = int(mal_id)
+            pending.append(ann_id)
 
             if len(pending) >= ANN_BATCH_SIZE:
                 if debug_log:
                     log(f"ANN batch {processed // ANN_BATCH_SIZE + 1}: ids={pending[:3]}... (+{len(pending)-3} more)")
-                newly_checked = process_ann_batch(pending, ann_to_mal)
+                newly_checked = process_ann_batch(pending, ann_to_mal, update_mapping=False)
                 checked_ok_ids.update(newly_checked)
                 processed += len(pending)
                 pending.clear()
 
-            if processed and processed % (FINALIZE_EVERY_N) == 0:
+            if processed and processed % FINALIZE_EVERY_N == 0:
                 finalize_jsons("ann", checked_ok_ids)
 
-        # flush remainder
         if pending:
-            newly_checked = process_ann_batch(pending, ann_to_mal)
+            newly_checked = process_ann_batch(pending, ann_to_mal, update_mapping=False)
             checked_ok_ids.update(newly_checked)
 
     except KeyboardInterrupt:
-        print("\nInterrupted. Finalizing data...")
+        print("\nInterrupted. Finalizing ANN dubs...")
     except Exception as e:
-        print(f"\nUnexpected error (ANN): {e}")
+        print(f"\nUnexpected error (ANN dubs): {e}")
         import traceback
         traceback.print_exc()
     finally:
         finalize_jsons("ann", checked_ok_ids)
-        print("Done (ANN).")
+        print(f"Done (ANN dubs). Processed ~{processed + len(pending)} mapped IDs.")
 
 
 def run_jikan(client_id: str, start_id: int, end_id: int):
@@ -1709,7 +1850,37 @@ def run_jikan(client_id: str, start_id: int, end_id: int):
         print("Done (Jikan).")
 
 
-def run_anilist(start_page: int | None, end_page: int | None):
+def run_anilist(start_page: int | None, end_page: int | None, source_file: str | None = None):
+    if source_file:
+        mal_ids = sorted(load_mal_ids_from_jsonl(source_file))
+        if not mal_ids:
+            print(f"[AniList] No MAL IDs loaded from {source_file}; falling back to page walk.")
+        else:
+            total_processed = 0
+            checked_ok_ids: set[int] = set()
+            try:
+                for offset in range(0, len(mal_ids), ANILIST_MAL_BATCH_SIZE):
+                    chunk = mal_ids[offset:offset + ANILIST_MAL_BATCH_SIZE]
+                    log(f"AniList MAL batch {offset // ANILIST_MAL_BATCH_SIZE + 1}: {chunk[0]}..{chunk[-1]}")
+                    _, processed, checked_ids = process_anilist_page(1, chunk)
+                    checked_ok_ids.update(checked_ids)
+                    total_processed += processed
+
+                    if (offset // ANILIST_MAL_BATCH_SIZE + 1) % 10 == 0:
+                        finalize_jsons("anilist", checked_ok_ids)
+
+                    time.sleep(ANILIST_PAGE_SLEEP)
+            except KeyboardInterrupt:
+                print("\nInterrupted. Finalizing data...")
+            except Exception as e:
+                print(f"\nUnexpected error (AniList): {e}")
+                import traceback
+                traceback.print_exc()
+            finally:
+                finalize_jsons("anilist", checked_ok_ids)
+                print(f"Done (AniList). Processed ~{total_processed} media items from {len(mal_ids)} MAL IDs.")
+            return
+
     page = start_page or 1
     total_processed = 0
     checked_ok_ids: set[int] = set()
@@ -1728,6 +1899,14 @@ def run_anilist(start_page: int | None, end_page: int | None):
                 break
 
             if not has_next:
+                break
+
+            if end_page is not None and page >= ANILIST_PAGE_WINDOW_LIMIT:
+                log(f"[AniList] Reached public page window limit ({ANILIST_PAGE_WINDOW_LIMIT}) for bounded page run.")
+                break
+
+            if page >= ANILIST_PAGE_WINDOW_LIMIT:
+                log(f"[AniList] Reached public page window limit ({ANILIST_PAGE_WINDOW_LIMIT}); stopping page walk.")
                 break
 
             page += 1
@@ -2040,6 +2219,16 @@ def main():
     parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api jikan/ann/kitsu.")
     parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api jikan/ann/kitsu.")
 
+    # ANN-specific
+    parser.add_argument("--ann-mode", choices=["mapping", "dubs"],
+                        help="ANN: refresh MAL->ANN mappings from Jikan, or refresh dubs from existing mappings.")
+    parser.add_argument("--ann-refresh-day", type=int,
+                        help="ANN mapping: 1-based rotation day to run from the selected source IDs.")
+    parser.add_argument("--ann-refresh-days", type=int,
+                        help="ANN mapping: total number of rotation days.")
+    parser.add_argument("--ann-limit", type=int,
+                        help="ANN mapping: optional maximum MAL IDs to check this run.")
+
     # Generic paging
     parser.add_argument("--start-page", type=int, help="Start page number (1-based) for AniList/HiAnime.")
     parser.add_argument("--end-page", type=int, help="End page number (inclusive) for AniList/HiAnime.")
@@ -2052,7 +2241,7 @@ def main():
     parser.add_argument("--api-host", default="http://localhost:6969",
                         help="Base host for the aniwatch API (e.g., http://localhost:6969).")
     # Source file
-    parser.add_argument("--source-file", help="Path to a JSON/JSONL source file (required for --api mal, anisearch, and hianime).")
+    parser.add_argument("--source-file", help="Path to a JSON/JSONL source file (required for --api mal/anisearch/hianime, optional ANN mapping source).")
 
     # Authentication
     parser.add_argument("--email", help="Account email for OAuth (optional).")
@@ -2100,13 +2289,26 @@ def main():
             except Exception as e:
                 print(f"Failed to fetch AniList total pages: {e}")
                 sys.exit(2)
-        run_anilist(args.start_page, args.end_page)
+        run_anilist(args.start_page, args.end_page, args.source_file)
 
     elif args.api == "ann":
-        if args.mal_start is None or args.mal_end is None:
-            print("For --api ann you must provide --mal-start and --mal-end.")
+        if not args.ann_mode:
+            print("For --api ann you must provide --ann-mode mapping or --ann-mode dubs.")
             sys.exit(1)
-        run_ann(args.mal_start, args.mal_end)
+        if args.ann_mode == "mapping":
+            run_ann_mapping_refresh(
+                args.source_file or ANN_MAPPING_SOURCE_JSONL,
+                args.mal_start,
+                args.mal_end,
+                args.ann_refresh_day,
+                args.ann_refresh_days,
+                args.ann_limit,
+            )
+        else:
+            if (args.mal_start is None) != (args.mal_end is None):
+                print("For --api ann --ann-mode dubs, provide both --mal-start and --mal-end or neither.")
+                sys.exit(1)
+            run_ann_dubs(args.mal_start, args.mal_end)
 
     elif args.api == "hianime":
         run_hianime(args.api_host, args.start_page, args.end_page, args.source_file)
