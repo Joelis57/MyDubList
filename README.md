@@ -38,29 +38,29 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5449 |
+| English | English | 5450 |
 | Spanish | Español | 3139 |
 | German | Deutsch | 3032 |
 | French | Français | 2507 |
 | Italian | Italiano | 2385 |
 | Portuguese | Português | 1801 |
-| Korean | 한국어 | 1606 |
+| Korean | 한국어 | 1608 |
 | Chinese | 中文 | 1494 |
 | Tagalog | Tagalog | 828 |
 | Arabic | العربية | 317 |
-| Polish | Polski | 283 |
-| Hindi | हिन्दी | 235 |
-| Hungarian | Magyar | 209 |
+| Polish | Polski | 285 |
+| Hindi | हिन्दी | 236 |
+| Hungarian | Magyar | 212 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 136 |
 | Hebrew | עברית | 132 |
 | Dutch | Nederlands | 105 |
-| Thai | ไทย | 93 |
+| Thai | ไทย | 94 |
+| Indonesian | Bahasa Indonesia | 80 |
 | Russian | Русский | 78 |
-| Indonesian | Bahasa Indonesia | 69 |
 | Danish | Dansk | 63 |
 | Finnish | Suomi | 16 |
-| Turkish | Türkçe | 10 |
+| Turkish | Türkçe | 13 |
 | Catalan | Català | 3 |
 | Vietnamese | Tiếng Việt | 1 |
 | Lithuanian | Lietuvių | 0 |
