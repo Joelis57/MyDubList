@@ -557,6 +557,9 @@ def run_mal_from_source(source_file: str):
 class TransientJikanError(Exception):
     pass
 
+class JikanNotFoundError(Exception):
+    pass
+
 @lru_cache(maxsize=MAX_IN_MEMORY_CACHE)
 def get_anime_roles_for_va_cached(person_id):
     data = jikan_get(f"/people/{person_id}/voices")
@@ -617,7 +620,12 @@ def mal_get(url, client_id):
     raise last_exception
 
 
-def jikan_get(url, retries: int | None = None, retry_delays: list[int] | None = None):
+def jikan_get(
+    url,
+    retries: int | None = None,
+    retry_delays: list[int] | None = None,
+    raise_not_found: bool = False,
+):
     global jikan_last_call
     now = time.time()
     to_wait = 1.0 - (now - jikan_last_call)
@@ -633,6 +641,8 @@ def jikan_get(url, retries: int | None = None, retry_delays: list[int] | None = 
             resp = requests.get(JIKAN_BASE + url, timeout=20)
 
             if resp.status_code == 404:
+                if raise_not_found:
+                    raise JikanNotFoundError(f"404 Not Found for {url}")
                 log("    404 Not Found, skipping")
                 return None
 
@@ -1047,7 +1057,7 @@ def ann_get(url):
     last_exception = None
     for attempt in range(CALL_RETRIES):
         try:
-            resp = requests.get(url, headers={"Accept": "text/xml"})
+            resp = requests.get(url, headers={"Accept": "text/xml"}, timeout=30)
             if resp.status_code == 404:
                 log("  ANN 404, skipping batch")
                 return None
@@ -1124,7 +1134,7 @@ def extract_mal_id_from_string(val: object) -> int | None:
 
 def jikan_ann_id_for_mal(mal_id: int, retries: int | None = None) -> int | None:
     """Use Jikan external links to find ANN id for a MAL anime id."""
-    data = jikan_get(f"/anime/{mal_id}/external", retries=retries)
+    data = jikan_get(f"/anime/{mal_id}/external", retries=retries, raise_not_found=True)
     if not data or "data" not in data:
         return None
     for entry in data["data"]:
