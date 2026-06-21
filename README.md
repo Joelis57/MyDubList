@@ -41,7 +41,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | English | English | 5449 |
 | Spanish | Español | 3139 |
 | German | Deutsch | 3032 |
-| French | Français | 2506 |
+| French | Français | 2507 |
 | Italian | Italiano | 2385 |
 | Portuguese | Português | 1801 |
 | Korean | 한국어 | 1606 |
