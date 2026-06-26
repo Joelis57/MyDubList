@@ -21736,7 +21736,7 @@
 {"mal_id":57554,"anilist_id":171637,"ann_id":31067,"kitsu_id":48393,"hianime_id":"rurouni-kenshin-kyoto-disturbance-19340","anisearch_id":18930,"animeschedule_id":"rurouni-kenshin-meiji-kenkaku-romantan-kyoto-douran"}
 {"mal_id":57555,"anilist_id":171627,"ann_id":31068,"kitsu_id":48323,"hianime_id":"chainsaw-man-the-movie-reze-arc-19721","anisearch_id":18929,"animeschedule_id":"chainsaw-man-movie-reze-hen"}
 {"mal_id":57556,"kitsu_id":49212,"anisearch_id":18942}
-{"mal_id":57557,"anilist_id":171630,"ann_id":31073,"kitsu_id":48322,"animeschedule_id":"the-one-piece"}
+{"mal_id":57557,"anilist_id":171630,"ann_id":31073,"kitsu_id":48322,"anisearch_id":18939,"animeschedule_id":"the-one-piece"}
 {"mal_id":57559,"anilist_id":171642,"ann_id":31074,"kitsu_id":48337,"hianime_id":"mf-ghost-2nd-season-19344","anisearch_id":18943,"animeschedule_id":"mf-ghost-second-season"}
 {"mal_id":57562,"anilist_id":171689,"ann_id":31075,"anisearch_id":19478,"animeschedule_id":"hyakushou-kizoku-2nd-season"}
 {"mal_id":57563,"anilist_id":176886,"animeschedule_id":"ore-wa-hitori-de"}
@@ -21959,7 +21959,7 @@
 {"mal_id":57976,"anilist_id":174934,"kitsu_id":48505,"animeschedule_id":"holohawk"}
 {"mal_id":57979,"anilist_id":175277,"animeschedule_id":"eyeshield-21-21st-anniversary-pv"}
 {"mal_id":57980,"kitsu_id":48477}
-{"mal_id":57990,"anilist_id":174427,"ann_id":31929,"kitsu_id":48480,"animeschedule_id":"zombie-no-afureta-sekai-de-ore-dake-ga-osowarenai"}
+{"mal_id":57990,"anilist_id":174427,"ann_id":31929,"kitsu_id":48480,"anisearch_id":19055,"animeschedule_id":"zombie-no-afureta-sekai-de-ore-dake-ga-osowarenai"}
 {"mal_id":57993,"anilist_id":174383,"ann_id":29285,"anisearch_id":18584}
 {"mal_id":57994,"kitsu_id":48543}
 {"mal_id":57995,"anilist_id":156082,"kitsu_id":48627,"animeschedule_id":"bai-yao-pu-4"}
@@ -23938,7 +23938,7 @@
 {"mal_id":63135,"anilist_id":204357,"ann_id":38149,"animeschedule_id":"mr-clice"}
 {"mal_id":63136,"anilist_id":204362,"ann_id":38150,"anisearch_id":21115,"animeschedule_id":"kaijuu-8-gou-kanketsu-hen"}
 {"mal_id":63138,"anilist_id":204431,"anisearch_id":21114,"animeschedule_id":"kaijuu-8-gou-narumi-no-heijitsu"}
-{"mal_id":63139,"anilist_id":204363,"ann_id":38152,"animeschedule_id":"sakamoto-days-2nd-season"}
+{"mal_id":63139,"anilist_id":204363,"ann_id":38152,"anisearch_id":21111,"animeschedule_id":"sakamoto-days-2nd-season"}
 {"mal_id":63140,"anilist_id":204389,"ann_id":38154,"animeschedule_id":"yasei-no-last-boss-ga-arawareta-2nd-season"}
 {"mal_id":63142,"anilist_id":204626,"animeschedule_id":"metal-cardbot-w"}
 {"mal_id":63143,"anilist_id":204429,"ann_id":38158,"anisearch_id":21123,"animeschedule_id":"chainsaw-man-shikaku-hen"}
@@ -24208,6 +24208,7 @@
 {"mal_id":64419,"anilist_id":213316,"anisearch_id":21741,"animeschedule_id":"nisemono-no-renkinjutsushi"}
 {"mal_id":64427,"anilist_id":169102,"animeschedule_id":"beat-and-motion"}
 {"mal_id":64428,"anilist_id":213338,"animeschedule_id":"jimoto-saikou"}
+{"mal_id":64435,"anisearch_id":21749}
 {"mal_id":64439,"anisearch_id":21743,"animeschedule_id":"akane-banashi-2nd-season"}
 {"mal_id":64441,"anilist_id":213363,"animeschedule_id":"kanan-sama-wa-akumade-choroi-2nd-season"}
 {"mal_id":64449,"animeschedule_id":"higurashi-no-naku-koro-ni-shinsaku-tv-animation"}
@@ -24215,3 +24216,5 @@
 {"mal_id":64459,"anilist_id":213457,"animeschedule_id":"fool-night"}
 {"mal_id":64462,"animeschedule_id":"re-bel-robotica"}
 {"mal_id":64463,"anilist_id":213477,"anisearch_id":21745,"animeschedule_id":"youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-5th-season"}
+{"mal_id":64466,"anisearch_id":21747}
+{"mal_id":64467,"anisearch_id":21746}
