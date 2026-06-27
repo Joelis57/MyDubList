@@ -18355,6 +18355,7 @@
 {"mal_id":49620,"anilist_id":136582,"animeschedule_id":"fei-ren-zai-5"}
 {"mal_id":49627,"anilist_id":139754,"kitsu_id":45959,"anisearch_id":17539,"animeschedule_id":"shingeki-no-kyojin-chimi-kyara-gekijou-final"}
 {"mal_id":49633,"anilist_id":138119,"anisearch_id":20209,"animeschedule_id":"fate-kaleid-liner-prisma-illya-licht-namae-no-nai-shoujo-special-mini-anime"}
+{"mal_id":49636,"anisearch_id":16589}
 {"mal_id":49637,"anilist_id":138063,"ann_id":24645,"anisearch_id":16541}
 {"mal_id":49644,"kitsu_id":48148}
 {"mal_id":49645,"kitsu_id":48159}
@@ -22794,7 +22795,7 @@
 {"mal_id":60014,"ann_id":1872}
 {"mal_id":60018,"anilist_id":203043,"kitsu_id":49822,"animeschedule_id":"slime-boukenki"}
 {"mal_id":60019,"anilist_id":204505,"kitsu_id":49823,"animeschedule_id":"slime-boukenki-wolf-kun-ganbaru-no-maki"}
-{"mal_id":60020,"anilist_id":163788,"animeschedule_id":"yeonui-pyeonji"}
+{"mal_id":60020,"anilist_id":163788,"anisearch_id":17064,"animeschedule_id":"yeonui-pyeonji"}
 {"mal_id":60021,"anilist_id":182466,"animeschedule_id":"good-morning-2024"}
 {"mal_id":60022,"anilist_id":182469,"ann_id":33643,"kitsu_id":49259,"anisearch_id":19696,"animeschedule_id":"one-piece-fan-letter"}
 {"mal_id":60023,"kitsu_id":49263}
@@ -23459,7 +23460,7 @@
 {"mal_id":61752,"anilist_id":137681,"kitsu_id":49975,"animeschedule_id":"xi-xing-ji-da-yuan-hun"}
 {"mal_id":61753,"kitsu_id":49977,"animeschedule_id":"shixiong-a-shixiong-nian-fan-2"}
 {"mal_id":61754,"anilist_id":193676,"ann_id":36317,"animeschedule_id":"s-rank-party-kara-kaiko-sareta-jugushi"}
-{"mal_id":61756,"anilist_id":194030,"ann_id":36321,"animeschedule_id":"gacha-wo-mawashite-nakama-wo-fuyasu-saikyou-no-bishoujo-gundan-wo-tsukuriagero"}
+{"mal_id":61756,"anilist_id":194030,"ann_id":36321,"anisearch_id":20648,"animeschedule_id":"gacha-wo-mawashite-nakama-wo-fuyasu-saikyou-no-bishoujo-gundan-wo-tsukuriagero"}
 {"mal_id":61758,"anilist_id":193699,"ann_id":36324,"anisearch_id":20677,"animeschedule_id":"akuyaku-reijou-no-naka-no-hito"}
 {"mal_id":61764,"anilist_id":168632,"animeschedule_id":"wiheomhan-pyeonuijeom"}
 {"mal_id":61765,"anilist_id":193883,"ann_id":36347,"kitsu_id":49962,"anisearch_id":20642,"animeschedule_id":"chibi-godzilla-no-gyakushuu-3"}
@@ -23479,7 +23480,7 @@
 {"mal_id":61792,"anilist_id":213459,"anisearch_id":21204}
 {"mal_id":61793,"anilist_id":194088,"ann_id":36440,"anisearch_id":20653,"animeschedule_id":"yami-shibai-15"}
 {"mal_id":61806,"anilist_id":194167,"anisearch_id":20645,"animeschedule_id":"love-live-hasunosora-jogakuin-school-idol-club-movie-bloom-garden-party"}
-{"mal_id":61813,"anilist_id":194213,"ann_id":36458,"animeschedule_id":"ghost"}
+{"mal_id":61813,"anilist_id":194213,"ann_id":36458,"anisearch_id":20636,"animeschedule_id":"ghost"}
 {"mal_id":61814,"anilist_id":194219,"ann_id":36475,"anisearch_id":20646,"animeschedule_id":"oni-no-hanayome"}
 {"mal_id":61830,"anilist_id":194318,"ann_id":36518,"anisearch_id":20617,"animeschedule_id":"yoroi-shin-den-samurai-troopers"}
 {"mal_id":61831,"anilist_id":194317,"ann_id":36517,"anisearch_id":20620,"animeschedule_id":"saikyou-no-ousama-nidome-no-jinsei-wa-nani-wo-suru-2nd-season"}
@@ -24213,7 +24214,7 @@
 {"mal_id":64441,"anilist_id":213363,"animeschedule_id":"kanan-sama-wa-akumade-choroi-2nd-season"}
 {"mal_id":64449,"animeschedule_id":"higurashi-no-naku-koro-ni-shinsaku-tv-animation"}
 {"mal_id":64452,"anilist_id":213422,"animeschedule_id":"koisuru-otome-no-tsukurikata"}
-{"mal_id":64459,"anilist_id":213457,"animeschedule_id":"fool-night"}
+{"mal_id":64459,"anilist_id":213457,"anisearch_id":21751,"animeschedule_id":"fool-night"}
 {"mal_id":64462,"animeschedule_id":"re-bel-robotica"}
 {"mal_id":64463,"anilist_id":213477,"anisearch_id":21745,"animeschedule_id":"youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-5th-season"}
 {"mal_id":64466,"anilist_id":213498,"anisearch_id":21747,"animeschedule_id":"nabe-ni-tama-wo-ukenagara"}
