@@ -23430,7 +23430,7 @@
 {"mal_id":61637,"anilist_id":192261,"ann_id":36012,"hianime_id":"an-adventurers-daily-grind-at-age-29-20253","anisearch_id":20479,"animeschedule_id":"29-sai-dokushin-chuuken-boukensha-no-nichijou"}
 {"mal_id":61639,"anilist_id":166417,"animeschedule_id":"da-tang-chengfeng-lu"}
 {"mal_id":61640,"anilist_id":166443,"animeschedule_id":"zi-jin-yu-miao-fang"}
-{"mal_id":61642,"anilist_id":199418}
+{"mal_id":61642,"anilist_id":199418,"animeschedule_id":"wan-ren-zhi-shang"}
 {"mal_id":61645,"kitsu_id":49957}
 {"mal_id":61650,"anilist_id":199413,"kitsu_id":49956}
 {"mal_id":61652,"kitsu_id":49946}
@@ -24236,4 +24236,5 @@
 {"mal_id":64519,"anilist_id":213750,"animeschedule_id":"bananya-at-home-party"}
 {"mal_id":64520,"anilist_id":213740,"animeschedule_id":"sensou-kyoushitsu"}
 {"mal_id":64524,"anilist_id":213752,"animeschedule_id":"marriagetoxin-2nd-season"}
-{"mal_id":64527,"anisearch_id":21769}
+{"mal_id":64527,"anisearch_id":21769,"animeschedule_id":"soara-to-mamono-no-ie"}
+{"mal_id":64528,"animeschedule_id":"majo-to-ryouken"}
