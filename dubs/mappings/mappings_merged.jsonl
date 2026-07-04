@@ -23384,7 +23384,7 @@
 {"mal_id":61538,"anilist_id":187404,"kitsu_id":50093,"anisearch_id":20304}
 {"mal_id":61539,"anilist_id":188933,"anisearch_id":20352}
 {"mal_id":61541,"kitsu_id":50122}
-{"mal_id":61546,"anilist_id":213847,"kitsu_id":49866,"anisearch_id":21717}
+{"mal_id":61546,"anilist_id":213847,"kitsu_id":49866,"anisearch_id":21717,"animeschedule_id":"star-wars-visions-presents-the-ninth-jedi"}
 {"mal_id":61549,"anilist_id":191205,"ann_id":35781,"anisearch_id":20464,"animeschedule_id":"okiraku-ryoushu-no-tanoshii-ryouchi-bouei-seisankei-majutsu-de-na-mo-naki-mura-wo-saikyou-no-jousai-toshi-ni"}
 {"mal_id":61550,"anilist_id":191308,"animeschedule_id":"hitotte-tada-no-tsutsujanai-desu-ka"}
 {"mal_id":61555,"anilist_id":191405,"kitsu_id":49874,"anisearch_id":20740,"animeschedule_id":"holoearth-anime-pv-saa-anata-no-mou-hitotsu-no-sekai-e"}
@@ -23560,7 +23560,7 @@
 {"mal_id":62012,"kitsu_id":50030}
 {"mal_id":62018,"anilist_id":195734,"ann_id":36923,"anisearch_id":20745,"animeschedule_id":"ichijouma-mankitsugurashi"}
 {"mal_id":62023,"anilist_id":200373,"animeschedule_id":"ootsuchi-chou-kagura-dai-hammer"}
-{"mal_id":62024,"anilist_id":195787,"ann_id":36957}
+{"mal_id":62024,"anilist_id":195787,"ann_id":36957,"animeschedule_id":"unmei-no-makimodoshi"}
 {"mal_id":62026,"anilist_id":195916,"animeschedule_id":"yao-shen-ji-9th-season"}
 {"mal_id":62027,"kitsu_id":50034}
 {"mal_id":62031,"anilist_id":195833,"ann_id":36973,"anisearch_id":20759,"animeschedule_id":"honoo-no-toukyuujo-dodge-danko"}
@@ -24244,4 +24244,6 @@
 {"mal_id":64527,"anilist_id":213782,"anisearch_id":21769,"animeschedule_id":"soara-to-mamono-no-ie"}
 {"mal_id":64528,"anilist_id":213796,"animeschedule_id":"majo-to-ryouken"}
 {"mal_id":64534,"anilist_id":213805,"anisearch_id":21791,"animeschedule_id":"koori-no-jouheki-2nd-season"}
-{"mal_id":64540,"anisearch_id":21833}
+{"mal_id":64540,"anisearch_id":21833,"animeschedule_id":"mamonotsukai-no-musume"}
+{"mal_id":64544,"animeschedule_id":"here-u-are"}
+{"mal_id":64546,"animeschedule_id":"solo-leveling-beyond-the-system"}
