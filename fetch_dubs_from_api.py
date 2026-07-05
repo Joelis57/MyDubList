@@ -16,7 +16,9 @@ from urllib.parse import urlparse, parse_qs
 # CONFIG
 # ======================
 MAL_BASE = "https://api.myanimelist.net/v2"
-JIKAN_BASE = (os.getenv("JIKAN_BASE_URL") or "https://api.jikan.moe/v4").rstrip("/")
+ALLOW_PUBLIC_JIKAN_FALLBACK = os.getenv("ALLOW_PUBLIC_JIKAN_FALLBACK", "false").lower() == "true"
+CONFIGURED_JIKAN_BASE = (os.getenv("JIKAN_BASE_URL") or "").strip()
+JIKAN_BASE = CONFIGURED_JIKAN_BASE.rstrip("/")
 ANILIST_BASE = "https://graphql.anilist.co"
 ANN_API = "https://cdn.animenewsnetwork.com/encyclopedia/api.xml"
 KITSU_BASE = "https://kitsu.io/api/edge"
@@ -87,6 +89,31 @@ hianime_last_call = 0.0
 # AnimeSchedule throttle
 ANIMESCHEDULE_MIN_INTERVAL = 0.5  # seconds
 animeschedule_last_call = 0.0
+
+
+def is_public_jikan_base() -> bool:
+    return "api.jikan.moe" in JIKAN_BASE.lower()
+
+
+def require_jikan_base() -> None:
+    if not JIKAN_BASE:
+        print(
+            "JIKAN_BASE_URL is required for Jikan-dependent jobs. "
+            "Set it to your private Jikan base URL, e.g. http://jikan-rest:8080/v4. "
+            "To temporarily use public Jikan explicitly, set JIKAN_BASE_URL to that host and "
+            "ALLOW_PUBLIC_JIKAN_FALLBACK=true.",
+            flush=True,
+        )
+        sys.exit(1)
+
+    if is_public_jikan_base() and not ALLOW_PUBLIC_JIKAN_FALLBACK:
+        print(
+            "Public api.jikan.moe is disabled for production jobs. "
+            "Set JIKAN_BASE_URL to your private Jikan instance or explicitly set "
+            "ALLOW_PUBLIC_JIKAN_FALLBACK=true for temporary debugging.",
+            flush=True,
+        )
+        sys.exit(1)
 
 # Kitsu throttle
 KITSU_MIN_INTERVAL = 1.0
@@ -2260,6 +2287,9 @@ def main():
 
     args = parser.parse_args()
     debug_log = str(args.debug).lower() == "true"
+
+    if args.api == "jikan" or (args.api == "ann" and args.ann_mode == "mapping"):
+        require_jikan_base()
 
     # Ensure output dirs exist up-front
     os.makedirs(SOURCES_DIR, exist_ok=True)
