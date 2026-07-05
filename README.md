@@ -31,8 +31,6 @@ The dataset aggregates information from multiple sources, including:
 - Curated community lists (e.g., *Kenny Stryker’s English dubs list* on MAL forums)
 - Manual overrides by MyDubList
 
-Jikan-dependent maintenance jobs require a private Jikan instance through `JIKAN_BASE_URL`, for example `http://jikan-rest:8080/v4`. Public `api.jikan.moe` is only allowed when `ALLOW_PUBLIC_JIKAN_FALLBACK=true` is set explicitly for temporary debugging.
-
 If you have an authoritative source to add, please open an issue/PR.
 
 ## Language statistics
