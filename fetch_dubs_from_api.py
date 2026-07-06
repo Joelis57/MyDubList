@@ -1740,13 +1740,7 @@ def run_ann_mapping_refresh(
                 ann_mapping[int(mal_id)] = int(found)
                 existing_map[int(mal_id)] = int(found)
             else:
-                if mal_id in existing_map:
-                    print(f"[ANN] Mapping removed for MAL {mal_id} (was {existing_map[mal_id]})", flush=True)
-                    removed += 1
-                    existing_map.pop(mal_id, None)
-                else:
-                    unchanged += 1
-                ann_mapping[int(mal_id)] = None
+                unchanged += 1
 
             if idx % FINALIZE_EVERY_N == 0:
                 save_ann_mapping_updates()
