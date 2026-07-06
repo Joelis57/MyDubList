@@ -41,6 +41,12 @@ ANILIST_MAL_BATCH_SIZE = 50
 ANN_BATCH_SIZE = 40
 ANN_JIKAN_RETRIES = 2
 ANN_JIKAN_MAX_CONSECUTIVE_FAILURES = 25
+# Never remove more than this fraction of existing ANN mappings in one run
+# (mass-removal brake; legitimate trickle-down removals are ~0-2 per day).
+ANN_MAPPING_REMOVAL_BRAKE_FRACTION = 0.02
+# Bridge cache map: minimum fraction of existing mappings that must have
+# external-links data before the cache map is trusted to drive updates.
+ANN_CACHE_MAP_MIN_COVERAGE = 0.5
 
 # Output locations
 SOURCES_DIR = "dubs/sources"
@@ -1159,17 +1165,26 @@ def extract_mal_id_from_string(val: object) -> int | None:
 
     return None
 
-def jikan_ann_id_for_mal(mal_id: int, retries: int | None = None) -> int | None:
-    """Use Jikan external links to find ANN id for a MAL anime id."""
+def jikan_ann_id_for_mal(mal_id: int, retries: int | None = None) -> tuple[int | None, bool]:
+    """Find the ANN id for a MAL anime id via Jikan's external links.
+
+    Returns (ann_id, external_present). external_present is True only when Jikan
+    returned a NON-EMPTY external-links list: then a missing ANN link is
+    trustworthy ("this anime has external links but none point to ANN"). When the
+    list is empty/absent (a data gap — e.g. a private Jikan that hasn't scraped
+    external links) external_present is False, so the caller must NOT treat the
+    missing ANN as evidence the mapping is wrong.
+    """
     data = jikan_get(f"/anime/{mal_id}/external", retries=retries, raise_not_found=True)
-    if not data or "data" not in data:
-        return None
-    for entry in data["data"]:
-        url = entry.get("url") or ""
+    entries = data.get("data") if isinstance(data, dict) else None
+    if not entries:
+        return None, False
+    for entry in entries:
+        url = (entry.get("url") if isinstance(entry, dict) else "") or ""
         ann_id = extract_ann_id_from_url(url)
         if ann_id:
-            return ann_id
-    return None
+            return ann_id, True
+    return None, True
 
 
 def parse_ann_batch_xml(xml_text: str) -> tuple[dict[int, set[str]], set[int]]:
@@ -1211,10 +1226,14 @@ def parse_ann_batch_xml(xml_text: str) -> tuple[dict[int, set[str]], set[int]]:
     return result, present_ids
 
 
-def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int], update_mapping: bool = True) -> set[int]:
+def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]) -> set[int]:
     """
     Fetch a batch of ANN IDs and add MAL IDs to json_data by language.
-    Also updates ann_mapping (mal_id -> ann_id) and returns MAL IDs present in ANN response.
+    Returns MAL IDs present in the ANN response.
+
+    Deliberately does NOT write ann_mapping: the mapping has a single canonical
+    source (Jikan external links, via run_ann_mapping_refresh /
+    run_ann_mapping_from_cache). ANN's XML API only supplies dub languages.
     """
     if not ann_ids:
         return set()
@@ -1239,8 +1258,6 @@ def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int], update_map
         mal_id = ann_to_mal.get(ann_id)
         if not mal_id:
             continue
-        if update_mapping:
-            ann_mapping[int(mal_id)] = int(ann_id)
         for key in langs:
             json_data[key].add(int(mal_id))
 
@@ -1699,19 +1716,24 @@ def run_ann_mapping_refresh(
         return
 
     existing_map = load_simple_jsonl_map(ANN_MAPPING_JSONL, "ann_id")
+    initial_size = len(existing_map)
     checked = 0
     updated = 0
     removed = 0
     unchanged = 0
     failed = 0
+    external_seen = 0
     consecutive_failures = 0
+    # Removals are collected and applied only at the end, gated by a safety
+    # brake, so a systemic source problem can never mass-delete mappings.
+    pending_removals: list[int] = []
 
     print(f"[ANN] Refreshing {len(ids)} Jikan mappings from {source_file}")
 
     try:
         for idx, mal_id in enumerate(ids, 1):
             try:
-                found = jikan_ann_id_for_mal(mal_id, retries=ANN_JIKAN_RETRIES)
+                found, external_present = jikan_ann_id_for_mal(mal_id, retries=ANN_JIKAN_RETRIES)
             except Exception as e:
                 failed += 1
                 consecutive_failures += 1
@@ -1723,6 +1745,8 @@ def run_ann_mapping_refresh(
 
             consecutive_failures = 0
             checked += 1
+            if external_present:
+                external_seen += 1
 
             if found is not None:
                 try:
@@ -1739,20 +1763,214 @@ def run_ann_mapping_refresh(
                     unchanged += 1
                 ann_mapping[int(mal_id)] = int(found)
                 existing_map[int(mal_id)] = int(found)
+            elif external_present:
+                # Jikan returned external links but none point to ANN: the ANN
+                # link is genuinely gone, so this is a removal candidate (real
+                # corrections and removals trickle down as intended).
+                if mal_id in existing_map:
+                    pending_removals.append(int(mal_id))
+                else:
+                    unchanged += 1
             else:
+                # No external-links data at all (a data gap — e.g. a private Jikan
+                # that hasn't scraped external links). Absence here is NOT evidence
+                # the mapping is wrong, so keep any existing mapping rather than
+                # deleting a possibly-correct one. THIS is what caused the mass
+                # deletion when the job first ran against the private Jikan.
                 unchanged += 1
 
             if idx % FINALIZE_EVERY_N == 0:
                 save_ann_mapping_updates()
 
+        # Apply deferred removals only on normal completion, behind the brake.
+        removal_brake = max(10, int(ANN_MAPPING_REMOVAL_BRAKE_FRACTION * initial_size))
+        if len(pending_removals) > removal_brake:
+            print(
+                f"[ANN] SAFETY BRAKE: {len(pending_removals)} pending removals exceed "
+                f"threshold {removal_brake} ({ANN_MAPPING_REMOVAL_BRAKE_FRACTION:.0%} of {initial_size}); "
+                "skipping ALL removals this run. Investigate the Jikan external-links source.",
+                flush=True,
+            )
+        else:
+            for mid in pending_removals:
+                print(f"[ANN] Mapping removed for MAL {mid} (was {existing_map.get(mid)})", flush=True)
+                existing_map.pop(mid, None)
+                ann_mapping[int(mid)] = None
+            removed = len(pending_removals)
+            pending_removals = []
+
     except KeyboardInterrupt:
         print("\nInterrupted. Saving ANN mappings...")
     finally:
         save_ann_mapping_updates()
+        coverage = (external_seen / checked) if checked else 0.0
+        # removals_deferred counts candidates NOT applied (brake trip or interrupt).
         print(
             f"Done (ANN mapping). selected={len(ids)} checked={checked} "
-            f"updated={updated} removed={removed} unchanged={unchanged} failed={failed}"
+            f"updated={updated} removed={removed} removals_deferred={len(pending_removals)} "
+            f"unchanged={unchanged} failed={failed} external_coverage={coverage:.1%}"
         )
+        if checked >= 25 and coverage < 0.10:
+            print(
+                "[ANN] WARNING: external-links coverage is near zero — the Jikan "
+                "source has no external data (fresh instance or blocked scrapes). "
+                "Mappings were kept, but no updates can occur until this is fixed.",
+                flush=True,
+            )
+
+
+def _bridge_internal_token() -> str:
+    token = os.getenv("JIKAN_CACHE_WARM_TOKEN", "").strip()
+    if token:
+        return token
+    path = os.getenv("JIKAN_CACHE_WARM_TOKEN_FILE", "").strip()
+    if not path:
+        return ""
+    try:
+        with open(path, "r", encoding="utf-8") as handle:
+            return handle.readline().strip()
+    except OSError:
+        return ""
+
+
+def run_ann_mapping_from_cache(bridge_url: str) -> int:
+    """Update ANN mappings from the bridge's cached Jikan /full external links.
+
+    One request replaces per-id /external polling: the bridge extracts
+    mal_id -> ann_id from every cached anime. Semantics mirror the per-id
+    refresh: entries with external links but no ANN are removal candidates
+    (behind the mass-removal brake); entries without external data are gaps
+    and never remove anything.
+
+    Exit codes: 0 = applied; 3 = map unusable (unreachable / low coverage) so
+    the caller should fall back to the per-id refresh.
+    """
+    token = _bridge_internal_token()
+    if not token:
+        print("[ANN] Bridge token not configured (JIKAN_CACHE_WARM_TOKEN[_FILE]); cannot use the cache map.")
+        return 3
+
+    url = f"{bridge_url.rstrip('/')}/internal/jikan-cache/external-map"
+    try:
+        resp = requests.get(url, headers={"X-MyDubList-Internal-Token": token}, timeout=300)
+        resp.raise_for_status()
+        payload = resp.json()
+    except Exception as e:
+        print(f"[ANN] Failed to download the external map from the bridge: {e}")
+        return 3
+
+    entries = payload.get("data") if isinstance(payload, dict) else None
+    summary = (payload.get("summary") if isinstance(payload, dict) else None) or {}
+    if not isinstance(entries, list) or not entries:
+        print("[ANN] Bridge external map is empty; falling back.")
+        return 3
+
+    entries_by_mal: dict[int, dict] = {}
+    for entry in entries:
+        if isinstance(entry, dict) and entry.get("mal_id") is not None:
+            try:
+                entries_by_mal[int(entry["mal_id"])] = entry
+            except (TypeError, ValueError):
+                continue
+
+    existing_map = load_simple_jsonl_map(ANN_MAPPING_JSONL, "ann_id")
+    initial_size = len(existing_map)
+
+    covered = sum(
+        1 for mid in existing_map
+        if entries_by_mal.get(int(mid), {}).get("external_present")
+    )
+    coverage = (covered / initial_size) if initial_size else 0.0
+    with_ann_entries = sum(1 for e in entries_by_mal.values() if e.get("ann_id"))
+    print(
+        f"[ANN] Cache map: {summary.get('anime_count', len(entries_by_mal))} cached anime, "
+        f"{summary.get('with_external', '?')} with external links, "
+        f"{with_ann_entries} with an ANN link. "
+        f"Coverage of existing mappings: {covered}/{initial_size} ({coverage:.1%})."
+    )
+    if initial_size == 0:
+        # Fresh/empty mapping file: there is nothing to validate coverage
+        # against. Bootstrap from the map if it has any ANN signal at all;
+        # otherwise fall back to per-id discovery.
+        if with_ann_entries == 0:
+            print("[ANN] No existing mappings and the cache map has no ANN links yet; falling back.")
+            return 3
+        print(f"[ANN] No existing mappings; bootstrapping from the cache map ({with_ann_entries} ANN links).")
+    elif coverage < ANN_CACHE_MAP_MIN_COVERAGE:
+        print(
+            f"[ANN] Coverage below {ANN_CACHE_MAP_MIN_COVERAGE:.0%} — the bridge cache has not been "
+            "re-warmed with /anime/{id}/full yet (or external scrapes are failing). Falling back."
+        )
+        return 3
+
+    updated = 0
+    added = 0
+    unchanged = 0
+    pending_removals: list[int] = []
+
+    for mid, prev in list(existing_map.items()):
+        mid = int(mid)
+        entry = entries_by_mal.get(mid)
+        if not entry or not entry.get("external_present"):
+            unchanged += 1  # gap: keep
+            continue
+        ann = entry.get("ann_id")
+        if ann:
+            try:
+                ann = int(ann)
+            except (TypeError, ValueError):
+                unchanged += 1
+                continue
+            try:
+                prev_int = int(prev)
+            except (TypeError, ValueError):
+                prev_int = None
+            if prev_int != ann:
+                print(f"[ANN] Mapping update MAL {mid}: {prev} -> {ann}", flush=True)
+                updated += 1
+                ann_mapping[mid] = ann
+                existing_map[mid] = ann
+            else:
+                unchanged += 1
+        else:
+            pending_removals.append(mid)
+
+    # New mappings for cached anime we didn't have yet.
+    for mid, entry in entries_by_mal.items():
+        if mid in existing_map:
+            continue
+        ann = entry.get("ann_id")
+        if ann:
+            try:
+                ann_mapping[int(mid)] = int(ann)
+                added += 1
+            except (TypeError, ValueError):
+                continue
+
+    removal_brake = max(10, int(ANN_MAPPING_REMOVAL_BRAKE_FRACTION * initial_size))
+    removed = 0
+    deferred = 0
+    if len(pending_removals) > removal_brake:
+        deferred = len(pending_removals)
+        print(
+            f"[ANN] SAFETY BRAKE: {deferred} pending removals exceed threshold "
+            f"{removal_brake} ({ANN_MAPPING_REMOVAL_BRAKE_FRACTION:.0%} of {initial_size}); "
+            "skipping ALL removals this run. Investigate the external-links source.",
+            flush=True,
+        )
+    else:
+        for mid in pending_removals:
+            print(f"[ANN] Mapping removed for MAL {mid} (was {existing_map.get(mid)})", flush=True)
+            existing_map.pop(mid, None)
+            ann_mapping[int(mid)] = None
+        removed = len(pending_removals)
+
+    save_ann_mapping_updates()
+    print(
+        f"Done (ANN mapping from cache). existing={initial_size} added={added} "
+        f"updated={updated} removed={removed} removals_deferred={deferred} unchanged={unchanged}"
+    )
+    return 0
 
 
 def run_ann_dubs(mal_start: int | None, mal_end: int | None):
@@ -1790,7 +2008,7 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
             if len(pending) >= ANN_BATCH_SIZE:
                 if debug_log:
                     log(f"ANN batch {processed // ANN_BATCH_SIZE + 1}: ids={pending[:3]}... (+{len(pending)-3} more)")
-                newly_checked = process_ann_batch(pending, ann_to_mal, update_mapping=False)
+                newly_checked = process_ann_batch(pending, ann_to_mal)
                 checked_ok_ids.update(newly_checked)
                 processed += len(pending)
                 pending.clear()
@@ -1799,7 +2017,7 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
                 finalize_jsons("ann", checked_ok_ids)
 
         if pending:
-            newly_checked = process_ann_batch(pending, ann_to_mal, update_mapping=False)
+            newly_checked = process_ann_batch(pending, ann_to_mal)
             checked_ok_ids.update(newly_checked)
 
     except KeyboardInterrupt:
@@ -2251,8 +2469,12 @@ def main():
     parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api jikan/ann/kitsu.")
 
     # ANN-specific
-    parser.add_argument("--ann-mode", choices=["mapping", "dubs"],
-                        help="ANN: refresh MAL->ANN mappings from Jikan, or refresh dubs from existing mappings.")
+    parser.add_argument("--ann-mode", choices=["mapping", "mapping-cache", "dubs"],
+                        help="ANN: refresh MAL->ANN mappings from Jikan per-id ('mapping'), from the "
+                             "bridge's cached external-links map in one request ('mapping-cache'), or "
+                             "refresh dubs from existing mappings ('dubs').")
+    parser.add_argument("--bridge-url", default=os.getenv("MYDUBLIST_BRIDGE_URL", "http://mydublist-bridge:5757"),
+                        help="ANN mapping-cache: base URL of the MyDubList bridge.")
     parser.add_argument("--ann-refresh-day", type=int,
                         help="ANN mapping: 1-based rotation day to run from the selected source IDs.")
     parser.add_argument("--ann-refresh-days", type=int,
@@ -2338,6 +2560,9 @@ def main():
                 args.ann_refresh_days,
                 args.ann_limit,
             )
+        elif args.ann_mode == "mapping-cache":
+            # Exit code 3 tells the caller to fall back to per-id 'mapping'.
+            sys.exit(run_ann_mapping_from_cache(args.bridge_url))
         else:
             if (args.mal_start is None) != (args.mal_end is None):
                 print("For --api ann --ann-mode dubs, provide both --mal-start and --mal-end or neither.")
