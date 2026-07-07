@@ -48,6 +48,12 @@ ANN_MAPPING_REMOVAL_BRAKE_FRACTION = 0.02
 # external-links data before the cache map is trusted to drive updates.
 ANN_CACHE_MAP_MIN_COVERAGE = 0.5
 
+# MAL dub-languages from the bridge cache (characters-derived): coverage gate
+# and removal brakes. Removals are the dangerous operation — brakes defer them
+# (per language AND globally) when a run looks anomalous.
+MAL_CACHE_MAP_MIN_COVERAGE = 0.5
+MAL_REMOVAL_BRAKE_FRACTION = 0.02
+
 # Output locations
 SOURCES_DIR = "dubs/sources"
 MAPPINGS_DIR = "dubs/mappings"
@@ -555,6 +561,176 @@ def load_mal_source_jsonl(source_file: str) -> tuple[dict[str, set[int]], set[in
                     per_lang[key].add(int(mal_id))
 
     return per_lang, checked_ok_ids, stats
+
+
+def _load_existing_mal_sources() -> dict[str, set[int]]:
+    """Read dubs/sources/automatic_mal/dubbed_*.json into {lang_key: ids}.
+
+    Uses the same filename<->lang mapping as finalize_jsons (underscores in the
+    filename correspond to spaces in the language key).
+    """
+    out: dict[str, set[int]] = {}
+    output_dir = os.path.join(SOURCES_DIR, "automatic_mal")
+    try:
+        for fname in os.listdir(output_dir):
+            if not fname.startswith("dubbed_") or not fname.endswith(".json"):
+                continue
+            lang_key = fname[len("dubbed_"):-len(".json")].replace("_", " ")
+            try:
+                with open(os.path.join(output_dir, fname), "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                out[lang_key] = set(int(x) for x in data.get("dubbed", []))
+            except Exception as e:
+                print(f"[MAL cache] Failed to read {fname}: {e}")
+                out[lang_key] = set()
+    except FileNotFoundError:
+        pass
+    return out
+
+
+def run_mal_from_cache(bridge_url: str) -> int:
+    """Update MAL dub languages from the bridge's cached VA-language map.
+
+    One request replaces the nightly Playwright MAL scrape: the bridge extracts
+    voice-actor languages from every cached /anime/{id}/characters payload.
+    Semantics mirror the legacy scraper JSONL exactly:
+      - characters_present=false  -> data GAP: id is NOT "checked", nothing can
+        be removed for it (equivalent to a scraper line without `languages`)
+      - characters_present=true + [] -> checked with no dubs (removal allowed,
+        behind the brakes)
+    Removal brakes: per-language max(10, 2%) AND a global max(25, 2% of all
+    known MAL-source ids). A tripped brake defers removals (keeps the ids) and
+    logs loudly instead.
+
+    Exit codes: 0 = applied; 3 = map unusable (bridge down / low coverage) so
+    the caller should fall back to the legacy Playwright scrape.
+    """
+    token = _bridge_internal_token()
+    if not token:
+        print("[MAL cache] Bridge token not configured (JIKAN_CACHE_WARM_TOKEN[_FILE]); cannot use the cache map.")
+        return 3
+
+    url = f"{bridge_url.rstrip('/')}/internal/jikan-cache/languages-map"
+    try:
+        resp = requests.get(url, headers={"X-MyDubList-Internal-Token": token}, timeout=300)
+        resp.raise_for_status()
+        payload = resp.json()
+    except Exception as e:
+        print(f"[MAL cache] Failed to download the languages map from the bridge: {e}")
+        return 3
+
+    entries = payload.get("data") if isinstance(payload, dict) else None
+    summary = (payload.get("summary") if isinstance(payload, dict) else None) or {}
+    if not isinstance(entries, list) or not entries:
+        print("[MAL cache] Bridge languages map is empty; falling back.")
+        return 3
+
+    entries_by_mal: dict[int, dict] = {}
+    for entry in entries:
+        if isinstance(entry, dict) and entry.get("mal_id") is not None:
+            try:
+                entries_by_mal[int(entry["mal_id"])] = entry
+            except (TypeError, ValueError):
+                continue
+
+    existing_by_lang = _load_existing_mal_sources()
+    existing_all: set[int] = set()
+    for ids in existing_by_lang.values():
+        existing_all.update(ids)
+
+    with_characters = sum(1 for e in entries_by_mal.values() if e.get("characters_present"))
+    covered = sum(
+        1 for mid in existing_all
+        if entries_by_mal.get(mid, {}).get("characters_present")
+    )
+    coverage = (covered / len(existing_all)) if existing_all else 0.0
+    print(
+        f"[MAL cache] Map: {summary.get('anime_count', len(entries_by_mal))} cached anime, "
+        f"{with_characters} with characters data. "
+        f"Coverage of known MAL-source ids: {covered}/{len(existing_all)} ({coverage:.1%})."
+    )
+    if not existing_all:
+        if with_characters == 0:
+            print("[MAL cache] No existing MAL sources and no characters data yet; falling back.")
+            return 3
+        print("[MAL cache] No existing MAL sources; bootstrapping from the cache map.")
+    elif coverage < MAL_CACHE_MAP_MIN_COVERAGE:
+        print(
+            f"[MAL cache] Coverage below {MAL_CACHE_MAP_MIN_COVERAGE:.0%} — the cache has not been "
+            "warmed with characters data yet (or characters fetches are failing). Falling back."
+        )
+        return 3
+
+    # Build found sets + checked ids with the same semantics as the scraper JSONL.
+    checked_ok_ids: set[int] = set()
+    json_data.clear()
+    for mid, entry in entries_by_mal.items():
+        if not entry.get("characters_present"):
+            continue  # gap: not checked, can never cause a removal
+        checked_ok_ids.add(mid)
+        for raw_lang in entry.get("languages") or []:
+            key = sanitize_lang(str(raw_lang))
+            if key:
+                json_data[key].add(mid)
+
+    # Removal brakes, computed with finalize_jsons' exact removal math BEFORE
+    # calling it. Deferring = re-adding the ids to json_data so they stay found.
+    added_per_lang: dict[str, int] = {}
+    removed_per_lang: dict[str, int] = {}
+    deferred_per_lang: dict[str, int] = {}
+    pending_removals: dict[str, set[int]] = {}
+    for lang_key, existing_ids in existing_by_lang.items():
+        found_ids = set(json_data.get(lang_key, set()))
+        added_per_lang[lang_key] = len(found_ids - existing_ids)
+        pending_removals[lang_key] = (existing_ids & checked_ok_ids) - found_ids
+    for lang_key in json_data.keys():
+        if lang_key not in added_per_lang:
+            added_per_lang[lang_key] = len(json_data[lang_key])
+
+    total_removals = sum(len(v) for v in pending_removals.values())
+    global_brake = max(25, int(MAL_REMOVAL_BRAKE_FRACTION * len(existing_all)))
+    if total_removals > global_brake:
+        print(
+            f"[MAL cache] GLOBAL SAFETY BRAKE: {total_removals} pending removals across all "
+            f"languages exceed threshold {global_brake}; deferring ALL removals this run. "
+            "Investigate the characters data source.",
+            flush=True,
+        )
+        for lang_key, ids in pending_removals.items():
+            if ids:
+                json_data[lang_key].update(ids)
+                deferred_per_lang[lang_key] = len(ids)
+            removed_per_lang[lang_key] = 0
+    else:
+        for lang_key, ids in pending_removals.items():
+            lang_brake = max(10, int(MAL_REMOVAL_BRAKE_FRACTION * len(existing_by_lang.get(lang_key, set()))))
+            if len(ids) > lang_brake:
+                print(
+                    f"[MAL cache] SAFETY BRAKE ({lang_key}): {len(ids)} pending removals exceed "
+                    f"threshold {lang_brake}; deferring this language's removals.",
+                    flush=True,
+                )
+                json_data[lang_key].update(ids)
+                deferred_per_lang[lang_key] = len(ids)
+                removed_per_lang[lang_key] = 0
+            else:
+                for mid in sorted(ids):
+                    print(f"[MAL cache] Removing MAL {mid} from {lang_key}", flush=True)
+                removed_per_lang[lang_key] = len(ids)
+
+    finalize_jsons("mal", checked_ok_ids)
+
+    changed = {
+        k: (added_per_lang.get(k, 0), removed_per_lang.get(k, 0), deferred_per_lang.get(k, 0))
+        for k in sorted(set(added_per_lang) | set(removed_per_lang) | set(deferred_per_lang))
+        if added_per_lang.get(k, 0) or removed_per_lang.get(k, 0) or deferred_per_lang.get(k, 0)
+    }
+    summary_txt = ", ".join(f"{k}: +{a}/-{r}" + (f" (deferred {d})" if d else "") for k, (a, r, d) in changed.items())
+    print(
+        f"Done (MAL from cache). checked={len(checked_ok_ids)} coverage={coverage:.1%} "
+        f"changes: {summary_txt or 'none'}"
+    )
+    return 0
 
 
 def run_mal_from_source(source_file: str):
@@ -2464,6 +2640,9 @@ def main():
 
     # MAL/Jikan-specific
     parser.add_argument("--client-id", help="MyAnimeList API Client ID (required for --api jikan).")
+    parser.add_argument("--mal-mode", choices=["source", "cache"], default="source",
+                        help="MAL: 'source' consumes a scraper JSONL (--source-file); 'cache' pulls the "
+                             "bridge's cached VA-language map in one request (exit 3 = fall back to 'source').")
 
     parser.add_argument("--mal-start", type=int, help="Start MAL ID (inclusive) for --api jikan/ann/kitsu.")
     parser.add_argument("--mal-end", type=int, help="End MAL ID (inclusive) for --api jikan/ann/kitsu.")
@@ -2525,6 +2704,9 @@ def main():
                 print("[Kitsu] Warning: proceeding without auth (NSFW may be hidden)")
 
     if args.api == "mal":
+        if args.mal_mode == "cache":
+            # Exit code 3 tells the caller to fall back to the scrape path.
+            sys.exit(run_mal_from_cache(args.bridge_url))
         if not args.source_file:
             print("For --api mal you must provide --source-file pointing to the MAL JSONL scrape output.")
             sys.exit(1)
