@@ -39,24 +39,24 @@ If you have an authoritative source to add, please open an issue/PR.
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | English | English | 5491 |
-| Spanish | Español | 3197 |
-| German | Deutsch | 3063 |
+| Spanish | Español | 3198 |
+| German | Deutsch | 3064 |
 | French | Français | 2537 |
 | Italian | Italiano | 2400 |
-| Chinese | 中文 | 1844 |
-| Portuguese | Português | 1813 |
+| Chinese | 中文 | 1845 |
+| Portuguese | Português | 1814 |
 | Korean | 한국어 | 1666 |
 | Tagalog | Tagalog | 831 |
 | Arabic | العربية | 321 |
-| Polish | Polski | 285 |
-| Hindi | हिन्दी | 236 |
-| Hungarian | Magyar | 214 |
+| Polish | Polski | 286 |
+| Hindi | हिन्दी | 237 |
+| Hungarian | Magyar | 215 |
 | Swedish | Svenska | 142 |
 | Hebrew | עברית | 136 |
 | Norwegian | Norsk | 136 |
 | Dutch | Nederlands | 106 |
 | Thai | ไทย | 94 |
-| Indonesian | Bahasa Indonesia | 82 |
+| Indonesian | Bahasa Indonesia | 83 |
 | Russian | Русский | 78 |
 | Danish | Dansk | 63 |
 | Finnish | Suomi | 16 |
