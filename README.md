@@ -41,8 +41,8 @@ If you have an authoritative source to add, please open an issue/PR.
 | English | English | 5491 |
 | Spanish | Español | 3197 |
 | German | Deutsch | 3063 |
-| French | Français | 2536 |
-| Italian | Italiano | 2399 |
+| French | Français | 2537 |
+| Italian | Italiano | 2400 |
 | Chinese | 中文 | 1844 |
 | Portuguese | Português | 1813 |
 | Korean | 한국어 | 1666 |
