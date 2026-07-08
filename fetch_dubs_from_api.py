@@ -53,6 +53,17 @@ ANN_CACHE_MAP_MIN_COVERAGE = 0.5
 # (per language AND globally) when a run looks anomalous.
 MAL_CACHE_MAP_MIN_COVERAGE = 0.5
 MAL_REMOVAL_BRAKE_FRACTION = 0.02
+# Parser-rot guards. A healthy cache always has a substantial share of
+# characters-present anime with at least one VA language (legitimate empties —
+# obscure shows without VA credits — sit around 20-45%, never near 90%). And
+# existing ANN mappings essentially never vanish in bulk (~0-2 removals/day).
+# When either signal goes wild the parser feeding the cache has rotted; without
+# these gates the brakes would just defer removals night after night — a
+# silent wedge — so the run falls back loudly (exit 3) instead.
+MAL_CACHE_EMPTY_LANG_FRACTION = 0.90
+MAL_CACHE_EMPTY_LANG_MIN_ROWS = 500
+ANN_CACHE_MAPPED_LOSS_FRACTION = 0.5
+ANN_CACHE_MAPPED_LOSS_MIN_ROWS = 200
 
 # Output locations
 SOURCES_DIR = "dubs/sources"
@@ -660,6 +671,26 @@ def run_mal_from_cache(bridge_url: str) -> int:
             "warmed with characters data yet (or characters fetches are failing). Falling back."
         )
         return 3
+
+    # Parser-rot guard: among rows that actually carry characters data, how
+    # many have zero VA languages? Rows without characters data are gaps and
+    # never count. Runs after the coverage gate so it also guards the
+    # bootstrap path (no existing sources -> no coverage check).
+    with_langs = sum(
+        1 for e in entries_by_mal.values()
+        if e.get("characters_present") and (e.get("languages") or [])
+    )
+    if with_characters >= MAL_CACHE_EMPTY_LANG_MIN_ROWS:
+        empty_fraction = (with_characters - with_langs) / with_characters
+        if empty_fraction >= MAL_CACHE_EMPTY_LANG_FRACTION:
+            print(
+                f"[MAL cache] PARSER-ROT GUARD: {with_characters - with_langs}/{with_characters} "
+                f"({empty_fraction:.1%}) characters-present anime have zero VA languages. "
+                "The characters parser has likely rotted — falling back instead of "
+                "emitting mass removal signals.",
+                flush=True,
+            )
+            return 3
 
     # Build found sets + checked ids with the same semantics as the scraper JSONL.
     checked_ok_ids: set[int] = set()
@@ -2078,6 +2109,26 @@ def run_ann_mapping_from_cache(bridge_url: str) -> int:
             "re-warmed with /anime/{id}/full yet (or external scrapes are failing). Falling back."
         )
         return 3
+
+    # Parser-rot guard: existing mappings whose cache row has external data
+    # but no ANN link are removal candidates — legitimately ~0-2 per day. When
+    # a large share of KNOWN mappings "loses" its ANN link at once, the
+    # external-links parser has rotted (external parses as checked-empty);
+    # fall back loudly instead of letting the brake defer silently every run.
+    if initial_size:
+        mapped_lost = sum(
+            1 for mid in existing_map
+            if entries_by_mal.get(int(mid), {}).get("external_present")
+            and not entries_by_mal.get(int(mid), {}).get("ann_id")
+        )
+        if covered >= ANN_CACHE_MAPPED_LOSS_MIN_ROWS and mapped_lost / covered >= ANN_CACHE_MAPPED_LOSS_FRACTION:
+            print(
+                f"[ANN] PARSER-ROT GUARD: {mapped_lost}/{covered} ({mapped_lost / covered:.1%}) of "
+                "existing mappings with external data have lost their ANN link at once. "
+                "The external-links parser has likely rotted — falling back.",
+                flush=True,
+            )
+            return 3
 
     updated = 0
     added = 0
