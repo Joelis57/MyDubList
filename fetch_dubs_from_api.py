@@ -672,7 +672,11 @@ def run_mal_from_cache(bridge_url: str) -> int:
         return 3
 
     entries = payload.get("data") if isinstance(payload, dict) else None
-    summary = (payload.get("summary") if isinstance(payload, dict) else None) or {}
+    # Normalize by TYPE, not truthiness: a malformed non-dict summary must
+    # become {} (so summary.get(...) below can't crash), not pass through.
+    summary = payload.get("summary") if isinstance(payload, dict) else None
+    if not isinstance(summary, dict):
+        summary = {}
     if not isinstance(entries, list) or not entries:
         print("[MAL cache] Bridge languages map is empty; falling back.")
         return 3
@@ -2118,7 +2122,11 @@ def run_ann_mapping_from_cache(bridge_url: str) -> int:
         return 3
 
     entries = payload.get("data") if isinstance(payload, dict) else None
-    summary = (payload.get("summary") if isinstance(payload, dict) else None) or {}
+    # Normalize by TYPE, not truthiness: a malformed non-dict summary must
+    # become {} (so summary.get(...) below can't crash), not pass through.
+    summary = payload.get("summary") if isinstance(payload, dict) else None
+    if not isinstance(summary, dict):
+        summary = {}
     if not isinstance(entries, list) or not entries:
         print("[ANN] Bridge external map is empty; falling back.")
         return 3
