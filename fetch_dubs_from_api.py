@@ -297,13 +297,35 @@ def load_missing_cache() -> set[int]:
         return set()
 
 
+def _atomic_write_text(path: str, write_fn) -> None:
+    """Write a file via tmp + os.replace so a mid-write crash (disk full,
+    OOM-kill) can never leave a truncated file at the final path — the old
+    file stays intact until the new one is complete. write_fn receives the
+    open temp file object."""
+    tmp_path = f"{path}.tmp"
+    try:
+        with open(tmp_path, "w", encoding="utf-8") as f:
+            write_fn(f)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp_path, path)
+    except Exception:
+        try:
+            os.remove(tmp_path)
+        except OSError:
+            pass
+        raise
+
+
 def save_missing_cache():
     """Persist cached anime 404 MAL IDs to disk."""
     _ensure_dir_for(MISSING_CACHE_PATH)
     try:
         payload = {"missing": sorted(missing_mal_ids)}
-        with open(MISSING_CACHE_PATH, "w", encoding="utf-8") as f:
-            json.dump(payload, f, ensure_ascii=False, indent=2)
+        _atomic_write_text(
+            MISSING_CACHE_PATH,
+            lambda f: json.dump(payload, f, ensure_ascii=False, indent=2),
+        )
         log(f"[cache] Saved {len(missing_mal_ids)} missing MAL IDs to {MISSING_CACHE_PATH}")
     except Exception as e:
         print(f"[cache] Failed to save {MISSING_CACHE_PATH}: {e}")
@@ -340,32 +362,39 @@ def load_simple_jsonl_map(path: str, value_key: str) -> dict[int, object]:
     if not os.path.exists(path):
         return {}
     result: dict[int, object] = {}
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                try:
-                    obj = json.loads(line)
-                except Exception:
-                    continue
-                mid = obj.get("mal_id")
-                val = obj.get(value_key)
-                try:
-                    if isinstance(mid, str) and mid.isdigit():
-                        mid = int(mid)
-                    if isinstance(val, (int, float)):
-                        val = int(val)
-                    elif isinstance(val, str) and val.isdigit():
-                        val = int(val)
-                    # else: leave non-numeric strings untouched
-                except Exception:
-                    pass
-                if isinstance(mid, int) and (isinstance(val, int) or isinstance(val, str)):
-                    result[mid] = val
-    except Exception as e:
-        print(f"[map] Failed to load {path}: {e}")
+    nonblank = 0
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            nonblank += 1
+            try:
+                obj = json.loads(line)
+            except Exception:
+                continue
+            mid = obj.get("mal_id")
+            val = obj.get(value_key)
+            try:
+                if isinstance(mid, str) and mid.isdigit():
+                    mid = int(mid)
+                if isinstance(val, (int, float)):
+                    val = int(val)
+                elif isinstance(val, str) and val.isdigit():
+                    val = int(val)
+                # else: leave non-numeric strings untouched
+            except Exception:
+                pass
+            if isinstance(mid, int) and (isinstance(val, int) or isinstance(val, str)):
+                result[mid] = val
+    # A present-but-unparseable file must never be laundered into "empty" —
+    # downstream saves would rewrite it from scratch and silently drop the
+    # accumulated mappings. Missing file = legitimately empty; corrupt = abort.
+    if nonblank and not result:
+        raise ValueError(
+            f"[map] {path} exists but contains no parseable entries — refusing to "
+            "treat it as empty. Restore the file (git checkout) before rerunning."
+        )
     return result
 
 
@@ -386,11 +415,12 @@ def save_simple_jsonl_map(path: str, mapping: dict[int, int | str | None], value
 
             existing[mid] = v
 
-        with open(path, "w", encoding="utf-8") as f:
+        def _write(f):
             for mid in sorted(existing.keys(), key=int):
-                val = existing[mid]
-                rec = {"mal_id": int(mid), value_key: val}
+                rec = {"mal_id": int(mid), value_key: existing[mid]}
                 f.write(json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n")
+
+        _atomic_write_text(path, _write)
         log(f"[map] Wrote {len(existing)} lines to {path}")
     except Exception as e:
         print(f"[map] Failed to save {path}: {e}")
@@ -400,10 +430,12 @@ def save_simple_jsonl_map_overwrite(path: str, mapping: dict[int, int], value_ke
     """Overwrite JSONL file with mapping exactly as provided."""
     _ensure_dir_for(path)
     try:
-        with open(path, "w", encoding="utf-8") as f:
+        def _write(f):
             for mid in sorted(mapping.keys(), key=int):
                 rec = {"mal_id": int(mid), value_key: int(mapping[mid])}
                 f.write(json.dumps(rec, ensure_ascii=False, separators=(",", ":")) + "\n")
+
+        _atomic_write_text(path, _write)
         log(f"[map] Overwrote {path} with {len(mapping)} mappings")
     except Exception as e:
         print(f"[map] Failed to overwrite {path}: {e}")
@@ -414,29 +446,34 @@ def load_jsonl_map(path: str) -> dict[int, dict]:
     if not os.path.exists(path):
         return {}
     result: dict[int, dict] = {}
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                try:
-                    obj = json.loads(line)
-                except Exception:
-                    continue
-                mid = obj.get("mal_id")
-                try:
-                    if isinstance(mid, str) and str(mid).isdigit():
-                        mid = int(mid)
-                except Exception:
-                    pass
-                if isinstance(mid, int):
-                    rec = {k: v for k, v in obj.items() if k != "mal_id"}
-                    if "sites" in rec and not isinstance(rec["sites"], dict):
-                        rec["sites"] = {}
-                    result[mid] = rec
-    except Exception as e:
-        print(f"[jsonl] Failed to load JSONL '{path}': {e}")
+    nonblank = 0
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            nonblank += 1
+            try:
+                obj = json.loads(line)
+            except Exception:
+                continue
+            mid = obj.get("mal_id")
+            try:
+                if isinstance(mid, str) and str(mid).isdigit():
+                    mid = int(mid)
+            except Exception:
+                pass
+            if isinstance(mid, int):
+                rec = {k: v for k, v in obj.items() if k != "mal_id"}
+                if "sites" in rec and not isinstance(rec["sites"], dict):
+                    rec["sites"] = {}
+                result[mid] = rec
+    # Same laundering guard as load_simple_jsonl_map: corrupt is not empty.
+    if nonblank and not result:
+        raise ValueError(
+            f"[jsonl] {path} exists but contains no parseable entries — refusing to "
+            "treat it as empty. Restore the file (git checkout) before rerunning."
+        )
     return result
 
 
@@ -444,11 +481,13 @@ def save_jsonl_map(path: str, mapping: dict[int, dict]):
     """Write the entire mapping dict to JSONL, sorted by mal_id."""
     _ensure_dir_for(path)
     try:
-        with open(path, "w", encoding="utf-8") as f:
+        def _write(f):
             for mid in sorted(mapping.keys(), key=int):
                 rec = mapping[mid] if isinstance(mapping[mid], dict) else {}
                 out_line = {"mal_id": int(mid), **rec}
                 f.write(json.dumps(out_line, ensure_ascii=False, separators=(",", ":")) + "\n")
+
+        _atomic_write_text(path, _write)
         log(f"[jsonl] Wrote {len(mapping)} lines to {path}")
     except Exception as e:
         print(f"[jsonl] Failed to save JSONL '{path}': {e}")
@@ -491,10 +530,12 @@ def merge_all_mappings():
     # Write merged
     _ensure_dir_for(MERGED_MAPPING_JSONL)
     try:
-        with open(MERGED_MAPPING_JSONL, "w", encoding="utf-8") as f:
+        def _write(f):
             for mid in sorted(master.keys(), key=int):
                 line = {"mal_id": int(mid), **master[mid]}
                 f.write(json.dumps(line, ensure_ascii=False, separators=(",", ":")) + "\n")
+
+        _atomic_write_text(MERGED_MAPPING_JSONL, _write)
         log(f"[merge] Wrote merged mappings: {len(master)} to {MERGED_MAPPING_JSONL}")
     except Exception as e:
         print(f"[merge] Failed to write merged mappings: {e}")
@@ -1194,14 +1235,22 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
         fname_lang = filename_for_lang(lang_key)
         filename = os.path.join(output_dir, f"dubbed_{fname_lang}.json")
 
-        # Load existing
+        # Load existing. A present-but-unreadable file must NEVER be treated
+        # as empty: the rewrite below would then keep only this run's found
+        # ids for the language and silently drop everything accumulated —
+        # and commit the shrunk file as if healthy. Missing file = genuinely
+        # new language; corrupt file = abort loudly and let the operator
+        # restore it (git checkout) before the next run.
         if os.path.exists(filename):
             try:
                 with open(filename, "r", encoding="utf-8") as f:
                     existing_data = json.load(f)
-                    existing_ids = set(int(x) for x in existing_data.get("dubbed", []))
-            except Exception:
-                existing_ids = set()
+                existing_ids = set(int(x) for x in existing_data.get("dubbed", []))
+            except Exception as e:
+                raise RuntimeError(
+                    f"[{api_mode}] Existing {filename} is unreadable ({e}); refusing to "
+                    "rewrite this language from scratch. Restore the file before rerunning."
+                ) from e
         else:
             existing_ids = set()
 
@@ -1222,8 +1271,9 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
             "language": lang_key.capitalize(),
             "dubbed": sorted((int(x) for x in updated_ids), key=int),
         }
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(obj, f, ensure_ascii=False, indent=2)
+        _atomic_write_text(
+            filename, lambda f: json.dump(obj, f, ensure_ascii=False, indent=2)
+        )
 
     # Also finalize per-API mappings and the merged mapping
     if api_mode == "anilist" and anilist_mapping:
@@ -1277,8 +1327,9 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
             "language": lang_key.capitalize(),
             "dubbed": ids_sorted,
         }
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(obj, f, ensure_ascii=False, indent=2)
+        _atomic_write_text(
+            filename, lambda f, _obj=obj: json.dump(_obj, f, ensure_ascii=False, indent=2)
+        )
 
 
 # ----------------------
