@@ -43,7 +43,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | German | Deutsch | 3065 |
 | French | Français | 2537 |
 | Italian | Italiano | 2400 |
-| Chinese | 中文 | 1846 |
+| Chinese | 中文 | 1847 |
 | Portuguese | Português | 1818 |
 | Korean | 한국어 | 1669 |
 | Tagalog | Tagalog | 831 |
