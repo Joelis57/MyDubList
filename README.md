@@ -38,15 +38,15 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5497 |
-| Spanish | Español | 3202 |
-| German | Deutsch | 3070 |
-| French | Français | 2542 |
-| Italian | Italiano | 2405 |
+| English | English | 5499 |
+| Spanish | Español | 3203 |
+| German | Deutsch | 3071 |
+| French | Français | 2543 |
+| Italian | Italiano | 2406 |
 | Chinese | 中文 | 1849 |
-| Portuguese | Português | 1823 |
+| Portuguese | Português | 1824 |
 | Korean | 한국어 | 1672 |
-| Tagalog | Tagalog | 833 |
+| Tagalog | Tagalog | 836 |
 | Arabic | العربية | 321 |
 | Polish | Polski | 286 |
 | Hindi | हिन्दी | 237 |
