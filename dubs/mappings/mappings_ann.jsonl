@@ -1143,7 +1143,7 @@
 {"mal_id":1263,"ann_id":4502}
 {"mal_id":1264,"ann_id":340}
 {"mal_id":1265,"ann_id":1879}
-{"mal_id":1266,"ann_id":1879}
+{"mal_id":1266,"ann_id":13253}
 {"mal_id":1267,"ann_id":1879}
 {"mal_id":1268,"ann_id":3427}
 {"mal_id":1269,"ann_id":523}
@@ -1651,7 +1651,7 @@
 {"mal_id":1838,"ann_id":6379}
 {"mal_id":1839,"ann_id":3977}
 {"mal_id":1840,"ann_id":7451}
-{"mal_id":1841,"ann_id":6473}
+{"mal_id":1841,"ann_id":10669}
 {"mal_id":1842,"ann_id":4115}
 {"mal_id":1843,"ann_id":6234}
 {"mal_id":1844,"ann_id":130}
@@ -11529,3 +11529,4 @@
 {"mal_id":64555,"ann_id":40276}
 {"mal_id":64556,"ann_id":40275}
 {"mal_id":64578,"ann_id":39284}
+{"mal_id":64580,"ann_id":40245}
