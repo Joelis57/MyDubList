@@ -53,6 +53,9 @@ ANN_CACHE_MAP_MIN_COVERAGE = 0.5
 # (per language AND globally) when a run looks anomalous.
 MAL_CACHE_MAP_MIN_COVERAGE = 0.5
 MAL_REMOVAL_BRAKE_FRACTION = 0.02
+# Same brake for the aniSearch overwrite path, which rewrites its language
+# files from scratch instead of merging into them.
+ANISEARCH_REMOVAL_BRAKE_FRACTION = 0.02
 # Parser-rot guards. A healthy cache always has a substantial share of
 # characters-present anime with at least one VA language (legitimate empties —
 # obscure shows without VA credits — sit around 20-45%, never near 90%). And
@@ -1310,6 +1313,34 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
         pass
 
     new_langs = set(per_lang_ids.keys())
+
+    # An upstream payload whose shape changed still parses, but yields no ids
+    # per language — and this function would then delete every file below.
+    # Same mass-removal brake the MAL and ANN paths use. An unreadable file is
+    # not an empty one, so it stops the rewrite rather than counting as zero.
+    existing_by_lang = {}
+    for fn in existing:
+        lang_key = fn[len("dubbed_"):-len(".json")].replace("_", " ")
+        try:
+            with open(os.path.join(output_dir, fn), "r", encoding="utf-8") as f:
+                existing_by_lang[lang_key] = {int(x) for x in json.load(f).get("dubbed", [])}
+        except Exception as e:
+            raise RuntimeError(
+                f"[{api_mode}] Refusing to rewrite from scratch: {fn} is unreadable ({e})."
+            )
+    total_existing = sum(len(ids) for ids in existing_by_lang.values())
+    total_removals = sum(
+        len(ids - set(per_lang_ids.get(lang_key, set())))
+        for lang_key, ids in existing_by_lang.items()
+    )
+    brake = max(25, int(ANISEARCH_REMOVAL_BRAKE_FRACTION * total_existing))
+    if total_existing and total_removals > brake:
+        raise RuntimeError(
+            f"[{api_mode}] SAFETY BRAKE: {total_removals} removals across all languages exceed "
+            f"threshold {brake} ({ANISEARCH_REMOVAL_BRAKE_FRACTION:.0%} of {total_existing}); "
+            "refusing to overwrite. Check the upstream payload shape."
+        )
+
     for fn in existing:
         lang_key = fn[len("dubbed_"):-len(".json")].replace("_", " ")
         if lang_key not in new_langs:
