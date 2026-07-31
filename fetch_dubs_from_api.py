@@ -956,6 +956,14 @@ def mal_get(url, client_id):
                 time.sleep(delay)
 
     print(f"  All {CALL_RETRIES} attempts failed for {url}", flush=True)
+    if last_exception is None:
+        # Every attempt was rate limited. The 429 branch `continue`s without
+        # ever assigning last_exception, so this raised None -> TypeError
+        # ("exceptions must derive from BaseException"), and the callers'
+        # broad handlers reported THAT instead of the real cause, on the very
+        # path that exists for when the cache map is unusable. Same guard
+        # animeschedule_get_page already carries.
+        raise RuntimeError("All attempts were rate limited (HTTP 429).")
     raise last_exception
 
 
@@ -1012,6 +1020,14 @@ def jikan_get(
                 time.sleep(delay)
 
     print(f"    All {max_retries} attempts failed for {url}", flush=True)
+    if last_exception is None:
+        # Every attempt was rate limited. The 429 branch `continue`s without
+        # ever assigning last_exception, so this raised None -> TypeError
+        # ("exceptions must derive from BaseException"), and the callers'
+        # broad handlers reported THAT instead of the real cause, on the very
+        # path that exists for when the cache map is unusable. Same guard
+        # animeschedule_get_page already carries.
+        raise RuntimeError("All attempts were rate limited (HTTP 429).")
     raise last_exception
 
 
@@ -1793,6 +1809,14 @@ def kitsu_get(url: str) -> dict | None:
                 print(f"  Kitsu call failed. Retrying in {delay} seconds...")
                 time.sleep(delay)
     print("  All Kitsu attempts failed.")
+    if last_exception is None:
+        # Every attempt was rate limited. The 429 branch `continue`s without
+        # ever assigning last_exception, so this raised None -> TypeError
+        # ("exceptions must derive from BaseException"), and the callers'
+        # broad handlers reported THAT instead of the real cause, on the very
+        # path that exists for when the cache map is unusable. Same guard
+        # animeschedule_get_page already carries.
+        raise RuntimeError("All attempts were rate limited (HTTP 429).")
     raise last_exception
 
 
