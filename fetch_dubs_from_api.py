@@ -1599,7 +1599,7 @@ def hianime_get_page(api_host: str, page: int) -> dict | None:
     last_exception = None
     for attempt in range(CALL_RETRIES):
         try:
-            resp = requests.get(url, headers={"Accept": "application/json"})
+            resp = requests.get(url, headers={"Accept": "application/json"}, timeout=30)
             if resp.status_code == 404:
                 log(f"[HiAnime] 404 on page {page}")
                 return None
