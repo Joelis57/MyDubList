@@ -71,6 +71,20 @@ FINALIZE_REMOVAL_BRAKE_FRACTION = float(
 # working (expired cert, renamed field, API withdrawn) looked like a healthy
 # night. A dict, not a bare name, so the handlers need no `global`.
 STAGE_ERROR = {"failed": False}
+# Returned by the cache-mode stages when a safety brake deferred removals: the
+# run's additions are still valid, but the run is not an ordinary success.
+# Distinct from 0 and from the other non-zero codes so a caller can tell the
+# two apart and handle each appropriately.
+EXIT_BRAKED = 4
+
+
+def _stage_rc(rc: int) -> int:
+    """Map a stage's own return onto the exit contract. These two stages exit
+    directly, bypassing the STAGE_ERROR check at the end of main(), so without
+    this a tripped brake would return 0 and look like an ordinary success."""
+    if rc == 0 and STAGE_ERROR["failed"]:
+        return EXIT_BRAKED
+    return rc
 # Parser-rot guards. A healthy cache always has a substantial share of
 # characters-present anime with at least one VA language (legitimate empties —
 # obscure shows without VA credits — sit around 20-45%, never near 90%). And
@@ -447,6 +461,25 @@ def save_simple_jsonl_map(path: str, mapping: dict[int, int | str | None], value
 def save_simple_jsonl_map_overwrite(path: str, mapping: dict[int, int], value_key: str):
     """Overwrite JSONL file with mapping exactly as provided."""
     _ensure_dir_for(path)
+    # Same brake as every other writer under dubs/. This one rewrites from
+    # scratch, so an upstream rename of the id key (the value half of the
+    # payload, independent of the dub half) yields an empty mapping that parses
+    # fine, passes the caller's both-halves-empty guard, and erases the file --
+    # which also starves the ANN per-id fallback that reads it.
+    existing_count = 0
+    if os.path.exists(path):
+        with open(path, "r", encoding="utf-8") as handle:
+            existing_count = sum(1 for line in handle if line.strip())
+    brake = max(25, int(ANISEARCH_REMOVAL_BRAKE_FRACTION * existing_count))
+    if existing_count and existing_count - len(mapping) > brake:
+        print(
+            f"[map] SAFETY BRAKE: {path} would drop from {existing_count} to {len(mapping)} "
+            f"mappings, more than the {brake} allowed; keeping the existing file. "
+            "Check the upstream payload shape.",
+            flush=True,
+        )
+        STAGE_ERROR["failed"] = True
+        return
     try:
         def _write(f):
             for mid in sorted(mapping.keys(), key=int):
@@ -790,6 +823,7 @@ def run_mal_from_cache(bridge_url: str) -> int:
             "Investigate the characters data source.",
             flush=True,
         )
+        STAGE_ERROR["failed"] = True
         for lang_key, ids in pending_removals.items():
             if ids:
                 json_data[lang_key].update(ids)
@@ -804,6 +838,7 @@ def run_mal_from_cache(bridge_url: str) -> int:
                     f"threshold {lang_brake}; deferring this language's removals.",
                     flush=True,
                 )
+                STAGE_ERROR["failed"] = True
                 json_data[lang_key].update(ids)
                 deferred_per_lang[lang_key] = len(ids)
                 removed_per_lang[lang_key] = 0
@@ -2328,6 +2363,7 @@ def run_ann_mapping_from_cache(bridge_url: str) -> int:
             "skipping ALL removals this run. Investigate the external-links source.",
             flush=True,
         )
+        STAGE_ERROR["failed"] = True
     else:
         for mid in pending_removals:
             print(f"[ANN] Mapping removed for MAL {mid} (was {existing_map.get(mid)})", flush=True)
@@ -2911,7 +2947,7 @@ def main():
     if args.api == "mal":
         if args.mal_mode == "cache":
             # Exit code 3 tells the caller to fall back to the scrape path.
-            sys.exit(run_mal_from_cache(args.bridge_url))
+            sys.exit(_stage_rc(run_mal_from_cache(args.bridge_url)))
         if not args.source_file:
             print("For --api mal you must provide --source-file pointing to the MAL JSONL scrape output.")
             sys.exit(1)
@@ -2949,7 +2985,7 @@ def main():
             )
         elif args.ann_mode == "mapping-cache":
             # Exit code 3 tells the caller to fall back to per-id 'mapping'.
-            sys.exit(run_ann_mapping_from_cache(args.bridge_url))
+            sys.exit(_stage_rc(run_ann_mapping_from_cache(args.bridge_url)))
         else:
             if (args.mal_start is None) != (args.mal_end is None):
                 print("For --api ann --ann-mode dubs, provide both --mal-start and --mal-end or neither.")

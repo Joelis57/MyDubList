@@ -91,11 +91,21 @@ def save_json(path: str, data):
     # tmp + replace, so an interrupted write cannot leave a truncated file that
     # the next run would then refuse to read.
     tmp = f"{path}.tmp"
-    with open(tmp, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-        f.flush()
-        os.fsync(f.fileno())
-    os.replace(tmp, path)
+    try:
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp, path)
+    except Exception:
+        # Leave no orphan behind: this repo has no .gitignore, so a stray .tmp
+        # would be picked up and published by the next stage's commit.
+        if os.path.exists(tmp):
+            try:
+                os.remove(tmp)
+            except OSError:
+                pass
+        raise
 
 def infer_language_from_filename(filename: str) -> str:
     name = os.path.splitext(filename)[0]
