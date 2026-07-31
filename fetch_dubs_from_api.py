@@ -55,7 +55,22 @@ MAL_CACHE_MAP_MIN_COVERAGE = 0.5
 MAL_REMOVAL_BRAKE_FRACTION = 0.02
 # Same brake for the aniSearch overwrite path, which rewrites its language
 # files from scratch instead of merging into them.
-ANISEARCH_REMOVAL_BRAKE_FRACTION = 0.02
+ANISEARCH_REMOVAL_BRAKE_FRACTION = float(
+    os.getenv("ANISEARCH_REMOVAL_BRAKE_FRACTION", "0.02")
+)
+# The shared finalize path needs the same brake: it removes ids that were
+# checked this run but not found, so an upstream field rename makes every id
+# "checked" and none "found" and empties the language files wholesale.
+FINALIZE_REMOVAL_BRAKE_FRACTION = float(
+    os.getenv("FINALIZE_REMOVAL_BRAKE_FRACTION", "0.02")
+)
+# Set when a stage caught an unexpected error, or a brake tripped. The handlers
+# below deliberately swallow exceptions so `finally: finalize_jsons(...)` still
+# banks the ids checked before the failure -- but swallowing also meant exiting
+# 0, so the caller's failure branch never ran and a source that had stopped
+# working (expired cert, renamed field, API withdrawn) looked like a healthy
+# night. A dict, not a bare name, so the handlers need no `global`.
+STAGE_ERROR = {"failed": False}
 # Parser-rot guards. A healthy cache always has a substantial share of
 # characters-present anime with at least one VA language (legitimate empties —
 # obscure shows without VA credits — sit around 20-45%, never near 90%). And
@@ -835,6 +850,7 @@ def run_mal_from_source(source_file: str):
         print(f"\nUnexpected error (MAL source): {e}")
         import traceback
         traceback.print_exc()
+        STAGE_ERROR["failed"] = True
         raise
 
 
@@ -1238,6 +1254,7 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
 
     checked_ok_ids = checked_ok_ids or set()
 
+    plan = {}
     for lang_key in sorted(languages):
         fname_lang = filename_for_lang(lang_key)
         filename = os.path.join(output_dir, f"dubbed_{fname_lang}.json")
@@ -1265,6 +1282,31 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
 
         # Only remove IDs that were checked this run and are no longer present
         removal_candidates = (existing_ids & checked_ok_ids) - found_ids
+        plan[lang_key] = (filename, existing_ids, found_ids, removal_candidates)
+
+    # An upstream field rename makes every id "checked" and none "found", so the
+    # removals above would empty every language file at once -- committed and
+    # pushed, with nothing to say the source had stopped parsing. Same brake the
+    # MAL path uses, applied across all languages together. Deferring rather
+    # than raising keeps the run non-destructive AND unwedgeable: a legitimate
+    # large removal is simply carried to the next run, and the non-zero exit
+    # below is what actually asks for attention.
+    total_existing = sum(len(p[1]) for p in plan.values())
+    total_removals = sum(len(p[3]) for p in plan.values())
+    brake = max(25, int(FINALIZE_REMOVAL_BRAKE_FRACTION * total_existing))
+    defer_removals = bool(total_existing) and total_removals > brake
+    if defer_removals:
+        print(
+            f"[{api_mode}] SAFETY BRAKE: {total_removals} removals across all languages exceed "
+            f"threshold {brake} ({FINALIZE_REMOVAL_BRAKE_FRACTION:.0%} of {total_existing}); "
+            "deferring ALL removals this run. Check whether the source changed shape.",
+            flush=True,
+        )
+        STAGE_ERROR["failed"] = True
+
+    for lang_key, (filename, existing_ids, found_ids, removal_candidates) in plan.items():
+        if defer_removals:
+            removal_candidates = set()
         updated_ids = (existing_ids - removal_candidates) | found_ids
 
         if removal_candidates and debug_log:
@@ -1334,12 +1376,23 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
         for lang_key, ids in existing_by_lang.items()
     )
     brake = max(25, int(ANISEARCH_REMOVAL_BRAKE_FRACTION * total_existing))
-    if total_existing and total_removals > brake:
-        raise RuntimeError(
+    braked = bool(total_existing) and total_removals > brake
+    if braked:
+        # Keep every existing id and merge this run's on top, rather than
+        # raising: a legitimate bulk removal upstream would otherwise fail this
+        # stage every night forever with no way through but a code edit.
+        print(
             f"[{api_mode}] SAFETY BRAKE: {total_removals} removals across all languages exceed "
             f"threshold {brake} ({ANISEARCH_REMOVAL_BRAKE_FRACTION:.0%} of {total_existing}); "
-            "refusing to overwrite. Check the upstream payload shape."
+            "keeping existing ids this run. Check the upstream payload shape.",
+            flush=True,
         )
+        STAGE_ERROR["failed"] = True
+        merged = {lang: set(ids) for lang, ids in existing_by_lang.items()}
+        for lang, ids in per_lang_ids.items():
+            merged.setdefault(lang, set()).update(ids)
+        per_lang_ids = merged
+        new_langs = set(per_lang_ids.keys())
 
     for fn in existing:
         lang_key = fn[len("dubbed_"):-len(".json")].replace("_", " ")
@@ -2343,6 +2396,7 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
         print(f"\nUnexpected error (ANN dubs): {e}")
         import traceback
         traceback.print_exc()
+        STAGE_ERROR["failed"] = True
     finally:
         finalize_jsons("ann", checked_ok_ids)
         print(f"Done (ANN dubs). Processed ~{processed + len(pending)} mapped IDs.")
@@ -2410,6 +2464,7 @@ def run_jikan(client_id: str, start_id: int, end_id: int):
         print(f"\nUnexpected error: {e}")
         import traceback
         traceback.print_exc()
+        STAGE_ERROR["failed"] = True
     finally:
         finalize_jsons("mal", checked_ok_ids)
         save_missing_cache()
@@ -2442,6 +2497,7 @@ def run_anilist(start_page: int | None, end_page: int | None, source_file: str |
                 print(f"\nUnexpected error (AniList): {e}")
                 import traceback
                 traceback.print_exc()
+                STAGE_ERROR["failed"] = True
             finally:
                 finalize_jsons("anilist", checked_ok_ids)
                 print(f"Done (AniList). Processed ~{total_processed} media items from {len(mal_ids)} MAL IDs.")
@@ -2483,6 +2539,7 @@ def run_anilist(start_page: int | None, end_page: int | None, source_file: str |
         print(f"\nUnexpected error (AniList): {e}")
         import traceback
         traceback.print_exc()
+        STAGE_ERROR["failed"] = True
     finally:
         finalize_jsons("anilist", checked_ok_ids)
         print(f"Done (AniList). Processed ~{total_processed} media items.")
@@ -2556,6 +2613,7 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
         print(f"\nUnexpected error (HiAnime): {e}")
         import traceback
         traceback.print_exc()
+        STAGE_ERROR["failed"] = True
     finally:
         finalize_jsons("hianime", checked_ok_ids)
         print("Done (HiAnime).")
@@ -2622,6 +2680,7 @@ def run_kitsu(mal_start: int, mal_end: int):
         print(f"\nUnexpected error (Kitsu): {e}")
         import traceback
         traceback.print_exc()
+        STAGE_ERROR["failed"] = True
     finally:
         finalize_jsons("kitsu", checked_ok_ids)
         log(f"[Kitsu] Summary: processed={processed}, with_langs={with_langs}, "
@@ -2632,7 +2691,11 @@ def run_kitsu(mal_start: int, mal_end: int):
 def run_anisearch(source_file: str):
     per_lang, mapping = load_anisearch_source(source_file)
     if not per_lang and not mapping:
+        # A payload wrapped in a new container key parses fine and lands here.
+        # Returning 0 made that indistinguishable from a healthy no-op night,
+        # and the source silently stopped updating.
         print("[aniSearch] Nothing to write (empty or invalid source).")
+        STAGE_ERROR["failed"] = True
         return
 
     # Write dubbed files (overwrite mode)
@@ -2758,6 +2821,7 @@ def run_animeschedule(token: str, start_page: int | None, end_page: int | None):
         print(f"\nUnexpected error (AnimeSchedule): {e}")
         import traceback
         traceback.print_exc()
+        STAGE_ERROR["failed"] = True
     finally:
         finalize_jsons("animeschedule", checked_ok_ids)
         print(f"Done (AnimeSchedule). Processed ~{total_processed} anime.")
@@ -2915,6 +2979,12 @@ def main():
 
     else:
         print(f"Unknown API: {args.api}")
+        sys.exit(1)
+
+    if STAGE_ERROR["failed"]:
+        # Partial results are already written by the `finally` blocks above; the
+        # non-zero exit is what tells the caller this source did not complete.
+        print("Stage finished with errors or a tripped safety brake; see above.")
         sys.exit(1)
 
 if __name__ == "__main__":
