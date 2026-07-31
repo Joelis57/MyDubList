@@ -2172,6 +2172,7 @@ def run_ann_mapping_refresh(
                 "skipping ALL removals this run. Investigate the Jikan external-links source.",
                 flush=True,
             )
+            STAGE_ERROR["failed"] = True
         else:
             for mid in pending_removals:
                 print(f"[ANN] Mapping removed for MAL {mid} (was {existing_map.get(mid)})", flush=True)
