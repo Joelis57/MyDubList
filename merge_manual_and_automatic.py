@@ -80,14 +80,22 @@ def load_json(path: str):
             try:
                 return json.load(f)
             except Exception as e:
-                print(f"Warning: failed to parse JSON: {path} ({e})", file=sys.stderr)
-                return {}
+                # A corrupt file is not an empty one. Returning {} here dropped
+                # every id in that source from the merge, silently demoting the
+                # ids it corroborated to a lower confidence tier.
+                raise RuntimeError(f"Refusing to merge: {path} is unreadable ({e})") from e
     return {}
 
 def save_json(path: str, data):
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
+    # tmp + replace, so an interrupted write cannot leave a truncated file that
+    # the next run would then refuse to read.
+    tmp = f"{path}.tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, path)
 
 def infer_language_from_filename(filename: str) -> str:
     name = os.path.splitext(filename)[0]
