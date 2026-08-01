@@ -75,6 +75,12 @@ FINALIZE_REMOVAL_BRAKE_FRACTION = float(
 # working (expired cert, renamed field, API withdrawn) looked like a healthy
 # night. A dict, not a bare name, so the handlers need no `global`.
 STAGE_ERROR = {"failed": False}
+# A tripped safety brake, kept SEPARATE from STAGE_ERROR. Both are anomalies but
+# they need different exit codes: a brake means "removals deferred, the run's
+# additions are valid and must still be committed", a hard error means "do not
+# trust this stage's output". Collapsing them would let a renamed upstream field
+# commit its partial parse as though a brake had merely deferred something.
+STAGE_BRAKED = {"tripped": False}
 # Returned by the cache-mode stages when a safety brake deferred removals: the
 # run's additions are still valid, but the run is not an ordinary success.
 # Distinct from 0 and from the other non-zero codes so a caller can tell the
@@ -86,7 +92,11 @@ def _stage_rc(rc: int) -> int:
     """Map a stage's own return onto the exit contract. These two stages exit
     directly, bypassing the STAGE_ERROR check at the end of main(), so without
     this a tripped brake would return 0 and look like an ordinary success."""
-    if rc == 0 and STAGE_ERROR["failed"]:
+    if rc != 0:
+        return rc
+    if STAGE_ERROR["failed"]:
+        return 1
+    if STAGE_BRAKED["tripped"]:
         return EXIT_BRAKED
     return rc
 # Parser-rot guards. A healthy cache always has a substantial share of
@@ -489,7 +499,7 @@ def save_simple_jsonl_map_overwrite(path: str, mapping: dict[int, int], value_ke
             "Check the upstream payload shape.",
             flush=True,
         )
-        STAGE_ERROR["failed"] = True
+        STAGE_BRAKED["tripped"] = True
         return
     try:
         def _write(f):
@@ -834,7 +844,7 @@ def run_mal_from_cache(bridge_url: str) -> int:
             "Investigate the characters data source.",
             flush=True,
         )
-        STAGE_ERROR["failed"] = True
+        STAGE_BRAKED["tripped"] = True
         for lang_key, ids in pending_removals.items():
             if ids:
                 json_data[lang_key].update(ids)
@@ -849,7 +859,7 @@ def run_mal_from_cache(bridge_url: str) -> int:
                     f"threshold {lang_brake}; deferring this language's removals.",
                     flush=True,
                 )
-                STAGE_ERROR["failed"] = True
+                STAGE_BRAKED["tripped"] = True
                 json_data[lang_key].update(ids)
                 deferred_per_lang[lang_key] = len(ids)
                 removed_per_lang[lang_key] = 0
@@ -1364,7 +1374,7 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
             "deferring ALL removals this run. Check whether the source changed shape.",
             flush=True,
         )
-        STAGE_ERROR["failed"] = True
+        STAGE_BRAKED["tripped"] = True
 
     for lang_key, (filename, existing_ids, found_ids, removal_candidates) in plan.items():
         if defer_removals:
@@ -1449,7 +1459,7 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
             "keeping existing ids this run. Check the upstream payload shape.",
             flush=True,
         )
-        STAGE_ERROR["failed"] = True
+        STAGE_BRAKED["tripped"] = True
         merged = {lang: set(ids) for lang, ids in existing_by_lang.items()}
         for lang, ids in per_lang_ids.items():
             merged.setdefault(lang, set()).update(ids)
@@ -2205,7 +2215,7 @@ def run_ann_mapping_refresh(
                 "skipping ALL removals this run. Investigate the Jikan external-links source.",
                 flush=True,
             )
-            STAGE_ERROR["failed"] = True
+            STAGE_BRAKED["tripped"] = True
         else:
             for mid in pending_removals:
                 print(f"[ANN] Mapping removed for MAL {mid} (was {existing_map.get(mid)})", flush=True)
@@ -2397,7 +2407,7 @@ def run_ann_mapping_from_cache(bridge_url: str) -> int:
             "skipping ALL removals this run. Investigate the external-links source.",
             flush=True,
         )
-        STAGE_ERROR["failed"] = True
+        STAGE_BRAKED["tripped"] = True
     else:
         for mid in pending_removals:
             print(f"[ANN] Mapping removed for MAL {mid} (was {existing_map.get(mid)})", flush=True)
@@ -3052,6 +3062,10 @@ def main():
         print(f"Unknown API: {args.api}")
         sys.exit(1)
 
+    if STAGE_BRAKED["tripped"] and not STAGE_ERROR["failed"]:
+        # Additions are already on disk; the caller commits them and flags the run.
+        print("A safety brake deferred removals; additions above are still valid.")
+        sys.exit(EXIT_BRAKED)
     if STAGE_ERROR["failed"]:
         # Partial results are already written by the `finally` blocks above; the
         # non-zero exit is what tells the caller this source did not complete.
