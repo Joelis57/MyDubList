@@ -55,6 +55,9 @@ MAL_CACHE_MAP_MIN_COVERAGE = 0.5
 MAL_REMOVAL_BRAKE_FRACTION = 0.02
 # Same brake for the aniSearch overwrite path, which rewrites its language
 # files from scratch instead of merging into them.
+# Maps whose value is a real numeric id. The rest are URL route slugs.
+_NUMERIC_MAP_VALUE_KEYS = {"anilist_id", "ann_id", "anisearch_id", "kitsu_id"}
+
 ANISEARCH_REMOVAL_BRAKE_FRACTION = float(
     os.getenv("ANISEARCH_REMOVAL_BRAKE_FRACTION", "0.02")
 )
@@ -442,7 +445,10 @@ def save_simple_jsonl_map(path: str, mapping: dict[int, int | str | None], value
                     existing.pop(mid, None)
                 continue
 
-            if isinstance(v, (int, float)) or (isinstance(v, str) and v.isdigit()):
+            # An all-digit slug like "100" must stay a string.
+            if value_key in _NUMERIC_MAP_VALUE_KEYS and (
+                isinstance(v, (int, float)) or (isinstance(v, str) and v.isdigit())
+            ):
                 v = int(v)
 
             existing[mid] = v
@@ -455,6 +461,8 @@ def save_simple_jsonl_map(path: str, mapping: dict[int, int | str | None], value
         _atomic_write_text(path, _write)
         log(f"[map] Wrote {len(existing)} lines to {path}")
     except Exception as e:
+        # A failed write must not let the run report success.
+        STAGE_ERROR["failed"] = True
         print(f"[map] Failed to save {path}: {e}")
 
 
@@ -1623,7 +1631,7 @@ def parse_ann_batch_xml(xml_text: str) -> tuple[dict[int, set[str]], set[int]]:
     return result, present_ids
 
 
-def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]) -> set[int]:
+def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, list[int]]) -> set[int]:
     """
     Fetch a batch of ANN IDs and add MAL IDs to json_data by language.
     Returns MAL IDs present in the ANN response.
@@ -1645,18 +1653,16 @@ def process_ann_batch(ann_ids: list[int], ann_to_mal: dict[int, int]) -> set[int
 
     ann_langs, present_ann_ids = parse_ann_batch_xml(xml_text)
 
+    # One ANN id can cover several MAL ids (ANN merges seasons MAL splits).
     checked_ok_mals: set[int] = set()
     for ann_id in present_ann_ids:
-        mal_id = ann_to_mal.get(ann_id)
-        if mal_id:
+        for mal_id in ann_to_mal.get(ann_id) or []:
             checked_ok_mals.add(int(mal_id))
 
     for ann_id, langs in ann_langs.items():
-        mal_id = ann_to_mal.get(ann_id)
-        if not mal_id:
-            continue
-        for key in langs:
-            json_data[key].add(int(mal_id))
+        for mal_id in ann_to_mal.get(ann_id) or []:
+            for key in langs:
+                json_data[key].add(int(mal_id))
 
     return checked_ok_mals
 
@@ -2416,7 +2422,7 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
         mal_ids = sorted(int(mid) for mid in existing_map.keys())
 
     pending: list[int] = []
-    ann_to_mal: dict[int, int] = {}
+    ann_to_mal: dict[int, list[int]] = {}
     processed = 0
     checked_ok_ids: set[int] = set()
 
@@ -2433,8 +2439,9 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
                 checked_ok_ids.add(int(mal_id))
                 continue
 
-            ann_to_mal[ann_id] = int(mal_id)
-            pending.append(ann_id)
+            ann_to_mal.setdefault(ann_id, []).append(int(mal_id))
+            if ann_id not in pending:
+                pending.append(ann_id)
 
             if len(pending) >= ANN_BATCH_SIZE:
                 if debug_log:
