@@ -3844,7 +3844,7 @@
 {"mal_id":4818,"anilist_id":4818,"ann_id":9338,"kitsu_id":3805,"anisearch_id":1338}
 {"mal_id":4819,"anilist_id":4819,"ann_id":3380,"kitsu_id":3806,"anisearch_id":1704}
 {"mal_id":4820,"anilist_id":4820,"kitsu_id":3807,"anisearch_id":2034}
-{"mal_id":4821,"anilist_id":4821,"ann_id":4029,"kitsu_id":3808}
+{"mal_id":4821,"anilist_id":4821,"ann_id":4029,"kitsu_id":3808,"anisearch_id":47}
 {"mal_id":4822,"anilist_id":4822,"ann_id":9169,"kitsu_id":3809,"anisearch_id":146}
 {"mal_id":4823,"anilist_id":4823,"ann_id":6541,"kitsu_id":3810,"anisearch_id":3587,"animeschedule_id":"youkai-ningen-bem-2006"}
 {"mal_id":4824,"anilist_id":4824,"kitsu_id":3811,"anisearch_id":4684}
@@ -23548,7 +23548,7 @@
 {"mal_id":61954,"anilist_id":196250,"animeschedule_id":"xi-yangyang-yu-hui-tailang-kuang-ye-xin-yuzhou"}
 {"mal_id":61963,"kitsu_id":50124,"anisearch_id":20741}
 {"mal_id":61964,"anilist_id":195384,"ann_id":36838,"anisearch_id":20694,"animeschedule_id":"meikyuu-no-shiori"}
-{"mal_id":61966,"anilist_id":195436,"animeschedule_id":"seibetsu-mona-lisa-no-kimi-e"}
+{"mal_id":61966,"anilist_id":195436,"anisearch_id":21738,"animeschedule_id":"seibetsu-mona-lisa-no-kimi-e"}
 {"mal_id":61967,"anilist_id":195604,"ann_id":36880,"animeschedule_id":"black-clover-2nd-season"}
 {"mal_id":61968,"anilist_id":195448,"ann_id":36842,"animeschedule_id":"monogatari-series-off-and-monster-season-shin-episode"}
 {"mal_id":61969,"anilist_id":199446,"ann_id":36820,"anisearch_id":20723,"animeschedule_id":"saioshi-no-gikei-wo-mederu-tame-nagaiki-shimasu"}
@@ -24222,7 +24222,7 @@
 {"mal_id":64268,"anisearch_id":21451}
 {"mal_id":64290,"anilist_id":212618,"animeschedule_id":"dorohedoro-season-3"}
 {"mal_id":64292,"anilist_id":212574,"anisearch_id":21583}
-{"mal_id":64298,"anilist_id":212667,"ann_id":39730,"animeschedule_id":"hitozukiai-ga-nigate-na-miboujin-no-yukionna-san-to-noroi-no-yubiwa"}
+{"mal_id":64298,"anilist_id":212667,"ann_id":39730,"anisearch_id":21584,"animeschedule_id":"hitozukiai-ga-nigate-na-miboujin-no-yukionna-san-to-noroi-no-yubiwa"}
 {"mal_id":64317,"animeschedule_id":"paradox-live-the-animation-movie"}
 {"mal_id":64325,"anilist_id":213427,"animeschedule_id":"pie-no-mi"}
 {"mal_id":64326,"anilist_id":212799,"ann_id":39765,"animeschedule_id":"marronnier-oukoku-no-shichinin-no-kishi"}
@@ -24289,6 +24289,7 @@
 {"mal_id":64556,"anilist_id":213879,"ann_id":40275,"animeschedule_id":"ryuugeshou-no-shinobi"}
 {"mal_id":64569,"anisearch_id":21841,"animeschedule_id":"7-nin-no-nemuri-hime"}
 {"mal_id":64573,"anilist_id":213952,"animeschedule_id":"watashi-wo-center-ni-suru-to-chikaimasu-ka"}
+{"mal_id":64577,"anisearch_id":21764}
 {"mal_id":64578,"anilist_id":213426,"ann_id":39284,"anisearch_id":21816}
 {"mal_id":64580,"anilist_id":213908,"ann_id":40245}
 {"mal_id":64597,"anilist_id":214031,"animeschedule_id":"mob-psycho-100-10-shuunen-kinen-tokubetsu-eizou"}
@@ -24299,9 +24300,10 @@
 {"mal_id":64643,"anilist_id":214246,"animeschedule_id":"yurayura-q"}
 {"mal_id":64658,"anilist_id":214332,"anisearch_id":21861,"animeschedule_id":"studio-cabana"}
 {"mal_id":64664,"anilist_id":214368,"animeschedule_id":"kusunoki-san-wa-koukou-debut-ni-shippaishiteiru"}
-{"mal_id":64665,"anilist_id":214461,"animeschedule_id":"shin-no-seijo-de-aru-watashi-wa-tsuihou-saremashita-dakara-kono-kuni-wa-mou-owari-desu"}
+{"mal_id":64665,"anilist_id":214461,"anisearch_id":21879,"animeschedule_id":"shin-no-seijo-de-aru-watashi-wa-tsuihou-saremashita-dakara-kono-kuni-wa-mou-owari-desu"}
 {"mal_id":64667,"anilist_id":214380,"animeschedule_id":"kidou-senshi-gundam-rg-xarx-zero"}
 {"mal_id":64668,"ann_id":38827}
+{"mal_id":64674,"anisearch_id":21875}
 {"mal_id":64685,"anilist_id":214451,"animeschedule_id":"mii-chan-to-yamada-san"}
 {"mal_id":64693,"anilist_id":214442,"animeschedule_id":"ginga-tetsudou-999-new-movie"}
 {"mal_id":64694,"anilist_id":214484,"animeschedule_id":"senren-banka"}
