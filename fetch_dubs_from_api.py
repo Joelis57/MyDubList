@@ -58,14 +58,15 @@ MAL_REMOVAL_BRAKE_FRACTION = 0.02
 # Maps whose value is a real numeric id. The rest are URL route slugs.
 _NUMERIC_MAP_VALUE_KEYS = {"anilist_id", "ann_id", "anisearch_id", "kitsu_id"}
 
+# `or`: an empty env value is present, so a getenv default never applies.
 ANISEARCH_REMOVAL_BRAKE_FRACTION = float(
-    os.getenv("ANISEARCH_REMOVAL_BRAKE_FRACTION", "0.02")
+    os.getenv("ANISEARCH_REMOVAL_BRAKE_FRACTION") or "0.02"
 )
 # The shared finalize path needs the same brake: it removes ids that were
 # checked this run but not found, so an upstream field rename makes every id
 # "checked" and none "found" and empties the language files wholesale.
 FINALIZE_REMOVAL_BRAKE_FRACTION = float(
-    os.getenv("FINALIZE_REMOVAL_BRAKE_FRACTION", "0.02")
+    os.getenv("FINALIZE_REMOVAL_BRAKE_FRACTION") or "0.02"
 )
 # Set when a stage caught an unexpected error, or a brake tripped. The handlers
 # below deliberately swallow exceptions so `finally: finalize_jsons(...)` still
@@ -413,7 +414,9 @@ def load_simple_jsonl_map(path: str, value_key: str) -> dict[int, object]:
             try:
                 if isinstance(mid, str) and mid.isdigit():
                     mid = int(mid)
-                if isinstance(val, (int, float)):
+                if value_key not in _NUMERIC_MAP_VALUE_KEYS:
+                    pass
+                elif isinstance(val, (int, float)):
                     val = int(val)
                 elif isinstance(val, str) and val.isdigit():
                     val = int(val)
