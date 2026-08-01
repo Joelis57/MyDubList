@@ -75,7 +75,7 @@ dubs/
       dubbed_<lang>.json
   counts/
     dubbed_<lang>.json       # { "<mal_id>": <num_sources>, ..., "partial": [ids] }
-                             # Ids under "partial" also carry a source count but are
+                             # Ids under "partial" usually carry a source count too but are
                              # excluded from every confidence tier — subtract them before
                              # deriving tiers from these counts.
   sources/
