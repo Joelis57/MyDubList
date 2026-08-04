@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+
+# A write interrupted by a signal must not leave a committable artifact.
+*.tmp
