@@ -1360,9 +1360,9 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     # removals above would empty every language file at once -- committed and
     # pushed, with nothing to say the source had stopped parsing. Same brake the
     # MAL path uses, applied across all languages together. Deferring rather
-    # than raising keeps the run non-destructive AND unwedgeable: a legitimate
-    # large removal is simply carried to the next run, and the non-zero exit
-    # below is what actually asks for attention.
+    # than raising keeps the run non-destructive; the non-zero exit asks for
+    # attention. A backlog that stays over the threshold defers every run until
+    # the fraction is raised once -- deliberate, since that is a human decision.
     total_existing = sum(len(p[1]) for p in plan.values())
     total_removals = sum(len(p[3]) for p in plan.values())
     brake = max(25, int(FINALIZE_REMOVAL_BRAKE_FRACTION * total_existing))
@@ -1371,7 +1371,9 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
         print(
             f"[{api_mode}] SAFETY BRAKE: {total_removals} removals across all languages exceed "
             f"threshold {brake} ({FINALIZE_REMOVAL_BRAKE_FRACTION:.0%} of {total_existing}); "
-            "deferring ALL removals this run. Check whether the source changed shape.",
+            "deferring ALL removals this run. Check whether the source changed shape. "
+            "If the removals are genuine, raise FINALIZE_REMOVAL_BRAKE_FRACTION for one run: "
+            "a backlog this size will otherwise defer on every run.",
             flush=True,
         )
         STAGE_BRAKED["tripped"] = True
