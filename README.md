@@ -85,7 +85,7 @@ dubs/
     mappings_<source>.jsonl  # { "mal_id":<mal_id>,"<source>_id":<source_id>, ... }
 
 cache/
-  missing_mal_ids.json       # MAL IDs returning 404 (legacy; refreshed only by the MAL scrape)
+  missing_mal_ids.json       # MAL IDs returning 404 (refreshed only by the Jikan pass)
 ```
 
 - `<lang>` is a lowercase language key (e.g., `english`, `spanish`, `german`, `french`, `italian`, etc.).
