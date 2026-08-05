@@ -566,25 +566,38 @@ def save_jsonl_map(path: str, mapping: dict[int, dict]):
 
 
 def _report_ambiguous(kind: str, m: dict) -> None:
-    """An external id owned by two MAL ids is a stale row, not a real pair.
+    """External ids owned by more than one MAL id, of which one side is DEAD.
 
-    Providers reissue ids; when the old MAL entry is deleted but its mapping
-    row survives, one external id ends up on two MAL ids and BOTH get credited
-    from a single upstream answer -- so one published dub entry is fabricated.
-    Detection only: which row to drop needs the dead id confirmed, and guessing
-    would delete real data. Surfacing it is what was missing; it was silent.
+    Sharing is normal and expected: ANN and aniSearch keep a series and its
+    specials under one entry, so ann 836 legitimately covers both One Piece and
+    its Long Ring Long Land arc. Measured, 561 of 563 shared ids are that shape.
+    Only the pairs where one MAL id is a confirmed 404 are a defect -- there the
+    provider reissued the id, the dead row survived, and a single upstream
+    answer credits BOTH ids, fabricating one published dub entry.
+
+    Reporting every shared id instead trained the reader to ignore the merge
+    log: a ~100% false-positive alarm on every run. Detection only; which row to
+    drop is a judgement call and guessing would delete real data.
     """
     seen: dict[object, list[int]] = {}
     for mid, val in m.items():
         seen.setdefault(val, []).append(mid)
-    dupes = {v: sorted(ids) for v, ids in seen.items() if len(ids) > 1}
-    if dupes:
-        preview = ", ".join(f"{v}->{ids}" for v, ids in sorted(dupes.items(), key=lambda kv: str(kv[0]))[:5])
-        print(
-            f"[mappings] AMBIGUOUS: {len(dupes)} {kind} id(s) map to more than one MAL id; "
-            f"one side of each is likely a stale row for a deleted anime. {preview}",
-            flush=True,
-        )
+    shared = {v: sorted(ids) for v, ids in seen.items() if len(ids) > 1}
+    if not shared:
+        return
+    dead = load_missing_cache()
+    suspect = {v: ids for v, ids in shared.items() if dead and any(i in dead for i in ids)}
+    if not suspect:
+        log(f"[mappings] {len(shared)} {kind} id(s) shared by several MAL ids; none has a dead side.")
+        return
+    preview = ", ".join(
+        f"{v}->{ids}" for v, ids in sorted(suspect.items(), key=lambda kv: str(kv[0]))[:5]
+    )
+    print(
+        f"[mappings] AMBIGUOUS: {len(suspect)} of {len(shared)} shared {kind} id(s) have a MAL id "
+        f"that returns 404 -- a reissued id whose dead row still credits dubs. {preview}",
+        flush=True,
+    )
 
 
 def merge_all_mappings():
