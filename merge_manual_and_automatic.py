@@ -98,9 +98,12 @@ SHRINK_BRAKE_FLOOR = 25
 def _published_size(data) -> int:
     """Comparable entry count for a counts file or a confidence tier."""
     if isinstance(data, dict):
+        # `partial` counts too: a collapse there is curated data disappearing,
+        # and it can be masked by the dubbed set growing at the same time.
+        partial = len(data["partial"]) if isinstance(data.get("partial"), list) else 0
         if isinstance(data.get("dubbed"), list):
-            return len(data["dubbed"])
-        return sum(1 for k in data if str(k).isdigit())
+            return len(data["dubbed"]) + partial
+        return sum(1 for k in data if str(k).isdigit()) + partial
     return 0
 
 
@@ -252,6 +255,22 @@ def load_language_sources(filename: str):
     auto_kenny_path         = os.path.join(AUTOMATIC_KENNY_DIR, filename)
     auto_animeschedule_path = os.path.join(AUTOMATIC_ANIMESCHEDULE_DIR, filename)
 
+    # A MISSING manual file is not an empty one. It carries the only copy of
+    # `not_dubbed` (curator vetoes) and `partial` (curated partial dubs), and
+    # load_json returns {} when it is absent -- so every published set GROWS and
+    # the shrink brake, which only measures the dubbed set, cannot fire.
+    # Measured with english's manual file removed: rc=0, "Done.", 30 hand-vetoed
+    # ids published as dubbed, 63 partials published as fully dubbed, and every
+    # Partial Dub badge gone from the site.
+    if not os.path.exists(manual_path):
+        published_counts = os.path.join(COUNTS_DIR, filename)
+        previously = load_json(published_counts) if os.path.exists(published_counts) else {}
+        if previously.get("partial"):
+            raise RuntimeError(
+                f"Refusing to merge: {manual_path} is missing, but the published "
+                f"{published_counts} still lists {len(previously['partial'])} partial id(s). "
+                "Restore the manual file rather than publishing it as fully dubbed."
+            )
     manual             = load_json(manual_path)
     auto_mal           = load_json(auto_mal_path)
     auto_anilist       = load_json(auto_anilist_path)
