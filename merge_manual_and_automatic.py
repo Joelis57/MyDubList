@@ -103,9 +103,9 @@ def _published_size(data) -> int:
             # so the two are disjoint and adding them is a true total.
             partial = len(data["partial"]) if isinstance(data.get("partial"), list) else 0
             return len(data["dubbed"]) + partial
-        # Counts files: the digit keys ALREADY contain the partial ids, so
-        # adding them again charged a partial -> not_dubbed veto twice against
-        # the budget and refused a legitimate curation.
+        # Counts files: most partial ids are also digit keys (63 of 66 in
+        # english), so adding them again charged a partial -> not_dubbed veto
+        # close to twice against the budget.
         return sum(1 for k in data if str(k).isdigit())
     return 0
 
@@ -291,13 +291,36 @@ def load_language_sources(filename: str):
                 "partial, so every veto and partial dub it held would be republished "
                 "as fully dubbed."
             )
-        _published_partial = _previously.get("partial") or []
-        if _published_partial and not manual.get("partial"):
-            raise RuntimeError(
-                f"Refusing to merge: {published_counts} lists "
-                f"{len(_published_partial)} partial id(s) but {manual_path} now has "
-                "none. Restore it rather than publishing them as fully dubbed."
-            )
+        # Compare PARSED sets against the recorded baseline. Testing raw JSON
+        # truthiness let a truncated list (66 -> 1) and even garbage
+        # (["x","y"], which parses to zero ids) satisfy the check.
+        _baseline = _previously.get("_manual_counts") or {}
+        _now = {
+            "dubbed": len(int_set(manual.get("dubbed"))),
+            "not_dubbed": len(int_set(manual.get("not_dubbed"))),
+            "partial": len(int_set(manual.get("partial"))),
+        }
+        for _key in ("not_dubbed", "partial"):
+            _was = int(_baseline.get(_key) or 0)
+            # Halving is the signal: a curator resolving entries one at a time
+            # never halves the set in a single run, and a lost key or a garbage
+            # value collapses it to zero.
+            if _was >= 4 and _now[_key] * 2 < _was:
+                raise RuntimeError(
+                    f"Refusing to merge: {manual_path} now has {_now[_key]} "
+                    f"{_key} id(s) but {published_counts} was published with {_was}. "
+                    "Restore the manual file rather than republishing them as dubbed."
+                )
+        # Pre-baseline fallback for counts files written before _manual_counts
+        # existed: `partial` is the one curated set that IS published.
+        if not _baseline:
+            _published_partial = _previously.get("partial") or []
+            if len(_published_partial) >= 4 and _now["partial"] * 2 < len(_published_partial):
+                raise RuntimeError(
+                    f"Refusing to merge: {published_counts} lists "
+                    f"{len(_published_partial)} partial id(s) but {manual_path} now has "
+                    f"{_now['partial']}. Restore it rather than publishing them as dubbed."
+                )
     auto_mal           = load_json(auto_mal_path)
     auto_anilist       = load_json(auto_anilist_path)
     auto_ann           = load_json(auto_ann_path)
@@ -375,6 +398,14 @@ def build_confidence_outputs(filename: str):
 
     counts_out = {str(mid): counts[mid] for mid in sorted(counts.keys())}
     counts_out["partial"] = sorted(manual_partial)
+    # Baseline for the next run's curation guard. `_`-prefixed like _license,
+    # and PARSED sizes, not raw JSON lengths, so ["x","y"] cannot pass as two
+    # partial ids. Vetoes never appear anywhere else in the published output.
+    counts_out["_manual_counts"] = {
+        "dubbed": len(manual_dubbed),
+        "not_dubbed": len(manual_not_dubbed),
+        "partial": len(manual_partial),
+    }
     save_json(os.path.join(COUNTS_DIR, filename), counts_out)
 
     for level, threshold in CONFIDENCE_LEVELS.items():
