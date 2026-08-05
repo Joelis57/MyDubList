@@ -98,7 +98,14 @@ SHRINK_BRAKE_FLOOR = 25
 # fraction of a list this same file wrote last run, so an absolute ceiling stops
 # junk ids buying a large loss later. Raise it deliberately, for one run, when a
 # real batch curation needs it: MERGE_CURATION_DROP_LIMIT=60.
-CURATION_DROP_LIMIT = int(os.environ.get("MERGE_CURATION_DROP_LIMIT") or 25)
+try:
+    CURATION_DROP_LIMIT = max(1, int(os.environ.get("MERGE_CURATION_DROP_LIMIT") or 25))
+except ValueError:
+    print(
+        "[merge] MERGE_CURATION_DROP_LIMIT is not a number; using 25.",
+        flush=True,
+    )
+    CURATION_DROP_LIMIT = 25
 
 
 def _published_size(data) -> int:
@@ -344,9 +351,11 @@ def load_language_sources(filename: str):
 
         for _key in ("not_dubbed", "partial"):
             _was = int_set(_previously.get(_key))
+            _from_tier = set()
             if _key == "partial":
                 # Union, so trimming the published list cannot shrink the
                 # baseline the manual file is measured against.
+                _from_tier = _implied_partial - _was
                 _was |= _implied_partial
             if len(_was) < 4:
                 continue
@@ -370,6 +379,23 @@ def load_language_sources(filename: str):
             # 250-id loss the run after. An absolute ceiling bounds that.
             _cap = min(CURATION_DROP_LIMIT, max(4, len(_was) // 4))
             if len(_lost) > _cap:
+                # Name the file that is actually inconsistent. When the
+                # evidence comes from the tier rather than the counts list, the
+                # likelier cause is a stale tier -- a run killed between the
+                # counts write and the tier write, or the shrink brake refusing
+                # one and allowing the other -- not a curator edit. Blaming the
+                # manual file there invites "fix" it by adding those ids to
+                # `partial`, which would publish fully-dubbed titles as partial.
+                _tier_only = _lost & _from_tier
+                if _tier_only and len(_tier_only) == len(_lost):
+                    raise RuntimeError(
+                        f"Refusing to merge: {len(_lost)} id(s) are counted in "
+                        f"{published_counts} but absent from {_tier}, which implies they "
+                        f"were {_key} last run -- yet {manual_path} does not list them "
+                        f"(e.g. {sorted(_lost)[:5]}). Those two published files disagree, "
+                        "so restore whichever is stale from git. Do NOT add these ids to "
+                        "the manual file; that would republish dubbed titles as partial."
+                    )
                 raise RuntimeError(
                     f"Refusing to merge: {len(_lost)} of {len(_was)} {_key} id(s) "
                     f"published in {published_counts} are no longer in {manual_path} "
