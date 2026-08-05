@@ -74,7 +74,8 @@ dubs/
     <confidence>/
       dubbed_<lang>.json
   counts/
-    dubbed_<lang>.json       # { "<mal_id>": <num_sources>, ..., "partial": [ids] }
+    dubbed_<lang>.json       # { "<mal_id>": <num_sources>, ..., "partial": [ids],
+  "not_dubbed": [ <mal_id>, ... ] }
                              # Ids under "partial" usually carry a source count too but are
                              # excluded from every confidence tier — subtract them before
                              # deriving tiers from these counts.
@@ -90,6 +91,7 @@ cache/
 
 - `<lang>` is a lowercase language key (e.g., `english`, `spanish`, `german`, `french`, `italian`, etc.).
 - `<confidence>` can be `low` (≥1 source), `normal` (≥2 sources), `high` (≥3 sources) or `very-high` (≥4 sources).
+- Ignore any key you do not recognise; more may be added.
 - Manually curated entries appear in every tier regardless of source count, so a
   tier means "at least this many automatic sources, **or** curated by hand".
 

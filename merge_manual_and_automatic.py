@@ -291,36 +291,42 @@ def load_language_sources(filename: str):
                 "partial, so every veto and partial dub it held would be republished "
                 "as fully dubbed."
             )
-        # Compare PARSED sets against the recorded baseline. Testing raw JSON
-        # truthiness let a truncated list (66 -> 1) and even garbage
-        # (["x","y"], which parses to zero ids) satisfy the check.
-        _baseline = _previously.get("_manual_counts") or {}
-        _now = {
-            "dubbed": len(int_set(manual.get("dubbed"))),
-            "not_dubbed": len(int_set(manual.get("not_dubbed"))),
-            "partial": len(int_set(manual.get("partial"))),
-        }
+        # Compare by SET MEMBERSHIP against the ids actually published last
+        # run, not by cardinality against a baseline this same run rewrites.
+        # Counting was too weak three ways: an exact halving passed; swapping
+        # every id while keeping the count passed; and because the baseline was
+        # refreshed from the same (damaged) file, six runs of "just under half"
+        # drained 30 vetoes to 0 at rc=0 with the evidence erased each time.
+        # The published lists are the one record the manual file cannot rewrite.
+        # Migration window: counts files published before `not_dubbed` was
+        # added carry no list to compare against. Membership resumes on the
+        # next run; until then at least insist the key still exists, which is
+        # the mutation that loses every veto at once.
+        if "not_dubbed" not in _previously and "not_dubbed" not in manual:
+            raise RuntimeError(
+                f"Refusing to merge: {manual_path} has no not_dubbed key and "
+                f"{published_counts} predates the published veto list, so nothing "
+                "can confirm the vetoes survived. Restore the manual file."
+            )
+
         for _key in ("not_dubbed", "partial"):
-            _was = int(_baseline.get(_key) or 0)
-            # Halving is the signal: a curator resolving entries one at a time
-            # never halves the set in a single run, and a lost key or a garbage
-            # value collapses it to zero.
-            if _was >= 4 and _now[_key] * 2 < _was:
+            _was = int_set(_previously.get(_key))
+            if len(_was) < 4:
+                continue
+            _now = int_set(manual.get(_key))
+            _lost = _was - _now
+            # A quarter, floor 4. Curation moves a handful of ids at a time; a
+            # lost key, a truncation, a garbage value or an id-remap gone wrong
+            # all take out far more, and membership catches the swap that an
+            # equal-size set hides.
+            if len(_lost) > max(4, len(_was) // 4):
                 raise RuntimeError(
-                    f"Refusing to merge: {manual_path} now has {_now[_key]} "
-                    f"{_key} id(s) but {published_counts} was published with {_was}. "
-                    "Restore the manual file rather than republishing them as dubbed."
+                    f"Refusing to merge: {len(_lost)} of {len(_was)} {_key} id(s) "
+                    f"published in {published_counts} are no longer in {manual_path} "
+                    f"(e.g. {sorted(_lost)[:5]}). Restore it rather than republishing "
+                    "them as fully dubbed."
                 )
-        # Pre-baseline fallback for counts files written before _manual_counts
-        # existed: `partial` is the one curated set that IS published.
-        if not _baseline:
-            _published_partial = _previously.get("partial") or []
-            if len(_published_partial) >= 4 and _now["partial"] * 2 < len(_published_partial):
-                raise RuntimeError(
-                    f"Refusing to merge: {published_counts} lists "
-                    f"{len(_published_partial)} partial id(s) but {manual_path} now has "
-                    f"{_now['partial']}. Restore it rather than publishing them as dubbed."
-                )
+
     auto_mal           = load_json(auto_mal_path)
     auto_anilist       = load_json(auto_anilist_path)
     auto_ann           = load_json(auto_ann_path)
@@ -398,14 +404,10 @@ def build_confidence_outputs(filename: str):
 
     counts_out = {str(mid): counts[mid] for mid in sorted(counts.keys())}
     counts_out["partial"] = sorted(manual_partial)
-    # Baseline for the next run's curation guard. `_`-prefixed like _license,
-    # and PARSED sizes, not raw JSON lengths, so ["x","y"] cannot pass as two
-    # partial ids. Vetoes never appear anywhere else in the published output.
-    counts_out["_manual_counts"] = {
-        "dubbed": len(manual_dubbed),
-        "not_dubbed": len(manual_not_dubbed),
-        "partial": len(manual_partial),
-    }
+    # Published so the next run can compare curation by MEMBERSHIP. Vetoes
+    # appeared nowhere in the output before, which is why losing them was
+    # invisible: every published set GROWS, so no shrink brake can see it.
+    counts_out["not_dubbed"] = sorted(manual_not_dubbed)
     save_json(os.path.join(COUNTS_DIR, filename), counts_out)
 
     for level, threshold in CONFIDENCE_LEVELS.items():
