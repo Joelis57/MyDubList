@@ -279,6 +279,19 @@ def load_language_sources(filename: str):
             "without its vetoes."
         )
 
+    # The counts file IS the baseline, so it needs the mirror of rule 1. A
+    # missing or stubbed `{}` counts file made the curation guard vacuous and
+    # `_published_size` return 0, which switches the shrink brake off too --
+    # both in one run, at rc=0. The confidence tiers are written from the same
+    # data, so they prove the language was published even if counts is gone.
+    _tier = os.path.join(CONFIDENCE_DIR, "low", filename)
+    if os.path.exists(_tier) and not _previously:
+        raise RuntimeError(
+            f"Refusing to merge: {published_counts} is missing or empty while "
+            f"{_tier} exists. That file is the record this run is checked against; "
+            "restore it from git rather than republishing unchecked."
+        )
+
     manual             = load_json(manual_path)
 
     # Rule 2: PRESENT but gutted is the same corruption. Checking existence
@@ -315,11 +328,23 @@ def load_language_sources(filename: str):
                 continue
             _now = int_set(manual.get(_key))
             _lost = _was - _now
+            if _lost:
+                # Logged every time, not only on refusal: a set that shrinks a
+                # little each run stays under the limit forever, and this is
+                # the only trace of it.
+                print(
+                    f"[merge] {filename}: {len(_lost)} {_key} id(s) removed "
+                    f"({len(_was)} -> {len(_now)}).",
+                    flush=True,
+                )
             # A quarter, floor 4. Curation moves a handful of ids at a time; a
             # lost key, a truncation, a garbage value or an id-remap gone wrong
             # all take out far more, and membership catches the swap that an
             # equal-size set hides.
-            if len(_lost) > max(4, len(_was) // 4):
+            # Capped at 25: the allowance is a fraction of a list this same
+            # file wrote last run, so 1000 junk ids would otherwise buy a
+            # 250-id loss the run after. An absolute ceiling bounds that.
+            if len(_lost) > min(25, max(4, len(_was) // 4)):
                 raise RuntimeError(
                     f"Refusing to merge: {len(_lost)} of {len(_was)} {_key} id(s) "
                     f"published in {published_counts} are no longer in {manual_path} "

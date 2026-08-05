@@ -75,10 +75,13 @@ dubs/
       dubbed_<lang>.json
   counts/
     dubbed_<lang>.json       # { "<mal_id>": <num_sources>, ..., "partial": [ids],
-  "not_dubbed": [ <mal_id>, ... ] }
+                             #   "not_dubbed": [ids] }
                              # Ids under "partial" usually carry a source count too but are
                              # excluded from every confidence tier — subtract them before
                              # deriving tiers from these counts.
+                             # Ids under "not_dubbed" are curator vetoes and are already
+                             # absent from the count keys. Match id keys by shape
+                             # (/^[0-9]+$/) rather than excluding names you know.
   sources/
     <source>/
       dubbed_<lang>.json     # { "dubbed": [<mal_id>, <mal_id>, ...] }
