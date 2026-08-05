@@ -98,12 +98,15 @@ SHRINK_BRAKE_FLOOR = 25
 def _published_size(data) -> int:
     """Comparable entry count for a counts file or a confidence tier."""
     if isinstance(data, dict):
-        # `partial` counts too: a collapse there is curated data disappearing,
-        # and it can be masked by the dubbed set growing at the same time.
-        partial = len(data["partial"]) if isinstance(data.get("partial"), list) else 0
         if isinstance(data.get("dubbed"), list):
+            # Confidence tiers: `dubbed` EXCLUDES partial (see finalize below),
+            # so the two are disjoint and adding them is a true total.
+            partial = len(data["partial"]) if isinstance(data.get("partial"), list) else 0
             return len(data["dubbed"]) + partial
-        return sum(1 for k in data if str(k).isdigit()) + partial
+        # Counts files: the digit keys ALREADY contain the partial ids, so
+        # adding them again charged a partial -> not_dubbed veto twice against
+        # the budget and refused a legitimate curation.
+        return sum(1 for k in data if str(k).isdigit())
     return 0
 
 
@@ -145,7 +148,7 @@ def save_json(path: str, data):
             os.fsync(f.fileno())
         os.replace(tmp, path)
     except Exception:
-        # Leave no orphan behind: this repo has no .gitignore, so a stray .tmp
+        # Leave no orphan behind: a stray .tmp under dubs/ would otherwise be
         # would be picked up and published by the next stage's commit.
         if os.path.exists(tmp):
             try:
@@ -262,16 +265,39 @@ def load_language_sources(filename: str):
     # Measured with english's manual file removed: rc=0, "Done.", 30 hand-vetoed
     # ids published as dubbed, 63 partials published as fully dubbed, and every
     # Partial Dub badge gone from the site.
-    if not os.path.exists(manual_path):
-        published_counts = os.path.join(COUNTS_DIR, filename)
-        previously = load_json(published_counts) if os.path.exists(published_counts) else {}
-        if previously.get("partial"):
-            raise RuntimeError(
-                f"Refusing to merge: {manual_path} is missing, but the published "
-                f"{published_counts} still lists {len(previously['partial'])} partial id(s). "
-                "Restore the manual file rather than publishing it as fully dubbed."
-            )
+    published_counts = os.path.join(COUNTS_DIR, filename)
+    _was_published = os.path.exists(published_counts)
+    _previously = load_json(published_counts) if _was_published else {}
+
+    # Rule 1: every published language HAS a manual file (all 27 do). If the
+    # language was published before and its manual file is gone now, the
+    # checkout is broken -- not a language that lost its curation.
+    if _was_published and not os.path.exists(manual_path):
+        raise RuntimeError(
+            f"Refusing to merge: {manual_path} is missing, but {published_counts} "
+            "was published from it. Restore the manual file rather than republishing "
+            "without its vetoes."
+        )
+
     manual             = load_json(manual_path)
+
+    # Rule 2: PRESENT but gutted is the same corruption. Checking existence
+    # alone let a stub `{}` through -- and a stub is the natural mis-recovery
+    # from rule 1's own error message, so this is the likelier route.
+    if _was_published and isinstance(manual, dict):
+        if not any(k in manual for k in ("dubbed", "not_dubbed", "partial")):
+            raise RuntimeError(
+                f"Refusing to merge: {manual_path} carries none of dubbed/not_dubbed/"
+                "partial, so every veto and partial dub it held would be republished "
+                "as fully dubbed."
+            )
+        _published_partial = _previously.get("partial") or []
+        if _published_partial and not manual.get("partial"):
+            raise RuntimeError(
+                f"Refusing to merge: {published_counts} lists "
+                f"{len(_published_partial)} partial id(s) but {manual_path} now has "
+                "none. Restore it rather than publishing them as fully dubbed."
+            )
     auto_mal           = load_json(auto_mal_path)
     auto_anilist       = load_json(auto_anilist_path)
     auto_ann           = load_json(auto_ann_path)
