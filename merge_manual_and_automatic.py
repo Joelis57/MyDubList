@@ -94,6 +94,12 @@ SHRINK_REFUSALS: list[str] = []
 SHRINK_BRAKE_FRACTION = 0.02
 SHRINK_BRAKE_FLOOR = 25
 
+# Most curated ids that may leave a manual file in one run. The allowance is a
+# fraction of a list this same file wrote last run, so an absolute ceiling stops
+# junk ids buying a large loss later. Raise it deliberately, for one run, when a
+# real batch curation needs it: MERGE_CURATION_DROP_LIMIT=60.
+CURATION_DROP_LIMIT = int(os.environ.get("MERGE_CURATION_DROP_LIMIT") or 25)
+
 
 def _published_size(data) -> int:
     """Comparable entry count for a counts file or a confidence tier."""
@@ -322,8 +328,26 @@ def load_language_sources(filename: str):
                 "can confirm the vetoes survived. Restore the manual file."
             )
 
+        # Cross-witness the baseline against the confidence tiers, which are a
+        # SEPARATE file written from the same run. Partial ids are excluded from
+        # every tier, so `counts digit keys - low tier` reproduces the partial
+        # set (minus the few curator-only ids that carry no source count). If
+        # the counts file's own `partial` list has been emptied or trimmed while
+        # the digits and tiers are intact, the two disagree -- which is how a
+        # gutted baseline slipped past a guard that only tested whether the
+        # whole file was missing.
+        _low_tier = load_json(_tier) if os.path.exists(_tier) else {}
+        _tier_dubbed = int_set(_low_tier.get("dubbed"))
+        _implied_partial = set()
+        if _tier_dubbed:
+            _implied_partial = {int(k) for k in _previously if str(k).isdigit()} - _tier_dubbed
+
         for _key in ("not_dubbed", "partial"):
             _was = int_set(_previously.get(_key))
+            if _key == "partial":
+                # Union, so trimming the published list cannot shrink the
+                # baseline the manual file is measured against.
+                _was |= _implied_partial
             if len(_was) < 4:
                 continue
             _now = int_set(manual.get(_key))
@@ -344,7 +368,8 @@ def load_language_sources(filename: str):
             # Capped at 25: the allowance is a fraction of a list this same
             # file wrote last run, so 1000 junk ids would otherwise buy a
             # 250-id loss the run after. An absolute ceiling bounds that.
-            if len(_lost) > min(25, max(4, len(_was) // 4)):
+            _cap = min(CURATION_DROP_LIMIT, max(4, len(_was) // 4))
+            if len(_lost) > _cap:
                 raise RuntimeError(
                     f"Refusing to merge: {len(_lost)} of {len(_was)} {_key} id(s) "
                     f"published in {published_counts} are no longer in {manual_path} "
