@@ -565,37 +565,65 @@ def save_jsonl_map(path: str, mapping: dict[int, dict]):
         print(f"[jsonl] Failed to save JSONL '{path}': {e}")
 
 
+def _report_ambiguous(kind: str, m: dict) -> None:
+    """An external id owned by two MAL ids is a stale row, not a real pair.
+
+    Providers reissue ids; when the old MAL entry is deleted but its mapping
+    row survives, one external id ends up on two MAL ids and BOTH get credited
+    from a single upstream answer -- so one published dub entry is fabricated.
+    Detection only: which row to drop needs the dead id confirmed, and guessing
+    would delete real data. Surfacing it is what was missing; it was silent.
+    """
+    seen: dict[object, list[int]] = {}
+    for mid, val in m.items():
+        seen.setdefault(val, []).append(mid)
+    dupes = {v: sorted(ids) for v, ids in seen.items() if len(ids) > 1}
+    if dupes:
+        preview = ", ".join(f"{v}->{ids}" for v, ids in sorted(dupes.items(), key=lambda kv: str(kv[0]))[:5])
+        print(
+            f"[mappings] AMBIGUOUS: {len(dupes)} {kind} id(s) map to more than one MAL id; "
+            f"one side of each is likely a stale row for a deleted anime. {preview}",
+            flush=True,
+        )
+
+
 def merge_all_mappings():
     """Merge existing mappings into a single JSONL at MERGED_MAPPING_JSONL."""
     master: dict[int, dict] = {}
 
     # AniList
     a_map = load_simple_jsonl_map(ANILIST_MAPPING_JSONL, "anilist_id")
+    _report_ambiguous("anilist", a_map)
     for mid, aid in a_map.items():
         master.setdefault(mid, {})["anilist_id"] = aid
 
     # ANN
     ann_map = load_simple_jsonl_map(ANN_MAPPING_JSONL, "ann_id")
+    _report_ambiguous("ann", ann_map)
     for mid, annid in ann_map.items():
         master.setdefault(mid, {})["ann_id"] = annid
 
     # Kitsu
     ki_map = load_simple_jsonl_map(KITSU_MAPPING_JSONL, "kitsu_id")
+    _report_ambiguous("kitsu", ki_map)
     for mid, kid in ki_map.items():
         master.setdefault(mid, {})["kitsu_id"] = kid
 
     # HiAnime
     hi_map = load_simple_jsonl_map(HIANIME_MAPPING_JSONL, "hianime_id")
+    _report_ambiguous("hianime", hi_map)
     for mid, hiid in hi_map.items():
         master.setdefault(mid, {})["hianime_id"] = hiid
 
     # aniSearch
     as_map = load_simple_jsonl_map(ANISEARCH_MAPPING_JSONL, "anisearch_id")
+    _report_ambiguous("anisearch", as_map)
     for mid, asid in as_map.items():
         master.setdefault(mid, {})["anisearch_id"] = asid
 
     # AnimeSchedule
     asched_map = load_simple_jsonl_map(ANIMESCHEDULE_MAPPING_JSONL, "animeschedule_id")
+    _report_ambiguous("animeschedule", asched_map)
     for mid, asid in asched_map.items():
         master.setdefault(mid, {})["animeschedule_id"] = asid
 
