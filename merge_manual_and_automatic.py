@@ -86,10 +86,54 @@ def load_json(path: str):
                 raise RuntimeError(f"Refusing to merge: {path} is unreadable ({e})") from e
     return {}
 
+# Refusals recorded by save_json's shrink brake, reported at the end.
+SHRINK_REFUSALS: list[str] = []
+
+# Largest share of a published file that may vanish in one run, matching the 2%
+# used by every other writer under dubs/. The floor lets small languages churn.
+SHRINK_BRAKE_FRACTION = 0.02
+SHRINK_BRAKE_FLOOR = 25
+
+
+def _published_size(data) -> int:
+    """Comparable entry count for a counts file or a confidence tier."""
+    if isinstance(data, dict):
+        if isinstance(data.get("dubbed"), list):
+            return len(data["dubbed"])
+        return sum(1 for k in data if str(k).isdigit())
+    return 0
+
+
 def save_json(path: str, data):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     # tmp + replace, so an interrupted write cannot leave a truncated file that
     # the next run would then refuse to read.
+    # Shrink brake. This script is the SOLE writer of every dubs/counts and
+    # dubs/confidence file in a PUBLIC repo, and it regenerates all of them from
+    # scratch each run -- yet it was the only writer under dubs/ with no brake.
+    # load_json returns {} for a MISSING source (it only raises on a corrupt
+    # one), so one absent file silently cut very-high/dubbed_japanese.json by
+    # 40% with "Done." as the only output. Keeping the previous good file and
+    # failing at the end matches how the rest of the system handles this.
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                before = _published_size(json.load(f))
+        except Exception:
+            before = 0
+        after = _published_size(data)
+        allowed = max(SHRINK_BRAKE_FLOOR, int(before * SHRINK_BRAKE_FRACTION))
+        if before and before - after > allowed:
+            SHRINK_REFUSALS.append(
+                f"{path}: {before} -> {after} ({before - after} removed, limit {allowed})"
+            )
+            print(
+                f"[merge] SAFETY BRAKE: {path} would drop {before - after} of {before} entries; "
+                "keeping the previous file. Check whether a source file is missing.",
+                flush=True,
+            )
+            return
+
     tmp = f"{path}.tmp"
     try:
         with open(tmp, "w", encoding="utf-8") as f:
@@ -335,6 +379,12 @@ def main():
         build_confidence_outputs(filename)
 
     update_readme_language_stats()
+    if SHRINK_REFUSALS:
+        raise SystemExit(
+            "[merge] " + str(len(SHRINK_REFUSALS))
+            + " file(s) refused by the shrink brake:\n  "
+            + "\n  ".join(SHRINK_REFUSALS)
+        )
     print("Done. Updated dub counts and confidences.")
 
 if __name__ == "__main__":
