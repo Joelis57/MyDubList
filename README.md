@@ -85,11 +85,13 @@ dubs/
     mappings_<source>.jsonl  # { "mal_id":<mal_id>,"<source>_id":<source_id>, ... }
 
 cache/
-  missing_mal_ids.json       # List of MAL IDs returning 404
+  missing_mal_ids.json       # MAL IDs returning 404 (legacy; refreshed only by the MAL scrape)
 ```
 
 - `<lang>` is a lowercase language key (e.g., `english`, `spanish`, `german`, `french`, `italian`, etc.).
 - `<confidence>` can be `low` (≥1 source), `normal` (≥2 sources), `high` (≥3 sources) or `very-high` (≥4 sources).
+- Manually curated entries appear in every tier regardless of source count, so a
+  tier means "at least this many automatic sources, **or** curated by hand".
 
 ## App integrations
 
