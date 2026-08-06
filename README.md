@@ -43,12 +43,12 @@ If you have an authoritative source to add, please open an issue/PR.
 | German | Deutsch | 3077 |
 | French | Français | 2545 |
 | Italian | Italiano | 2410 |
-| Chinese | 中文 | 1862 |
-| Portuguese | Português | 1841 |
+| Chinese | 中文 | 1863 |
+| Portuguese | Português | 1842 |
 | Korean | 한국어 | 1674 |
 | Tagalog | Tagalog | 846 |
 | Arabic | العربية | 322 |
-| Polish | Polski | 286 |
+| Polish | Polski | 288 |
 | Hindi | हिन्दी | 237 |
 | Hungarian | Magyar | 215 |
 | Swedish | Svenska | 142 |
