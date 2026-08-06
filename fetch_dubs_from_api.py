@@ -31,7 +31,14 @@ CALL_RETRIES = 4
 RETRY_DELAYS = [10, 60, 120]
 # Longest single 429 wait. The stage's own budget is 2h, so honouring a large
 # reset header on every attempt could consume the night before it alerted.
-ANIMESCHEDULE_MAX_429_WAIT = 600
+# Longest a single 429 may park us, for ANY provider. Retry-After and
+# X-RateLimit-Reset are upstream-controlled, and sleeping them raw is the same
+# bug three times over: a legitimate hourly quota reset (3600) burned 4h on ONE
+# anime in mal_get/jikan_get, which sit on the per-anime hot path. Waking early
+# just means the next request 429s again, which is capped, escalating, and
+# ultimately raises -- failing loud inside the stage budget beats hanging.
+MAX_429_WAIT = 600
+ANIMESCHEDULE_MAX_429_WAIT = MAX_429_WAIT
 FINALIZE_EVERY_N = 100
 
 # AniList paging (fixed by request)
@@ -1018,6 +1025,7 @@ def mal_get(url, client_id):
                     delay = int(ra) if ra is not None else RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
                 except Exception:
                     delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
+                delay = min(delay, MAX_429_WAIT)
                 print(f"  MAL 429. Retrying in {delay} seconds...", flush=True)
                 time.sleep(delay)
                 continue
@@ -1082,6 +1090,7 @@ def jikan_get(
                     delay = int(ra) if ra is not None else delays[min(attempt, len(delays)-1)]
                 except Exception:
                     delay = delays[min(attempt, len(delays)-1)]
+                delay = min(delay, MAX_429_WAIT)
                 print(f"    429 Too Many Requests. Retrying in {delay} seconds...", flush=True)
                 time.sleep(delay)
                 continue
