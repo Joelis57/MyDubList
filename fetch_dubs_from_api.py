@@ -2154,7 +2154,7 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                             # burned 4 hours on a single page; the stage's own
                             # 2h timeout then killed the whole night's run.
                             if reset_ts <= 3600:
-                                delay = min(reset_ts, ANIMESCHEDULE_MAX_429_WAIT)
+                                delay = reset_ts
                             else:
                                 delay = max(1.0, RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)])
                     except Exception:
@@ -2179,6 +2179,12 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                 last_exception = RuntimeError(
                     f"AnimeSchedule rate limited on page {page} after {attempt + 1} attempt(s)"
                 )
+                # Cap HERE: the single point every header shape converges on.
+                # Capping inside the "delay <= 0" branch covered only a delta
+                # and an elapsed epoch -- a genuine future epoch (the canonical
+                # X-RateLimit-Reset) and the Retry-After fallback both bypassed
+                # it. Measured: a +24h header slept 96h across the retries.
+                delay = min(delay, ANIMESCHEDULE_MAX_429_WAIT)
                 time.sleep(delay)
                 continue
 
