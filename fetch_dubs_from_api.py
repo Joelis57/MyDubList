@@ -8,7 +8,7 @@ from collections import defaultdict
 from functools import lru_cache
 import re
 import requests
-from math import ceil
+from math import ceil, isfinite
 import xml.etree.ElementTree as ET
 from urllib.parse import urlparse, parse_qs
 from typing import Optional
@@ -245,6 +245,14 @@ def sanitize_lang(lang: str) -> str:
 
     # Remove any (...) parenthetical chunk(s)
     s = re.sub(r"\(.*?\)", "", s).strip()
+
+    # Underscore is reserved by filename_for_lang (space -> "_"), and the
+    # inverse maps every "_" back to a space -- so a key containing a literal
+    # underscore aliases onto another language's file. An upstream token like
+    # "pt_BR" became key "pt_br", file dubbed_pt_br.json, read back as "pt br",
+    # which then looked absent from every payload and braked that language every
+    # night forever. Normalise it away here so the round-trip is injective.
+    s = s.replace("_", " ")
 
     # Collapse whitespace
     s = re.sub(r"\s+", " ", s)
@@ -1589,9 +1597,10 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
         # then committed -- the deferral was intended, publishing this was not.
         if braked and lang_key not in existing_keys:
             print(
-                f"[{api_mode}] Not creating dubbed_{filename_for_lang(lang_key)}.json: a brake "
-                "tripped this run and this language has never been published. Looks like a "
-                "rename of an existing key rather than a genuinely new language.",
+                f"[{api_mode}] Deferring dubbed_{filename_for_lang(lang_key)}.json: a brake "
+                "tripped this run and this language has never been published. If it is a "
+                "rename of an existing key this is the junk half; if it is genuinely new it "
+                "will be created once the brake clears.",
                 flush=True,
             )
             continue
@@ -2117,6 +2126,11 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                 if reset_header:
                     try:
                         reset_ts = float(reset_header)
+                        # NaN/inf parse successfully and would sail past the
+                        # guard below, then raise at int(delay) two steps later,
+                        # defeating the Retry-After fallback chain entirely.
+                        if not isfinite(reset_ts):
+                            raise ValueError(f"non-finite reset header: {reset_header!r}")
                         delay = max(reset_ts - time.time(), 0)
                         # A delta, not an epoch, reads as 0 and burns the whole
                         # retry budget instantly. Treat a small value as
@@ -2127,7 +2141,14 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                             # an epoch that has already elapsed, which means the
                             # window is open and a short retry is right --
                             # min(reset_ts, 300) slept the full 300s there.
-                            delay = reset_ts if reset_ts <= 3600 else 1.0
+                            # Escalate rather than a flat 1.0: this branch is
+                            # reached by any clock skew, and CALL_RETRIES=4 made
+                            # the entire 429 budget about four seconds.
+                            delay = (
+                                reset_ts
+                                if reset_ts <= 3600
+                                else max(1.0, RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)])
+                            )
                     except Exception:
                         delay = None
 
