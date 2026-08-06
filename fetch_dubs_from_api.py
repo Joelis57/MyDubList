@@ -1530,6 +1530,7 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
     # payload has its file DELETED, not merely emptied. Not reachable at today's
     # volumes (smallest language 2177 vs a 578 threshold); it becomes reachable
     # the moment aniSearch publishes a language smaller than that.
+    per_lang_braked = False
     if not braked:
         for _lang, _ids in existing_by_lang.items():
             if not _ids:
@@ -1542,17 +1543,26 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
                     flush=True,
                 )
                 braked = True
+                per_lang_braked = True
                 break
     if braked:
         # Keep every existing id and merge this run's on top, rather than
         # raising: a legitimate bulk removal upstream would otherwise fail this
         # stage every night forever with no way through but a code edit.
-        print(
-            f"[{api_mode}] SAFETY BRAKE: {total_removals} removals across all languages exceed "
-            f"threshold {brake} ({ANISEARCH_REMOVAL_BRAKE_FRACTION:.0%} of {total_existing}); "
-            "keeping existing ids this run. Check the upstream payload shape.",
-            flush=True,
-        )
+        if not per_lang_braked:
+            print(
+                f"[{api_mode}] SAFETY BRAKE: {total_removals} removals across all languages exceed "
+                f"threshold {brake} ({ANISEARCH_REMOVAL_BRAKE_FRACTION:.0%} of {total_existing}); "
+                "keeping existing ids this run. Check the upstream payload shape.",
+                flush=True,
+            )
+        else:
+            # The per-language line was already printed above with its own
+            # numbers; repeating the global ones here contradicted it.
+            print(
+                f"[{api_mode}] Keeping existing ids this run because a per-language brake tripped.",
+                flush=True,
+            )
         STAGE_BRAKED["tripped"] = True
         merged = {lang: set(ids) for lang, ids in existing_by_lang.items()}
         for lang, ids in per_lang_ids.items():
@@ -1570,7 +1580,21 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
                 print(f"[anisearch] Failed to remove {fn}: {e}")
 
     # Write new files
+    existing_keys = {fn[len("dubbed_"):-len(".json")].replace("_", " ") for fn in existing}
     for lang_key in sorted(new_langs):
+        # A brake tripped AND this language has never been published before: that
+        # is the signature of an upstream RENAME (the brake fired because the old
+        # key emptied), so the "new" key is the junk half of it. Writing it
+        # anyway put a bogus language into the public dataset that the caller
+        # then committed -- the deferral was intended, publishing this was not.
+        if braked and lang_key not in existing_keys:
+            print(
+                f"[{api_mode}] Not creating dubbed_{filename_for_lang(lang_key)}.json: a brake "
+                "tripped this run and this language has never been published. Looks like a "
+                "rename of an existing key rather than a genuinely new language.",
+                flush=True,
+            )
+            continue
         fname_lang = filename_for_lang(lang_key)
         filename = os.path.join(output_dir, f"dubbed_{fname_lang}.json")
         ids_sorted = sorted((int(x) for x in per_lang_ids.get(lang_key, set())), key=int)
@@ -2098,7 +2122,12 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                         # retry budget instantly. Treat a small value as
                         # seconds-until-reset, which is what it must be.
                         if delay <= 0 and reset_ts > 0:
-                            delay = min(reset_ts, 300.0)
+                            # Distinguish the two shapes a server may send. A
+                            # small value is seconds-until-reset; a large one is
+                            # an epoch that has already elapsed, which means the
+                            # window is open and a short retry is right --
+                            # min(reset_ts, 300) slept the full 300s there.
+                            delay = reset_ts if reset_ts <= 3600 else 1.0
                     except Exception:
                         delay = None
 
