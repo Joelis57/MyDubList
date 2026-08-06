@@ -1419,8 +1419,32 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
         )
         STAGE_BRAKED["tripped"] = True
 
+    # PER-LANGUAGE brake as well as the global one. run_mal_from_cache has both;
+    # this shared path had only the global, so a single language could be
+    # emptied while staying far under it. Reachable without any outage: an
+    # upstream emitting a new regional variant (the code already special-cases
+    # ES-419, PT-BR and ZH-CN) routes every id to a NEW key, so the old language
+    # goes to zero. Measured on real ANN data, 'ar-EG' moved all 320 arabic ids
+    # into a junk dubbed_ar-eg.json -- under the 534 global threshold, rc=0.
+    per_lang_deferred = set()
+    if not defer_removals:
+        for _lang, (_fn, _existing, _found, _cands) in plan.items():
+            if not _existing or not _cands:
+                continue
+            _limit = max(10, int(FINALIZE_REMOVAL_BRAKE_FRACTION * len(_existing)))
+            if len(_cands) > _limit:
+                per_lang_deferred.add(_lang)
+                print(
+                    f"[{api_mode}] SAFETY BRAKE: {_lang} would lose {len(_cands)} of "
+                    f"{len(_existing)} ids (limit {_limit}); deferring that language's "
+                    "removals. Check whether the source renamed this language.",
+                    flush=True,
+                )
+        if per_lang_deferred:
+            STAGE_BRAKED["tripped"] = True
+
     for lang_key, (filename, existing_ids, found_ids, removal_candidates) in plan.items():
-        if defer_removals:
+        if defer_removals or lang_key in per_lang_deferred:
             removal_candidates = set()
         updated_ids = (existing_ids - removal_candidates) | found_ids
 
@@ -1916,15 +1940,26 @@ def kitsu_lang_to_key(raw: str) -> str:
     return sanitize_lang(iso_try or raw)
 
 
-def kitsu_list_languages(kitsu_anime_id: int) -> set[str]:
+def kitsu_list_languages(kitsu_anime_id: int) -> Optional[set[str]]:
+    """Languages for one Kitsu id, or None when the LOOKUP itself failed.
+
+    None and set() must not be conflated. kitsu_get returns None on 401/403/404,
+    so a revoked token or a retired endpoint made every id look like "checked,
+    zero languages" -- and the caller then marked it checked, so finalize
+    deleted it from every language file. Measured on a copy of the real data:
+    1002 ids all 403 removed 166 ids across 10 languages at rc=0, under the
+    global brake because that brake's denominator is the whole corpus while a
+    run only ever covers one window.
+    """
     url = f"{KITSU_BASE}/anime/{int(kitsu_anime_id)}/_languages"
     data = kitsu_get(url)
+    if not isinstance(data, list):
+        return None
     langs: set[str] = set()
-    if isinstance(data, list):
-        for raw in data:
-            key = kitsu_lang_to_key(str(raw))
-            if key:
-                langs.add(key)
+    for raw in data:
+        key = kitsu_lang_to_key(str(raw))
+        if key:
+            langs.add(key)
     return langs
 
 # ----------------------
@@ -2032,6 +2067,11 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                     try:
                         reset_ts = float(reset_header)
                         delay = max(reset_ts - time.time(), 0)
+                        # A delta, not an epoch, reads as 0 and burns the whole
+                        # retry budget instantly. Treat a small value as
+                        # seconds-until-reset, which is what it must be.
+                        if delay <= 0 and reset_ts > 0:
+                            delay = min(reset_ts, 300.0)
                     except Exception:
                         delay = None
 
@@ -2045,6 +2085,15 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                     delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)]
 
                 print(f"  AnimeSchedule 429. Retrying in {int(delay)} seconds...", flush=True)
+                # Record it. Without this, exhausting the retries fell through
+                # to `return None` -- the SAME value the 404 branch uses to mean
+                # "no more pages" -- so a sustained rate limit silently ended
+                # the walk and the stage reported a healthy night. jikan_get and
+                # kitsu_get both carry this guard; their comments claimed this
+                # function did too, and it did not.
+                last_exception = RuntimeError(
+                    f"AnimeSchedule rate limited on page {page} after {attempt + 1} attempt(s)"
+                )
                 time.sleep(delay)
                 continue
 
@@ -2207,6 +2256,12 @@ def run_ann_mapping_refresh(
                 print(f"[ANN] Jikan failure for MAL {mal_id}: {e} (keeping existing mapping)", flush=True)
                 if consecutive_failures >= ANN_JIKAN_MAX_CONSECUTIVE_FAILURES:
                     print(f"[ANN] Stopping after {consecutive_failures} consecutive Jikan failures.", flush=True)
+                    # This is the ONLY stage that never set STAGE_ERROR: its
+                    # outer handler catches KeyboardInterrupt alone, per-id
+                    # failures are swallowed, and this breaker just broke. It is
+                    # also the fallback taken when the cache path returns 3, so
+                    # the whole ANN mapping chain could be dead at rc=0.
+                    STAGE_ERROR["failed"] = True
                     break
                 continue
 
@@ -2757,6 +2812,7 @@ def run_kitsu(mal_start: int, mal_end: int):
     checked_ok_ids: set[int] = set()
     processed = 0
     with_langs = 0
+    lookup_failures = 0
     without_langs = 0
     missing_map = 0
 
@@ -2781,6 +2837,14 @@ def run_kitsu(mal_start: int, mal_end: int):
 
             log(f"[Kitsu] MAL {mal_id} -> Kitsu {kid}: fetching languages")
             langs_found = kitsu_list_languages(kid)
+
+            if langs_found is None:
+                # The lookup failed. NOT authoritative, so this id must not be
+                # marked checked -- a checked id with no languages is a removal.
+                lookup_failures += 1
+                log(f"[Kitsu] MAL {mal_id}: lookup failed; not marking as checked")
+                processed += 1
+                continue
 
             if langs_found:
                 for key in langs_found:
@@ -2809,6 +2873,13 @@ def run_kitsu(mal_start: int, mal_end: int):
         finalize_jsons("kitsu", checked_ok_ids)
         log(f"[Kitsu] Summary: processed={processed}, with_langs={with_langs}, "
             f"without_langs={without_langs}, missing_map={missing_map}")
+        if lookup_failures:
+            print(f"[Kitsu] {lookup_failures} lookup(s) failed; those ids were not marked checked.", flush=True)
+        if lookup_failures and not checked_ok_ids:
+            # Every lookup failed: a revoked token or a retired endpoint, not a
+            # quiet night. Nothing was removed now, but the caller must hear it.
+            print("[Kitsu] EVERY lookup failed; treating the run as an error.", flush=True)
+            STAGE_ERROR["failed"] = True
         print("Done (Kitsu).")
 
 
