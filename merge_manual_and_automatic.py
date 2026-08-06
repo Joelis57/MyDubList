@@ -32,6 +32,7 @@ CONFIDENCE_LEVELS      = {
     "very-high": 4,
 }
 COUNTS_DIR             = os.path.join(ROOT, "dubs", "counts")
+CACHE_DIR              = os.path.join(ROOT, "cache")
 
 README_DIR             = os.path.join(ROOT, "README.md")
 DUBS_LOW_DIR           = os.path.join(ROOT, "dubs", "confidence", "low")
@@ -281,6 +282,14 @@ def load_language_sources(filename: str):
     published_counts = os.path.join(COUNTS_DIR, filename)
     _was_published = os.path.exists(published_counts)
     _previously = load_json(published_counts) if _was_published else {}
+    # Veto baseline lives in cache/, NOT in the published counts file. Absence
+    # from the count keys already means "not dubbed", so publishing the veto
+    # list told consumers nothing -- it existed only so this guard could tell a
+    # lost veto from a legitimate edit, and that is not a reason to widen a
+    # public schema.
+    _baseline_path = os.path.join(CACHE_DIR, "curation_baseline.json")
+    _baseline_all = load_json(_baseline_path) if os.path.exists(_baseline_path) else {}
+    _baseline = _baseline_all.get(filename) or {}
 
     # Rule 1: every published language HAS a manual file (all 27 do). If the
     # language was published before and its manual file is gone now, the
@@ -324,11 +333,11 @@ def load_language_sources(filename: str):
         # refreshed from the same (damaged) file, six runs of "just under half"
         # drained 30 vetoes to 0 at rc=0 with the evidence erased each time.
         # The published lists are the one record the manual file cannot rewrite.
-        # Migration window: counts files published before `not_dubbed` was
-        # added carry no list to compare against. Membership resumes on the
+        # Migration window: before the cache baseline exists there is no
+        # veto list to compare against. Membership resumes on the
         # next run; until then at least insist the key still exists, which is
         # the mutation that loses every veto at once.
-        if "not_dubbed" not in _previously and "not_dubbed" not in manual:
+        if "not_dubbed" not in _baseline and "not_dubbed" not in manual:
             raise RuntimeError(
                 f"Refusing to merge: {manual_path} has no not_dubbed key and "
                 f"{published_counts} predates the published veto list, so nothing "
@@ -350,7 +359,7 @@ def load_language_sources(filename: str):
             _implied_partial = {int(k) for k in _previously if str(k).isdigit()} - _tier_dubbed
 
         for _key in ("not_dubbed", "partial"):
-            _was = int_set(_previously.get(_key))
+            _was = int_set(_baseline.get(_key)) if _key == "not_dubbed" else int_set(_previously.get(_key))
             _from_tier = set()
             if _key == "partial":
                 # Union, so trimming the published list cannot shrink the
@@ -480,11 +489,19 @@ def build_confidence_outputs(filename: str):
 
     counts_out = {str(mid): counts[mid] for mid in sorted(counts.keys())}
     counts_out["partial"] = sorted(manual_partial)
-    # Published so the next run can compare curation by MEMBERSHIP. Vetoes
-    # appeared nowhere in the output before, which is why losing them was
-    # invisible: every published set GROWS, so no shrink brake can see it.
-    counts_out["not_dubbed"] = sorted(manual_not_dubbed)
+
     save_json(os.path.join(COUNTS_DIR, filename), counts_out)
+
+    # Record the curated sizes for the next run's guard. cache/, not the
+    # published counts: a consumer gains nothing from the veto list, since an
+    # id absent from the count keys is already not dubbed.
+    _bp = os.path.join(CACHE_DIR, "curation_baseline.json")
+    _all = load_json(_bp) if os.path.exists(_bp) else {}
+    _all[filename] = {
+        "not_dubbed": sorted(manual_not_dubbed),
+        "partial": sorted(manual_partial),
+    }
+    save_json(_bp, _all)
 
     for level, threshold in CONFIDENCE_LEVELS.items():
         # candidates from (overridden) counts by threshold

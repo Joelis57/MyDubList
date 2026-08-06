@@ -1,0 +1,208 @@
+{
+  "dubbed_arabic.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_catalan.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_chinese.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_danish.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_dutch.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_english.json": {
+    "not_dubbed": [
+      102,
+      1413,
+      1414,
+      1420,
+      1421,
+      1423,
+      1424,
+      1429,
+      1840,
+      2470,
+      2903,
+      3019,
+      3712,
+      4386,
+      4472,
+      4718,
+      4851,
+      4879,
+      5019,
+      7270,
+      8097,
+      8132,
+      13677,
+      15783,
+      20141,
+      29868,
+      31561,
+      35363,
+      35840,
+      40873
+    ],
+    "partial": [
+      15,
+      111,
+      170,
+      230,
+      235,
+      250,
+      278,
+      349,
+      482,
+      508,
+      516,
+      605,
+      687,
+      738,
+      918,
+      961,
+      966,
+      967,
+      1000,
+      1289,
+      1293,
+      1316,
+      1458,
+      1486,
+      1567,
+      1599,
+      1604,
+      1683,
+      1728,
+      1744,
+      1835,
+      1897,
+      1985,
+      2089,
+      2223,
+      2253,
+      2280,
+      2471,
+      2556,
+      2561,
+      2582,
+      2686,
+      2688,
+      2747,
+      2800,
+      2819,
+      2836,
+      3036,
+      3101,
+      3185,
+      3571,
+      3811,
+      3972,
+      4929,
+      5052,
+      6900,
+      7522,
+      7674,
+      8687,
+      9062,
+      10033,
+      12951,
+      13261,
+      24405,
+      28819,
+      40010
+    ]
+  },
+  "dubbed_finnish.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_french.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_german.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_hebrew.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_hindi.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_hungarian.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_indonesian.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_italian.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_japanese.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_korean.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_lithuanian.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_norwegian.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_polish.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_portuguese.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_russian.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_spanish.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_swedish.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_tagalog.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_thai.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_turkish.json": {
+    "not_dubbed": [],
+    "partial": []
+  },
+  "dubbed_vietnamese.json": {
+    "not_dubbed": [],
+    "partial": []
+  }
+}
