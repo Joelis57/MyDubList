@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 FORUM_URL = "https://myanimelist.net/forum/?topicid=1692966"
 KENNY_USERNAME = "Kenny_Stryker"
-POST_COUNT = 11  # how many of Kenny's posts to read (most recent first)
+POST_COUNT = 11  # how many of Kenny's posts to read (page 1 is OLDEST first)
 # A 200 OK that isn't the expected page (a challenge/interstitial, a moved or
 # locked topic, a markup change) parses fine and yields zero posts. Refuse to
 # publish a result that small rather than overwriting a good file with it.
@@ -23,17 +23,24 @@ def fetch_posts():
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
     posts = soup.find_all("div", class_="forum-topic-message", attrs={"data-user": KENNY_USERNAME})
-    if len(posts) >= POST_COUNT:
-        # The floor below is a SHRINK guard only. If a 12th index post appears
-        # -- or the topic paginates past page 1 -- the extra ids are simply
-        # never read: the count stops growing, nothing shrinks, and the stage
-        # commits and pings green forever. Say so rather than plateau silently.
+    read = posts[:POST_COUNT]
+    # Warn only when the cap is actually BINDING -- i.e. the last post we read
+    # still carried ids, so there may be more we never looked at. Testing
+    # len(posts) >= POST_COUNT was wrong: Kenny has ~27 posts on page 1, most of
+    # them ordinary replies, so that fired on every single run forever. An alarm
+    # that is always on is not an alarm.
+    #
+    # Note this cannot detect a NEW index post: page 1 is oldest-first and the
+    # topic runs to ~4,600 posts, so a 7th index block would be appended at the
+    # end of the thread and never appear here at any POST_COUNT. Only following
+    # pagination would find it.
+    if read and extract_mal_ids(read[-1]):
         print(
-            f"[kenny] WARNING: read the {POST_COUNT}-post cap ({len(posts)} of Kenny's posts on "
-            "page 1). If the index has grown, raise POST_COUNT or follow pagination.",
+            f"[kenny] WARNING: the last of the {POST_COUNT} posts read still contained ids, "
+            "so the index may extend past the cap. Raise POST_COUNT.",
             flush=True,
         )
-    return posts[:POST_COUNT]
+    return read
 
 def extract_mal_ids(post):
     content = post.find("div", class_="content")
