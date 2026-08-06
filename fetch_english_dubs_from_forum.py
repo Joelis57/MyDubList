@@ -15,7 +15,8 @@ POST_COUNT = 11  # how many of Kenny's posts to read (page 1 is OLDEST first)
 # publish a result that small rather than overwriting a good file with it.
 MIN_KEEP_FRACTION = 0.5
 
-OUTPUT_DIR = os.path.join("dubs", "sources", "automatic_kenny")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_DIR = os.path.join(SCRIPT_DIR, "dubs", "sources", "automatic_kenny")
 OUTPUT_PATH = os.path.join(OUTPUT_DIR, "dubbed_english.json")
 
 def fetch_posts():
@@ -85,7 +86,7 @@ def main():
     print(f"Total unique IDs extracted: {len(all_ids)}")
 
     existing = load_existing_ids(OUTPUT_PATH)
-    if existing and len(all_ids) < MIN_KEEP_FRACTION * len(existing):
+    if existing is not None and existing and len(all_ids) < MIN_KEEP_FRACTION * len(existing):
         raise SystemExit(
             f"Refusing to overwrite {OUTPUT_PATH}: extracted {len(all_ids)} IDs, under "
             f"{MIN_KEEP_FRACTION:.0%} of the {len(existing)} already published. "
