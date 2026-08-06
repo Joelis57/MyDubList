@@ -23,6 +23,16 @@ def fetch_posts():
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
     posts = soup.find_all("div", class_="forum-topic-message", attrs={"data-user": KENNY_USERNAME})
+    if len(posts) >= POST_COUNT:
+        # The floor below is a SHRINK guard only. If a 12th index post appears
+        # -- or the topic paginates past page 1 -- the extra ids are simply
+        # never read: the count stops growing, nothing shrinks, and the stage
+        # commits and pings green forever. Say so rather than plateau silently.
+        print(
+            f"[kenny] WARNING: read the {POST_COUNT}-post cap ({len(posts)} of Kenny's posts on "
+            "page 1). If the index has grown, raise POST_COUNT or follow pagination.",
+            flush=True,
+        )
     return posts[:POST_COUNT]
 
 def extract_mal_ids(post):
