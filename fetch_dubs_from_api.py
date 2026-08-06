@@ -511,6 +511,10 @@ def save_simple_jsonl_map_overwrite(path: str, mapping: dict[int, int], value_ke
         log(f"[map] Overwrote {path} with {len(mapping)} mappings")
     except Exception as e:
         print(f"[map] Failed to overwrite {path}: {e}")
+        # The atomic write leaves the old file intact, so nothing is lost -- but
+        # merge_all_mappings then merges the STALE file and the stage prints
+        # "Done". Its sibling save_simple_jsonl_map sets this in the same spot.
+        STAGE_ERROR["failed"] = True
 
 
 def load_jsonl_map(path: str) -> dict[int, dict]:
@@ -1516,6 +1520,25 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
     )
     brake = max(25, int(ANISEARCH_REMOVAL_BRAKE_FRACTION * total_existing))
     braked = bool(total_existing) and total_removals > brake
+    # Per-language too, matching finalize_jsons. Only the global brake here made
+    # a single language's wipe invisible whenever that language held fewer ids
+    # than the global threshold -- and on this path a language absent from the
+    # payload has its file DELETED, not merely emptied. Not reachable at today's
+    # volumes (smallest language 2177 vs a 578 threshold); it becomes reachable
+    # the moment aniSearch publishes a language smaller than that.
+    if not braked:
+        for _lang, _ids in existing_by_lang.items():
+            if not _ids:
+                continue
+            _gone = len(_ids - set(per_lang_ids.get(_lang, set())))
+            if _gone > max(10, int(ANISEARCH_REMOVAL_BRAKE_FRACTION * len(_ids))):
+                print(
+                    f"[anisearch] SAFETY BRAKE: {_lang} would lose {_gone} of {len(_ids)} "
+                    "ids; keeping every existing id this run.",
+                    flush=True,
+                )
+                braked = True
+                break
     if braked:
         # Keep every existing id and merge this run's on top, rather than
         # raising: a legitimate bulk removal upstream would otherwise fail this
@@ -2954,7 +2977,19 @@ def run_animeschedule(token: str, start_page: int | None, end_page: int | None):
                 anime_list = []
 
             if not anime_list:
-                if debug_log:
+                if page == 1:
+                    # Page 1 parsing to nothing is not "no more pages" -- it is
+                    # the container being renamed (four variants are already
+                    # special-cased above) or the API answering empty. run_anisearch
+                    # flags the analogous case; this one reported a healthy night
+                    # with total_processed=0.
+                    print(
+                        "[AnimeSchedule] Page 1 parsed to zero entries; the payload shape "
+                        "may have changed. Treating the run as an error.",
+                        flush=True,
+                    )
+                    STAGE_ERROR["failed"] = True
+                elif debug_log:
                     log(f"[AnimeSchedule] Empty anime list on page {page}, stopping.")
                 break
 
