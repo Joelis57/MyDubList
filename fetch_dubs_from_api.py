@@ -2197,7 +2197,9 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                 # and an elapsed epoch -- a genuine future epoch (the canonical
                 # X-RateLimit-Reset) and the Retry-After fallback both bypassed
                 # it. Measured: a +24h header slept 96h across the retries.
-                delay = min(delay, ANIMESCHEDULE_MAX_429_WAIT)
+                # max(0,...) here too: float(retry_after) admits a negative,
+                # which reached time.sleep and raised instead of retrying.
+                delay = max(0, min(delay, ANIMESCHEDULE_MAX_429_WAIT))
                 time.sleep(delay)
                 continue
 
