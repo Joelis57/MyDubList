@@ -567,6 +567,9 @@ def save_jsonl_map(path: str, mapping: dict[int, dict]):
         log(f"[jsonl] Wrote {len(mapping)} lines to {path}")
     except Exception as e:
         print(f"[jsonl] Failed to save JSONL '{path}': {e}")
+        # Same omission as save_simple_jsonl_map_overwrite had: the old file
+        # survives, but downstream merges it as if it were current.
+        STAGE_ERROR["failed"] = True
 
 
 def _report_ambiguous(kind: str, m: dict) -> None:
