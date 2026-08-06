@@ -1025,7 +1025,9 @@ def mal_get(url, client_id):
                     delay = int(ra) if ra is not None else RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
                 except Exception:
                     delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS)-1)]
-                delay = min(delay, MAX_429_WAIT)
+                # max(0,...): a negative Retry-After made time.sleep raise a
+                # misleading ValueError instead of retrying immediately.
+                delay = max(0, min(delay, MAX_429_WAIT))
                 print(f"  MAL 429. Retrying in {delay} seconds...", flush=True)
                 time.sleep(delay)
                 continue
@@ -1090,7 +1092,9 @@ def jikan_get(
                     delay = int(ra) if ra is not None else delays[min(attempt, len(delays)-1)]
                 except Exception:
                     delay = delays[min(attempt, len(delays)-1)]
-                delay = min(delay, MAX_429_WAIT)
+                # max(0,...): a negative Retry-After made time.sleep raise a
+                # misleading ValueError instead of retrying immediately.
+                delay = max(0, min(delay, MAX_429_WAIT))
                 print(f"    429 Too Many Requests. Retrying in {delay} seconds...", flush=True)
                 time.sleep(delay)
                 continue
