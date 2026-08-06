@@ -2217,7 +2217,15 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                 and remaining_val <= 1
                 and reset_ts > time.time()
             ):
-                delay = reset_ts - time.time() + 0.1  # small safety margin
+                # Capped like the 429 path. This guard fires on exactly the
+                # daily-quota-exhausted shape that produces a far-future reset,
+                # and sleeping it raw meant one and the same "Reset: now+24h"
+                # waited 600s on a 429 but 24h here -- 12x the stage's whole
+                # budget, in a page walk that can repeat it. Waking early just
+                # means the next request 429s, which is capped, escalating and
+                # ultimately raises: failing loud inside the budget beats
+                # hanging the night silently.
+                delay = min(reset_ts - time.time() + 0.1, ANIMESCHEDULE_MAX_429_WAIT)
                 if delay > 0:
                     if debug_log:
                         log(f"[AnimeSchedule] Rate limit nearly exhausted "
