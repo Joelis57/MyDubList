@@ -2182,6 +2182,9 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                 if delay is None:
                     delay = RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)]
 
+                # Clamp BEFORE the log: int(delay) on an `inf` header raised
+                # here, ahead of the cap below, so the error text was misleading.
+                delay = max(0, min(delay, ANIMESCHEDULE_MAX_429_WAIT)) if isfinite(delay) else ANIMESCHEDULE_MAX_429_WAIT
                 print(f"  AnimeSchedule 429. Retrying in {int(delay)} seconds...", flush=True)
                 # Record it. Without this, exhausting the retries fell through
                 # to `return None` -- the SAME value the 404 branch uses to mean
@@ -2197,9 +2200,6 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                 # and an elapsed epoch -- a genuine future epoch (the canonical
                 # X-RateLimit-Reset) and the Retry-After fallback both bypassed
                 # it. Measured: a +24h header slept 96h across the retries.
-                # max(0,...) here too: float(retry_after) admits a negative,
-                # which reached time.sleep and raised instead of retrying.
-                delay = max(0, min(delay, ANIMESCHEDULE_MAX_429_WAIT))
                 time.sleep(delay)
                 continue
 
