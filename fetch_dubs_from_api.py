@@ -29,6 +29,9 @@ ANIMESCHEDULE_BASE = "https://animeschedule.net/api/v3"
 MAX_IN_MEMORY_CACHE = 5000
 CALL_RETRIES = 4
 RETRY_DELAYS = [10, 60, 120]
+# Longest single 429 wait. The stage's own budget is 2h, so honouring a large
+# reset header on every attempt could consume the night before it alerted.
+ANIMESCHEDULE_MAX_429_WAIT = 600
 FINALIZE_EVERY_N = 100
 
 # AniList paging (fixed by request)
@@ -254,8 +257,10 @@ def sanitize_lang(lang: str) -> str:
     # night forever. Normalise it away here so the round-trip is injective.
     s = s.replace("_", " ")
 
-    # Collapse whitespace
-    s = re.sub(r"\s+", " ", s)
+    # Collapse whitespace. .strip() again at the end: the underscore
+    # replacement above runs after the earlier strip, so "english_" would
+    # otherwise survive as "english " and produce a second bogus file.
+    s = re.sub(r"\s+", " ", s).strip()
 
     return s
 
@@ -2144,11 +2149,14 @@ def animeschedule_get_page(token: str, page: int) -> dict | None:
                             # Escalate rather than a flat 1.0: this branch is
                             # reached by any clock skew, and CALL_RETRIES=4 made
                             # the entire 429 budget about four seconds.
-                            delay = (
-                                reset_ts
-                                if reset_ts <= 3600
-                                else max(1.0, RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)])
-                            )
+                            # Capped and escalating on BOTH halves. Honouring a
+                            # 3600s delta on every one of CALL_RETRIES attempts
+                            # burned 4 hours on a single page; the stage's own
+                            # 2h timeout then killed the whole night's run.
+                            if reset_ts <= 3600:
+                                delay = min(reset_ts, ANIMESCHEDULE_MAX_429_WAIT)
+                            else:
+                                delay = max(1.0, RETRY_DELAYS[min(attempt, len(RETRY_DELAYS) - 1)])
                     except Exception:
                         delay = None
 
