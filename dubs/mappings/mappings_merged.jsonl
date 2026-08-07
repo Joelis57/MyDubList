@@ -8886,7 +8886,7 @@
 {"mal_id":23125,"kitsu_id":8323}
 {"mal_id":23129,"anilist_id":104148,"kitsu_id":9118,"anisearch_id":8953,"animeschedule_id":"mahou-no-princess-minky-momo-hitomi-no-seiza-minky-momo-song-special"}
 {"mal_id":23133,"anilist_id":20647,"ann_id":15897,"kitsu_id":8335,"anisearch_id":9523,"animeschedule_id":"m3-sono-kuroki-hagane"}
-{"mal_id":23135,"anilist_id":20742,"ann_id":15916,"kitsu_id":8555,"anisearch_id":9554,"animeschedule_id":"pripara-2"}
+{"mal_id":23135,"anilist_id":20742,"ann_id":15916,"kitsu_id":8555,"anisearch_id":9554,"animeschedule_id":"pripara-3"}
 {"mal_id":23137,"kitsu_id":8749}
 {"mal_id":23149,"anilist_id":108743,"kitsu_id":8953,"anisearch_id":9444,"animeschedule_id":"47-todoufuken-r"}
 {"mal_id":23151,"anilist_id":20648,"ann_id":16084,"kitsu_id":8521,"anisearch_id":9522,"animeschedule_id":"shounen-hollywood-holly-stage-for-49"}
@@ -15886,7 +15886,7 @@
 {"mal_id":40217,"anilist_id":110736,"kitsu_id":42799,"anisearch_id":14544}
 {"mal_id":40221,"anilist_id":115230,"ann_id":23068,"kitsu_id":43004,"hianime_id":"tower-of-god-866","anisearch_id":14974,"animeschedule_id":"kami-no-tou-tower-of-god"}
 {"mal_id":40222,"kitsu_id":42489}
-{"mal_id":40223,"anilist_id":111028,"animeschedule_id":"qing-chi-hong-xiaodou-ba-wai-zhuan-mo-xiang-wang"}
+{"mal_id":40223,"anilist_id":111028,"animeschedule_id":"qing-chi-hong-xiao-dou-ba-wai-zhuan-mo-xiang-wang"}
 {"mal_id":40228,"anilist_id":110881,"ann_id":22414,"kitsu_id":42486,"hianime_id":"bananya-and-the-curious-bunch-5677","anisearch_id":14610,"animeschedule_id":"bananya-fushigi-na-nakama-tachi"}
 {"mal_id":40230,"anilist_id":111951,"ann_id":22488,"kitsu_id":42488,"anisearch_id":14552,"animeschedule_id":"housekishou-richard-shi-no-nazo-kantei"}
 {"mal_id":40233,"anilist_id":111125,"kitsu_id":42643,"animeschedule_id":"da-zhuzai"}
@@ -17393,7 +17393,7 @@
 {"mal_id":44047,"anilist_id":122520,"kitsu_id":43781,"animeschedule_id":"tian-huang"}
 {"mal_id":44048,"anilist_id":179778,"anisearch_id":20013,"animeschedule_id":"zetsumetsu-kigu-shun-2020"}
 {"mal_id":44050,"anilist_id":126662,"anisearch_id":15696,"animeschedule_id":"gundam-build-divers-battlogue"}
-{"mal_id":44053,"anilist_id":120268,"animeschedule_id":"hua-jianghu-gui-yexing"}
+{"mal_id":44053,"anilist_id":120268,"animeschedule_id":"hua-jianghu-zhi-gui-yexing-part-2"}
 {"mal_id":44055,"anilist_id":126288,"ann_id":24453,"kitsu_id":44575,"hianime_id":"sasaki-to-miyano-17364","anisearch_id":16249,"animeschedule_id":"sasaki-to-miyano"}
 {"mal_id":44056,"anilist_id":126831,"ann_id":23834,"kitsu_id":43828,"anisearch_id":15779,"animeschedule_id":"tokyo-gambo"}
 {"mal_id":44059,"anilist_id":126287,"kitsu_id":43749,"animeschedule_id":"puparia"}
@@ -17967,7 +17967,7 @@
 {"mal_id":48615,"anilist_id":131944,"kitsu_id":44527,"anisearch_id":16473,"animeschedule_id":"isekai-maou-to-shoukan-shoujo-no-dorei-majutsu-mini-anime"}
 {"mal_id":48616,"anilist_id":132061,"anisearch_id":16480,"animeschedule_id":"sayonara-watashi-no-cramer-mini-anime"}
 {"mal_id":48617,"kitsu_id":46739}
-{"mal_id":48624,"anilist_id":132232,"ann_id":24213,"kitsu_id":44394,"hianime_id":"recycle-of-the-penguindrum-17796","anisearch_id":16120,"animeschedule_id":"re-cycle-of-the-penguindrum"}
+{"mal_id":48624,"anilist_id":132232,"ann_id":24213,"kitsu_id":44394,"hianime_id":"recycle-of-the-penguindrum-17796","anisearch_id":16120,"animeschedule_id":"re-cycle-of-the-penguindrum-kouhen-boku-wa-kimi-wo-aishiteru"}
 {"mal_id":48626,"anilist_id":127126,"kitsu_id":44461,"anisearch_id":15815}
 {"mal_id":48627,"anilist_id":136137,"kitsu_id":44998,"hianime_id":"hetalia-worldstars-specials-17811","anisearch_id":16324,"animeschedule_id":"hetalia-world-stars-ova"}
 {"mal_id":48628,"anilist_id":130911,"ann_id":24137,"animeschedule_id":"yuusei-koukou-tenmon-bu"}
@@ -24280,6 +24280,7 @@
 {"mal_id":64528,"anilist_id":213796,"animeschedule_id":"majo-to-ryouken"}
 {"mal_id":64534,"anilist_id":213805,"ann_id":40257,"anisearch_id":21791,"animeschedule_id":"koori-no-jouheki-2nd-season"}
 {"mal_id":64540,"anilist_id":213815,"anisearch_id":21833,"animeschedule_id":"mamonotsukai-no-musume"}
+{"mal_id":64543,"animeschedule_id":"snack-hazama"}
 {"mal_id":64544,"anisearch_id":21840,"animeschedule_id":"here-u-are"}
 {"mal_id":64546,"anilist_id":213846,"anisearch_id":21844,"animeschedule_id":"solo-leveling-beyond-the-system"}
 {"mal_id":64551,"anilist_id":213872,"animeschedule_id":"hitoribocchi-no-isekai-kouryaku-2nd-season"}
@@ -24311,3 +24312,5 @@
 {"mal_id":64712,"anilist_id":214582,"animeschedule_id":"tsuihou-sareta-shounin-wa-kane-no-chikara-de-sekai-wo-sukuu"}
 {"mal_id":64725,"animeschedule_id":"fate-grand-order-fujimaru-ritsuka-wa-wakaranai-season-4"}
 {"mal_id":64726,"anilist_id":214650,"animeschedule_id":"mato-seihei-no-slave-3"}
+{"mal_id":64737,"animeschedule_id":"dokagui-daisuki-mochizuki-san"}
+{"mal_id":64746,"animeschedule_id":"komadori-mofmof-parade"}
