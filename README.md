@@ -38,16 +38,16 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5525 |
-| Spanish | Español | 3211 |
-| German | Deutsch | 3080 |
-| French | Français | 2548 |
-| Italian | Italiano | 2413 |
+| English | English | 5528 |
+| Spanish | Español | 3214 |
+| German | Deutsch | 3081 |
+| French | Français | 2549 |
+| Italian | Italiano | 2415 |
 | Chinese | 中文 | 1865 |
-| Portuguese | Português | 1843 |
-| Korean | 한국어 | 1675 |
-| Tagalog | Tagalog | 846 |
-| Arabic | العربية | 323 |
+| Portuguese | Português | 1845 |
+| Korean | 한국어 | 1676 |
+| Tagalog | Tagalog | 848 |
+| Arabic | العربية | 324 |
 | Polish | Polski | 288 |
 | Hindi | हिन्दी | 237 |
 | Hungarian | Magyar | 215 |
