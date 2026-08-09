@@ -18766,7 +18766,7 @@
 {"mal_id":50501,"anilist_id":142178,"kitsu_id":45582,"animeschedule_id":"jian-yu-chuanqi"}
 {"mal_id":50503,"kitsu_id":45721}
 {"mal_id":50505,"anilist_id":142262,"kitsu_id":45552,"animeschedule_id":"kira-kira"}
-{"mal_id":50510,"anilist_id":145898,"anisearch_id":16876,"animeschedule_id":"chinzei-hachirou-tametomo-ona"}
+{"mal_id":50510,"anilist_id":145898,"ann_id":25026,"anisearch_id":16876,"animeschedule_id":"chinzei-hachirou-tametomo-ona"}
 {"mal_id":50512,"anilist_id":145316,"kitsu_id":47894,"animeschedule_id":"neko-reset"}
 {"mal_id":50513,"anilist_id":142218,"kitsu_id":47137,"animeschedule_id":"tsubame"}
 {"mal_id":50515,"anilist_id":145709,"animeschedule_id":"artiswitch-picture-drama"}
@@ -19811,7 +19811,7 @@
 {"mal_id":53075,"anilist_id":154688,"kitsu_id":46429,"animeschedule_id":"ryuuutto-kite-kyuuu"}
 {"mal_id":53076,"anilist_id":153348,"kitsu_id":46310,"animeschedule_id":"hololive-summer-2022"}
 {"mal_id":53077,"anilist_id":154785,"ann_id":26353,"kitsu_id":46499,"anisearch_id":17719,"animeschedule_id":"nijiyon-animation"}
-{"mal_id":53079,"anilist_id":154789,"kitsu_id":46532,"anisearch_id":17709,"animeschedule_id":"youjo-shachou-r"}
+{"mal_id":53079,"anilist_id":154789,"ann_id":26354,"kitsu_id":46532,"anisearch_id":17709,"animeschedule_id":"youjo-shachou-r"}
 {"mal_id":53080,"anilist_id":119533,"kitsu_id":46515,"animeschedule_id":"yoru-ni-natta-yuki-nohanashi"}
 {"mal_id":53081,"anilist_id":119532,"animeschedule_id":"shala-bon-bon"}
 {"mal_id":53082,"anilist_id":106538,"animeschedule_id":"kiroi-kikyuu-to-banno-sensei"}
@@ -20262,7 +20262,7 @@
 {"mal_id":54142,"anilist_id":164204,"ann_id":30379,"kitsu_id":47424,"hianime_id":"cardfight-vanguard-divinez-18730","anisearch_id":18769,"animeschedule_id":"cardfight-vanguard-overdress-season-6"}
 {"mal_id":54143,"anilist_id":165681,"ann_id":32675,"hianime_id":"cardfight-vanguard-divinez-season-2-19206","anisearch_id":19247,"animeschedule_id":"cardfight-vanguard-overdress-season-7"}
 {"mal_id":54144,"anilist_id":182920,"ann_id":33713,"kitsu_id":49527,"hianime_id":"cardfight-vanguard-divinez-deluxe-hen-19480","anisearch_id":19749,"animeschedule_id":"cardfight-vanguard-divinez-deluxe-hen"}
-{"mal_id":54145,"anilist_id":191994,"kitsu_id":49528,"hianime_id":"cardfight-vanguard-divinez-deluxe-kesshou-hen-19732","anisearch_id":20473,"animeschedule_id":"cardfight-vanguard-divinez-deluxe-kesshou-hen"}
+{"mal_id":54145,"anilist_id":191994,"ann_id":36281,"kitsu_id":49528,"hianime_id":"cardfight-vanguard-divinez-deluxe-kesshou-hen-19732","anisearch_id":20473,"animeschedule_id":"cardfight-vanguard-divinez-deluxe-kesshou-hen"}
 {"mal_id":54152,"anilist_id":153320}
 {"mal_id":54153,"kitsu_id":49411}
 {"mal_id":54154,"anilist_id":155207,"animeschedule_id":"nee-yo-na"}
@@ -24310,6 +24310,7 @@
 {"mal_id":64694,"anilist_id":214484,"animeschedule_id":"senren-banka"}
 {"mal_id":64695,"anilist_id":214483,"anisearch_id":21864,"animeschedule_id":"odoru-sennen-kazoku"}
 {"mal_id":64712,"anilist_id":214582,"animeschedule_id":"tsuihou-sareta-shounin-wa-kane-no-chikara-de-sekai-wo-sukuu"}
+{"mal_id":64717,"ann_id":40393}
 {"mal_id":64725,"anilist_id":214855,"anisearch_id":21884,"animeschedule_id":"fate-grand-order-fujimaru-ritsuka-wa-wakaranai-season-4"}
 {"mal_id":64726,"anilist_id":214650,"animeschedule_id":"mato-seihei-no-slave-3"}
 {"mal_id":64737,"anilist_id":214749,"animeschedule_id":"dokagui-daisuki-mochizuki-san"}
