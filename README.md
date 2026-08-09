@@ -44,13 +44,13 @@ If you have an authoritative source to add, please open an issue/PR.
 | French | Français | 2549 |
 | Italian | Italiano | 2415 |
 | Chinese | 中文 | 1869 |
-| Portuguese | Português | 1846 |
+| Portuguese | Português | 1847 |
 | Korean | 한국어 | 1681 |
-| Tagalog | Tagalog | 848 |
+| Tagalog | Tagalog | 849 |
 | Arabic | العربية | 324 |
-| Polish | Polski | 288 |
+| Polish | Polski | 289 |
 | Hindi | हिन्दी | 237 |
-| Hungarian | Magyar | 215 |
+| Hungarian | Magyar | 216 |
 | Swedish | Svenska | 142 |
 | Hebrew | עברית | 136 |
 | Norwegian | Norsk | 136 |
