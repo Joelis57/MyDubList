@@ -42,12 +42,12 @@ If you have an authoritative source to add, please open an issue/PR.
 | Spanish | Español | 3216 |
 | German | Deutsch | 3089 |
 | French | Français | 2550 |
-| Italian | Italiano | 2416 |
+| Italian | Italiano | 2420 |
 | Chinese | 中文 | 1872 |
 | Portuguese | Português | 1848 |
 | Korean | 한국어 | 1681 |
 | Tagalog | Tagalog | 849 |
-| Arabic | العربية | 324 |
+| Arabic | العربية | 335 |
 | Polish | Polski | 289 |
 | Hindi | हिन्दी | 237 |
 | Hungarian | Magyar | 216 |
