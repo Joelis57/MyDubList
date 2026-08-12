@@ -593,6 +593,10 @@ def save_jsonl_map(path: str, mapping: dict[int, dict]):
         STAGE_ERROR["failed"] = True
 
 
+# Last reported suspect set per provider; print only on change, not per merge.
+_ambiguous_last: dict[str, tuple] = {}
+
+
 def _report_ambiguous(kind: str, m: dict) -> None:
     """External ids owned by more than one MAL id, of which one side is DEAD.
 
@@ -615,6 +619,10 @@ def _report_ambiguous(kind: str, m: dict) -> None:
         return
     dead = load_missing_cache()
     suspect = {v: ids for v, ids in shared.items() if dead and any(i in dead for i in ids)}
+    _snapshot = tuple(sorted((str(v), tuple(ids)) for v, ids in suspect.items()))
+    if _ambiguous_last.get(kind) == _snapshot:
+        return
+    _ambiguous_last[kind] = _snapshot
     if not suspect:
         log(f"[mappings] {len(shared)} {kind} id(s) shared by several MAL ids; none has a dead side.")
         return
