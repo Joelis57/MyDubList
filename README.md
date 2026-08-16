@@ -39,11 +39,11 @@ If you have an authoritative source to add, please open an issue/PR.
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | English | English | 5528 |
-| Spanish | Español | 3218 |
+| Spanish | Español | 3219 |
 | German | Deutsch | 3091 |
 | French | Français | 2552 |
 | Italian | Italiano | 2421 |
-| Chinese | 中文 | 1873 |
+| Chinese | 中文 | 1876 |
 | Portuguese | Português | 1848 |
 | Korean | 한국어 | 1681 |
 | Tagalog | Tagalog | 849 |
