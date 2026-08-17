@@ -23388,7 +23388,7 @@
 {"mal_id":61538,"anilist_id":187404,"kitsu_id":50093,"anisearch_id":20304}
 {"mal_id":61539,"anilist_id":188933,"anisearch_id":20352}
 {"mal_id":61541,"kitsu_id":50122}
-{"mal_id":61546,"anilist_id":213847,"kitsu_id":49866,"anisearch_id":21717,"animeschedule_id":"star-wars-visions-presents-the-ninth-jedi"}
+{"mal_id":61546,"anilist_id":213847,"ann_id":35763,"kitsu_id":49866,"anisearch_id":21717,"animeschedule_id":"star-wars-visions-presents-the-ninth-jedi"}
 {"mal_id":61549,"anilist_id":191205,"ann_id":35781,"anisearch_id":20464,"animeschedule_id":"okiraku-ryoushu-no-tanoshii-ryouchi-bouei-seisankei-majutsu-de-na-mo-naki-mura-wo-saikyou-no-jousai-toshi-ni"}
 {"mal_id":61550,"anilist_id":191308,"animeschedule_id":"hitotte-tada-no-tsutsujanai-desu-ka"}
 {"mal_id":61555,"anilist_id":191405,"kitsu_id":49874,"anisearch_id":20740,"animeschedule_id":"holoearth-anime-pv-saa-anata-no-mou-hitotsu-no-sekai-e"}
@@ -24315,7 +24315,8 @@
 {"mal_id":64725,"anilist_id":214855,"anisearch_id":21884,"animeschedule_id":"fate-grand-order-fujimaru-ritsuka-wa-wakaranai-season-4"}
 {"mal_id":64726,"anilist_id":214650,"animeschedule_id":"mato-seihei-no-slave-3"}
 {"mal_id":64737,"anilist_id":214749,"animeschedule_id":"dokagui-daisuki-mochizuki-san"}
-{"mal_id":64746,"animeschedule_id":"komadori-mofmof-parade"}
-{"mal_id":64751,"anilist_id":214854,"animeschedule_id":"destiny-unchain-online"}
+{"mal_id":64744,"ann_id":39997}
+{"mal_id":64746,"ann_id":38273,"animeschedule_id":"komadori-mofmof-parade"}
+{"mal_id":64751,"anilist_id":214854,"ann_id":40413,"animeschedule_id":"destiny-unchain-online"}
 {"mal_id":64768,"anilist_id":214863,"animeschedule_id":"akuyaku-no-ending-wa-shi-nomi"}
 {"mal_id":64782,"anilist_id":214969,"ann_id":40427,"anisearch_id":21892,"animeschedule_id":"akazukin-tabi-no-tochuu-de-shitai-to-deau"}
