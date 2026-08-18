@@ -2683,6 +2683,9 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
                 checked_ok_ids.update(newly_checked)
                 processed += len(pending)
                 pending.clear()
+                # Always-on heartbeat: a stalled run was killed after 2h silent.
+                if (processed // ANN_BATCH_SIZE) % 25 == 0:
+                    print(f"[ANN] progress: {processed} ids checked", flush=True)
 
             if processed and processed % FINALIZE_EVERY_N == 0:
                 finalize_jsons("ann", checked_ok_ids)
