@@ -13804,7 +13804,7 @@
 {"mal_id":44047,"animeschedule_id":"tian-huang"}
 {"mal_id":44048,"animeschedule_id":"zetsumetsu-kigu-shun-2020"}
 {"mal_id":44050,"animeschedule_id":"gundam-build-divers-battlogue"}
-{"mal_id":44053,"animeschedule_id":"hua-jianghu-zhi-gui-yexing-part-2"}
+{"mal_id":44053,"animeschedule_id":"hua-jianghu-gui-yexing"}
 {"mal_id":44055,"animeschedule_id":"sasaki-to-miyano"}
 {"mal_id":44056,"animeschedule_id":"tokyo-gambo"}
 {"mal_id":44059,"animeschedule_id":"puparia"}
@@ -14850,7 +14850,7 @@
 {"mal_id":50230,"animeschedule_id":"nitian-xie-shen"}
 {"mal_id":50231,"animeschedule_id":"inori-wa-karappo"}
 {"mal_id":50232,"animeschedule_id":"hongse-jiangshan-huangma-fenghuo"}
-{"mal_id":50233,"animeschedule_id":"jia-you"}
+{"mal_id":50233,"animeschedule_id":"zhongguo-hao-gushi"}
 {"mal_id":50234,"animeschedule_id":"cheng-li-laile-liao-yi-tiao-long"}
 {"mal_id":50235,"animeschedule_id":"long-wu"}
 {"mal_id":50238,"animeschedule_id":"m"}
@@ -18857,6 +18857,7 @@
 {"mal_id":63062,"animeschedule_id":"xian-jian-qi-xia-zhuan-san"}
 {"mal_id":63066,"animeschedule_id":"code-geass-hoshi-oi-no-aspal"}
 {"mal_id":63078,"animeschedule_id":"saijaku-tamer-wa-gomi-hiroi-no-tabi-wo-hajimemashita-2nd-season"}
+{"mal_id":63081,"animeschedule_id":"saijaku-na-boku-wa-kabenuke-bug-de-nariagaru"}
 {"mal_id":63082,"animeschedule_id":"reiwa-no-dara-san"}
 {"mal_id":63087,"animeschedule_id":"yami-shibai-16"}
 {"mal_id":63088,"animeschedule_id":"watashi-wa-watashi-no-koto-ga-suki"}
@@ -19060,6 +19061,7 @@
 {"mal_id":64006,"animeschedule_id":"megane-tokidoki-yankee-kun"}
 {"mal_id":64012,"animeschedule_id":"the-ribbon-hero"}
 {"mal_id":64018,"animeschedule_id":"kaze-no-anthem"}
+{"mal_id":64028,"animeschedule_id":"tanuki-to-kitsune-tv"}
 {"mal_id":64058,"animeschedule_id":"kagurabachi"}
 {"mal_id":64059,"animeschedule_id":"boushoku-no-berserk-2nd-season"}
 {"mal_id":64064,"animeschedule_id":"hokuhokusei-ni-kumo-to-ike"}
@@ -19164,3 +19166,5 @@
 {"mal_id":64751,"animeschedule_id":"destiny-unchain-online"}
 {"mal_id":64768,"animeschedule_id":"akuyaku-no-ending-wa-shi-nomi"}
 {"mal_id":64782,"animeschedule_id":"akazukin-tabi-no-tochuu-de-shitai-to-deau"}
+{"mal_id":64844,"animeschedule_id":"maiden-blood"}
+{"mal_id":64848,"animeschedule_id":"duel-masters-lost-danzai-no-shounen"}

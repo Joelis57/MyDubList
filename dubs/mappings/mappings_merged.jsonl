@@ -17393,7 +17393,7 @@
 {"mal_id":44047,"anilist_id":122520,"kitsu_id":43781,"animeschedule_id":"tian-huang"}
 {"mal_id":44048,"anilist_id":179778,"anisearch_id":20013,"animeschedule_id":"zetsumetsu-kigu-shun-2020"}
 {"mal_id":44050,"anilist_id":126662,"anisearch_id":15696,"animeschedule_id":"gundam-build-divers-battlogue"}
-{"mal_id":44053,"anilist_id":120268,"animeschedule_id":"hua-jianghu-zhi-gui-yexing-part-2"}
+{"mal_id":44053,"anilist_id":120268,"animeschedule_id":"hua-jianghu-gui-yexing"}
 {"mal_id":44055,"anilist_id":126288,"ann_id":24453,"kitsu_id":44575,"hianime_id":"sasaki-to-miyano-17364","anisearch_id":16249,"animeschedule_id":"sasaki-to-miyano"}
 {"mal_id":44056,"anilist_id":126831,"ann_id":23834,"kitsu_id":43828,"anisearch_id":15779,"animeschedule_id":"tokyo-gambo"}
 {"mal_id":44059,"anilist_id":126287,"kitsu_id":43749,"animeschedule_id":"puparia"}
@@ -18636,7 +18636,7 @@
 {"mal_id":50230,"anilist_id":131073,"kitsu_id":45675,"animeschedule_id":"nitian-xie-shen"}
 {"mal_id":50231,"anilist_id":122736,"kitsu_id":47070,"animeschedule_id":"inori-wa-karappo"}
 {"mal_id":50232,"anilist_id":140252,"animeschedule_id":"hongse-jiangshan-huangma-fenghuo"}
-{"mal_id":50233,"anilist_id":137983,"animeschedule_id":"jia-you"}
+{"mal_id":50233,"anilist_id":137983,"animeschedule_id":"zhongguo-hao-gushi"}
 {"mal_id":50234,"anilist_id":138563,"animeschedule_id":"cheng-li-laile-liao-yi-tiao-long"}
 {"mal_id":50235,"anilist_id":138561,"animeschedule_id":"long-wu"}
 {"mal_id":50237,"anilist_id":140430,"kitsu_id":45731,"anisearch_id":16671}
@@ -23945,7 +23945,7 @@
 {"mal_id":63066,"anilist_id":203651,"ann_id":38116,"animeschedule_id":"code-geass-hoshi-oi-no-aspal"}
 {"mal_id":63074,"anilist_id":203367,"anisearch_id":21121}
 {"mal_id":63078,"anilist_id":203855,"ann_id":38119,"animeschedule_id":"saijaku-tamer-wa-gomi-hiroi-no-tabi-wo-hajimemashita-2nd-season"}
-{"mal_id":63081,"anilist_id":213465,"ann_id":38121}
+{"mal_id":63081,"anilist_id":213465,"ann_id":38121,"animeschedule_id":"saijaku-na-boku-wa-kabenuke-bug-de-nariagaru"}
 {"mal_id":63082,"anilist_id":203880,"ann_id":38122,"anisearch_id":21085,"animeschedule_id":"reiwa-no-dara-san"}
 {"mal_id":63084,"anilist_id":201153,"anisearch_id":21080}
 {"mal_id":63087,"anilist_id":203939,"ann_id":38125,"anisearch_id":21076,"animeschedule_id":"yami-shibai-16"}
@@ -24194,7 +24194,7 @@
 {"mal_id":64012,"anilist_id":211308,"ann_id":39225,"anisearch_id":21489,"animeschedule_id":"the-ribbon-hero"}
 {"mal_id":64018,"anilist_id":211301,"animeschedule_id":"kaze-no-anthem"}
 {"mal_id":64019,"anilist_id":194116,"ann_id":39245,"anisearch_id":20298}
-{"mal_id":64028,"ann_id":38826}
+{"mal_id":64028,"ann_id":38826,"animeschedule_id":"tanuki-to-kitsune-tv"}
 {"mal_id":64058,"anilist_id":211496,"ann_id":39298,"anisearch_id":21498,"animeschedule_id":"kagurabachi"}
 {"mal_id":64059,"anilist_id":211495,"ann_id":39290,"animeschedule_id":"boushoku-no-berserk-2nd-season"}
 {"mal_id":64063,"ann_id":6848,"anisearch_id":20026}
@@ -24320,3 +24320,5 @@
 {"mal_id":64751,"anilist_id":214854,"ann_id":40413,"animeschedule_id":"destiny-unchain-online"}
 {"mal_id":64768,"anilist_id":214863,"animeschedule_id":"akuyaku-no-ending-wa-shi-nomi"}
 {"mal_id":64782,"anilist_id":214969,"ann_id":40427,"anisearch_id":21892,"animeschedule_id":"akazukin-tabi-no-tochuu-de-shitai-to-deau"}
+{"mal_id":64844,"animeschedule_id":"maiden-blood"}
+{"mal_id":64848,"animeschedule_id":"duel-masters-lost-danzai-no-shounen"}
