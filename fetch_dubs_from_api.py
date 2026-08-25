@@ -161,6 +161,10 @@ last_mal_404 = False
 # ANN throttle
 ann_last_call = 0
 ANN_MIN_INTERVAL = 1.0  # seconds between ANN calls
+# Stop cleanly before run_daily's 2h stage cap kills us mid-batch.
+ANN_SOFT_DEADLINE_SECONDS = 100 * 60
+# Cumulative seconds inside ANN HTTP, to tell network from local time.
+_ann_http_seconds = [0.0]
 
 # HiAnime throttle
 HIANIME_MIN_INTERVAL = 1.0  # seconds
@@ -706,6 +710,7 @@ def load_mal_source_jsonl(source_file: str) -> tuple[dict[str, set[int]], set[in
     """
     per_lang: dict[str, set[int]] = defaultdict(set)
     checked_ok_ids: set[int] = set()
+    stage_started = time.time()
     stats = {
         "lines": 0,
         "successful": 0,
@@ -1659,13 +1664,16 @@ def ann_get(url):
     ann_last_call = time.time()
 
     last_exception = None
+    _t0 = time.time()
     for attempt in range(CALL_RETRIES):
         try:
             resp = requests.get(url, headers={"Accept": "text/xml"}, timeout=30)
             if resp.status_code == 404:
                 log("  ANN 404, skipping batch")
+                _ann_http_seconds[0] += time.time() - _t0
                 return None
             resp.raise_for_status()
+            _ann_http_seconds[0] += time.time() - _t0
             return resp.text
         except Exception as e:
             last_exception = e
@@ -1675,6 +1683,7 @@ def ann_get(url):
                 print(f"  ANN call failed. Retrying in {delay} seconds...")
                 time.sleep(delay)
     print(f"  All {CALL_RETRIES} ANN attempts failed for {url}")
+    _ann_http_seconds[0] += time.time() - _t0
     raise last_exception
 
 
@@ -2685,7 +2694,14 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
                 pending.clear()
                 # Always-on heartbeat: a stalled run was killed after 2h silent.
                 if (processed // ANN_BATCH_SIZE) % 25 == 0:
-                    print(f"[ANN] progress: {processed} ids checked", flush=True)
+                    _el = (time.time() - stage_started) / 60
+                    _hh = _ann_http_seconds[0] / 60
+                    print(f"[ANN] progress: {processed} ids checked, {_el:.0f}min elapsed ({_hh:.0f}min in ANN HTTP)", flush=True)
+                if time.time() - stage_started > ANN_SOFT_DEADLINE_SECONDS:
+                    # Additions so far still land; unswept ids keep last week's data.
+                    print(f"[ANN] WARNING: soft deadline at {processed} ids; finalizing early instead of dying mid-batch.", flush=True)
+                    pending.clear()
+                    break
 
             if processed and processed % FINALIZE_EVERY_N == 0:
                 finalize_jsons("ann", checked_ok_ids)
