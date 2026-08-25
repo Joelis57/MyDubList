@@ -38,21 +38,21 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5535 |
+| English | English | 5536 |
 | Spanish | Español | 3224 |
 | German | Deutsch | 3093 |
 | French | Français | 2553 |
 | Italian | Italiano | 2424 |
 | Chinese | 中文 | 1877 |
-| Portuguese | Português | 1849 |
+| Portuguese | Português | 1855 |
 | Korean | 한국어 | 1684 |
 | Tagalog | Tagalog | 849 |
 | Arabic | العربية | 339 |
 | Polish | Polski | 289 |
 | Hindi | हिन्दी | 237 |
 | Hungarian | Magyar | 216 |
+| Hebrew | עברית | 153 |
 | Swedish | Svenska | 142 |
-| Hebrew | עברית | 136 |
 | Norwegian | Norsk | 136 |
 | Dutch | Nederlands | 106 |
 | Thai | ไทย | 95 |
