@@ -20429,6 +20429,7 @@
 {"mal_id":54659,"ann_id":27244,"anisearch_id":18517}
 {"mal_id":54660,"kitsu_id":47139}
 {"mal_id":54662,"anilist_id":160982,"animeschedule_id":"yishu-xueyuan"}
+{"mal_id":54668,"anisearch_id":21907}
 {"mal_id":54671,"anilist_id":145408,"kitsu_id":47349,"animeschedule_id":"blue-eyes-in-harbor-tale"}
 {"mal_id":54674,"anilist_id":145440,"animeschedule_id":"eternity"}
 {"mal_id":54678,"anilist_id":136128,"kitsu_id":44862,"animeschedule_id":"dennou"}
@@ -23980,7 +23981,7 @@
 {"mal_id":63158,"anilist_id":204463}
 {"mal_id":63159,"anilist_id":200930}
 {"mal_id":63164,"anilist_id":168252,"animeschedule_id":"chaofan-jinhua"}
-{"mal_id":63167,"anilist_id":204561,"animeschedule_id":"mahou-no-princess-minky-momo-ova"}
+{"mal_id":63167,"anilist_id":204561,"anisearch_id":21139,"animeschedule_id":"mahou-no-princess-minky-momo-ova"}
 {"mal_id":63174,"anilist_id":204579,"ann_id":38183,"anisearch_id":21135,"animeschedule_id":"jirai-nan-desu-ka-chihara-san"}
 {"mal_id":63177,"anilist_id":204604,"ann_id":38185,"anisearch_id":21137,"animeschedule_id":"undead-unluck-2nd-season"}
 {"mal_id":63179,"anilist_id":206727,"animeschedule_id":"re-member"}
@@ -24172,7 +24173,7 @@
 {"mal_id":63912,"anilist_id":210483,"ann_id":38953,"anisearch_id":21478,"animeschedule_id":"isekai-maou-to-shoukan-shoujo-no-dorei-majutsu-ult"}
 {"mal_id":63933,"anisearch_id":20250}
 {"mal_id":63934,"anilist_id":190244,"animeschedule_id":"date-a-live-f-last-date"}
-{"mal_id":63938,"anilist_id":214536,"ann_id":38996,"animeschedule_id":"cardfight-vanguard-divinez-unmei-seisen-hen"}
+{"mal_id":63938,"anilist_id":214536,"ann_id":38996,"anisearch_id":21901,"animeschedule_id":"cardfight-vanguard-divinez-unmei-seisen-hen"}
 {"mal_id":63939,"anisearch_id":21482}
 {"mal_id":63947,"anisearch_id":18663}
 {"mal_id":63956,"ann_id":39030,"animeschedule_id":"black-channel"}
@@ -24312,6 +24313,7 @@
 {"mal_id":64695,"anilist_id":214483,"ann_id":40382,"anisearch_id":21864,"animeschedule_id":"odoru-sennen-kazoku"}
 {"mal_id":64712,"anilist_id":214582,"animeschedule_id":"tsuihou-sareta-shounin-wa-kane-no-chikara-de-sekai-wo-sukuu"}
 {"mal_id":64717,"ann_id":40393}
+{"mal_id":64724,"anisearch_id":21903}
 {"mal_id":64725,"anilist_id":214855,"anisearch_id":21884,"animeschedule_id":"fate-grand-order-fujimaru-ritsuka-wa-wakaranai-season-4"}
 {"mal_id":64726,"anilist_id":214650,"animeschedule_id":"mato-seihei-no-slave-3"}
 {"mal_id":64737,"anilist_id":214749,"animeschedule_id":"dokagui-daisuki-mochizuki-san"}

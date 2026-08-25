@@ -38,8 +38,8 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5536 |
-| Spanish | Español | 3224 |
+| English | English | 5538 |
+| Spanish | Español | 3225 |
 | German | Deutsch | 3093 |
 | French | Français | 2553 |
 | Italian | Italiano | 2424 |
