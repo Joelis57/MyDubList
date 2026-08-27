@@ -38,20 +38,20 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5539 |
-| Spanish | Español | 3226 |
+| English | English | 5540 |
+| Spanish | Español | 3227 |
 | German | Deutsch | 3093 |
-| French | Français | 2553 |
+| French | Français | 2554 |
 | Italian | Italiano | 2424 |
-| Chinese | 中文 | 1877 |
+| Chinese | 中文 | 1878 |
 | Portuguese | Português | 1855 |
-| Korean | 한국어 | 1686 |
+| Korean | 한국어 | 1689 |
 | Tagalog | Tagalog | 849 |
 | Arabic | العربية | 339 |
 | Polish | Polski | 292 |
 | Hindi | हिन्दी | 237 |
 | Hungarian | Magyar | 216 |
-| Hebrew | עברית | 154 |
+| Hebrew | עברית | 155 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 136 |
 | Dutch | Nederlands | 106 |
