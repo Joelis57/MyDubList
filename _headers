@@ -1,0 +1,4 @@
+# Cloudflare Pages headers for data.mydublist.com
+/dubs/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
