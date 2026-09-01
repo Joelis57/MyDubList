@@ -710,7 +710,6 @@ def load_mal_source_jsonl(source_file: str) -> tuple[dict[str, set[int]], set[in
     """
     per_lang: dict[str, set[int]] = defaultdict(set)
     checked_ok_ids: set[int] = set()
-    stage_started = time.time()
     stats = {
         "lines": 0,
         "successful": 0,
@@ -2667,6 +2666,7 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
     ann_to_mal: dict[int, list[int]] = {}
     processed = 0
     checked_ok_ids: set[int] = set()
+    stage_started = time.time()
 
     try:
         for mal_id in mal_ids:
