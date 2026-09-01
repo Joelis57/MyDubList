@@ -17513,7 +17513,7 @@
 {"mal_id":44370,"anilist_id":129278,"animeschedule_id":"shen-chu-xiao-fugui"}
 {"mal_id":44376,"anilist_id":132679,"ann_id":24049,"kitsu_id":45784,"anisearch_id":15807,"animeschedule_id":"idol-land-pripara"}
 {"mal_id":44387,"anilist_id":126897,"ann_id":23838,"kitsu_id":44312,"anisearch_id":15809,"animeschedule_id":"sankaku-mado-no-sotogawa-wa-yoru"}
-{"mal_id":44388,"anilist_id":122508,"kitsu_id":45570,"animeschedule_id":"biao-ren"}
+{"mal_id":44388,"anilist_id":122508,"kitsu_id":45570,"anisearch_id":16697,"animeschedule_id":"biao-ren"}
 {"mal_id":44389,"anilist_id":118201,"kitsu_id":45644,"animeschedule_id":"zi-chuan"}
 {"mal_id":44390,"anilist_id":122516,"kitsu_id":47038,"animeschedule_id":"tian-mei-de-yao-hen"}
 {"mal_id":44403,"anilist_id":129217,"animeschedule_id":"konglong-baobei-shiluo-de-wenming"}
@@ -20166,7 +20166,7 @@
 {"mal_id":53912,"anilist_id":159039,"ann_id":26759,"kitsu_id":46923,"anisearch_id":17959,"animeschedule_id":"seiyuu-radio-no-uraomote"}
 {"mal_id":53913,"anilist_id":159042,"ann_id":26756,"kitsu_id":46917,"anisearch_id":17958,"animeschedule_id":"tensei-shitara-ken-deshita-2"}
 {"mal_id":53917,"anilist_id":158914,"anisearch_id":17960,"animeschedule_id":"1000-mankai-hug-nanda"}
-{"mal_id":53919,"anilist_id":141895,"animeschedule_id":"zhongguo-qi-tan"}
+{"mal_id":53919,"anilist_id":141895,"anisearch_id":17146,"animeschedule_id":"zhongguo-qi-tan"}
 {"mal_id":53920,"kitsu_id":47310}
 {"mal_id":53921,"kitsu_id":48425}
 {"mal_id":53924,"anilist_id":170892,"ann_id":30590,"kitsu_id":46924,"hianime_id":"toilet-bound-hanako-kun-season-2-19437","anisearch_id":17962,"animeschedule_id":"jibaku-shounen-hanako-kun-2nd-season"}
@@ -23966,7 +23966,7 @@
 {"mal_id":63134,"anilist_id":204361,"ann_id":38148,"animeschedule_id":"shin-kochira-katsushikaku-kameari-kouenmae-hashutsujo"}
 {"mal_id":63135,"anilist_id":204357,"ann_id":38149,"animeschedule_id":"mr-clice"}
 {"mal_id":63136,"anilist_id":204362,"ann_id":38150,"anisearch_id":21115,"animeschedule_id":"kaijuu-8-gou-kanketsu-hen"}
-{"mal_id":63138,"anilist_id":204431,"ann_id":38151,"anisearch_id":21114,"animeschedule_id":"kaijuu-8-gou-narumi-no-heijitsu"}
+{"mal_id":63138,"anilist_id":204431,"ann_id":38151,"anisearch_id":21925,"animeschedule_id":"kaijuu-8-gou-narumi-no-heijitsu"}
 {"mal_id":63139,"anilist_id":204363,"ann_id":38152,"anisearch_id":21111,"animeschedule_id":"sakamoto-days-2nd-season"}
 {"mal_id":63140,"anilist_id":204389,"ann_id":38154,"anisearch_id":21117,"animeschedule_id":"yasei-no-last-boss-ga-arawareta-2nd-season"}
 {"mal_id":63142,"anilist_id":204626,"animeschedule_id":"metal-cardbot-w"}
@@ -24307,6 +24307,7 @@
 {"mal_id":64665,"anilist_id":214461,"anisearch_id":21879,"animeschedule_id":"shin-no-seijo-de-aru-watashi-wa-tsuihou-saremashita-dakara-kono-kuni-wa-mou-owari-desu"}
 {"mal_id":64667,"anilist_id":214380,"animeschedule_id":"kidou-senshi-gundam-rg-xarx-zero"}
 {"mal_id":64668,"ann_id":38827}
+{"mal_id":64672,"anisearch_id":21926}
 {"mal_id":64685,"anilist_id":214451,"animeschedule_id":"mii-chan-to-yamada-san"}
 {"mal_id":64693,"anilist_id":214442,"animeschedule_id":"ginga-tetsudou-999-new-movie"}
 {"mal_id":64694,"anilist_id":214484,"animeschedule_id":"senren-banka"}
