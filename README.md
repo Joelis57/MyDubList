@@ -38,7 +38,7 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5545 |
+| English | English | 5546 |
 | Spanish | Español | 3231 |
 | German | Deutsch | 3096 |
 | French | Français | 2559 |
