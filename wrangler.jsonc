@@ -1,0 +1,8 @@
+{
+  // Serves the dataset at data.mydublist.com via Cloudflare Workers static assets.
+  "name": "mydublist-data",
+  "compatibility_date": "2026-09-02",
+  "assets": {
+    "directory": "./"
+  }
+}
