@@ -163,8 +163,10 @@ ann_last_call = 0
 ANN_MIN_INTERVAL = 1.0  # seconds between ANN calls
 # Stop cleanly before run_daily's 2h stage cap kills us mid-batch.
 ANN_SOFT_DEADLINE_SECONDS = 100 * 60
-# Cumulative seconds inside ANN HTTP, to tell network from local time.
+# Cumulative seconds inside ANN HTTP, the throttle wait, and the periodic save.
 _ann_http_seconds = [0.0]
+_ann_wait_seconds = [0.0]
+_ann_finalize_seconds = [0.0]
 
 # HiAnime throttle
 HIANIME_MIN_INTERVAL = 1.0  # seconds
@@ -1660,6 +1662,7 @@ def ann_get(url):
     to_wait = ANN_MIN_INTERVAL - (now - ann_last_call)
     if to_wait > 0:
         time.sleep(to_wait)
+        _ann_wait_seconds[0] += to_wait
     ann_last_call = time.time()
 
     last_exception = None
@@ -2695,8 +2698,13 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
                 # Always-on heartbeat: a stalled run was killed after 2h silent.
                 if (processed // ANN_BATCH_SIZE) % 25 == 0:
                     _el = (time.time() - stage_started) / 60
-                    _hh = _ann_http_seconds[0] / 60
-                    print(f"[ANN] progress: {processed} ids checked, {_el:.0f}min elapsed ({_hh:.0f}min in ANN HTTP)", flush=True)
+                    print(
+                        f"[ANN] progress: {processed} ids checked, {_el:.1f}min elapsed "
+                        f"(http {_ann_http_seconds[0]/60:.1f}, throttle {_ann_wait_seconds[0]/60:.1f}, "
+                        f"save {_ann_finalize_seconds[0]/60:.1f}, other "
+                        f"{max(0.0, (time.time()-stage_started-_ann_http_seconds[0]-_ann_wait_seconds[0]-_ann_finalize_seconds[0]))/60:.1f})",
+                        flush=True,
+                    )
                 if time.time() - stage_started > ANN_SOFT_DEADLINE_SECONDS:
                     # Additions so far still land; unswept ids keep last week's data.
                     print(f"[ANN] WARNING: soft deadline at {processed} ids; finalizing early instead of dying mid-batch.", flush=True)
@@ -2704,7 +2712,9 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
                     break
 
             if processed and processed % FINALIZE_EVERY_N == 0:
+                _fz = time.time()
                 finalize_jsons("ann", checked_ok_ids)
+                _ann_finalize_seconds[0] += time.time() - _fz
 
         if pending:
             newly_checked = process_ann_batch(pending, ann_to_mal)
