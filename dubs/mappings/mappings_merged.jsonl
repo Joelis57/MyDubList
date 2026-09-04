@@ -22930,7 +22930,7 @@
 {"mal_id":60337,"animeschedule_id":"tori-to-re-treat"}
 {"mal_id":60338,"animeschedule_id":"endless-fes"}
 {"mal_id":60347,"anilist_id":184718,"ann_id":34069,"hianime_id":"cats-eye-19727","anisearch_id":19937,"animeschedule_id":"cats-eye-2025"}
-{"mal_id":60348,"anilist_id":202282,"animeschedule_id":"disney-twisted-wonderland-episode-of-savanaclaw"}
+{"mal_id":60348,"anilist_id":202282,"anisearch_id":21008,"animeschedule_id":"disney-twisted-wonderland-episode-of-savanaclaw"}
 {"mal_id":60351,"anilist_id":184765,"kitsu_id":49775,"anisearch_id":19971}
 {"mal_id":60356,"anilist_id":184816,"kitsu_id":49795,"animeschedule_id":"teenage-blue"}
 {"mal_id":60357,"anilist_id":184998,"anisearch_id":20616,"animeschedule_id":"maarui-kanojo-to-zannen-na-kareshi-2nd-season"}
@@ -23757,7 +23757,7 @@
 {"mal_id":62523,"anilist_id":199008,"ann_id":35852,"anisearch_id":20969,"animeschedule_id":"uso-tantei-tomanto"}
 {"mal_id":62524,"anilist_id":199007,"ann_id":37853,"anisearch_id":20901,"animeschedule_id":"zombie-sagashitemasu"}
 {"mal_id":62526,"anilist_id":206154,"animeschedule_id":"qiyun-dantian-kaiju-qiandao-zhizun-dantian"}
-{"mal_id":62534,"anilist_id":199068,"ann_id":37857,"animeschedule_id":"shin-tennis-no-oujisama-u-17-world-cup-kesshou-member-ketteisen"}
+{"mal_id":62534,"anilist_id":199068,"ann_id":37857,"anisearch_id":21113,"animeschedule_id":"shin-tennis-no-oujisama-u-17-world-cup-kesshou-member-ketteisen"}
 {"mal_id":62535,"anilist_id":199066,"ann_id":37858,"anisearch_id":20895,"animeschedule_id":"hanaori-san-wa-tensei-shite-mo-kenka-ga-shitai"}
 {"mal_id":62537,"anilist_id":198344,"anisearch_id":20899}
 {"mal_id":62539,"anilist_id":207855,"animeschedule_id":"maru-neun-gangjwi"}
@@ -24170,7 +24170,7 @@
 {"mal_id":63878,"anilist_id":213665,"ann_id":38871,"anisearch_id":21421,"animeschedule_id":"migawari-reijou-wo-sukutta-no-wa-reikoku-mujihi-na-koori-no-ouji-no-ai-deshita"}
 {"mal_id":63885,"anilist_id":210199,"ann_id":38879,"anisearch_id":21420,"animeschedule_id":"the-fable-2nd-season"}
 {"mal_id":63901,"anilist_id":209709,"animeschedule_id":"shirotan"}
-{"mal_id":63903,"anilist_id":198654,"ann_id":38940,"animeschedule_id":"meitantei-precure-movie"}
+{"mal_id":63903,"anilist_id":198654,"ann_id":38940,"anisearch_id":21953,"animeschedule_id":"meitantei-precure-movie"}
 {"mal_id":63912,"anilist_id":210483,"ann_id":38953,"anisearch_id":21478,"animeschedule_id":"isekai-maou-to-shoukan-shoujo-no-dorei-majutsu-ult"}
 {"mal_id":63933,"anisearch_id":20250}
 {"mal_id":63934,"anilist_id":190244,"animeschedule_id":"date-a-live-f-last-date"}
@@ -24239,6 +24239,7 @@
 {"mal_id":64354,"anilist_id":213020,"ann_id":39844}
 {"mal_id":64357,"anilist_id":213097,"ann_id":39856,"anisearch_id":21832}
 {"mal_id":64359,"anilist_id":212994,"anisearch_id":21737}
+{"mal_id":64373,"anisearch_id":21582}
 {"mal_id":64374,"anilist_id":213052,"ann_id":39890,"anisearch_id":21730,"animeschedule_id":"dengeki-daisy"}
 {"mal_id":64375,"anilist_id":137664,"animeschedule_id":"cheng-huang-lu"}
 {"mal_id":64378,"anilist_id":213506,"ann_id":39320,"anisearch_id":21736,"animeschedule_id":"hokuto-no-ken-kenougun-zako-tachi-no-banka-part-2"}
@@ -24278,6 +24279,7 @@
 {"mal_id":64516,"anilist_id":213702,"animeschedule_id":"tongari-boushi-no-atelier-2nd-season"}
 {"mal_id":64519,"anilist_id":213750,"anisearch_id":21825,"animeschedule_id":"bananya-at-home-party"}
 {"mal_id":64520,"anilist_id":213740,"animeschedule_id":"sensou-kyoushitsu"}
+{"mal_id":64522,"anisearch_id":21944}
 {"mal_id":64524,"anilist_id":213752,"animeschedule_id":"marriagetoxin-2nd-season"}
 {"mal_id":64527,"anilist_id":213782,"anisearch_id":21769,"animeschedule_id":"soara-to-mamono-no-ie"}
 {"mal_id":64528,"anilist_id":213796,"animeschedule_id":"majo-to-ryouken"}
