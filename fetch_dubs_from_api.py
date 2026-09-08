@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import io
 import os
 import sys
 import time
@@ -376,9 +377,20 @@ def _atomic_write_text(path: str, write_fn) -> None:
     file stays intact until the new one is complete. write_fn receives the
     open temp file object."""
     tmp_path = f"{path}.tmp"
+    # Render first and skip identical content: every write fsyncs, and the
+    # periodic saves rewrote unchanged mapping files on spinning disks.
+    buf = io.StringIO()
+    write_fn(buf)
+    new_text = buf.getvalue()
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            if f.read() == new_text:
+                return
+    except OSError:
+        pass
     try:
         with open(tmp_path, "w", encoding="utf-8") as f:
-            write_fn(f)
+            f.write(new_text)
             f.flush()
             os.fsync(f.fileno())
         os.replace(tmp_path, path)
