@@ -386,7 +386,7 @@ def _atomic_write_text(path: str, write_fn) -> None:
         with open(path, "r", encoding="utf-8") as f:
             if f.read() == new_text:
                 return
-    except OSError:
+    except (OSError, UnicodeDecodeError):
         pass
     try:
         with open(tmp_path, "w", encoding="utf-8") as f:
