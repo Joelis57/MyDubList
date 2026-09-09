@@ -39,7 +39,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Language | Native name | Dubbed |
 |---|---:|---:|
 | English | English | 5548 |
-| Spanish | Español | 3233 |
+| Spanish | Español | 3234 |
 | German | Deutsch | 3100 |
 | French | Français | 2560 |
 | Italian | Italiano | 2430 |
