@@ -143,8 +143,10 @@ def save_json(path: str, data):
             before = 0
         after = _published_size(data)
         allowed = max(SHRINK_BRAKE_FLOOR, int(before * SHRINK_BRAKE_FRACTION))
-        # after == 0 as well: a language below the floor could be emptied silently.
-        if before and (after == 0 or before - after > allowed):
+        # Emptying is refused only for the counts files; a confidence tier
+        # reaching zero is normal (41 already are).
+        _is_counts = os.path.dirname(os.path.abspath(path)) == os.path.abspath(COUNTS_DIR)
+        if before and ((after == 0 and _is_counts) or before - after > allowed):
             SHRINK_REFUSALS.append(
                 f"{path}: {before} -> {after} ({before - after} removed, limit {allowed})"
             )
