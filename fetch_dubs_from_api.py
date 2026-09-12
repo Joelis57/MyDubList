@@ -1303,12 +1303,10 @@ def _anilist_retry_delay(resp) -> float:
         if not isfinite(parsed) or parsed < 0:
             continue
         delay = (parsed - time.time()) if as_epoch else parsed
-        # A reset header can be an epoch or a delta; a already-elapsed epoch
-        # means the window is open, so retry shortly rather than not at all.
-        if as_epoch and delay <= 0:
-            delay = min(parsed, 60.0) if parsed > 0 else 0.0
-        if delay > 0:
-            return max(0.0, min(delay, ANILIST_MAX_429_WAIT))
+        # An elapsed epoch must not hide a usable Retry-After.
+        if delay <= 0:
+            continue
+        return max(0.0, min(delay, ANILIST_MAX_429_WAIT))
     return min(60.0, ANILIST_MAX_429_WAIT)
 
 
@@ -1333,11 +1331,15 @@ def anilist_post(query, variables):
                 # budget -- but it is bounded by a cumulative TIME budget so a
                 # pathological Retry-After cannot park the stage.
                 delay = _anilist_retry_delay(r)
-                if throttled_for + delay > ANILIST_MAX_429_WAIT_TOTAL:
+                remaining = ANILIST_MAX_429_WAIT_TOTAL - throttled_for
+                if remaining <= 0:
                     raise RuntimeError(
                         f"AniList throttled this call for {throttled_for:.0f}s; giving up"
                     )
-                throttled_for += delay
+                # Clamp to the remaining budget rather than refusing to wait.
+                delay = min(delay, remaining)
+                # Charge the pacing floor too; every retry also sleeps it.
+                throttled_for += max(delay, ANILIST_MIN_INTERVAL)
                 rate_limited += 1
                 print(f"  AniList 429 (throttled {rate_limited}x, {throttled_for:.0f}s total); waiting {delay:.0f}s", flush=True)
                 time.sleep(delay)
@@ -1575,12 +1577,6 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
         if defer_removals or lang_key in per_lang_deferred:
             removal_candidates = set()
         updated_ids = (existing_ids - removal_candidates) | found_ids
-
-        # Skip untouched languages. Each write fsyncs, and this runs every
-        # FINALIZE_EVERY_N ids, so rewriting all languages when only one gained
-        # an id cost 88% of the ANN stage's wall clock on spinning disks.
-        if updated_ids == existing_ids and os.path.exists(filename):
-            continue
 
         if removal_candidates and debug_log:
             log(f"  [{api_mode}] {lang_key}: removing {len(removal_candidates)} ids; keeping {len(updated_ids)}")
@@ -2792,8 +2788,9 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
                         flush=True,
                     )
                 if time.time() - stage_started > ANN_SOFT_DEADLINE_SECONDS:
-                    # Additions so far still land; unswept ids keep last week's data.
+                    # Additions land; a truncated sweep still flags the run.
                     print(f"[ANN] WARNING: soft deadline at {processed} ids; finalizing early instead of dying mid-batch.", flush=True)
+                    STAGE_BRAKED["tripped"] = True
                     pending.clear()
                     break
 
