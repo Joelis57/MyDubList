@@ -48,7 +48,7 @@ ANILIST_MIN_INTERVAL = 60.0 / max(1, ANILIST_RATE_LIMIT_PER_MIN - ANILIST_RATE_L
 # Throttling must not eat the retry budget, but must still be bounded in time.
 ANILIST_MAX_429_WAIT_TOTAL = 300.0
 # Per-STAGE too: the per-call bound still allowed ~490 calls x 60s = 8.5h.
-ANILIST_STAGE_429_BUDGET = 1200.0
+ANILIST_STAGE_429_BUDGET = 900.0
 _anilist_stage_throttle = [0.0]
 
 
@@ -1342,7 +1342,7 @@ def anilist_post(query, variables):
                 charged = max(delay, ANILIST_MIN_INTERVAL)
                 throttled_for += charged
                 _anilist_stage_throttle[0] += charged
-                if _anilist_stage_throttle[0] > ANILIST_STAGE_429_BUDGET:
+                if _anilist_stage_throttle[0] >= ANILIST_STAGE_429_BUDGET:
                     raise AniListStageThrottled(
                         f"AniList throttled this stage for "
                         f"{_anilist_stage_throttle[0]/60:.0f} min; aborting rather than burning the night"
