@@ -41,16 +41,19 @@ RETRY_DELAYS = [10, 60, 120]
 MAX_429_WAIT = 600
 ANIMESCHEDULE_MAX_429_WAIT = MAX_429_WAIT
 ANILIST_MAX_429_WAIT = MAX_429_WAIT
-# AniList cut its limit to 30/min. A full run is ~490 requests, so pace them
-# instead of firing blind and burning the retry budget on 429s. Paced a little
-# under the ceiling: riding it exactly still trips a rolling window.
+# AniList's limit is 30/min; pace under it, since riding it trips a rolling window.
 ANILIST_RATE_LIMIT_PER_MIN = 30
 ANILIST_RATE_LIMIT_HEADROOM = 5
 ANILIST_MIN_INTERVAL = 60.0 / max(1, ANILIST_RATE_LIMIT_PER_MIN - ANILIST_RATE_LIMIT_HEADROOM)
-# Being throttled is expected and must not consume the retry budget reserved
-# for real errors -- but it must still be bounded in TIME, not just in count:
-# 12 waits at the 600s cap would park one call for two hours.
+# Throttling must not eat the retry budget, but must still be bounded in time.
 ANILIST_MAX_429_WAIT_TOTAL = 300.0
+# Per-STAGE too: the per-call bound still allowed ~490 calls x 60s = 8.5h.
+ANILIST_STAGE_429_BUDGET = 1200.0
+_anilist_stage_throttle = [0.0]
+
+
+class AniListStageThrottled(RuntimeError):
+    """Stage-wide throttle budget spent; must not be swallowed by the retry loop."""
 anilist_last_call = 0.0
 FINALIZE_EVERY_N = 100
 
@@ -1318,8 +1321,7 @@ def anilist_post(query, variables):
     rate_limited = 0
     throttled_for = 0.0
     while attempt < CALL_RETRIES:
-        # Pace to the published limit. Without this the stage fired ~490
-        # requests as fast as it could into a 30/min ceiling.
+        # Formalises the existing per-batch sleep into a hard per-call floor.
         wait = ANILIST_MIN_INTERVAL - (time.time() - anilist_last_call)
         if wait > 0:
             time.sleep(wait)
@@ -1327,9 +1329,7 @@ def anilist_post(query, variables):
         try:
             r = requests.post(ANILIST_BASE, json={"query": query, "variables": variables}, headers=headers, timeout=30)
             if r.status_code == 429:
-                # Throttling is not a failure, so it does not consume the retry
-                # budget -- but it is bounded by a cumulative TIME budget so a
-                # pathological Retry-After cannot park the stage.
+                # Throttling is bounded by a cumulative time budget, not a count.
                 delay = _anilist_retry_delay(r)
                 remaining = ANILIST_MAX_429_WAIT_TOTAL - throttled_for
                 if remaining <= 0:
@@ -1339,7 +1339,14 @@ def anilist_post(query, variables):
                 # Clamp to the remaining budget rather than refusing to wait.
                 delay = min(delay, remaining)
                 # Charge the pacing floor too; every retry also sleeps it.
-                throttled_for += max(delay, ANILIST_MIN_INTERVAL)
+                charged = max(delay, ANILIST_MIN_INTERVAL)
+                throttled_for += charged
+                _anilist_stage_throttle[0] += charged
+                if _anilist_stage_throttle[0] > ANILIST_STAGE_429_BUDGET:
+                    raise AniListStageThrottled(
+                        f"AniList throttled this stage for "
+                        f"{_anilist_stage_throttle[0]/60:.0f} min; aborting rather than burning the night"
+                    )
                 rate_limited += 1
                 print(f"  AniList 429 (throttled {rate_limited}x, {throttled_for:.0f}s total); waiting {delay:.0f}s", flush=True)
                 time.sleep(delay)
@@ -1351,6 +1358,9 @@ def anilist_post(query, variables):
             if "errors" in data:
                 raise RuntimeError(data["errors"])
             return data
+        except AniListStageThrottled:
+            # Stage-wide budget: retrying is exactly what must not happen.
+            raise
         except Exception as e:
             last_exception = e
             attempt += 1
