@@ -143,7 +143,8 @@ def save_json(path: str, data):
             before = 0
         after = _published_size(data)
         allowed = max(SHRINK_BRAKE_FLOOR, int(before * SHRINK_BRAKE_FRACTION))
-        if before and before - after > allowed:
+        # after == 0 as well: a language below the floor could be emptied silently.
+        if before and (after == 0 or before - after > allowed):
             SHRINK_REFUSALS.append(
                 f"{path}: {before} -> {after} ({before - after} removed, limit {allowed})"
             )

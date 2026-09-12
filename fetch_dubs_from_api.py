@@ -1572,7 +1572,9 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
             if not _existing or not _cands:
                 continue
             _limit = max(10, int(FINALIZE_REMOVAL_BRAKE_FRACTION * len(_existing)))
-            if len(_cands) > _limit:
+            # Emptying a language outright is never routine, and a language
+            # smaller than the floor could otherwise reach zero untouched.
+            if len(_cands) > _limit or not ((_existing - _cands) | _found):
                 per_lang_deferred.add(_lang)
                 print(
                     f"[{api_mode}] SAFETY BRAKE: {_lang} would lose {len(_cands)} of "
