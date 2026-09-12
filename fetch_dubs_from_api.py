@@ -40,6 +40,18 @@ RETRY_DELAYS = [10, 60, 120]
 # ultimately raises -- failing loud inside the stage budget beats hanging.
 MAX_429_WAIT = 600
 ANIMESCHEDULE_MAX_429_WAIT = MAX_429_WAIT
+ANILIST_MAX_429_WAIT = MAX_429_WAIT
+# AniList cut its limit to 30/min. A full run is ~490 requests, so pace them
+# instead of firing blind and burning the retry budget on 429s. Paced a little
+# under the ceiling: riding it exactly still trips a rolling window.
+ANILIST_RATE_LIMIT_PER_MIN = 30
+ANILIST_RATE_LIMIT_HEADROOM = 5
+ANILIST_MIN_INTERVAL = 60.0 / max(1, ANILIST_RATE_LIMIT_PER_MIN - ANILIST_RATE_LIMIT_HEADROOM)
+# Being throttled is expected and must not consume the retry budget reserved
+# for real errors -- but it must still be bounded in TIME, not just in count:
+# 12 waits at the 600s cap would park one call for two hours.
+ANILIST_MAX_429_WAIT_TOTAL = 300.0
+anilist_last_call = 0.0
 FINALIZE_EVERY_N = 100
 
 # AniList paging (fixed by request)
@@ -1273,12 +1285,63 @@ query ($page: Int = 1, $perPage: Int = 50) {
 """
 
 
+def _anilist_retry_delay(resp) -> float:
+    """Seconds to wait after a 429, from the server's own headers.
+
+    Same shape as the AnimeSchedule path: prefer X-RateLimit-Reset, fall back
+    to Retry-After, then to a sane default -- and CAP it. These values are
+    upstream-controlled and sleeping one raw has parked a run for days before.
+    """
+    for header, as_epoch in (("X-RateLimit-Reset", True), ("Retry-After", False)):
+        value = resp.headers.get(header)
+        if not value:
+            continue
+        try:
+            parsed = float(value)
+        except (TypeError, ValueError):
+            continue
+        if not isfinite(parsed) or parsed < 0:
+            continue
+        delay = (parsed - time.time()) if as_epoch else parsed
+        # A reset header can be an epoch or a delta; a already-elapsed epoch
+        # means the window is open, so retry shortly rather than not at all.
+        if as_epoch and delay <= 0:
+            delay = min(parsed, 60.0) if parsed > 0 else 0.0
+        if delay > 0:
+            return max(0.0, min(delay, ANILIST_MAX_429_WAIT))
+    return min(60.0, ANILIST_MAX_429_WAIT)
+
+
 def anilist_post(query, variables):
+    global anilist_last_call
     last_exception = None
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
-    for attempt in range(CALL_RETRIES):
+    attempt = 0
+    rate_limited = 0
+    throttled_for = 0.0
+    while attempt < CALL_RETRIES:
+        # Pace to the published limit. Without this the stage fired ~490
+        # requests as fast as it could into a 30/min ceiling.
+        wait = ANILIST_MIN_INTERVAL - (time.time() - anilist_last_call)
+        if wait > 0:
+            time.sleep(wait)
+        anilist_last_call = time.time()
         try:
             r = requests.post(ANILIST_BASE, json={"query": query, "variables": variables}, headers=headers, timeout=30)
+            if r.status_code == 429:
+                # Throttling is not a failure, so it does not consume the retry
+                # budget -- but it is bounded by a cumulative TIME budget so a
+                # pathological Retry-After cannot park the stage.
+                delay = _anilist_retry_delay(r)
+                if throttled_for + delay > ANILIST_MAX_429_WAIT_TOTAL:
+                    raise RuntimeError(
+                        f"AniList throttled this call for {throttled_for:.0f}s; giving up"
+                    )
+                throttled_for += delay
+                rate_limited += 1
+                print(f"  AniList 429 (throttled {rate_limited}x, {throttled_for:.0f}s total); waiting {delay:.0f}s", flush=True)
+                time.sleep(delay)
+                continue
             if r.status_code >= 400:
                 print(f"  AniList HTTP {r.status_code}: {r.text[:500]}")
                 r.raise_for_status()
@@ -1288,9 +1351,14 @@ def anilist_post(query, variables):
             return data
         except Exception as e:
             last_exception = e
-            print(f"  AniList attempt {attempt + 1} failed: {e}")
-            if attempt < CALL_RETRIES - 1:
-                delay = RETRY_DELAYS[attempt]
+            attempt += 1
+            # Fresh attempt, fresh throttle budget: otherwise the first
+            # exhaustion makes every later attempt fail instantly.
+            throttled_for = 0.0
+            rate_limited = 0
+            print(f"  AniList attempt {attempt} failed: {e}")
+            if attempt < CALL_RETRIES:
+                delay = RETRY_DELAYS[min(attempt - 1, len(RETRY_DELAYS) - 1)]
                 print(f"  AniList call failed. Retrying in {delay} seconds...")
                 time.sleep(delay)
     print("  All AniList attempts failed.")
