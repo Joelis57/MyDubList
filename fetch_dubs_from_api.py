@@ -1739,12 +1739,47 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
     # payload has its file DELETED, not merely emptied. Not reachable at today's
     # volumes (smallest language 2177 vs a 578 threshold); it becomes reachable
     # the moment aniSearch publishes a language smaller than that.
+    # Same rename/split test the other writer uses: a never-published key
+    # carrying away an existing language's ids is the junk half of a rename.
+    _plan = {}
+    for _lang, _ids in existing_by_lang.items():
+        _fn = os.path.join(output_dir, f"dubbed_{filename_for_lang(_lang)}.json")
+        _found = set(per_lang_ids.get(_lang, set()))
+        _plan[_lang] = (_fn, set(_ids), _found, set(_ids) - _found)
+    for _lang, _found in per_lang_ids.items():
+        if _lang in _plan:
+            continue
+        _fn = os.path.join(output_dir, f"dubbed_{filename_for_lang(_lang)}.json")
+        _plan[_lang] = (_fn, set(), set(_found), set())
+    _checked = set().union(*(v[1] for v in _plan.values())) if _plan else set()
+    anisearch_junk, _held = _rename_twins(_plan, _checked)
+    if anisearch_junk:
+        print(
+            f"[anisearch] SAFETY BRAKE: {sorted(anisearch_junk)} carry ids that "
+            f"{sorted(_held)} are losing, so this looks like a rename or split. "
+            "Refusing the new keys and keeping the existing languages.",
+            flush=True,
+        )
+        braked = True
+        STAGE_BRAKED["tripped"] = True
+
     per_lang_braked = False
     if not braked:
         for _lang, _ids in existing_by_lang.items():
             if not _ids:
                 continue
             _gone = len(_ids - set(per_lang_ids.get(_lang, set())))
+            if _gone and _gone == len(_ids):
+                # Emptying is never routine, whatever the language's size.
+                print(
+                    f"[anisearch] NOTICE: {_lang} would be emptied ({len(_ids)} ids); "
+                    "keeping every existing id this run.",
+                    flush=True,
+                )
+                braked = True
+                per_lang_braked = True
+                STAGE_BRAKED["tripped"] = True
+                break
             if _gone > max(10, int(ANISEARCH_REMOVAL_BRAKE_FRACTION * len(_ids))):
                 print(
                     f"[anisearch] SAFETY BRAKE: {_lang} would lose {_gone} of {len(_ids)} "
@@ -1782,6 +1817,13 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
     for fn in existing:
         lang_key = fn[len("dubbed_"):-len(".json")].replace("_", " ")
         if lang_key not in new_langs:
+            if braked:
+                print(
+                    f"[anisearch] Keeping {fn}: a brake tripped this run, so its "
+                    "disappearance is not trusted.",
+                    flush=True,
+                )
+                continue
             try:
                 os.remove(os.path.join(output_dir, fn))
                 log(f"[anisearch] Removed obsolete file {fn}")
@@ -1791,6 +1833,8 @@ def write_dubbed_files_overwrite(api_mode: str, per_lang_ids: dict[str, set[int]
     # Write new files
     existing_keys = {fn[len("dubbed_"):-len(".json")].replace("_", " ") for fn in existing}
     for lang_key in sorted(new_langs):
+        if lang_key in anisearch_junk:
+            continue
         # A brake tripped AND this language has never been published before: that
         # is the signature of an upstream RENAME (the brake fired because the old
         # key emptied), so the "new" key is the junk half of it. Writing it
@@ -3013,6 +3057,7 @@ def run_anilist(start_page: int | None, end_page: int | None, source_file: str |
     total_processed = 0
     checked_ok_ids: set[int] = set()
 
+    walk_completed = False
     try:
         while True:
             log(f"AniList Page {page}")
@@ -3039,6 +3084,7 @@ def run_anilist(start_page: int | None, end_page: int | None, source_file: str |
 
             page += 1
             time.sleep(ANILIST_PAGE_SLEEP)
+        walk_completed = True
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing data...")
     except Exception as e:
@@ -3047,7 +3093,7 @@ def run_anilist(start_page: int | None, end_page: int | None, source_file: str |
         traceback.print_exc()
         STAGE_ERROR["failed"] = True
     finally:
-        finalize_jsons("anilist", checked_ok_ids)
+        finalize_jsons("anilist", checked_ok_ids, allow_new=walk_completed)
         print(f"Done (AniList). Processed ~{total_processed} media items.")
 
     log(f"AniList totals: pages={anilist_stats['pages']}, media={anilist_stats['media_total']}, "
