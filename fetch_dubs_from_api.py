@@ -1482,20 +1482,34 @@ def process_anilist_page(page: int, id_mal_in: list[int] | None = None) -> tuple
 # Finalize (dubbed_* sources + mappings) with safe removals for checked IDs
 # ----------------------
 
-def _rename_twin(lang_key, found_ids, plan, overlap: float = 0.8):
-    """Published language that is LOSING the ids this never-seen key gained."""
-    best, best_hit = None, 0
-    for other_key, (other_file, other_existing, _found, other_cands) in plan.items():
-        if other_key == lang_key or not other_cands:
+def _rename_twins(plan, overlap: float = 0.8):
+    """Never-published keys that are carrying away an existing language's ids.
+
+    Union of all new keys per candidate, so a regional SPLIT (one language into
+    several) is caught as well as a one-to-one rename.
+    """
+    new_keys = {
+        k: v[2] for k, v in plan.items()
+        if v[2] and not os.path.exists(v[0])
+    }
+    junk, held = set(), set()
+    if not new_keys:
+        return junk, held
+    union = set().union(*new_keys.values())
+    for other_key, (other_file, _existing, _found, other_cands) in plan.items():
+        if other_key in new_keys or not other_cands:
             continue
         if not os.path.exists(other_file):
             continue
-        # Losing exactly what the new key gained is the rename signature; merely
-        # sharing ids is not, since a title is dubbed in many languages.
-        hit = len(found_ids & other_cands)
-        if hit >= overlap * len(found_ids) and hit >= overlap * len(other_cands) and hit > best_hit:
-            best, best_hit = other_key, hit
-    return best
+        # Losing what the new keys gained is the signature; merely sharing ids
+        # is not, since one title is dubbed in many languages.
+        hit = len(union & other_cands)
+        if hit >= overlap * len(other_cands):
+            held.add(other_key)
+            for k, ids_ in new_keys.items():
+                if ids_ & other_cands:
+                    junk.add(k)
+    return junk, held
 
 
 def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
@@ -1583,22 +1597,18 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     # goes to zero. Measured on real ANN data, 'ar-EG' moved all 320 arabic ids
     # into a junk dubbed_ar-eg.json -- under the 534 global threshold, rc=0.
     per_lang_deferred = set()
-    # An upstream rename: hold both keys, or tomorrow the evidence is gone.
-    rename_junk = set()
-    for _lang, (_fn, _existing, _found, _cands) in plan.items():
-        if not _found or os.path.exists(_fn):
-            continue
-        _twin = _rename_twin(_lang, _found, plan)
-        if _twin:
-            rename_junk.add(_lang)
-            per_lang_deferred.add(_twin)
-            print(
-                f"[{api_mode}] SAFETY BRAKE: {os.path.basename(_fn)} carries {len(_found)} "
-                f"ids that {_twin} already holds, so it looks like a rename. Refusing the new "
-                f"key and keeping {_twin}.",
-                flush=True,
-            )
-            STAGE_BRAKED["tripped"] = True
+    # An upstream rename or split: hold both sides, or tomorrow the real
+    # language is empty and the evidence is gone.
+    rename_junk, _held = _rename_twins(plan)
+    if rename_junk:
+        per_lang_deferred |= _held
+        print(
+            f"[{api_mode}] SAFETY BRAKE: {sorted(rename_junk)} carry ids that "
+            f"{sorted(_held)} are losing, so this looks like a rename or split. "
+            "Refusing the new keys and keeping the existing languages.",
+            flush=True,
+        )
+        STAGE_BRAKED["tripped"] = True
     if not defer_removals:
         for _lang, (_fn, _existing, _found, _cands) in plan.items():
             if not _existing or not _cands:
@@ -1627,6 +1637,15 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
 
     for lang_key, (filename, existing_ids, found_ids, removal_candidates) in plan.items():
         if lang_key in rename_junk:
+            continue
+        # Blunt backstop: on a braked run a never-published key is far more
+        # likely the junk half of an upstream change than a real new language.
+        if (defer_removals or per_lang_deferred) and not os.path.exists(filename):
+            print(
+                f"[{api_mode}] Deferring {os.path.basename(filename)}: a brake tripped this "
+                "run and this language has never been published.",
+                flush=True,
+            )
             continue
         if defer_removals or lang_key in per_lang_deferred:
             removal_candidates = set()

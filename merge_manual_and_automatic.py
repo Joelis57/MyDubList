@@ -294,9 +294,10 @@ def load_language_sources(filename: str):
     # Rule 1: every published language HAS a manual file (all 27 do). If the
     # language was published before and its manual file is gone now, the
     # checkout is broken -- not a language that lost its curation.
-    # A language merge itself published for the first time has no manual file
-    # yet; only a language that HAD curation recorded is a broken checkout.
-    if _was_published and _baseline and not os.path.exists(manual_path):
+    # A baseline row is written for every published language, so only real
+    # recorded curation proves the manual file used to exist.
+    _had_curation = any(_baseline.get(k) for k in ("not_dubbed", "partial"))
+    if _was_published and _had_curation and not os.path.exists(manual_path):
         raise RuntimeError(
             f"Refusing to merge: {manual_path} is missing, but {published_counts} "
             "was published from it. Restore the manual file rather than republishing "
@@ -321,7 +322,7 @@ def load_language_sources(filename: str):
     # Rule 2: PRESENT but gutted is the same corruption. Checking existence
     # alone let a stub `{}` through -- and a stub is the natural mis-recovery
     # from rule 1's own error message, so this is the likelier route.
-    if _was_published and isinstance(manual, dict):
+    if _was_published and _had_curation and isinstance(manual, dict):
         if not any(k in manual for k in ("dubbed", "not_dubbed", "partial")):
             raise RuntimeError(
                 f"Refusing to merge: {manual_path} carries none of dubbed/not_dubbed/"
