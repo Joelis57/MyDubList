@@ -1495,15 +1495,17 @@ def _rename_twins(plan, overlap: float = 0.8):
     junk, held = set(), set()
     if not new_keys:
         return junk, held
-    for other_key, (other_file, _existing, _found, other_cands) in plan.items():
-        if other_key in new_keys or not other_cands:
+    for other_key, (other_file, other_existing, _found, other_cands) in plan.items():
+        if other_key in new_keys or not other_cands or not other_existing:
             continue
         if not os.path.exists(other_file):
             continue
-        # Only the keys MADE OF this language's losses count; unioning every new
-        # key let one unrelated key dilute the test and hide a real rename.
-        made_of = {k: i for k, i in new_keys.items()
-                   if len(i & other_cands) >= overlap * len(i)}
+        # A rename empties the old language; ordinary churn removes a handful.
+        if len(other_cands) < overlap * len(other_existing):
+            continue
+        # Any new key holding some of those losses counts; measuring against the
+        # new key's own size let its freshly-found ids dilute the test.
+        made_of = {k: i for k, i in new_keys.items() if i & other_cands}
         if not made_of:
             continue
         covered = set().union(*made_of.values()) & other_cands
@@ -1513,7 +1515,8 @@ def _rename_twins(plan, overlap: float = 0.8):
     return junk, held
 
 
-def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
+def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None, allow_new: bool = True,
+                   intermediate: bool = False):
     """
     Write/merge dubbed lists under dubs/sources/automatic_<api>/.
     Removals are allowed, but only for MAL IDs contained in checked_ok_ids.
@@ -1578,8 +1581,10 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     total_existing = sum(len(p[1]) for p in plan.values())
     total_removals = sum(len(p[3]) for p in plan.values())
     brake = max(25, int(FINALIZE_REMOVAL_BRAKE_FRACTION * total_existing))
-    defer_removals = bool(total_existing) and total_removals > brake
-    if defer_removals:
+    # A checkpoint mid-run must not remove: only the end of the stage has
+    # seen enough to know an id is really gone.
+    defer_removals = intermediate or (bool(total_existing) and total_removals > brake)
+    if defer_removals and not intermediate:
         print(
             f"[{api_mode}] SAFETY BRAKE: {total_removals} removals across all languages exceed "
             f"threshold {brake} ({FINALIZE_REMOVAL_BRAKE_FRACTION:.0%} of {total_existing}); "
@@ -1638,6 +1643,10 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
 
     for lang_key, (filename, existing_ids, found_ids, removal_candidates) in plan.items():
         if lang_key in rename_junk:
+            continue
+        # A mid-run finalize must not create a language: once the file exists
+        # the rename guard can never see it again.
+        if not allow_new and not os.path.exists(filename):
             continue
         # Blunt backstop: on a braked run a never-published key is far more
         # likely the junk half of an upstream change than a real new language.
@@ -2870,7 +2879,7 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
 
             if processed and processed % FINALIZE_EVERY_N == 0:
                 _fz = time.time()
-                finalize_jsons("ann", checked_ok_ids)
+                finalize_jsons("ann", checked_ok_ids, allow_new=False, intermediate=True)
                 _ann_finalize_seconds[0] += time.time() - _fz
 
         if pending:
@@ -2942,7 +2951,7 @@ def run_jikan(client_id: str, start_id: int, end_id: int):
 
             if idx % FINALIZE_EVERY_N == 0:
                 log(f"--- Updating files at MAL ID {start_id + idx - 1} ---")
-                finalize_jsons("mal", checked_ok_ids)
+                finalize_jsons("mal", checked_ok_ids, allow_new=False, intermediate=True)
                 save_missing_cache()
 
     except KeyboardInterrupt:
@@ -2975,7 +2984,7 @@ def run_anilist(start_page: int | None, end_page: int | None, source_file: str |
                     total_processed += processed
 
                     if (offset // ANILIST_MAL_BATCH_SIZE + 1) % 10 == 0:
-                        finalize_jsons("anilist", checked_ok_ids)
+                        finalize_jsons("anilist", checked_ok_ids, allow_new=False, intermediate=True)
 
                     time.sleep(ANILIST_PAGE_SLEEP)
             except KeyboardInterrupt:
@@ -3002,7 +3011,7 @@ def run_anilist(start_page: int | None, end_page: int | None, source_file: str |
             total_processed += processed
 
             if page % 10 == 0:
-                finalize_jsons("anilist", checked_ok_ids)
+                finalize_jsons("anilist", checked_ok_ids, allow_new=False, intermediate=True)
 
             if end_page is not None and page >= end_page:
                 break
@@ -3081,7 +3090,7 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
                 hianime_mapping[int(mal_id)] = hi_id
 
             if current_page % 10 == 0:
-                finalize_jsons("hianime", checked_ok_ids)
+                finalize_jsons("hianime", checked_ok_ids, allow_new=False, intermediate=True)
 
             if end_page is not None and page >= end_page:
                 break
@@ -3168,7 +3177,7 @@ def run_kitsu(mal_start: int, mal_end: int):
 
             if idx % FINALIZE_EVERY_N == 0:
                 log(f"[Kitsu] --- Updating files at MAL ID {mal_id} ---")
-                finalize_jsons("kitsu", checked_ok_ids)
+                finalize_jsons("kitsu", checked_ok_ids, allow_new=False, intermediate=True)
 
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing data...")
@@ -3315,7 +3324,7 @@ def run_animeschedule(token: str, start_page: int | None, end_page: int | None):
                 total_processed += 1
 
             if page % 10 == 0:
-                finalize_jsons("animeschedule", checked_ok_ids)
+                finalize_jsons("animeschedule", checked_ok_ids, allow_new=False, intermediate=True)
 
             if total_amount is not None and seen_count >= total_amount:
                 if debug_log:
