@@ -294,7 +294,9 @@ def load_language_sources(filename: str):
     # Rule 1: every published language HAS a manual file (all 27 do). If the
     # language was published before and its manual file is gone now, the
     # checkout is broken -- not a language that lost its curation.
-    if _was_published and not os.path.exists(manual_path):
+    # A language merge itself published for the first time has no manual file
+    # yet; only a language that HAD curation recorded is a broken checkout.
+    if _was_published and _baseline and not os.path.exists(manual_path):
         raise RuntimeError(
             f"Refusing to merge: {manual_path} is missing, but {published_counts} "
             "was published from it. Restore the manual file rather than republishing "

@@ -1482,6 +1482,22 @@ def process_anilist_page(page: int, id_mal_in: list[int] | None = None) -> tuple
 # Finalize (dubbed_* sources + mappings) with safe removals for checked IDs
 # ----------------------
 
+def _rename_twin(lang_key, found_ids, plan, overlap: float = 0.8):
+    """Published language that is LOSING the ids this never-seen key gained."""
+    best, best_hit = None, 0
+    for other_key, (other_file, other_existing, _found, other_cands) in plan.items():
+        if other_key == lang_key or not other_cands:
+            continue
+        if not os.path.exists(other_file):
+            continue
+        # Losing exactly what the new key gained is the rename signature; merely
+        # sharing ids is not, since a title is dubbed in many languages.
+        hit = len(found_ids & other_cands)
+        if hit >= overlap * len(found_ids) and hit >= overlap * len(other_cands) and hit > best_hit:
+            best, best_hit = other_key, hit
+    return best
+
+
 def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     """
     Write/merge dubbed lists under dubs/sources/automatic_<api>/.
@@ -1567,6 +1583,22 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
     # goes to zero. Measured on real ANN data, 'ar-EG' moved all 320 arabic ids
     # into a junk dubbed_ar-eg.json -- under the 534 global threshold, rc=0.
     per_lang_deferred = set()
+    # An upstream rename: hold both keys, or tomorrow the evidence is gone.
+    rename_junk = set()
+    for _lang, (_fn, _existing, _found, _cands) in plan.items():
+        if not _found or os.path.exists(_fn):
+            continue
+        _twin = _rename_twin(_lang, _found, plan)
+        if _twin:
+            rename_junk.add(_lang)
+            per_lang_deferred.add(_twin)
+            print(
+                f"[{api_mode}] SAFETY BRAKE: {os.path.basename(_fn)} carries {len(_found)} "
+                f"ids that {_twin} already holds, so it looks like a rename. Refusing the new "
+                f"key and keeping {_twin}.",
+                flush=True,
+            )
+            STAGE_BRAKED["tripped"] = True
     if not defer_removals:
         for _lang, (_fn, _existing, _found, _cands) in plan.items():
             if not _existing or not _cands:
@@ -1594,14 +1626,7 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
             STAGE_BRAKED["tripped"] = True
 
     for lang_key, (filename, existing_ids, found_ids, removal_candidates) in plan.items():
-        # A brake tripped and this language has never been published: the
-        # signature of an upstream rename, so this is its junk half.
-        if (defer_removals or per_lang_deferred) and not os.path.exists(filename):
-            print(
-                f"[{api_mode}] Deferring {os.path.basename(filename)}: a brake tripped this "
-                "run and this language has never been published.",
-                flush=True,
-            )
+        if lang_key in rename_junk:
             continue
         if defer_removals or lang_key in per_lang_deferred:
             removal_candidates = set()
