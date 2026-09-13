@@ -1482,7 +1482,7 @@ def process_anilist_page(page: int, id_mal_in: list[int] | None = None) -> tuple
 # Finalize (dubbed_* sources + mappings) with safe removals for checked IDs
 # ----------------------
 
-def _rename_twins(plan, overlap: float = 0.8):
+def _rename_twins(plan, checked_ok_ids, overlap: float = 0.8):
     """Never-published keys that are carrying away an existing language's ids.
 
     Union of all new keys per candidate, so a regional SPLIT (one language into
@@ -1500,8 +1500,10 @@ def _rename_twins(plan, overlap: float = 0.8):
             continue
         if not os.path.exists(other_file):
             continue
-        # A rename empties the old language; ordinary churn removes a handful.
-        if len(other_cands) < overlap * len(other_existing):
+        # Scaled to what this run could see: a banded stage only ever checks a
+        # slice, so comparing against the whole language never matches.
+        speakable = other_existing & checked_ok_ids if checked_ok_ids else other_existing
+        if not speakable or len(other_cands) < overlap * len(speakable):
             continue
         # Any new key holding some of those losses counts; measuring against the
         # new key's own size let its freshly-found ids dilute the test.
@@ -1517,6 +1519,8 @@ def _rename_twins(plan, overlap: float = 0.8):
 
 def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None, allow_new: bool = True,
                    intermediate: bool = False):
+    # allow_new=False is also correct for a stage that aborted: partial evidence
+    # must never invent a language, because the file then becomes permanent.
     """
     Write/merge dubbed lists under dubs/sources/automatic_<api>/.
     Removals are allowed, but only for MAL IDs contained in checked_ok_ids.
@@ -1605,7 +1609,7 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None, allow_
     per_lang_deferred = set()
     # An upstream rename or split: hold both sides, or tomorrow the real
     # language is empty and the evidence is gone.
-    rename_junk, _held = _rename_twins(plan)
+    rename_junk, _held = _rename_twins(plan, checked_ok_ids)
     if rename_junk:
         per_lang_deferred |= _held
         print(
@@ -2836,6 +2840,7 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
     checked_ok_ids: set[int] = set()
     stage_started = time.time()
 
+    stage_completed = False
     try:
         for mal_id in mal_ids:
             ann_id = existing_map.get(mal_id)
@@ -2886,6 +2891,7 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
             newly_checked = process_ann_batch(pending, ann_to_mal)
             checked_ok_ids.update(newly_checked)
 
+        stage_completed = True
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing ANN dubs...")
     except Exception as e:
@@ -2894,7 +2900,7 @@ def run_ann_dubs(mal_start: int | None, mal_end: int | None):
         traceback.print_exc()
         STAGE_ERROR["failed"] = True
     finally:
-        finalize_jsons("ann", checked_ok_ids)
+        finalize_jsons("ann", checked_ok_ids, allow_new=stage_completed)
         print(f"Done (ANN dubs). Processed ~{processed + len(pending)} mapped IDs.")
 
 
@@ -2911,6 +2917,7 @@ def run_jikan(client_id: str, start_id: int, end_id: int):
     consecutive_404 = 0
     checked_ok_ids: set[int] = set()
 
+    stage_completed = False
     try:
         for idx, mal_id in enumerate(range(start_id, end_id + 1), 1):
             # If we've previously cached that this ID 404s (and it's <= largest known),
@@ -2954,6 +2961,7 @@ def run_jikan(client_id: str, start_id: int, end_id: int):
                 finalize_jsons("mal", checked_ok_ids, allow_new=False, intermediate=True)
                 save_missing_cache()
 
+        stage_completed = True
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing data...")
     except Exception as e:
@@ -2962,7 +2970,7 @@ def run_jikan(client_id: str, start_id: int, end_id: int):
         traceback.print_exc()
         STAGE_ERROR["failed"] = True
     finally:
-        finalize_jsons("mal", checked_ok_ids)
+        finalize_jsons("mal", checked_ok_ids, allow_new=stage_completed)
         save_missing_cache()
         print("Done (Jikan).")
 
@@ -2975,6 +2983,7 @@ def run_anilist(start_page: int | None, end_page: int | None, source_file: str |
         else:
             total_processed = 0
             checked_ok_ids: set[int] = set()
+            stage_completed = False
             try:
                 for offset in range(0, len(mal_ids), ANILIST_MAL_BATCH_SIZE):
                     chunk = mal_ids[offset:offset + ANILIST_MAL_BATCH_SIZE]
@@ -2987,6 +2996,7 @@ def run_anilist(start_page: int | None, end_page: int | None, source_file: str |
                         finalize_jsons("anilist", checked_ok_ids, allow_new=False, intermediate=True)
 
                     time.sleep(ANILIST_PAGE_SLEEP)
+                stage_completed = True
             except KeyboardInterrupt:
                 print("\nInterrupted. Finalizing data...")
             except Exception as e:
@@ -2995,7 +3005,7 @@ def run_anilist(start_page: int | None, end_page: int | None, source_file: str |
                 traceback.print_exc()
                 STAGE_ERROR["failed"] = True
             finally:
-                finalize_jsons("anilist", checked_ok_ids)
+                finalize_jsons("anilist", checked_ok_ids, allow_new=stage_completed)
                 print(f"Done (AniList). Processed ~{total_processed} media items from {len(mal_ids)} MAL IDs.")
             return
 
@@ -3054,6 +3064,7 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
     page = start_page or 1
     checked_ok_ids: set[int] = set()
 
+    stage_completed = False
     try:
         total_pages = None
         while True:
@@ -3103,6 +3114,7 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
             if to_wait > 0:
                 time.sleep(to_wait)
 
+        stage_completed = True
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing data...")
     except Exception as e:
@@ -3111,7 +3123,7 @@ def run_hianime(api_host: str, start_page: int | None, end_page: int | None, sou
         traceback.print_exc()
         STAGE_ERROR["failed"] = True
     finally:
-        finalize_jsons("hianime", checked_ok_ids)
+        finalize_jsons("hianime", checked_ok_ids, allow_new=stage_completed)
         print("Done (HiAnime).")
 
 
@@ -3133,6 +3145,7 @@ def run_kitsu(mal_start: int, mal_end: int):
     without_langs = 0
     missing_map = 0
 
+    stage_completed = False
     try:
         for idx, mal_id in enumerate(range(mal_start, mal_end + 1), 1):
             if mal_id in known_missing:
@@ -3179,6 +3192,7 @@ def run_kitsu(mal_start: int, mal_end: int):
                 log(f"[Kitsu] --- Updating files at MAL ID {mal_id} ---")
                 finalize_jsons("kitsu", checked_ok_ids, allow_new=False, intermediate=True)
 
+        stage_completed = True
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing data...")
     except Exception as e:
@@ -3187,7 +3201,7 @@ def run_kitsu(mal_start: int, mal_end: int):
         traceback.print_exc()
         STAGE_ERROR["failed"] = True
     finally:
-        finalize_jsons("kitsu", checked_ok_ids)
+        finalize_jsons("kitsu", checked_ok_ids, allow_new=stage_completed)
         log(f"[Kitsu] Summary: processed={processed}, with_langs={with_langs}, "
             f"without_langs={without_langs}, missing_map={missing_map}")
         if lookup_failures:
@@ -3235,6 +3249,7 @@ def run_animeschedule(token: str, start_page: int | None, end_page: int | None):
     total_amount: int | None = None
     seen_count = 0
 
+    stage_completed = False
     try:
         while True:
             log(f"[AnimeSchedule] Page {page}")
@@ -3339,6 +3354,7 @@ def run_animeschedule(token: str, start_page: int | None, end_page: int | None):
 
             page += 1
 
+        stage_completed = True
     except KeyboardInterrupt:
         print("\nInterrupted. Finalizing data...")
     except Exception as e:
@@ -3347,7 +3363,7 @@ def run_animeschedule(token: str, start_page: int | None, end_page: int | None):
         traceback.print_exc()
         STAGE_ERROR["failed"] = True
     finally:
-        finalize_jsons("animeschedule", checked_ok_ids)
+        finalize_jsons("animeschedule", checked_ok_ids, allow_new=stage_completed)
         print(f"Done (AnimeSchedule). Processed ~{total_processed} anime.")
 
 
