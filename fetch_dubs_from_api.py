@@ -1572,9 +1572,17 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
             if not _existing or not _cands:
                 continue
             _limit = max(10, int(FINALIZE_REMOVAL_BRAKE_FRACTION * len(_existing)))
-            # Emptying a language outright is never routine, and a language
-            # smaller than the floor could otherwise reach zero untouched.
-            if len(_cands) > _limit or not ((_existing - _cands) | _found):
+            _would_empty = not ((_existing - _cands) | _found)
+            if len(_cands) <= _limit and _would_empty:
+                # Deferring a small language forever wedges it with no escape;
+                # allow the removal but flag the run so it is never silent.
+                print(
+                    f"[{api_mode}] NOTICE: {_lang} is being emptied ({len(_existing)} ids). "
+                    "Allowed because it is within the removal floor, but flagging the run.",
+                    flush=True,
+                )
+                STAGE_BRAKED["tripped"] = True
+            elif len(_cands) > _limit:
                 per_lang_deferred.add(_lang)
                 print(
                     f"[{api_mode}] SAFETY BRAKE: {_lang} would lose {len(_cands)} of "
@@ -1586,6 +1594,15 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
             STAGE_BRAKED["tripped"] = True
 
     for lang_key, (filename, existing_ids, found_ids, removal_candidates) in plan.items():
+        # A brake tripped and this language has never been published: the
+        # signature of an upstream rename, so this is its junk half.
+        if (defer_removals or per_lang_deferred) and not os.path.exists(filename):
+            print(
+                f"[{api_mode}] Deferring {os.path.basename(filename)}: a brake tripped this "
+                "run and this language has never been published.",
+                flush=True,
+            )
+            continue
         if defer_removals or lang_key in per_lang_deferred:
             removal_candidates = set()
         updated_ids = (existing_ids - removal_candidates) | found_ids

@@ -143,9 +143,7 @@ def save_json(path: str, data):
             before = 0
         after = _published_size(data)
         allowed = max(SHRINK_BRAKE_FLOOR, int(before * SHRINK_BRAKE_FRACTION))
-        # Emptying is only anomalous for a file bigger than the tolerance floor:
-        # tiny languages and empty confidence tiers reach zero legitimately.
-        if before and ((after == 0 and before > SHRINK_BRAKE_FLOOR) or before - after > allowed):
+        if before and before - after > allowed:
             SHRINK_REFUSALS.append(
                 f"{path}: {before} -> {after} ({before - after} removed, limit {allowed})"
             )
