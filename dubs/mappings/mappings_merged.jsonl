@@ -22712,7 +22712,7 @@
 {"mal_id":59774,"animeschedule_id":"tokyo-montage"}
 {"mal_id":59779,"ann_id":1322}
 {"mal_id":59784,"anilist_id":186198,"ann_id":27175,"animeschedule_id":"oshiri-tantei-cosmic-front"}
-{"mal_id":59785,"kitsu_id":49188,"animeschedule_id":"allegro"}
+{"mal_id":59785,"anilist_id":180870,"kitsu_id":49188,"animeschedule_id":"allegro"}
 {"mal_id":59787,"anilist_id":180894,"ann_id":33491,"anisearch_id":19585,"animeschedule_id":"romelia-senki"}
 {"mal_id":59789,"anilist_id":180936,"kitsu_id":49195,"animeschedule_id":"feelingradation"}
 {"mal_id":59791,"anilist_id":180929,"ann_id":33495,"kitsu_id":49210,"anisearch_id":19586,"animeschedule_id":"ruri-no-houseki"}
@@ -23979,7 +23979,7 @@
 {"mal_id":63150,"anilist_id":204466,"ann_id":38166,"anisearch_id":21130,"animeschedule_id":"otome-kaijuu-caramelise"}
 {"mal_id":63151,"anilist_id":204656,"ann_id":38172,"anisearch_id":21129,"animeschedule_id":"mofusand"}
 {"mal_id":63153,"anilist_id":204349,"animeschedule_id":"hyakushou-kizoku-3rd-season-ova"}
-{"mal_id":63157,"ann_id":38174,"anisearch_id":21260,"animeschedule_id":"keroro-gunsou-2026"}
+{"mal_id":63157,"anilist_id":216557,"ann_id":38174,"anisearch_id":21260,"animeschedule_id":"keroro-gunsou-2026"}
 {"mal_id":63158,"anilist_id":204463}
 {"mal_id":63159,"anilist_id":200930}
 {"mal_id":63164,"anilist_id":168252,"animeschedule_id":"chaofan-jinhua"}
@@ -24321,7 +24321,7 @@
 {"mal_id":64695,"anilist_id":214483,"ann_id":40382,"anisearch_id":21864,"animeschedule_id":"odoru-sennen-kazoku"}
 {"mal_id":64712,"anilist_id":214582,"animeschedule_id":"tsuihou-sareta-shounin-wa-kane-no-chikara-de-sekai-wo-sukuu"}
 {"mal_id":64717,"ann_id":40393}
-{"mal_id":64718,"anisearch_id":21895,"animeschedule_id":"ghost-meets-gal"}
+{"mal_id":64718,"anilist_id":214703,"anisearch_id":21895,"animeschedule_id":"ghost-meets-gal"}
 {"mal_id":64724,"anisearch_id":21903}
 {"mal_id":64725,"anilist_id":214855,"anisearch_id":21884,"animeschedule_id":"fate-grand-order-fujimaru-ritsuka-wa-wakaranai-season-4"}
 {"mal_id":64726,"anilist_id":214650,"animeschedule_id":"mato-seihei-no-slave-3"}
@@ -24335,10 +24335,10 @@
 {"mal_id":64789,"ann_id":40424}
 {"mal_id":64793,"ann_id":40164}
 {"mal_id":64844,"anilist_id":215791,"anisearch_id":21913,"animeschedule_id":"maiden-blood"}
-{"mal_id":64848,"ann_id":40437,"anisearch_id":21940,"animeschedule_id":"duel-masters-lost-danzai-no-shounen"}
+{"mal_id":64848,"anilist_id":208367,"ann_id":40437,"anisearch_id":21940,"animeschedule_id":"duel-masters-lost-danzai-no-shounen"}
 {"mal_id":64858,"anilist_id":215855,"animeschedule_id":"one-piece-film-god-valley"}
 {"mal_id":64859,"anilist_id":215856,"animeschedule_id":"one-piece-film-baad"}
-{"mal_id":64861,"anisearch_id":21920,"animeschedule_id":"hetalia-world-stars-2026"}
+{"mal_id":64861,"anilist_id":216645,"anisearch_id":21920,"animeschedule_id":"hetalia-world-stars-2026"}
 {"mal_id":64867,"anilist_id":215835,"anisearch_id":21917}
 {"mal_id":64876,"anisearch_id":21962}
 {"mal_id":64877,"anilist_id":216312,"animeschedule_id":"boku-no-suki-na-hito-ga-suki-na-hito"}
@@ -24348,5 +24348,5 @@
 {"mal_id":64905,"anilist_id":216346,"animeschedule_id":"nippon-sangoku-zoku-hen"}
 {"mal_id":64906,"anilist_id":216404,"animeschedule_id":"aoharu-once-more"}
 {"mal_id":64913,"anisearch_id":21968}
-{"mal_id":64922,"animeschedule_id":"kimi-wa-yotsuba-no-clover"}
-{"mal_id":64950,"animeschedule_id":"sss-class-revival-hunter"}
+{"mal_id":64922,"anilist_id":216560,"animeschedule_id":"kimi-wa-yotsuba-no-clover"}
+{"mal_id":64950,"anilist_id":216624,"animeschedule_id":"sss-class-revival-hunter"}
