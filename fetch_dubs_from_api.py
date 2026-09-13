@@ -1503,8 +1503,10 @@ def _rename_twins(plan, overlap: float = 0.8):
             continue
         # Losing what the new keys gained is the signature; merely sharing ids
         # is not, since one title is dubbed in many languages.
+        # Both ways: the new keys must be MADE OF what the old key lost, not
+        # merely contain it. One-sided, any new language tripped on churn.
         hit = len(union & other_cands)
-        if hit >= overlap * len(other_cands):
+        if hit >= overlap * len(other_cands) and hit >= overlap * len(union):
             held.add(other_key)
             for k, ids_ in new_keys.items():
                 if ids_ & other_cands:
@@ -1640,7 +1642,7 @@ def finalize_jsons(api_mode: str, checked_ok_ids: set[int] | None = None):
             continue
         # Blunt backstop: on a braked run a never-published key is far more
         # likely the junk half of an upstream change than a real new language.
-        if (defer_removals or per_lang_deferred) and not os.path.exists(filename):
+        if (defer_removals or per_lang_deferred or STAGE_BRAKED["tripped"]) and not os.path.exists(filename):
             print(
                 f"[{api_mode}] Deferring {os.path.basename(filename)}: a brake tripped this "
                 "run and this language has never been published.",
