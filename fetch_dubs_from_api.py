@@ -1495,22 +1495,21 @@ def _rename_twins(plan, overlap: float = 0.8):
     junk, held = set(), set()
     if not new_keys:
         return junk, held
-    union = set().union(*new_keys.values())
     for other_key, (other_file, _existing, _found, other_cands) in plan.items():
         if other_key in new_keys or not other_cands:
             continue
         if not os.path.exists(other_file):
             continue
-        # Losing what the new keys gained is the signature; merely sharing ids
-        # is not, since one title is dubbed in many languages.
-        # Both ways: the new keys must be MADE OF what the old key lost, not
-        # merely contain it. One-sided, any new language tripped on churn.
-        hit = len(union & other_cands)
-        if hit >= overlap * len(other_cands) and hit >= overlap * len(union):
+        # Only the keys MADE OF this language's losses count; unioning every new
+        # key let one unrelated key dilute the test and hide a real rename.
+        made_of = {k: i for k, i in new_keys.items()
+                   if len(i & other_cands) >= overlap * len(i)}
+        if not made_of:
+            continue
+        covered = set().union(*made_of.values()) & other_cands
+        if len(covered) >= overlap * len(other_cands):
             held.add(other_key)
-            for k, ids_ in new_keys.items():
-                if ids_ & other_cands:
-                    junk.add(k)
+            junk |= set(made_of)
     return junk, held
 
 
