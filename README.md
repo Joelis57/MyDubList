@@ -45,13 +45,13 @@ If you have an authoritative source to add, please open an issue/PR.
 | Italian | Italiano | 2431 |
 | Chinese | 中文 | 1898 |
 | Portuguese | Português | 1862 |
-| Korean | 한국어 | 1706 |
+| Korean | 한국어 | 1707 |
 | Tagalog | Tagalog | 849 |
 | Arabic | العربية | 341 |
 | Polish | Polski | 292 |
 | Hindi | हिन्दी | 237 |
 | Hungarian | Magyar | 216 |
-| Hebrew | עברית | 156 |
+| Hebrew | עברית | 157 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 136 |
 | Dutch | Nederlands | 106 |
