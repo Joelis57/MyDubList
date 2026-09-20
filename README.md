@@ -41,12 +41,12 @@ If you have an authoritative source to add, please open an issue/PR.
 | English | English | 5571 |
 | Spanish | Español | 3249 |
 | German | Deutsch | 3115 |
-| French | Français | 2572 |
+| French | Français | 2573 |
 | Italian | Italiano | 2439 |
 | Chinese | 中文 | 1898 |
 | Portuguese | Português | 1864 |
 | Korean | 한국어 | 1707 |
-| Tagalog | Tagalog | 851 |
+| Tagalog | Tagalog | 852 |
 | Arabic | العربية | 342 |
 | Polish | Polski | 292 |
 | Hindi | हिन्दी | 237 |
