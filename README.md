@@ -51,7 +51,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Polish | Polski | 293 |
 | Hindi | हिन्दी | 237 |
 | Hungarian | Magyar | 216 |
-| Hebrew | עברית | 157 |
+| Hebrew | עברית | 166 |
 | Swedish | Svenska | 142 |
 | Norwegian | Norsk | 136 |
 | Dutch | Nederlands | 106 |
