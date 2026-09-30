@@ -6444,7 +6444,7 @@
 {"mal_id":10893,"anilist_id":10893,"ann_id":13434,"kitsu_id":6396,"anisearch_id":6925,"animeschedule_id":"kyousougiga"}
 {"mal_id":10897,"anilist_id":10897,"ann_id":13249,"kitsu_id":6397,"anisearch_id":7200,"animeschedule_id":"boku-wa-tomodachi-ga-sukunai-episode-0-yami-nabe-wa-bishoujo-ga-zannen-na-nioi"}
 {"mal_id":10901,"anilist_id":10901,"ann_id":15244,"kitsu_id":6398,"anisearch_id":5570,"animeschedule_id":"aoi-hitomi-no-onna-no-ko-no-ohanashi"}
-{"mal_id":10904,"anilist_id":10904,"kitsu_id":6399,"anisearch_id":7197,"animeschedule_id":"waza-no-tabibito"}
+{"mal_id":10904,"anilist_id":10904,"ann_id":23381,"kitsu_id":6399,"anisearch_id":7197,"animeschedule_id":"waza-no-tabibito"}
 {"mal_id":10905,"anilist_id":10905,"kitsu_id":6400,"anisearch_id":8430,"animeschedule_id":"ikoku-meiro-no-croisee-picture-drama"}
 {"mal_id":10906,"anilist_id":10906,"ann_id":13158,"kitsu_id":6401,"anisearch_id":7201}
 {"mal_id":10908,"anilist_id":10908,"kitsu_id":6402,"anisearch_id":7271,"animeschedule_id":"kakko-kawaii-sengen-2"}
@@ -22472,7 +22472,7 @@
 {"mal_id":59199,"anilist_id":178825,"ann_id":32861,"kitsu_id":49060,"anisearch_id":19449,"animeschedule_id":"classic-stars"}
 {"mal_id":59200,"anilist_id":170056,"anisearch_id":19483,"animeschedule_id":"etopirika-omoi-wo-tsumugu-tori"}
 {"mal_id":59201,"anilist_id":179915,"animeschedule_id":"hoshi-to-yume-no-samba"}
-{"mal_id":59204,"anilist_id":178868,"anisearch_id":19448,"animeschedule_id":"magic-knight-rayearth-shin-anime"}
+{"mal_id":59204,"anilist_id":178868,"ann_id":37921,"anisearch_id":19448,"animeschedule_id":"magic-knight-rayearth-shin-anime"}
 {"mal_id":59205,"anilist_id":178869,"ann_id":32863,"kitsu_id":49061,"hianime_id":"clevatess-19760","anisearch_id":19447,"animeschedule_id":"clevatess-majuu-no-ou-to-akago-to-shikabane-no-yuusha"}
 {"mal_id":59206,"anilist_id":179910,"animeschedule_id":"yes-you"}
 {"mal_id":59207,"anilist_id":178886,"ann_id":32864,"kitsu_id":49012,"hianime_id":"dealing-with-mikadono-sisters-is-a-breeze-19765","anisearch_id":19456,"animeschedule_id":"mikadono-sanshimai-wa-angai-choroi"}
@@ -23371,7 +23371,7 @@
 {"mal_id":61425,"anilist_id":189987,"ann_id":35564,"anisearch_id":21190,"animeschedule_id":"ponkotsu-fuuki-iin-to-skirt-take-ga-futekisetsu-na-jk-no-hanashi"}
 {"mal_id":61431,"anisearch_id":20612,"animeschedule_id":"shimazu-seisakushou-sougyou-150-shuunenkinen-animation"}
 {"mal_id":61437,"anilist_id":191471,"animeschedule_id":"kekka-alright"}
-{"mal_id":61440,"anilist_id":190054,"anisearch_id":20463,"animeschedule_id":"watashi-no-shiawase-na-kekkon-shinsaku-anime"}
+{"mal_id":61440,"anilist_id":190054,"ann_id":38040,"anisearch_id":20463,"animeschedule_id":"watashi-no-shiawase-na-kekkon-shinsaku-anime"}
 {"mal_id":61441,"kitsu_id":49846}
 {"mal_id":61443,"anilist_id":190143,"ann_id":35579,"anisearch_id":20450,"animeschedule_id":"shunkashuutou-daikousha-haru-no-mai"}
 {"mal_id":61456,"anilist_id":177456,"anisearch_id":21214,"animeschedule_id":"the-idolm-ster-million-live-the-backstage"}
@@ -23470,7 +23470,7 @@
 {"mal_id":61731,"anilist_id":193238,"ann_id":36188,"anisearch_id":20665,"animeschedule_id":"gakkou-de-wa-oshiete-kurenai-taisetsu-na-koto"}
 {"mal_id":61736,"anilist_id":193294,"ann_id":36198,"kitsu_id":49933,"anisearch_id":20497,"animeschedule_id":"toritsukare-otoko"}
 {"mal_id":61737,"anilist_id":193372,"kitsu_id":49951,"animeschedule_id":"feel-like"}
-{"mal_id":61742,"anilist_id":193607,"kitsu_id":49942,"anisearch_id":20508}
+{"mal_id":61742,"anilist_id":193607,"ann_id":36284,"kitsu_id":49942,"anisearch_id":20508}
 {"mal_id":61745,"anilist_id":193705,"animeschedule_id":"ai-scream"}
 {"mal_id":61748,"anilist_id":198698,"kitsu_id":49976,"animeschedule_id":"douluo-dalu-jiandao-chen-xin"}
 {"mal_id":61751,"animeschedule_id":"liaozhai-lanre-si"}
@@ -24362,6 +24362,8 @@
 {"mal_id":64950,"anilist_id":216624,"animeschedule_id":"sss-class-revival-hunter"}
 {"mal_id":64960,"anilist_id":216644,"animeschedule_id":"eat-man-the-over-order"}
 {"mal_id":64978,"anilist_id":216826,"animeschedule_id":"funsou-deshitara-hatta-made"}
+{"mal_id":64981,"ann_id":40543}
+{"mal_id":65007,"ann_id":40548}
 {"mal_id":65009,"anisearch_id":21981,"animeschedule_id":"aoki-denshou-welsh-and-shedar"}
 {"mal_id":65015,"anilist_id":216939,"animeschedule_id":"kami-sama-gakkou-no-ochikobore"}
 {"mal_id":65024,"anilist_id":217013,"animeschedule_id":"yomi-no-tsugai-2nd-season"}
@@ -24369,7 +24371,7 @@
 {"mal_id":65032,"anilist_id":217070,"animeschedule_id":"futsutsuka-na-akujo-dewa-gozaimasu-ga-suuguu-chouso-torikae-den-part-2"}
 {"mal_id":65037,"anilist_id":217136,"animeschedule_id":"grand-blue-4th-season"}
 {"mal_id":65047,"animeschedule_id":"katainaka-no-ossan-kensei-ni-naru-3rd-season"}
-{"mal_id":65050,"anilist_id":216558,"animeschedule_id":"odeholo"}
+{"mal_id":65050,"anilist_id":216558,"ann_id":40527,"animeschedule_id":"odeholo"}
 {"mal_id":65052,"anilist_id":217283,"animeschedule_id":"phantom-busters"}
 {"mal_id":65053,"anilist_id":217008,"animeschedule_id":"shin-oishinbo"}
 {"mal_id":65069,"anilist_id":217317,"animeschedule_id":"elf-sensei-no-toilet-wa-doko-desu-ka"}
