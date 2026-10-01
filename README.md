@@ -43,8 +43,8 @@ If you have an authoritative source to add, please open an issue/PR.
 | German | Deutsch | 3118 |
 | French | Français | 2576 |
 | Italian | Italiano | 2442 |
-| Chinese | 中文 | 1913 |
-| Portuguese | Português | 1866 |
+| Chinese | 中文 | 1916 |
+| Portuguese | Português | 1867 |
 | Korean | 한국어 | 1710 |
 | Tagalog | Tagalog | 852 |
 | Arabic | العربية | 342 |
