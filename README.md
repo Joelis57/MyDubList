@@ -38,12 +38,12 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5586 |
+| English | English | 5588 |
 | Spanish | Español | 3253 |
 | German | Deutsch | 3118 |
 | French | Français | 2576 |
 | Italian | Italiano | 2442 |
-| Chinese | 中文 | 1916 |
+| Chinese | 中文 | 1917 |
 | Portuguese | Português | 1867 |
 | Korean | 한국어 | 1710 |
 | Tagalog | Tagalog | 852 |
