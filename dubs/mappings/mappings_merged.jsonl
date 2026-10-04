@@ -18636,7 +18636,7 @@
 {"mal_id":50230,"anilist_id":131073,"kitsu_id":45675,"animeschedule_id":"nitian-xie-shen"}
 {"mal_id":50231,"anilist_id":122736,"kitsu_id":47070,"animeschedule_id":"inori-wa-karappo"}
 {"mal_id":50232,"anilist_id":140252,"animeschedule_id":"hongse-jiangshan-huangma-fenghuo"}
-{"mal_id":50233,"anilist_id":137983,"animeschedule_id":"jia-you"}
+{"mal_id":50233,"anilist_id":137983,"animeschedule_id":"zhongguo-hao-gushi"}
 {"mal_id":50234,"anilist_id":138563,"animeschedule_id":"cheng-li-laile-liao-yi-tiao-long"}
 {"mal_id":50235,"anilist_id":138561,"animeschedule_id":"long-wu"}
 {"mal_id":50237,"anilist_id":140430,"kitsu_id":45731,"anisearch_id":16671}
@@ -22726,7 +22726,7 @@
 {"mal_id":59804,"anilist_id":180832,"kitsu_id":49613,"anisearch_id":19592}
 {"mal_id":59806,"kitsu_id":49245}
 {"mal_id":59807,"anilist_id":180947,"kitsu_id":49199,"animeschedule_id":"transformers-40th-shuunen-kinen-special-movie"}
-{"mal_id":59817,"anilist_id":186714,"ann_id":33520,"kitsu_id":49204,"anisearch_id":20614,"animeschedule_id":"girls-band-cry-seishun-kyousoukyouku"}
+{"mal_id":59817,"anilist_id":186714,"ann_id":33520,"kitsu_id":49204,"anisearch_id":20614,"animeschedule_id":"girls-band-cry-naa-mirai"}
 {"mal_id":59819,"anilist_id":181078,"ann_id":33522,"kitsu_id":49198,"hianime_id":"bye-bye-earth-season-2-19564","anisearch_id":19590,"animeschedule_id":"bye-bye-earth-2nd-season"}
 {"mal_id":59820,"anilist_id":179126,"ann_id":31557,"anisearch_id":19655,"animeschedule_id":"elf-san-wa-yaserarenai-specials"}
 {"mal_id":59825,"anilist_id":183478,"kitsu_id":49213,"animeschedule_id":"undead"}
@@ -24383,4 +24383,10 @@
 {"mal_id":65077,"anilist_id":217434,"animeschedule_id":"mushoku-tensei-iii-isekai-ittara-honki-dasu-part-2"}
 {"mal_id":65080,"anilist_id":217457,"anisearch_id":21991,"animeschedule_id":"houkago-no-idol-ni-wa-himitsu-ga-aru"}
 {"mal_id":65083,"animeschedule_id":"liar-game-2nd-season"}
-{"mal_id":65103,"anisearch_id":22017}
+{"mal_id":65087,"animeschedule_id":"seirei-gensouki-3"}
+{"mal_id":65092,"animeschedule_id":"thunder-3-2nd-season"}
+{"mal_id":65094,"animeschedule_id":"maid-nara-touzen-desu"}
+{"mal_id":65103,"anisearch_id":22017,"animeschedule_id":"honzuki-no-gekokujou-shisho-ni-naru-tame-ni-wa-shudan-wo-erandeiraremasen-kizokuin-no-toshokan-wo-sukuitai"}
+{"mal_id":65104,"animeschedule_id":"dorei-kara-no-kitai-to-hyouka-no-sei-de-sakushu-dekinai-no-da-ga"}
+{"mal_id":65105,"animeschedule_id":"soshiki-no-shukuteki-to-kekkon-shitara-mecha-amai"}
+{"mal_id":65106,"animeschedule_id":"delta-to-gamma-no-rigakubu-note"}
