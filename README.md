@@ -38,10 +38,10 @@ If you have an authoritative source to add, please open an issue/PR.
 <!-- LANG-STATS:START -->
 | Language | Native name | Dubbed |
 |---|---:|---:|
-| English | English | 5590 |
+| English | English | 5593 |
 | Spanish | Español | 3257 |
 | German | Deutsch | 3120 |
-| French | Français | 2579 |
+| French | Français | 2580 |
 | Italian | Italiano | 2444 |
 | Chinese | 中文 | 1922 |
 | Portuguese | Português | 1870 |
