@@ -27,7 +27,7 @@ The dataset aggregates information from multiple sources, including:
 - **AnimeSchedule** (official API)
 - **aniSearch** (custom API for MyDubList)
 - **Kitsu** (official API)
-- **HiAnime** (community API)
+- **HiAnime** (legacy snapshot; the site has shut down)
 - Curated community lists (e.g., *Kenny Stryker’s English dubs list* on MAL forums)
 - Manual overrides by MyDubList
 
