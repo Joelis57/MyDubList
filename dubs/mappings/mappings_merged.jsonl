@@ -14728,7 +14728,7 @@
 {"mal_id":38078,"kitsu_id":41915,"anisearch_id":17786,"animeschedule_id":"zoo-hidamari-no-shi"}
 {"mal_id":38080,"anilist_id":103302,"ann_id":21237,"kitsu_id":42101,"hianime_id":"kono-oto-tomare-sounds-of-life-728","anisearch_id":13772,"animeschedule_id":"kono-oto-tomare"}
 {"mal_id":38081,"anilist_id":107208,"ann_id":19354,"kitsu_id":42947,"hianime_id":"girls-panzer-saishuushou-part-2-463","anisearch_id":11767,"animeschedule_id":"girls-und-panzer-saishuushou-2"}
-{"mal_id":38082,"kitsu_id":41923,"anisearch_id":13774}
+{"mal_id":38082,"kitsu_id":41923}
 {"mal_id":38083,"anilist_id":104103,"ann_id":21250,"kitsu_id":41946,"anisearch_id":13793,"animeschedule_id":"ken-en-ken-aoki-kagayaki"}
 {"mal_id":38084,"anilist_id":103275,"ann_id":21240,"kitsu_id":42269,"hianime_id":"fategrand-order-absolute-demonic-front-babylonia-564","anisearch_id":13776,"animeschedule_id":"fate-grand-order-zettai-majuu-sensen-babylonia"}
 {"mal_id":38085,"anilist_id":103276,"ann_id":22020,"kitsu_id":42270,"hianime_id":"fategrand-order-shinsei-entaku-ryouiki-camelot-1-wandering-agateram-15701","anisearch_id":13775,"animeschedule_id":"fate-grand-order-shinsei-entaku-ryouiki-camelot-1-wandering-agateram"}
@@ -23882,7 +23882,7 @@
 {"mal_id":62843,"anilist_id":207886,"anisearch_id":21184,"animeschedule_id":"run-run-lantern"}
 {"mal_id":62844,"anilist_id":200929,"ann_id":37933,"anisearch_id":20990,"animeschedule_id":"kusuriya-no-hitorigoto-movie"}
 {"mal_id":62852,"anilist_id":201090,"ann_id":37935,"anisearch_id":20995,"animeschedule_id":"ghost-concert-missing-songs"}
-{"mal_id":62856,"anilist_id":103303,"ann_id":37941,"animeschedule_id":"nijuuseiki-denki-mokuroku"}
+{"mal_id":62856,"anilist_id":103303,"ann_id":37941,"anisearch_id":13774,"animeschedule_id":"nijuuseiki-denki-mokuroku"}
 {"mal_id":62857,"anilist_id":201140,"ann_id":37942,"animeschedule_id":"ousama-no-proposal"}
 {"mal_id":62863,"anilist_id":201262,"ann_id":29217,"anisearch_id":21006,"animeschedule_id":"poketoon-2025"}
 {"mal_id":62864,"anilist_id":202419,"ann_id":37944,"anisearch_id":21001,"animeschedule_id":"omae-wa-mada-gunma-wo-shiranai-reiwa-ban"}
@@ -24283,7 +24283,7 @@
 {"mal_id":64495,"anilist_id":213628,"animeschedule_id":"kill-ao-2nd-season"}
 {"mal_id":64500,"anilist_id":213656,"ann_id":40189,"animeschedule_id":"tsue-to-tsurugi-no-wistoria-3rd-season"}
 {"mal_id":64501,"anilist_id":213655,"ann_id":40186,"anisearch_id":21759,"animeschedule_id":"lona"}
-{"mal_id":64502,"ann_id":40221}
+{"mal_id":64502,"ann_id":40221,"anisearch_id":22022}
 {"mal_id":64503,"anilist_id":213657,"ann_id":40187,"anisearch_id":21826,"animeschedule_id":"yozakura-san-chi-no-daisakusen-2nd-season-part-2"}
 {"mal_id":64505,"anilist_id":213658,"ann_id":40188,"anisearch_id":21757,"animeschedule_id":"diamond-no-ace-act-ii-zoku-hen-part-2"}
 {"mal_id":64516,"anilist_id":213702,"animeschedule_id":"tongari-boushi-no-atelier-2nd-season"}
