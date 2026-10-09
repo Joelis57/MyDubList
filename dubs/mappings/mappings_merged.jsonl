@@ -23514,7 +23514,7 @@
 {"mal_id":61865,"anilist_id":194706,"ann_id":28983,"anisearch_id":21153}
 {"mal_id":61869,"ann_id":11360}
 {"mal_id":61870,"ann_id":11360}
-{"mal_id":61872,"anilist_id":194724}
+{"mal_id":61872,"anilist_id":194724,"animeschedule_id":"nyuugaku-youhei"}
 {"mal_id":61873,"anilist_id":206595,"animeschedule_id":"guruguru-live"}
 {"mal_id":61876,"anilist_id":206349,"kitsu_id":50029}
 {"mal_id":61877,"animeschedule_id":"bazubi-bazab"}
@@ -24339,7 +24339,7 @@
 {"mal_id":64756,"ann_id":20170315113441}
 {"mal_id":64768,"anilist_id":214863,"animeschedule_id":"akuyaku-no-ending-wa-shi-nomi"}
 {"mal_id":64782,"anilist_id":214969,"ann_id":40427,"anisearch_id":21892,"animeschedule_id":"akazukin-tabi-no-tochuu-de-shitai-to-deau"}
-{"mal_id":64789,"ann_id":40424,"anisearch_id":21900}
+{"mal_id":64789,"ann_id":40424,"anisearch_id":21900,"animeschedule_id":"nezumi-kun-no-chokki-tv-2nd-season"}
 {"mal_id":64793,"ann_id":40164}
 {"mal_id":64844,"anilist_id":215791,"anisearch_id":21913,"animeschedule_id":"maiden-blood"}
 {"mal_id":64848,"anilist_id":208367,"ann_id":40437,"anisearch_id":21940,"animeschedule_id":"duel-masters-lost-danzai-no-shounen"}
@@ -24381,11 +24381,13 @@
 {"mal_id":65073,"anilist_id":217333,"animeschedule_id":"hell-mode-yarikomizuki-no-gamer-wa-hai-settei-no-isekai-de-musou-suru-s-kyuu-dungeon-kouryaku-hen"}
 {"mal_id":65076,"animeschedule_id":"mairimashita-iruma-kun-movie"}
 {"mal_id":65077,"anilist_id":217434,"animeschedule_id":"mushoku-tensei-iii-isekai-ittara-honki-dasu-part-2"}
+{"mal_id":65078,"animeschedule_id":"monster-strike-mera-death-shinigami-to-boku-no-ijou-na-koi"}
 {"mal_id":65080,"anilist_id":217457,"anisearch_id":21991,"animeschedule_id":"houkago-no-idol-ni-wa-himitsu-ga-aru"}
 {"mal_id":65083,"anilist_id":217460,"animeschedule_id":"liar-game-2nd-season"}
 {"mal_id":65087,"anilist_id":217578,"animeschedule_id":"seirei-gensouki-3"}
 {"mal_id":65092,"animeschedule_id":"thunder-3-2nd-season"}
 {"mal_id":65094,"animeschedule_id":"maid-nara-touzen-desu"}
+{"mal_id":65095,"animeschedule_id":"petitcure-precure-fairies-4th-season"}
 {"mal_id":65103,"anisearch_id":22017,"animeschedule_id":"honzuki-no-gekokujou-shisho-ni-naru-tame-ni-wa-shudan-wo-erandeiraremasen-kizokuin-no-toshokan-wo-sukuitai"}
 {"mal_id":65104,"anilist_id":217716,"animeschedule_id":"dorei-kara-no-kitai-to-hyouka-no-sei-de-sakushu-dekinai-no-da-ga"}
 {"mal_id":65105,"anilist_id":217714,"animeschedule_id":"soshiki-no-shukuteki-to-kekkon-shitara-mecha-amai"}
@@ -24395,3 +24397,5 @@
 {"mal_id":65118,"anilist_id":217841,"anisearch_id":22023,"animeschedule_id":"vampire-juujikai"}
 {"mal_id":65119,"anisearch_id":22024}
 {"mal_id":65124,"anilist_id":182615,"animeschedule_id":"uchuu-senkan-yamato-root-2199"}
+{"mal_id":65144,"animeschedule_id":"the-boxer"}
+{"mal_id":65145,"animeschedule_id":"saikon-shounin-wo-youkyuu-shimasu"}
