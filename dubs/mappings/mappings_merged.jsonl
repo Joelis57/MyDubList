@@ -17393,7 +17393,7 @@
 {"mal_id":44047,"anilist_id":122520,"kitsu_id":43781,"animeschedule_id":"tian-huang"}
 {"mal_id":44048,"anilist_id":179778,"anisearch_id":20013,"animeschedule_id":"zetsumetsu-kigu-shun-2020"}
 {"mal_id":44050,"anilist_id":126662,"anisearch_id":15696,"animeschedule_id":"gundam-build-divers-battlogue"}
-{"mal_id":44053,"anilist_id":120268,"animeschedule_id":"hua-jianghu-zhi-gui-yexing-part-2"}
+{"mal_id":44053,"anilist_id":120268,"animeschedule_id":"hua-jianghu-gui-yexing"}
 {"mal_id":44055,"anilist_id":126288,"ann_id":24453,"kitsu_id":44575,"hianime_id":"sasaki-to-miyano-17364","anisearch_id":16249,"animeschedule_id":"sasaki-to-miyano"}
 {"mal_id":44056,"anilist_id":126831,"ann_id":23834,"kitsu_id":43828,"anisearch_id":15779,"animeschedule_id":"tokyo-gambo"}
 {"mal_id":44059,"anilist_id":126287,"kitsu_id":43749,"animeschedule_id":"puparia"}
@@ -18712,7 +18712,7 @@
 {"mal_id":50399,"anilist_id":127976,"kitsu_id":45488,"hianime_id":"heaven-officials-blessing-season-2-18622","anisearch_id":16891,"animeschedule_id":"tian-guan-ci-fu-2"}
 {"mal_id":50400,"anilist_id":141880,"kitsu_id":45522,"animeschedule_id":"wo-jia-da-shixiong-youdian-kaopu"}
 {"mal_id":50401,"anilist_id":132530,"kitsu_id":46645,"animeschedule_id":"hanhua-riji-3"}
-{"mal_id":50403,"anilist_id":141877,"kitsu_id":45539,"animeschedule_id":"liang-bu-yi-2"}
+{"mal_id":50403,"anilist_id":141877,"kitsu_id":45539,"animeschedule_id":"liang-bu-yi-2-part-2"}
 {"mal_id":50404,"anilist_id":141852,"kitsu_id":45524,"hianime_id":"the-daily-life-of-the-immortal-king-3-18199","anisearch_id":17102,"animeschedule_id":"xian-wang-de-richang-shenghuo-3"}
 {"mal_id":50405,"anilist_id":137296,"kitsu_id":45536,"animeschedule_id":"tianbao-fuyao-lu-3"}
 {"mal_id":50406,"anilist_id":141893,"kitsu_id":45531,"animeschedule_id":"yuan-long-3"}
@@ -23857,6 +23857,7 @@
 {"mal_id":62744,"anilist_id":199357,"animeschedule_id":"qing-jiao-wo-gui-chai-daren"}
 {"mal_id":62745,"animeschedule_id":"tao-yu-moshi-zhi-shu"}
 {"mal_id":62747,"anilist_id":206143,"animeschedule_id":"tiancai-julebu"}
+{"mal_id":62748,"animeschedule_id":"xingmen"}
 {"mal_id":62749,"animeschedule_id":"tian-wai-tian"}
 {"mal_id":62750,"animeschedule_id":"lang-lang-shaonu-lan"}
 {"mal_id":62751,"anilist_id":168245,"animeschedule_id":"nian-fanchen"}
@@ -24310,6 +24311,7 @@
 {"mal_id":64577,"anilist_id":213961,"anisearch_id":21764}
 {"mal_id":64578,"anilist_id":213426,"ann_id":39284,"anisearch_id":21816}
 {"mal_id":64580,"anilist_id":213908,"ann_id":40245}
+{"mal_id":64583,"animeschedule_id":"wu-liuqi-movie"}
 {"mal_id":64597,"anilist_id":214031,"animeschedule_id":"mob-psycho-100-10-shuunen-kinen-tokubetsu-eizou"}
 {"mal_id":64599,"anilist_id":214044,"anisearch_id":21846,"animeschedule_id":"noa-senpai-wa-tomodachi"}
 {"mal_id":64600,"anilist_id":214049,"ann_id":40337,"animeschedule_id":"kizuguchi-to-houtai"}
@@ -24322,6 +24324,7 @@
 {"mal_id":64667,"anilist_id":214380,"ann_id":40368,"animeschedule_id":"kidou-senshi-gundam-rg-xarx-zero"}
 {"mal_id":64668,"ann_id":38827}
 {"mal_id":64672,"anilist_id":214426,"anisearch_id":21926}
+{"mal_id":64677,"animeschedule_id":"xiaozhu-peppa-pig-wanmei-jiaqi"}
 {"mal_id":64685,"anilist_id":214451,"animeschedule_id":"mii-chan-to-yamada-san"}
 {"mal_id":64693,"anilist_id":214442,"animeschedule_id":"ginga-tetsudou-999-new-movie"}
 {"mal_id":64694,"anilist_id":214484,"animeschedule_id":"senren-banka"}
@@ -24378,6 +24381,7 @@
 {"mal_id":65069,"anilist_id":217317,"animeschedule_id":"elf-sensei-no-toilet-wa-doko-desu-ka"}
 {"mal_id":65070,"anilist_id":217330,"animeschedule_id":"tensei-shitara-slime-datta-ken-clayman-revenge"}
 {"mal_id":65071,"anilist_id":217329,"animeschedule_id":"kore-kaite-shine-2nd-season"}
+{"mal_id":65072,"animeschedule_id":"luo-xiaohei-zhan-ji-xue-qian-pian"}
 {"mal_id":65073,"anilist_id":217333,"animeschedule_id":"hell-mode-yarikomizuki-no-gamer-wa-hai-settei-no-isekai-de-musou-suru-s-kyuu-dungeon-kouryaku-hen"}
 {"mal_id":65076,"animeschedule_id":"mairimashita-iruma-kun-movie"}
 {"mal_id":65077,"anilist_id":217434,"animeschedule_id":"mushoku-tensei-iii-isekai-ittara-honki-dasu-part-2"}
@@ -24403,3 +24407,4 @@
 {"mal_id":65161,"anilist_id":218099,"animeschedule_id":"dr-stone-terraforming"}
 {"mal_id":65169,"anilist_id":218217,"anisearch_id":22025}
 {"mal_id":65180,"anilist_id":218216,"anisearch_id":22045,"animeschedule_id":"nue-no-onmyouji"}
+{"mal_id":65188,"anisearch_id":22047,"animeschedule_id":"yumene-connect"}
