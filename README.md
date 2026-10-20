@@ -44,11 +44,11 @@ If you have an authoritative source to add, please open an issue/PR.
 | French | Français | 2583 |
 | Italian | Italiano | 2446 |
 | Chinese | 中文 | 1924 |
-| Portuguese | Português | 1878 |
+| Portuguese | Português | 1879 |
 | Korean | 한국어 | 1718 |
 | Tagalog | Tagalog | 853 |
 | Arabic | العربية | 342 |
-| Polish | Polski | 295 |
+| Polish | Polski | 296 |
 | Hindi | हिन्दी | 237 |
 | Hungarian | Magyar | 216 |
 | Hebrew | עברית | 170 |
