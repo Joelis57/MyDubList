@@ -23884,7 +23884,7 @@
 {"mal_id":62844,"anilist_id":200929,"ann_id":37933,"anisearch_id":20990,"animeschedule_id":"kusuriya-no-hitorigoto-movie"}
 {"mal_id":62852,"anilist_id":201090,"ann_id":37935,"anisearch_id":20995,"animeschedule_id":"ghost-concert-missing-songs"}
 {"mal_id":62856,"anilist_id":103303,"ann_id":37941,"anisearch_id":13774,"animeschedule_id":"nijuuseiki-denki-mokuroku"}
-{"mal_id":62857,"anilist_id":201140,"ann_id":37942,"animeschedule_id":"ousama-no-proposal"}
+{"mal_id":62857,"anilist_id":201140,"ann_id":37942,"anisearch_id":20999,"animeschedule_id":"ousama-no-proposal"}
 {"mal_id":62863,"anilist_id":201262,"ann_id":29217,"anisearch_id":21006,"animeschedule_id":"poketoon-2025"}
 {"mal_id":62864,"anilist_id":202419,"ann_id":37944,"anisearch_id":21001,"animeschedule_id":"omae-wa-mada-gunma-wo-shiranai-reiwa-ban"}
 {"mal_id":62865,"anilist_id":201388,"ann_id":37948,"anisearch_id":20998,"animeschedule_id":"dark-gathering-2nd-season"}
@@ -24183,7 +24183,7 @@
 {"mal_id":63903,"anilist_id":198654,"ann_id":38940,"anisearch_id":21953,"animeschedule_id":"meitantei-precure-movie"}
 {"mal_id":63912,"anilist_id":210483,"ann_id":38953,"anisearch_id":21478,"animeschedule_id":"isekai-maou-to-shoukan-shoujo-no-dorei-majutsu-ult"}
 {"mal_id":63933,"anisearch_id":20250}
-{"mal_id":63934,"anilist_id":190244,"ann_id":38983,"animeschedule_id":"date-a-live-f-last-date"}
+{"mal_id":63934,"anilist_id":190244,"ann_id":38983,"anisearch_id":21479,"animeschedule_id":"date-a-live-f-last-date"}
 {"mal_id":63938,"anilist_id":214536,"ann_id":38996,"anisearch_id":21901,"animeschedule_id":"cardfight-vanguard-divinez-unmei-seisen-hen"}
 {"mal_id":63939,"anisearch_id":21482}
 {"mal_id":63947,"anisearch_id":18663}
@@ -24412,3 +24412,4 @@
 {"mal_id":65205,"anilist_id":218439,"anisearch_id":22058,"animeschedule_id":"shiawase-kanako-no-koroshiya-seikatsu"}
 {"mal_id":65214,"anilist_id":218530,"animeschedule_id":"nullmeta"}
 {"mal_id":65252,"anilist_id":218740,"animeschedule_id":"koukaku-kidoutai-shinsaku-animation"}
+{"mal_id":65259,"anisearch_id":22074}
