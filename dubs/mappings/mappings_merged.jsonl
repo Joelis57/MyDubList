@@ -22489,7 +22489,7 @@
 {"mal_id":59230,"anilist_id":179068,"ann_id":32906,"animeschedule_id":"omniscient-reader"}
 {"mal_id":59231,"anilist_id":211328,"anisearch_id":19305,"animeschedule_id":"first-line"}
 {"mal_id":59232,"anilist_id":179679,"animeschedule_id":"minami-no-shima-no-coconut"}
-{"mal_id":59235,"anilist_id":179088,"ann_id":32909,"kitsu_id":49023,"animeschedule_id":"minami-ke-shin-series"}
+{"mal_id":59235,"anilist_id":179088,"ann_id":32909,"kitsu_id":49023,"anisearch_id":19549,"animeschedule_id":"minami-ke-shin-series"}
 {"mal_id":59236,"anilist_id":179214,"anisearch_id":19420,"animeschedule_id":"san-shao-nu"}
 {"mal_id":59237,"anilist_id":185117,"animeschedule_id":"luo-fanchen"}
 {"mal_id":59241,"kitsu_id":50043}
@@ -24352,7 +24352,7 @@
 {"mal_id":64861,"anilist_id":216645,"anisearch_id":21920,"animeschedule_id":"hetalia-world-stars-2026"}
 {"mal_id":64867,"anilist_id":215835,"ann_id":40463,"anisearch_id":21917,"animeschedule_id":"umayuru-full-gate"}
 {"mal_id":64876,"anisearch_id":21962}
-{"mal_id":64877,"anilist_id":216312,"animeschedule_id":"boku-no-suki-na-hito-ga-suki-na-hito"}
+{"mal_id":64877,"anilist_id":216312,"anisearch_id":21921,"animeschedule_id":"boku-no-suki-na-hito-ga-suki-na-hito"}
 {"mal_id":64884,"anilist_id":215989,"anisearch_id":21950}
 {"mal_id":64892,"anilist_id":216170,"animeschedule_id":"8-gatsu-31-nichi-no-long-summer"}
 {"mal_id":64895,"anilist_id":216167,"animeschedule_id":"pokemon-wild-card"}
@@ -24421,7 +24421,8 @@
 {"mal_id":65302,"anilist_id":219282,"anisearch_id":22087,"animeschedule_id":"bocchi-the-rock-movie-hoshi-no-ashiato"}
 {"mal_id":65312,"anilist_id":219346,"animeschedule_id":"chi-ni-ueta-hanayome-wa-ou-wo-kurau"}
 {"mal_id":65318,"anilist_id":219477,"animeschedule_id":"oshi-ni-amagami"}
-{"mal_id":65323,"anilist_id":219548,"animeschedule_id":"spirit-circle"}
+{"mal_id":65323,"anilist_id":219548,"anisearch_id":22095,"animeschedule_id":"spirit-circle"}
 {"mal_id":65324,"anilist_id":219616,"animeschedule_id":"33-sai-dokushin-onna-kishi-taichou"}
-{"mal_id":65326,"anilist_id":219621,"animeschedule_id":"hagure-idol-jigoku-hen"}
-{"mal_id":65335,"anilist_id":219679,"animeschedule_id":"yuusha-party-ni-kawaii-ko-ga-ita-node-kokuhaku-shitemita-2nd-season"}
+{"mal_id":65325,"anisearch_id":22092}
+{"mal_id":65326,"anilist_id":219621,"anisearch_id":22093,"animeschedule_id":"hagure-idol-jigoku-hen"}
+{"mal_id":65335,"anilist_id":219679,"anisearch_id":22094,"animeschedule_id":"yuusha-party-ni-kawaii-ko-ga-ita-node-kokuhaku-shitemita-2nd-season"}
