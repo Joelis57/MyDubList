@@ -17393,7 +17393,7 @@
 {"mal_id":44047,"anilist_id":122520,"kitsu_id":43781,"animeschedule_id":"tian-huang"}
 {"mal_id":44048,"anilist_id":179778,"anisearch_id":20013,"animeschedule_id":"zetsumetsu-kigu-shun-2020"}
 {"mal_id":44050,"anilist_id":126662,"anisearch_id":15696,"animeschedule_id":"gundam-build-divers-battlogue"}
-{"mal_id":44053,"anilist_id":120268,"animeschedule_id":"hua-jianghu-gui-yexing"}
+{"mal_id":44053,"anilist_id":120268,"animeschedule_id":"hua-jianghu-zhi-gui-yexing-part-2"}
 {"mal_id":44055,"anilist_id":126288,"ann_id":24453,"kitsu_id":44575,"hianime_id":"sasaki-to-miyano-17364","anisearch_id":16249,"animeschedule_id":"sasaki-to-miyano"}
 {"mal_id":44056,"anilist_id":126831,"ann_id":23834,"kitsu_id":43828,"anisearch_id":15779,"animeschedule_id":"tokyo-gambo"}
 {"mal_id":44059,"anilist_id":126287,"kitsu_id":43749,"animeschedule_id":"puparia"}
@@ -24338,7 +24338,7 @@
 {"mal_id":64725,"anilist_id":214855,"anisearch_id":21884,"animeschedule_id":"fate-grand-order-fujimaru-ritsuka-wa-wakaranai-season-4"}
 {"mal_id":64726,"anilist_id":214650,"animeschedule_id":"mato-seihei-no-slave-3"}
 {"mal_id":64737,"anilist_id":214749,"animeschedule_id":"dokagui-daisuki-mochizuki-san"}
-{"mal_id":64744,"ann_id":39997}
+{"mal_id":64744,"ann_id":39997,"animeschedule_id":"josemaru"}
 {"mal_id":64746,"anilist_id":215695,"ann_id":38273,"animeschedule_id":"komadori-mofmof-parade"}
 {"mal_id":64751,"anilist_id":214854,"ann_id":40413,"anisearch_id":21893,"animeschedule_id":"destiny-unchain-online"}
 {"mal_id":64756,"ann_id":20170315113441}
@@ -24435,3 +24435,4 @@
 {"mal_id":65412,"anilist_id":219798,"animeschedule_id":"nanatsuya-shinobu-no-housekibako"}
 {"mal_id":65437,"anilist_id":219866,"animeschedule_id":"isekai-douraku-ni-akitara"}
 {"mal_id":65450,"anilist_id":219904,"animeschedule_id":"re-zero-kara-hajimeru-isekai-seikatsu-5"}
+{"mal_id":65463,"animeschedule_id":"diamond-no-kouzai"}
