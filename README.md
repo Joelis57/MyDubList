@@ -48,7 +48,7 @@ If you have an authoritative source to add, please open an issue/PR.
 | Korean | 한국어 | 1759 |
 | Tagalog | Tagalog | 854 |
 | Arabic | العربية | 343 |
-| Polish | Polski | 297 |
+| Polish | Polski | 298 |
 | Hindi | हिन्दी | 237 |
 | Hungarian | Magyar | 216 |
 | Hebrew | עברית | 171 |
